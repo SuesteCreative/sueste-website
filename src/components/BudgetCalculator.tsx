@@ -64,29 +64,31 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
 
     const [isStickyMobile, setIsStickyMobile] = useState(false);
     const [isMergedWithForm, setIsMergedWithForm] = useState(false);
+    const [formHeight, setFormHeight] = useState(0);
 
     // Scroll detection: collapse card and handle merge logic
     useEffect(() => {
         const handleScroll = () => {
             const scrollY = window.scrollY;
 
-            if (window.innerWidth <= 1024) {
-                // Collapse much earlier: as soon as we scroll 50px
-                setIsStickyMobile(scrollY > 50);
+            const formEl = document.getElementById('budget-form-ref');
+            if (formEl) {
+                // Determine height for desktop docking match
+                if (window.innerWidth > 1024) {
+                    setFormHeight(formEl.offsetHeight);
+                }
 
-                // Detect proximity to form for merge effect
-                const formEl = document.getElementById('budget-form-ref');
-                if (formEl) {
+                if (window.innerWidth <= 1024) {
+                    // Collapse much earlier: as soon as we scroll 50px
+                    setIsStickyMobile(scrollY > 50);
+
                     const rect = formEl.getBoundingClientRect();
                     // Merge logic: Swap the element into the form when close
                     const mergeThreshold = 140;
                     setIsMergedWithForm(rect.top <= mergeThreshold);
-                }
-            } else {
-                // Desktop logic: Detect when sticky card aligns with form
-                setIsStickyMobile(false);
-                const formEl = document.getElementById('budget-form-ref');
-                if (formEl) {
+                } else {
+                    // Desktop logic: Detect when sticky card aligns with form
+                    setIsStickyMobile(false);
                     const rect = formEl.getBoundingClientRect();
                     // On desktop, the card is at top: 100px. 
                     // When form reaches ~120px, they are side-by-side.
@@ -456,11 +458,16 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                 <div className="calc-sidebar">
                     <motion.div
                         layout
-                        className={`estimate-card glass-panel ${shouldCollapse ? 'mobile-collapsed' : ''}`}
+                        className={`estimate-card glass-panel ${shouldCollapse ? 'mobile-collapsed' : ''} ${isMergedWithForm && !isStickyMobile ? 'is-docked-desktop' : ''}`}
                         initial={false}
                         animate={{
                             padding: shouldCollapse ? '12px 20px' : '40px',
-                            gap: shouldCollapse ? '12px' : '24px'
+                            gap: shouldCollapse ? '12px' : '24px',
+                            height: (isMergedWithForm && typeof window !== 'undefined' && window.innerWidth > 1024) ? formHeight : 'auto'
+                        }}
+                        transition={{
+                            height: { type: "spring", stiffness: 300, damping: 30 },
+                            default: { duration: 0.5 }
                         }}
                     >
                         {!shouldCollapse && (
