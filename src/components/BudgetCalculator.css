@@ -59,8 +59,15 @@
         position: sticky;
         top: 80px;
         z-index: 50;
-        margin-bottom: 0;
-        /* Allow card to reach the bottom spacer exactly */
+        margin-bottom: 5rem;
+        /* V1 Spacing: prevent touching services */
+        transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .calc-container:has(.is-merged) .calc-sidebar {
+        opacity: 0;
+        transform: translateY(20px) scale(0.9);
+        pointer-events: none;
     }
 
     /* Remove the has-selector logic and use standard sticky behavior */
@@ -541,6 +548,12 @@
     padding-bottom: 2rem;
 }
 
+@media (max-width: 1024px) {
+    .calc-selection-area.has-sticky-margin {
+        margin-top: 2rem;
+    }
+}
+
 .section-title {
     font-size: 1.5rem;
     color: #fff;
@@ -600,9 +613,55 @@
     font-size: 0.9rem;
 }
 
-/* FORM */
-.quote-form {
-    margin-top: 3rem;
+/* MERGED FORM HEADER */
+.merged-estimate-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.25rem;
+    background: rgba(56, 189, 248, 0.1);
+    border-radius: 16px;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(56, 189, 248, 0.2);
+}
+
+.merged-estimate-header .estimate-value {
+    font-size: 2rem !important;
+}
+
+.merged-estimate-header .estimate-label-inline {
+    display: block;
+}
+
+.calc-form-container {
+    margin-top: 4rem;
+}
+
+/* Gooey Context - Only apply when near merge zone to preserve text sharpness */
+@media (max-width: 1024px) {
+    .gooey-context {
+        filter: url('#goo');
+    }
+}
+
+.is-merged .quote-form {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-top: none;
+}
+
+.merged-estimate-header {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+    margin: -2.51rem -2.51rem 2rem -2.51rem;
+    /* Precise overlap */
+    padding: 1.5rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .form-title {
