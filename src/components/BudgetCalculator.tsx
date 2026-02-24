@@ -499,14 +499,15 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                         {pricingData.services.map((service: any, idx) => renderServiceCard(service, idx))}
                     </div>
 
-                    {/* ADDONS */}
+                    {/* ADDONS - Now wrapped in a card */}
                     <motion.div
-                        className="addons-section"
+                        className="addons-section glass-panel"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 0.6 }}
+                        style={{ marginTop: '2rem' }}
                     >
-                        <h3 className="section-title">{t.addonsTitle}</h3>
+                        <h3 className="section-title" style={{ marginTop: 0 }}>{t.addonsTitle}</h3>
                         <div className="addons-grid">
                             {pricingData.global_addons.map((addon: any) => {
                                 const isActive = !!addons[addon.id];
