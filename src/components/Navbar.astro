@@ -251,6 +251,24 @@ const quoteLabel = t("nav.quote");
     flex-direction: column;
   }
 
+  .mobile-nav-quote-link {
+    font-size: 2.25rem;
+    font-weight: 800;
+    text-decoration: none;
+    background: linear-gradient(135deg, #38bdf8 0%, #2563eb 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: transform 0.3s ease;
+    display: block;
+    padding-top: 1rem;
+    font-family: inherit;
+  }
+
+  .mobile-nav-quote-link:active {
+    transform: scale(0.95);
+  }
+
   .drawer-header-internal {
     display: flex;
     justify-content: flex-end;

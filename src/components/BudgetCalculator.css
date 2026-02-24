@@ -40,9 +40,10 @@
 @media (max-width: 1024px) {
     .calc-sidebar {
         position: sticky;
-        top: 80px;
+        bottom: 1.5rem;
+        top: auto;
         z-index: 50;
-        margin-bottom: 1rem;
+        margin-top: 1rem;
     }
 
     .glass-panel {
@@ -163,6 +164,20 @@
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+
+.estimate-iva {
+    font-size: 0.8rem;
+    color: #38bdf8;
+    font-weight: 700;
+    margin-left: 0.5rem;
+    align-self: flex-end;
+    margin-bottom: 0.5rem;
+}
+
+.mobile-collapsed .estimate-iva {
+    font-size: 0.65rem;
+    margin-bottom: 0.2rem;
 }
 
 .estimate-currency {

@@ -433,54 +433,6 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
     return (
         <div className="calc-container">
             <div className="calc-sticky-boundary">
-                {/* LEFT COLUMN: STICKY Total */}
-                <div className="calc-sidebar">
-                    <motion.div
-                        layout
-                        className={`estimate-card glass-panel ${shouldCollapse ? 'mobile-collapsed' : ''}`}
-                        initial={false}
-                        animate={{
-                            padding: shouldCollapse ? '12px 20px' : '40px',
-                            gap: shouldCollapse ? '12px' : '24px'
-                        }}
-                    >
-                        {!shouldCollapse && (
-                            <p className="estimate-label">
-                                {hasStartingAt ? t.startingAt : t.estimate}
-                            </p>
-                        )}
-
-                        <div className="estimate-shrink-content">
-                            {shouldCollapse && (
-                                <span className="estimate-label-inline">
-                                    {hasStartingAt ? t.startingAt : t.estimate}
-                                </span>
-                            )}
-                            <div className="estimate-value-wrapper">
-                                <span className="estimate-value">{animatedTotal.toLocaleString('pt-PT')}</span>
-                                <span className="estimate-currency">€</span>
-                            </div>
-                        </div>
-
-                        <button
-                            type="button"
-                            className="btn-clear"
-                            onClick={clearBudget}
-                            disabled={marginBase === 0}
-                        >
-                            <Trash2 size={16} />
-                            {!shouldCollapse && <span className="btn-clear-text" style={{ marginLeft: 8 }}>{t.clear}</span>}
-                        </button>
-
-                        {!shouldCollapse && (
-                            <div className="legal-note">
-                                <Info size={16} className="legal-icon" />
-                                <p>{t.legal}</p>
-                            </div>
-                        )}
-                    </motion.div>
-                </div>
-
                 {/* RIGHT COLUMN: CONFIGURATOR */}
                 <div className="calc-selection-area">
                     <div className="calc-step-group">
@@ -519,6 +471,66 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                                 );
                             })}
                         </div>
+                    </motion.div>
+                </div>
+
+                {/* LEFT COLUMN: STICKY Total (Placed after selection on mobile) */}
+                <div className="calc-sidebar">
+                    <motion.div
+                        layout
+                        className={`estimate-card glass-panel ${shouldCollapse ? 'mobile-collapsed' : ''}`}
+                        initial={false}
+                        animate={{
+                            padding: shouldCollapse ? '12px 20px' : '40px',
+                            gap: shouldCollapse ? '12px' : '24px'
+                        }}
+                    >
+                        {!shouldCollapse && (
+                            <p className="estimate-label">
+                                {hasStartingAt ? t.startingAt : t.estimate}
+                            </p>
+                        )}
+
+                        <div className="estimate-shrink-content">
+                            {shouldCollapse && (
+                                <span className="estimate-label-inline">
+                                    {hasStartingAt ? t.startingAt : t.estimate}
+                                </span>
+                            )}
+                            <div className="estimate-value-wrapper">
+                                <span className="estimate-value">{animatedTotal.toLocaleString('pt-PT')}</span>
+                                <span className="estimate-currency">€</span>
+                                <AnimatePresence>
+                                    {marginBase > 0 && (
+                                        <motion.span
+                                            initial={{ opacity: 0, x: -10 }}
+                                            animate={{ opacity: 1, x: 0 }}
+                                            exit={{ opacity: 0, x: -10 }}
+                                            className="estimate-iva"
+                                        >
+                                            + IVA
+                                        </motion.span>
+                                    )}
+                                </AnimatePresence>
+                            </div>
+                        </div>
+
+                        <button
+                            type="button"
+                            className="btn-clear"
+                            onClick={clearBudget}
+                            disabled={marginBase === 0}
+                        >
+                            <Trash2 size={16} />
+                            {!shouldCollapse && <span className="btn-clear-text" style={{ marginLeft: 8 }}>{t.clear}</span>}
+                        </button>
+
+                        {!shouldCollapse && (
+                            <div className="legal-note">
+                                <Info size={16} className="legal-icon" />
+                                <p>{t.legal}</p>
+                            </div>
+                        )}
                     </motion.div>
                 </div>
             </div>
