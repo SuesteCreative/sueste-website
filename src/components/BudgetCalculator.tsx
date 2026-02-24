@@ -64,7 +64,6 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
 
     const [isStickyMobile, setIsStickyMobile] = useState(false);
     const [isMergedWithForm, setIsMergedWithForm] = useState(false);
-    const [isNearForm, setIsNearForm] = useState(false);
 
     // Scroll detection: collapse card and handle merge logic
     useEffect(() => {
@@ -80,19 +79,13 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                 const formEl = document.getElementById('budget-form-ref');
                 if (formEl) {
                     const rect = formEl.getBoundingClientRect();
-                    // Merge logic:
-                    // 1. "Near" triggers the liquid/gooey container effect
-                    // 2. "Merged" swaps the element into the form
+                    // Merge logic: Swap the element into the form when close
                     const mergeThreshold = 140;
-                    const nearThreshold = 300;
-
-                    setIsNearForm(rect.top < nearThreshold && rect.top > mergeThreshold);
                     setIsMergedWithForm(rect.top <= mergeThreshold);
                 }
             } else {
                 setIsStickyMobile(false);
                 setIsMergedWithForm(false);
-                setIsNearForm(false);
             }
         };
         window.addEventListener('scroll', handleScroll, { passive: true });
@@ -451,7 +444,7 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
     };
 
     return (
-        <div className={`calc-container ${isNearForm || isMergedWithForm ? 'gooey-context' : ''}`}>
+        <div className={`calc-container ${isMergedWithForm ? 'is-merged' : ''}`}>
             <div className="calc-sticky-boundary">
                 {/* LEFT COLUMN: STICKY Total */}
                 <div className="calc-sidebar">
@@ -652,16 +645,7 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                 </div>
             </div>
 
-            {/* Gooey Filter SVG */}
-            <svg style={{ position: 'absolute', width: 0, height: 0 }}>
-                <defs>
-                    <filter id="goo">
-                        <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
-                        <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -10" result="goo" />
-                        <feComposite in="SourceGraphic" in2="goo" operator="atop" />
-                    </filter>
-                </defs>
-            </svg>
+            {/* Removed Gooey Filter SVG as it caused rendering issues on mobile */}
         </div>
     );
 };

@@ -66,7 +66,7 @@
 
     .calc-container:has(.is-merged) .calc-sidebar {
         opacity: 0;
-        transform: translateY(20px) scale(0.9);
+        transform: translateY(40px) scale(0.8);
         pointer-events: none;
     }
 
@@ -637,11 +637,9 @@
     margin-top: 4rem;
 }
 
-/* Gooey Context - Only apply when near merge zone to preserve text sharpness */
+/* Merge Zone Transitions */
 @media (max-width: 1024px) {
-    .gooey-context {
-        filter: url('#goo');
-    }
+    /* Transitions are handled via classes on parents */
 }
 
 .is-merged .quote-form {
