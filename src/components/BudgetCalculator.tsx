@@ -433,48 +433,7 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
     return (
         <div className="calc-container">
             <div className="calc-sticky-boundary">
-                {/* RIGHT COLUMN: CONFIGURATOR */}
-                <div className="calc-selection-area">
-                    <div className="calc-step-group">
-                        {pricingData.services.map((service: any, idx) => renderServiceCard(service, idx))}
-                    </div>
-
-                    {/* ADDONS */}
-                    <motion.div
-                        className="addons-section"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: 0.6 }}
-                    >
-                        <h3 className="section-title">{t.addonsTitle}</h3>
-                        <div className="addons-grid">
-                            {pricingData.global_addons.map((addon: any) => {
-                                const isActive = !!addons[addon.id];
-                                return (
-                                    <div
-                                        key={addon.id}
-                                        className={`addon-card ${isActive ? 'active' : ''}`}
-                                        onClick={() => toggleAddon(addon.id)}
-                                    >
-                                        <div className="addon-icon">
-                                            {isActive ? <CheckSquare size={20} className="check-icon" /> : <Square size={20} className="uncheck-icon" />}
-                                        </div>
-                                        <div className="addon-content">
-                                            <span className="addon-name">{lang === 'pt' ? addon.name_pt : addon.name_en}</span>
-                                            <span className="addon-price">
-                                                {addon.on_request
-                                                    ? t.onRequest
-                                                    : (addon.price > 0 ? `+${addon.price}€` : t.included)}
-                                            </span>
-                                        </div>
-                                    </div>
-                                );
-                            })}
-                        </div>
-                    </motion.div>
-                </div>
-
-                {/* LEFT COLUMN: STICKY Total (Placed after selection on mobile) */}
+                {/* LEFT COLUMN: STICKY Total (Placed first to follow through boundary) */}
                 <div className="calc-sidebar">
                     <motion.div
                         layout
@@ -531,6 +490,47 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                                 <p>{t.legal}</p>
                             </div>
                         )}
+                    </motion.div>
+                </div>
+
+                {/* RIGHT COLUMN: CONFIGURATOR */}
+                <div className="calc-selection-area">
+                    <div className="calc-step-group">
+                        {pricingData.services.map((service: any, idx) => renderServiceCard(service, idx))}
+                    </div>
+
+                    {/* ADDONS */}
+                    <motion.div
+                        className="addons-section"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.6 }}
+                    >
+                        <h3 className="section-title">{t.addonsTitle}</h3>
+                        <div className="addons-grid">
+                            {pricingData.global_addons.map((addon: any) => {
+                                const isActive = !!addons[addon.id];
+                                return (
+                                    <div
+                                        key={addon.id}
+                                        className={`addon-card ${isActive ? 'active' : ''}`}
+                                        onClick={() => toggleAddon(addon.id)}
+                                    >
+                                        <div className="addon-icon">
+                                            {isActive ? <CheckSquare size={20} className="check-icon" /> : <Square size={20} className="uncheck-icon" />}
+                                        </div>
+                                        <div className="addon-content">
+                                            <span className="addon-name">{lang === 'pt' ? addon.name_pt : addon.name_en}</span>
+                                            <span className="addon-price">
+                                                {addon.on_request
+                                                    ? t.onRequest
+                                                    : (addon.price > 0 ? `+${addon.price}€` : t.included)}
+                                            </span>
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                        </div>
                     </motion.div>
                 </div>
             </div>

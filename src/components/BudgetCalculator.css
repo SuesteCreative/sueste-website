@@ -39,11 +39,17 @@
 
 @media (max-width: 1024px) {
     .calc-sidebar {
-        position: sticky;
-        bottom: 1.5rem;
-        top: auto;
+        position: relative;
+        top: 0;
         z-index: 50;
-        margin-top: 1rem;
+        margin-bottom: 2rem;
+        transition: top 0.4s ease;
+    }
+
+    /* When collapsed, it sticks to the bottom of the viewport */
+    .calc-sidebar:has(.mobile-collapsed) {
+        position: sticky;
+        top: calc(100dvh - 90px);
     }
 
     .glass-panel {
