@@ -11,14 +11,8 @@ const navItems = [
     href: lang === "pt" ? "/servicos" : "/en/services",
     label: t("nav.services"),
   },
-  {
-    href: lang === "pt" ? "/portfolio" : "/en/work",
-    label: t("nav.work"),
-  },
-  {
-    href: lang === "pt" ? "/sobre" : "/en/about",
-    label: t("nav.about"),
-  },
+  { href: lang === "pt" ? "/portfolio" : "/en/work", label: t("nav.work") },
+  { href: lang === "pt" ? "/sobre" : "/en/about", label: t("nav.about") },
   {
     href: lang === "pt" ? "/contacto" : "/en/contact",
     label: t("nav.contact"),
@@ -133,21 +127,72 @@ const quoteLabel = t("nav.quote");
     box-shadow: 0 8px 25px rgba(56, 189, 248, 0.4);
   }
 
-  .lang-switch-nav {
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: #71717a;
-    padding: 4px 8px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 6px;
-    transition: all 0.3s ease;
+  /* Language Toggle Switch */
+  .lang-toggle-wrapper {
+    display: block;
     text-decoration: none;
+    cursor: pointer;
   }
 
-  .lang-switch-nav:hover {
-    color: #fff;
-    border-color: rgba(255, 255, 255, 0.3);
+  .lang-toggle-track {
+    width: 64px;
+    height: 32px;
     background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 8px;
+    transition: all 0.3s ease;
+  }
+
+  .lang-toggle-track:hover {
+    border-color: rgba(56, 189, 248, 0.4);
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .lang-toggle-thumb {
+    position: absolute;
+    left: 4px;
+    width: 24px;
+    height: 24px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+
+  .lang-label {
+    font-size: 0.65rem;
+    font-weight: 800;
+    color: #71717a;
+    z-index: 2;
+    transition: color 0.3s ease;
+    width: 20px;
+    text-align: center;
+  }
+
+  .lang-label.active {
+    color: #09090b;
+  }
+
+  .lang-toggle-wrapper.mobile .lang-toggle-track {
+    width: 80px;
+    height: 40px;
+    padding: 0 10px;
+  }
+
+  .lang-toggle-wrapper.mobile .lang-toggle-thumb {
+    width: 30px;
+    height: 30px;
+    left: 5px;
+  }
+
+  .lang-toggle-wrapper.mobile .lang-label {
+    font-size: 0.8rem;
+    width: 25px;
   }
 
   /* Mobile Button */
@@ -162,7 +207,7 @@ const quoteLabel = t("nav.quote");
     height: 48px;
     border-radius: 12px;
     cursor: pointer;
-    z-index: 1001;
+    z-index: 10001;
     transition: all 0.3s ease;
   }
 
@@ -186,9 +231,9 @@ const quoteLabel = t("nav.quote");
   .nav-overlay-blur {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
   }
 
   .nav-drawer-panel {
@@ -197,11 +242,32 @@ const quoteLabel = t("nav.quote");
     right: 0;
     bottom: 0;
     width: 85%;
-    max-width: 400px;
+    max-width: 360px;
     background: #09090b;
     border-left: 1px solid rgba(255, 255, 255, 0.05);
-    padding: 6rem 2rem 2rem;
+    padding: 2rem;
     box-shadow: -10px 0 40px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .drawer-header-internal {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 2rem;
+  }
+
+  .drawer-close-btn {
+    background: transparent;
+    border: none;
+    color: #71717a;
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: color 0.3s;
+  }
+
+  .drawer-close-btn:hover {
+    color: #fff;
   }
 
   .mobile-nav-list {
@@ -214,15 +280,16 @@ const quoteLabel = t("nav.quote");
   }
 
   .mobile-nav-list a {
-    font-size: 1.75rem;
-    font-weight: 700;
+    font-size: 2rem;
+    font-weight: 800;
     color: #fff;
     text-decoration: none;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
   }
 
   .mobile-nav-list a:hover {
     color: #38bdf8;
+    padding-left: 8px;
   }
 
   .drawer-cta-item {
@@ -236,21 +303,24 @@ const quoteLabel = t("nav.quote");
     font-size: 1.1rem;
   }
 
-  .drawer-lang-item {
-    margin-top: 2rem;
+  .drawer-lang-section {
+    margin-top: 3rem;
     padding-top: 2rem;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
   }
 
-  .lang-switch-mobile {
-    font-size: 1rem;
+  .lang-section-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     color: #71717a;
-    text-decoration: none;
-    font-weight: 500;
-  }
-
-  .lang-switch-mobile:hover {
-    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
   }
 
   /* Utilities */

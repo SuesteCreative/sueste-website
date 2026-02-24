@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Globe } from 'lucide-react';
 
 interface NavItem {
     href: string;
@@ -13,6 +13,25 @@ interface NavbarUIProps {
     quoteLabel: string;
     quoteHref: string;
 }
+
+const LangSwitcher: React.FC<{ lang: 'pt' | 'en', mobile?: boolean }> = ({ lang, mobile }) => {
+    const isPT = lang === 'pt';
+    const targetUrl = isPT ? '/en/' : '/';
+
+    return (
+        <a href={targetUrl} className={`lang-toggle-wrapper ${mobile ? 'mobile' : ''}`}>
+            <div className="lang-toggle-track">
+                <motion.div
+                    className="lang-toggle-thumb"
+                    animate={{ x: isPT ? 0 : 32 }}
+                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                />
+                <span className={`lang-label pt ${isPT ? 'active' : ''}`}>PT</span>
+                <span className={`lang-label en ${!isPT ? 'active' : ''}`}>EN</span>
+            </div>
+        </a>
+    );
+};
 
 const NavbarUI: React.FC<NavbarUIProps> = ({ lang, navItems, quoteLabel, quoteHref }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -27,15 +46,11 @@ const NavbarUI: React.FC<NavbarUIProps> = ({ lang, navItems, quoteLabel, quoteHr
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    // Prevent body scroll when menu is open
     useEffect(() => {
         if (isOpen) {
             document.body.style.overflow = 'hidden';
-            // Also adds a slight padding to prevent layout shift if possible
-            document.body.style.paddingRight = '0px';
         } else {
             document.body.style.overflow = 'unset';
-            document.body.style.paddingRight = '0px';
         }
     }, [isOpen]);
 
@@ -56,10 +71,8 @@ const NavbarUI: React.FC<NavbarUIProps> = ({ lang, navItems, quoteLabel, quoteHr
                     <li>
                         <a href={quoteHref} className="btn-primary-nav">{quoteLabel}</a>
                     </li>
-                    <li>
-                        <a href={lang === 'pt' ? '/en/' : '/'} className="lang-switch-nav">
-                            {lang === 'pt' ? 'EN' : 'PT'}
-                        </a>
+                    <li style={{ marginLeft: '1rem' }}>
+                        <LangSwitcher lang={lang} />
                     </li>
                 </ul>
 
@@ -68,14 +81,15 @@ const NavbarUI: React.FC<NavbarUIProps> = ({ lang, navItems, quoteLabel, quoteHr
                     className="mobile-menu-btn"
                     onClick={() => setIsOpen(!isOpen)}
                     aria-label={isOpen ? "Close menu" : "Open menu"}
+                    style={{ zIndex: 10001 }}
                 >
                     <AnimatePresence mode="wait">
                         {isOpen ? (
                             <motion.div
                                 key="close"
-                                initial={{ opacity: 0, rotate: -90, scale: 0.5 }}
-                                animate={{ opacity: 1, rotate: 0, scale: 1 }}
-                                exit={{ opacity: 0, rotate: 90, scale: 0.5 }}
+                                initial={{ opacity: 0, rotate: -90 }}
+                                animate={{ opacity: 1, rotate: 0 }}
+                                exit={{ opacity: 0, rotate: 90 }}
                                 transition={{ duration: 0.2 }}
                             >
                                 <X size={28} />
@@ -83,9 +97,9 @@ const NavbarUI: React.FC<NavbarUIProps> = ({ lang, navItems, quoteLabel, quoteHr
                         ) : (
                             <motion.div
                                 key="menu"
-                                initial={{ opacity: 0, rotate: 90, scale: 0.5 }}
-                                animate={{ opacity: 1, rotate: 0, scale: 1 }}
-                                exit={{ opacity: 0, rotate: -90, scale: 0.5 }}
+                                initial={{ opacity: 0, rotate: 90 }}
+                                animate={{ opacity: 1, rotate: 0 }}
+                                exit={{ opacity: 0, rotate: -90 }}
                                 transition={{ duration: 0.2 }}
                             >
                                 <Menu size={28} />
@@ -113,12 +127,18 @@ const NavbarUI: React.FC<NavbarUIProps> = ({ lang, navItems, quoteLabel, quoteHr
                             transition={{ type: 'spring', damping: 30, stiffness: 300 }}
                             className="nav-drawer-panel"
                         >
+                            <div className="drawer-header-internal">
+                                <button className="drawer-close-btn" onClick={() => setIsOpen(false)}>
+                                    <X size={32} />
+                                </button>
+                            </div>
+
                             <div className="drawer-inner">
                                 <ul className="mobile-nav-list">
                                     {navItems.map((item, idx) => (
                                         <motion.li
                                             key={idx}
-                                            initial={{ opacity: 0, x: 30 }}
+                                            initial={{ opacity: 0, x: 20 }}
                                             animate={{ opacity: 1, x: 0 }}
                                             transition={{ delay: 0.1 + idx * 0.05 }}
                                         >
@@ -126,24 +146,27 @@ const NavbarUI: React.FC<NavbarUIProps> = ({ lang, navItems, quoteLabel, quoteHr
                                         </motion.li>
                                     ))}
                                     <motion.li
-                                        initial={{ opacity: 0, x: 30 }}
-                                        animate={{ opacity: 1, x: 0 }}
-                                        transition={{ delay: 0.1 + navItems.length * 0.05 }}
+                                        initial={{ opacity: 0, scale: 0.95 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        transition={{ delay: 0.4 }}
                                         className="drawer-cta-item"
                                     >
                                         <a href={quoteHref} className="btn-primary-nav w-full" onClick={() => setIsOpen(false)}>
                                             {quoteLabel}
                                         </a>
                                     </motion.li>
+
                                     <motion.li
-                                        initial={{ opacity: 0, y: 20 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{ delay: 0.4 }}
-                                        className="drawer-lang-item"
+                                        className="drawer-lang-section"
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        transition={{ delay: 0.5 }}
                                     >
-                                        <a href={lang === 'pt' ? '/en/' : '/'} className="lang-switch-mobile">
-                                            {lang === 'pt' ? 'Switch to English' : 'Mudar para Português'}
-                                        </a>
+                                        <div className="lang-section-label">
+                                            <Globe size={18} />
+                                            <span>{lang === 'pt' ? 'Idioma' : 'Language'}</span>
+                                        </div>
+                                        <LangSwitcher lang={lang} mobile />
                                     </motion.li>
                                 </ul>
                             </div>
