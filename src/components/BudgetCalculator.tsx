@@ -577,6 +577,18 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                                         <div className="estimate-value-wrapper">
                                             <span className="estimate-value">{animatedTotal.toLocaleString('pt-PT')}</span>
                                             <span className="estimate-currency">€</span>
+                                            <AnimatePresence>
+                                                {marginBase > 0 && (
+                                                    <motion.span
+                                                        initial={{ opacity: 0, x: -10 }}
+                                                        animate={{ opacity: 1, x: 0 }}
+                                                        exit={{ opacity: 0, x: -10 }}
+                                                        className="estimate-iva"
+                                                    >
+                                                        + IVA
+                                                    </motion.span>
+                                                )}
+                                            </AnimatePresence>
                                         </div>
                                     </div>
                                     <button
