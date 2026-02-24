@@ -444,7 +444,7 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
     };
 
     return (
-        <div className={`calc-container ${isMergedWithForm ? 'is-merged' : ''}`}>
+        <div className={`calc-container ${isMergedWithForm ? 'is-merged' : ''} ${marginBase === 0 ? 'is-zero' : ''}`}>
             <div className="calc-sticky-boundary">
                 {/* LEFT COLUMN: STICKY Total */}
                 <div className="calc-sidebar">

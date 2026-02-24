@@ -650,7 +650,15 @@
 
 .merged-estimate-header .estimate-value {
     font-size: 2.5rem !important;
-    background: linear-gradient(135deg, #fff 0%, #38bdf8 100%);
+    background: #fff;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Apply button gradient only when price is > 0 */
+.calc-container:not(.is-zero) .merged-estimate-header .estimate-value {
+    background: linear-gradient(135deg, #38bdf8 0%, #2563eb 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -658,8 +666,12 @@
 
 .merged-estimate-header .estimate-currency {
     font-size: 1.4rem;
-    color: #38bdf8;
+    color: #a1a1aa;
     align-self: baseline;
+}
+
+.calc-container:not(.is-zero) .merged-estimate-header .estimate-currency {
+    color: #38bdf8;
 }
 
 .merged-estimate-header .estimate-iva {
