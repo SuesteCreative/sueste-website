@@ -72,14 +72,7 @@
         justify-content: space-between;
     }
 
-    .estimate-card.mobile-collapsed .estimate-label {
-        display: none;
-    }
 
-    .estimate-card.mobile-collapsed .legal-note,
-    .estimate-card.mobile-collapsed p.estimate-disclaimer {
-        display: none;
-    }
 
     .estimate-card.mobile-collapsed .estimate-shrink-content {
         display: flex;
@@ -110,9 +103,7 @@
         border-radius: 50%;
     }
 
-    .estimate-card.mobile-collapsed .btn-clear-text {
-        display: none;
-    }
+
 }
 
 .calc-sidebar {
