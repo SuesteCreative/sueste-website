@@ -62,17 +62,24 @@
     }
 
     /* Mobile collapsed state */
-    /* Transitions managed by Framer Motion */
     .estimate-card {
-        transition: none !important;
+        transition: all 0.3s ease;
     }
 
     .estimate-card.mobile-collapsed {
-        /* Layout handled via framer-motion props */
-        padding: 0.75rem 1.25rem;
+        flex-direction: row;
+        padding: 1rem 1.5rem;
+        justify-content: space-between;
     }
 
+    .estimate-card.mobile-collapsed .estimate-label {
+        display: none;
+    }
 
+    .estimate-card.mobile-collapsed .legal-note,
+    .estimate-card.mobile-collapsed p.estimate-disclaimer {
+        display: none;
+    }
 
     .estimate-card.mobile-collapsed .estimate-shrink-content {
         display: flex;
@@ -103,7 +110,9 @@
         border-radius: 50%;
     }
 
-
+    .estimate-card.mobile-collapsed .btn-clear-text {
+        display: none;
+    }
 }
 
 .calc-sidebar {
