@@ -226,9 +226,9 @@
 }
 
 .service-card.selected {
-    border-color: rgba(56, 189, 248, 0.4);
-    background: rgba(56, 189, 248, 0.03);
-    box-shadow: 0 0 20px rgba(56, 189, 248, 0.05);
+    border-color: rgba(56, 189, 248, 0.6);
+    background: rgba(56, 189, 248, 0.08);
+    box-shadow: 0 0 25px rgba(56, 189, 248, 0.15), inset 0 0 10px rgba(56, 189, 248, 0.05);
 }
 
 .service-header {
@@ -332,8 +332,9 @@
 }
 
 .sub-card.selected {
-    background: rgba(56, 189, 248, 0.08);
-    border-color: rgba(56, 189, 248, 0.3);
+    background: rgba(56, 189, 248, 0.12);
+    border-color: rgba(56, 189, 248, 0.5);
+    box-shadow: inset 0 0 15px rgba(56, 189, 248, 0.1);
 }
 
 /* SUB OPTIONS */
@@ -365,8 +366,9 @@
 }
 
 .sub-option.active {
-    background: rgba(56, 189, 248, 0.1);
-    border-color: rgba(56, 189, 248, 0.3);
+    background: rgba(56, 189, 248, 0.15);
+    border-color: rgba(56, 189, 248, 0.6);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), inset 0 0 10px rgba(56, 189, 248, 0.1);
 }
 
 .sub-opt-info {
@@ -493,8 +495,9 @@
 }
 
 .addon-card.active {
-    border-color: rgba(56, 189, 248, 0.4);
-    background: rgba(56, 189, 248, 0.05);
+    border-color: rgba(56, 189, 248, 0.6);
+    background: rgba(56, 189, 248, 0.12);
+    box-shadow: 0 4px 15px rgba(56, 189, 248, 0.1);
 }
 
 .addon-icon {
