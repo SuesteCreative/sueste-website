@@ -62,6 +62,35 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
     const [status, setStatus] = useState({ type: '', msg: '' });
     const [isSubmitting, setIsSubmitting] = useState(false);
 
+    const [isStickyMobile, setIsStickyMobile] = useState(false);
+    const [isAtForm, setIsAtForm] = useState(false);
+
+    // Scroll detection for mobile sticky
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.innerWidth <= 1024) {
+                setIsStickyMobile(window.scrollY > 80);
+            } else {
+                setIsStickyMobile(false);
+            }
+        };
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        handleScroll();
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    // Intersection observer for form visibility
+    useEffect(() => {
+        const observer = new IntersectionObserver(([entry]) => {
+            setIsAtForm(entry.isIntersecting);
+        }, { threshold: 0.05 });
+        const formEl = document.getElementById('budget-form-ref');
+        if (formEl) observer.observe(formEl);
+        return () => observer.disconnect();
+    }, []);
+
+    const shouldCollapse = isStickyMobile && !isAtForm;
+
     // Load from local storage
     useEffect(() => {
         const savedSelections = localStorage.getItem('budgetSelections');
@@ -406,15 +435,18 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
             {/* LEFT COLUMN: STICKY Total */}
             <div className="calc-sidebar">
                 <motion.div
-                    className="estimate-card glass-panel"
+                    className={`estimate-card glass-panel ${shouldCollapse ? 'mobile-collapsed' : ''}`}
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, ease: "easeOut" }}
                 >
                     <p className="estimate-label">{hasStartingAt ? t.startingAt : t.estimate}</p>
-                    <div className="estimate-value-wrapper">
-                        <span className="estimate-value">{animatedTotal.toLocaleString('pt-PT')}</span>
-                        <span className="estimate-currency">€</span>
+                    <div className="estimate-shrink-content">
+                        <span className="estimate-label-inline">{hasStartingAt ? t.startingAt : t.estimate}</span>
+                        <div className="estimate-value-wrapper">
+                            <span className="estimate-value">{animatedTotal.toLocaleString('pt-PT')}</span>
+                            <span className="estimate-currency">€</span>
+                        </div>
                     </div>
 
                     <button
@@ -423,7 +455,7 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                         onClick={clearBudget}
                         disabled={marginBase === 0}
                     >
-                        <Trash2 size={16} /> {t.clear}
+                        <Trash2 size={16} /> <span className="btn-clear-text">{t.clear}</span>
                     </button>
 
                     <div className="legal-note">
@@ -475,6 +507,7 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
 
                 {/* SUBMISSION FORM */}
                 <motion.form
+                    id="budget-form-ref"
                     className="quote-form glass-panel"
                     onSubmit={handleSubmit}
                     initial={{ opacity: 0, y: 20 }}
