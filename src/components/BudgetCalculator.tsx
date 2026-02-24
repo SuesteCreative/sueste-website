@@ -437,14 +437,24 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                 <motion.div
                     layout
                     className={`estimate-card glass-panel ${shouldCollapse ? 'mobile-collapsed' : ''}`}
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, ease: "easeOut", layout: { duration: 0.4, type: "spring", bounce: 0.1 } }}
+                    initial={false}
+                    animate={{
+                        flexDirection: shouldCollapse ? 'row' : 'column',
+                        padding: shouldCollapse ? '12px 20px' : '40px',
+                        gap: shouldCollapse ? '12px' : '24px',
+                        justifyContent: shouldCollapse ? 'space-between' : 'center',
+                        alignItems: 'center'
+                    }}
+                    transition={{
+                        duration: 0.4,
+                        ease: [0.23, 1, 0.32, 1],
+                        layout: { duration: 0.4 }
+                    }}
                 >
-                    <AnimatePresence>
+                    <AnimatePresence mode="popLayout" initial={false}>
                         {!shouldCollapse && (
                             <motion.p
-                                layout
+                                key="label-top"
                                 initial={{ opacity: 0, height: 0, scale: 0.9, marginBottom: 0 }}
                                 animate={{ opacity: 1, height: 'auto', scale: 1, marginBottom: 24 }}
                                 exit={{ opacity: 0, height: 0, scale: 0.8, marginBottom: 0 }}
@@ -457,10 +467,10 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                     </AnimatePresence>
 
                     <motion.div layout className="estimate-shrink-content">
-                        <AnimatePresence>
+                        <AnimatePresence mode="popLayout" initial={false}>
                             {shouldCollapse && (
                                 <motion.span
-                                    layout
+                                    key="label-inline"
                                     initial={{ opacity: 0, width: 0 }}
                                     animate={{ opacity: 1, width: 'auto' }}
                                     exit={{ opacity: 0, width: 0 }}
@@ -485,10 +495,10 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                         disabled={marginBase === 0}
                     >
                         <Trash2 size={16} />
-                        <AnimatePresence>
+                        <AnimatePresence mode="popLayout" initial={false}>
                             {!shouldCollapse && (
                                 <motion.span
-                                    layout
+                                    key="clear-text"
                                     initial={{ opacity: 0, width: 0, marginLeft: 0 }}
                                     animate={{ opacity: 1, width: 'auto', marginLeft: 8 }}
                                     exit={{ opacity: 0, width: 0, marginLeft: 0 }}
@@ -501,13 +511,13 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                         </AnimatePresence>
                     </motion.button>
 
-                    <AnimatePresence>
+                    <AnimatePresence mode="popLayout" initial={false}>
                         {!shouldCollapse && (
                             <motion.div
-                                layout
-                                initial={{ opacity: 0, height: 0, marginTop: 0, paddingTop: 0, borderTopColor: 'rgba(255,255,255,0)' }}
-                                animate={{ opacity: 1, height: 'auto', marginTop: 16, paddingTop: 24, borderTopColor: 'rgba(255,255,255,0.05)' }}
-                                exit={{ opacity: 0, height: 0, marginTop: 0, paddingTop: 0, borderTopColor: 'rgba(255,255,255,0)' }}
+                                key="legal-note"
+                                initial={{ opacity: 0, height: 0, marginTop: 0, paddingTop: 0 }}
+                                animate={{ opacity: 1, height: 'auto', marginTop: 16, paddingTop: 24 }}
+                                exit={{ opacity: 0, height: 0, marginTop: 0, paddingTop: 0 }}
                                 className="legal-note"
                                 style={{ overflow: 'hidden' }}
                             >
