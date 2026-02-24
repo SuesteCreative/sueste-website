@@ -9,7 +9,9 @@ const year = new Date().getFullYear();
 <footer class="footer">
   <div class="container footer-content">
     <div class="footer-brand">
-      <a href="/" class="logo">Sueste<span>Creative</span></a>
+      <a href="/" class="logo">
+        <img src="/images/logo-white-vert.png" alt="Sueste Creative Logo" class="footer-logo-img" />
+      </a>
       <p>{t('hero.subheadline')}</p>
     </div>
     
@@ -95,14 +97,10 @@ const year = new Date().getFullYear();
     opacity: 0.5;
   }
   
-  .logo {
-    font-size: 1.25rem;
-    font-weight: 800;
-  }
-  
-  .logo span {
-    color: var(--color-accent);
-    font-weight: 400;
+  .footer-logo-img {
+    height: 80px;
+    width: auto;
+    margin-bottom: 1rem;
   }
 
   @media (max-width: 768px) {

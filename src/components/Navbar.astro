@@ -18,7 +18,7 @@ const quoteHref = lang === 'pt' ? '/orcamento' : '/en/quote';
 <nav class="navbar glass">
   <div class="container nav-content">
     <a href={lang === 'pt' ? '/' : '/en/'} class="logo">
-      Sueste<span>Creative</span>
+      <img src="/images/logo-white-hor.png" alt="Sueste Creative Logo" class="logo-img" />
     </a>
     
     <ul class="nav-links">
@@ -52,15 +52,10 @@ const quoteHref = lang === 'pt' ? '/orcamento' : '/en/quote';
     align-items: center;
   }
   
-  .logo {
-    font-size: 1.5rem;
-    font-weight: 800;
-    letter-spacing: -1px;
-  }
-  
-  .logo span {
-    color: var(--color-accent);
-    font-weight: 400;
+  .logo-img {
+    height: 40px;
+    width: auto;
+    display: block;
   }
   
   .nav-links {
