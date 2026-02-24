@@ -80,22 +80,7 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    // Intersection observer: only expand when form is almost hitting the collapsed card
-    useEffect(() => {
-        const observer = new IntersectionObserver(([entry]) => {
-            setIsAtForm(entry.isIntersecting);
-        }, {
-            threshold: 0,
-            // Negative rootMargin on top to trigger ONLY when form hits the sticky bar zone
-            // Negative on bottom to ensure it doesn't trigger while form is still far down
-            rootMargin: '-100px 0px -20% 0px'
-        });
-        const formEl = document.getElementById('budget-form-ref');
-        if (formEl) observer.observe(formEl);
-        return () => observer.disconnect();
-    }, []);
-
-    const shouldCollapse = isStickyMobile && !isAtForm;
+    const shouldCollapse = isStickyMobile;
 
     // Load from local storage
     useEffect(() => {
