@@ -76,36 +76,13 @@ const NavbarUI: React.FC<NavbarUIProps> = ({ lang, navItems, quoteLabel, quoteHr
                     </li>
                 </ul>
 
-                {/* MOBILE BUTTON */}
                 <button
                     className="mobile-menu-btn"
                     onClick={() => setIsOpen(!isOpen)}
                     aria-label={isOpen ? "Close menu" : "Open menu"}
-                    style={{ zIndex: 10001 }}
+                    style={{ zIndex: 10001, opacity: isOpen ? 0 : 1, pointerEvents: isOpen ? 'none' : 'auto' }}
                 >
-                    <AnimatePresence mode="wait">
-                        {isOpen ? (
-                            <motion.div
-                                key="close"
-                                initial={{ opacity: 0, rotate: -90 }}
-                                animate={{ opacity: 1, rotate: 0 }}
-                                exit={{ opacity: 0, rotate: 90 }}
-                                transition={{ duration: 0.2 }}
-                            >
-                                <X size={28} />
-                            </motion.div>
-                        ) : (
-                            <motion.div
-                                key="menu"
-                                initial={{ opacity: 0, rotate: 90 }}
-                                animate={{ opacity: 1, rotate: 0 }}
-                                exit={{ opacity: 0, rotate: -90 }}
-                                transition={{ duration: 0.2 }}
-                            >
-                                <Menu size={28} />
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
+                    <Menu size={28} />
                 </button>
             </div>
 
@@ -127,6 +104,15 @@ const NavbarUI: React.FC<NavbarUIProps> = ({ lang, navItems, quoteLabel, quoteHr
                             transition={{ type: 'spring', damping: 30, stiffness: 300 }}
                             className="nav-drawer-panel"
                         >
+                            <div className="drawer-header-internal" style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '2rem' }}>
+                                <button
+                                    className="drawer-close-btn"
+                                    onClick={() => setIsOpen(false)}
+                                    style={{ background: 'transparent', border: 'none', color: '#fff', cursor: 'pointer' }}
+                                >
+                                    <X size={32} />
+                                </button>
+                            </div>
 
 
                             <div className="drawer-inner">

@@ -5,8 +5,8 @@ import pricingData from '../data/pricing.json';
 import './BudgetCalculator.css';
 
 // Animated Counter Hook
-function useCountUp(endValue: number, duration: number = 1000) {
-    const [count, setCount] = useState(0);
+function useCountUp(endValue: number, duration: number = 800) {
+    const [count, setCount] = useState(endValue);
 
     useEffect(() => {
         let startTimestamp: number | null = null;
@@ -15,13 +15,13 @@ function useCountUp(endValue: number, duration: number = 1000) {
         const step = (timestamp: number) => {
             if (!startTimestamp) startTimestamp = timestamp;
             const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-            // easeOutExpo
-            const easing = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
-            setCount(Math.floor(startValue + easing * (endValue - startValue)));
+            // easeOutQuart
+            const easing = 1 - Math.pow(1 - progress, 4);
+            const currentCount = Math.floor(startValue + easing * (endValue - startValue));
+            setCount(currentCount);
+
             if (progress < 1) {
                 window.requestAnimationFrame(step);
-            } else {
-                setCount(endValue);
             }
         };
 
@@ -257,7 +257,7 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
         msgOpt: lang === 'pt' ? 'Mensagem (Opcional)' : 'Message (Optional)',
         send: lang === 'pt' ? 'Enviar pedido' : 'Send request',
         sending: lang === 'pt' ? 'A enviar...' : 'Sending...',
-        monthlyNote: lang === 'pt' ? 'valores mensais, mínimo recomendado 3 meses' : 'monthly values, recommended minimum 3 months',
+        monthlyNote: lang === 'pt' ? 'valores mensais' : 'monthly values',
         hourly: lang === 'pt' ? 'por hora' : 'per hour',
         hours: lang === 'pt' ? 'Horas' : 'Hours',
         included: lang === 'pt' ? 'Incluído' : 'Included',

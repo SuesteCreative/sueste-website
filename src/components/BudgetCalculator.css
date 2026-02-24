@@ -39,17 +39,15 @@
 
 @media (max-width: 1024px) {
     .calc-sidebar {
-        position: relative;
-        top: 0;
+        position: sticky;
+        top: 80px;
         z-index: 50;
         margin-bottom: 2rem;
-        transition: top 0.4s ease;
     }
 
-    /* When collapsed, it sticks to the bottom of the viewport */
+    /* Remove the has-selector logic and use standard sticky behavior */
     .calc-sidebar:has(.mobile-collapsed) {
-        position: sticky;
-        top: calc(100dvh - 90px);
+        top: 80px;
     }
 
     .glass-panel {
