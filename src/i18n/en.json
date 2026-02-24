@@ -1,0 +1,20 @@
+{
+    "nav": {
+        "home": "Home",
+        "services": "Services",
+        "work": "Work",
+        "about": "About",
+        "contact": "Contact",
+        "quote": "Quote"
+    },
+    "hero": {
+        "headline": "Creativity that Drives Results",
+        "subheadline": "Web Design, Social Media, Drones and Visual Identity for brands that want to lead.",
+        "cta": "Start Project"
+    },
+    "footer": {
+        "rights": "All rights reserved.",
+        "privacy": "Privacy",
+        "terms": "Terms"
+    }
+}

@@ -1,0 +1,65 @@
+{
+    "services": [
+        {
+            "id": "web",
+            "name_pt": "Desenvolvimento Web",
+            "name_en": "Web Development",
+            "base_price": 1000,
+            "options": [
+                {
+                    "id": "static",
+                    "name_pt": "Website Estático",
+                    "name_en": "Static Website",
+                    "price": 0
+                },
+                {
+                    "id": "dynamic",
+                    "name_pt": "Website Dinâmico (Backoffice)",
+                    "name_en": "Dynamic Website (Backoffice)",
+                    "price": 500
+                }
+            ],
+            "per_page": 100
+        },
+        {
+            "id": "social",
+            "name_pt": "Social Media",
+            "name_en": "Social Media",
+            "base_price": 500,
+            "options": [
+                {
+                    "id": "basic",
+                    "name_pt": "Gestão Básica (2 posts/semana)",
+                    "name_en": "Basic Management (2 posts/week)",
+                    "price": 0
+                },
+                {
+                    "id": "pro",
+                    "name_pt": "Gestão Pro (5 posts/semana)",
+                    "name_en": "Pro Management (5 posts/week)",
+                    "price": 300
+                }
+            ]
+        },
+        {
+            "id": "drone",
+            "name_pt": "Drone & Vídeo",
+            "name_en": "Drone & Video",
+            "base_price": 400,
+            "options": [
+                {
+                    "id": "half_day",
+                    "name_pt": "Meio Dia de Captação",
+                    "name_en": "Half Day Shoot",
+                    "price": 0
+                },
+                {
+                    "id": "full_day",
+                    "name_pt": "Dia Inteiro de Captação",
+                    "name_en": "Full Day Shoot",
+                    "price": 300
+                }
+            ]
+        }
+    ]
+}

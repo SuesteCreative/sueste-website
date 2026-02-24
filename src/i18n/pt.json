@@ -1,0 +1,20 @@
+{
+    "nav": {
+        "home": "Início",
+        "services": "Serviços",
+        "work": "Portfólio",
+        "about": "Sobre",
+        "contact": "Contacto",
+        "quote": "Orçamento"
+    },
+    "hero": {
+        "headline": "Criatividade que Impulsiona Resultados",
+        "subheadline": "Web Design, Social Media, Drones e Identidade Visual para marcas que querem liderar.",
+        "cta": "Começar Projeto"
+    },
+    "footer": {
+        "rights": "Todos os direitos reservados.",
+        "privacy": "Privacidade",
+        "terms": "Termos"
+    }
+}

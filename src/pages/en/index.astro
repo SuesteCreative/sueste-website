@@ -1,0 +1,186 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import HeroScrollSequence from '../../components/HeroScrollSequence.astro';
+import Section from '../../components/Section.astro';
+import { useTranslations } from '../../utils/i18n';
+
+const t = useTranslations('en');
+---
+
+<BaseLayout title="Home" description={t('hero.subheadline')} lang="en">
+  <Navbar />
+  
+  <main>
+    <HeroScrollSequence>
+      <div class="hero-content container">
+        <h1>{t('hero.headline')}</h1>
+        <p>{t('hero.subheadline')}</p>
+        <a href="/en/quote" class="btn-cta">{t('hero.cta')}</a>
+      </div>
+    </HeroScrollSequence>
+
+    <Section id="services" title="Services" subtitle="Complete creative solutions to take your brand to the next level.">
+      <div class="services-grid">
+        <div class="service-card glass">
+          <h3>Web Development</h3>
+          <p>Fast, SEO-first websites focused on conversion.</p>
+        </div>
+        <div class="service-card glass">
+          <h3>Social Media</h3>
+          <p>Social media management and strategic content creation.</p>
+        </div>
+        <div class="service-card glass">
+          <h3>Drone Footage</h3>
+          <p>Cinematic 4K aerial imagery for your business.</p>
+        </div>
+        <div class="service-card glass">
+          <h3>Graphic Design</h3>
+          <p>Visual identity and design that communicates your values.</p>
+        </div>
+      </div>
+    </Section>
+
+    <Section id="process" title="Our Process" dark>
+      <div class="process-steps">
+        <div class="process-step">
+          <span class="step-num">01</span>
+          <h4>Discover</h4>
+          <p>We analyze your goals and your market.</p>
+        </div>
+        <div class="process-step">
+          <span class="step-num">02</span>
+          <h4>Design</h4>
+          <p>We create the visual and functional strategy.</p>
+        </div>
+        <div class="process-step">
+          <span class="step-num">03</span>
+          <h4>Produce</h4>
+          <p>We bring the project to life with cutting-edge technology.</p>
+        </div>
+        <div class="process-step">
+          <span class="step-num">04</span>
+          <h4>Deliver</h4>
+          <p>We deliver measurable results.</p>
+        </div>
+      </div>
+    </Section>
+
+    <Section id="cta" className="final-cta">
+      <div class="cta-box glass">
+        <h2>Ready to start?</h2>
+        <p>Get a free quote in less than 2 minutes.</p>
+        <a href="/en/quote" class="btn-cta">Get a Quote</a>
+      </div>
+    </Section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .hero-content {
+    max-width: 800px;
+  }
+  
+  .hero-content h1 {
+    font-size: 4.5rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 2rem;
+    letter-spacing: -2px;
+  }
+  
+  .hero-content p {
+    font-size: 1.25rem;
+    opacity: 0.8;
+    margin-bottom: 3rem;
+  }
+
+  .btn-cta {
+    display: inline-block;
+    background-color: var(--color-accent);
+    color: white;
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: transform 0.3s ease;
+  }
+  
+  .btn-cta:hover {
+    transform: scale(1.05);
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+  
+  .service-card {
+    padding: 3rem 2rem;
+    border-radius: 20px;
+    transition: transform 0.3s ease;
+  }
+  
+  .service-card:hover {
+    transform: translateY(-10px);
+  }
+  
+  .service-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--color-accent);
+  }
+
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 3rem;
+  }
+  
+  .process-step {
+    position: relative;
+  }
+  
+  .step-num {
+    font-size: 3rem;
+    font-weight: 800;
+    opacity: 0.1;
+    display: block;
+    margin-bottom: -1.5rem;
+  }
+  
+  .process-step h4 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .final-cta {
+    text-align: center;
+  }
+  
+  .cta-box {
+    padding: 6rem 2rem;
+    border-radius: 40px;
+  }
+  
+  .cta-box h2 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  
+  .cta-box p {
+    margin-bottom: 3rem;
+    font-size: 1.2rem;
+    opacity: 0.7;
+  }
+
+  @media (max-width: 768px) {
+    .hero-content h1 {
+      font-size: 2.5rem;
+    }
+  }
+</style>

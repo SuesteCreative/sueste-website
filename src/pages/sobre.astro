@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import Section from '../components/Section.astro';
+---
+
+<BaseLayout title="Sobre Nós" description="Saiba mais sobre a Equipa Sueste Creative.">
+  <Navbar />
+  <main class="sub-page">
+    <Section title="Sobre a Sueste Creative" subtitle="Somos uma agência focada em resultados reais através da criatividade.">
+      <div class="content">
+        <p>A Sueste Creative nasceu da paixão por unir design, tecnologia e narrativa visual. Especializamo-nos em ajudar marcas a destacar-se num mercado cada vez mais digital e visual.</p>
+        <p>Desde o desenvolvimento de websites de alta performance até à captação aérea com drones, a nossa abordagem é sempre estratégica e focada no detalhe.</p>
+      </div>
+    </Section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .sub-page { padding-top: 80px; }
+  .content p { margin-bottom: 1.5rem; font-size: 1.1rem; opacity: 0.8; max-width: 800px; }
+</style>

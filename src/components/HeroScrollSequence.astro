@@ -1,0 +1,118 @@
+---
+---
+
+<div class="hero-scroll-container">
+  <div class="sticky-pin">
+    <canvas id="hero-canvas"></canvas>
+    <div class="hero-overlay">
+      <slot />
+    </div>
+  </div>
+</div>
+
+<style>
+  .hero-scroll-container {
+    height: 300vh; /* Scroll distance */
+    position: relative;
+  }
+  
+  .sticky-pin {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  #hero-canvas {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+  }
+  
+  .hero-overlay {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    width: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-scroll-container {
+      height: 100vh;
+    }
+  }
+</style>
+
+<script>
+  // Simple LERP (Linear Interpolation) function
+  const lerp = (start: number, end: number, amt: number) => (1 - amt) * start + amt * end;
+
+  class HeroSequence {
+    canvas: HTMLCanvasElement;
+    ctx: CanvasRenderingContext2D;
+    images: HTMLImageElement[] = [];
+    currentFrame = 0;
+    targetFrame = 0;
+    frameCount = 60; // Placeholder count
+    loadedCount = 0;
+    container: HTMLElement;
+
+    constructor() {
+      this.canvas = document.getElementById('hero-canvas') as HTMLCanvasElement;
+      this.ctx = this.canvas.getContext('2d')!;
+      this.container = document.querySelector('.hero-scroll-container')!;
+      
+      this.init();
+    }
+
+    async init() {
+      // For now, using a placeholder logic or empty sequence
+      // In a real scenario, we'd load images here
+      this.resize();
+      window.addEventListener('resize', () => this.resize());
+      window.addEventListener('scroll', () => this.onScroll());
+      
+      this.render();
+    }
+
+    resize() {
+      this.canvas.width = window.innerWidth;
+      this.canvas.height = window.innerHeight;
+      this.drawFrame(Math.floor(this.currentFrame));
+    }
+
+    onScroll() {
+      const scrollFraction = window.scrollY / (this.container.offsetHeight - window.innerHeight);
+      this.targetFrame = Math.min(this.frameCount - 1, Math.max(0, scrollFraction * this.frameCount));
+    }
+
+    drawFrame(frame: number) {
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      // Placeholder: Draw a centered circle that grows/shrinks
+      const progress = frame / this.frameCount;
+      const size = 100 + progress * 500;
+      this.ctx.fillStyle = `rgba(0, 112, 243, ${0.1 + progress * 0.4})`;
+      this.ctx.beginPath();
+      this.ctx.arc(this.canvas.width / 2, this.canvas.height / 2, size, 0, Math.PI * 2);
+      this.ctx.fill();
+    }
+
+    render() {
+      this.currentFrame = lerp(this.currentFrame, this.targetFrame, 0.1);
+      this.drawFrame(Math.floor(this.currentFrame));
+      requestAnimationFrame(() => this.render());
+    }
+  }
+
+  // Initialize if NOT prefers-reduced-motion
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    new HeroSequence();
+  }
+</script>

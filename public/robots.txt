@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sueste.creative/sitemap-index.xml

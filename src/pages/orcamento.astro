@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import Section from '../components/Section.astro';
+import QuoteBuilder from '../components/QuoteBuilder.jsx';
+import { useTranslations } from '../utils/i18n';
+
+const t = useTranslations('pt');
+---
+
+<BaseLayout title="Orçamento" description="Configure o seu projeto e obtenha uma estimativa imediata.">
+  <Navbar />
+  
+  <main class="quote-page">
+    <Section title="Calculadora de Orçamento" subtitle="Personalize os serviços de que necessita e obtenha uma estimativa transparente em tempo real.">
+      <QuoteBuilder client:load lang="pt" />
+    </Section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .quote-page {
+    padding-top: 80px;
+  }
+</style>
