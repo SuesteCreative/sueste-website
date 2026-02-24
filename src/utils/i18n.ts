@@ -15,9 +15,9 @@ export function getLangFromUrl(url: URL) {
 }
 
 export function useTranslations(lang: keyof typeof languages) {
-    return function t(key: string) {
+    return function t(key: string): string {
         const translations = lang === 'en' ? enTranslations : ptTranslations;
         // Simple dot notation accessor
-        return key.split('.').reduce((obj, i) => (obj as any)?.[i], translations) || key;
+        return (key.split('.').reduce((obj, i) => (obj as any)?.[i], translations) as unknown as string) || key;
     }
 }
