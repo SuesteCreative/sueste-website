@@ -34,7 +34,7 @@
         position: sticky;
         top: 80px;
         z-index: 50;
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
     }
 
     .glass-panel {
@@ -68,7 +68,8 @@
 
     .estimate-card.mobile-collapsed {
         flex-direction: row;
-        /* Padding and gap handled by Framer Motion for smoothness */
+        justify-content: space-between;
+        width: 100%;
     }
 
     /* Elements are now handled by Framer Motion (opacity/height/scale) 

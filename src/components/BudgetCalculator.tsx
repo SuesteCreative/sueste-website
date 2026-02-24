@@ -157,7 +157,7 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
             }
         });
 
-        const marginBase = Math.round(baseSum * 1.1); // +10%
+        const marginBase = Math.round(baseSum);
         return { baseSum, marginBase, hasStartingAt };
     };
 
@@ -457,86 +457,41 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                         padding: shouldCollapse ? '12px 20px' : '40px',
                         gap: shouldCollapse ? '12px' : '24px'
                     }}
-                    transition={{
-                        layout: { duration: 0.4, ease: [0.23, 1, 0.32, 1] },
-                        padding: { duration: 0.4 }
-                    }}
                 >
-                    <AnimatePresence mode="popLayout" initial={false}>
-                        {!shouldCollapse && (
-                            <motion.p
-                                key="label-top"
-                                initial={{ opacity: 0, height: 0, scale: 0.9 }}
-                                animate={{ opacity: 1, height: 'auto', scale: 1 }}
-                                exit={{ opacity: 0, height: 0, scale: 0.9 }}
-                                className="estimate-label"
-                                style={{ overflow: 'hidden' }}
-                            >
+                    {!shouldCollapse && (
+                        <p className="estimate-label">
+                            {hasStartingAt ? t.startingAt : t.estimate}
+                        </p>
+                    )}
+
+                    <div className="estimate-shrink-content">
+                        {shouldCollapse && (
+                            <span className="estimate-label-inline">
                                 {hasStartingAt ? t.startingAt : t.estimate}
-                            </motion.p>
+                            </span>
                         )}
-                    </AnimatePresence>
+                        <div className="estimate-value-wrapper">
+                            <span className="estimate-value">{animatedTotal.toLocaleString('pt-PT')}</span>
+                            <span className="estimate-currency">€</span>
+                        </div>
+                    </div>
 
-                    <motion.div layout className="estimate-shrink-content">
-                        <AnimatePresence mode="popLayout" initial={false}>
-                            {shouldCollapse && (
-                                <motion.span
-                                    key="label-inline"
-                                    initial={{ opacity: 0, width: 0 }}
-                                    animate={{ opacity: 1, width: 'auto' }}
-                                    exit={{ opacity: 0, width: 0 }}
-                                    className="estimate-label-inline"
-                                    style={{ whiteSpace: 'nowrap', overflow: 'hidden' }}
-                                >
-                                    {hasStartingAt ? t.startingAt : t.estimate}
-                                </motion.span>
-                            )}
-                        </AnimatePresence>
-                        <motion.div layout className="estimate-value-wrapper">
-                            <motion.span layout className="estimate-value">{animatedTotal.toLocaleString('pt-PT')}</motion.span>
-                            <motion.span layout className="estimate-currency">€</motion.span>
-                        </motion.div>
-                    </motion.div>
-
-                    <motion.button
-                        layout
+                    <button
                         type="button"
                         className="btn-clear"
                         onClick={clearBudget}
                         disabled={marginBase === 0}
                     >
                         <Trash2 size={16} />
-                        <AnimatePresence mode="popLayout" initial={false}>
-                            {!shouldCollapse && (
-                                <motion.span
-                                    key="clear-text"
-                                    initial={{ opacity: 0, width: 0 }}
-                                    animate={{ opacity: 1, width: 'auto' }}
-                                    exit={{ opacity: 0, width: 0 }}
-                                    className="btn-clear-text"
-                                    style={{ overflow: 'hidden', whiteSpace: 'nowrap', marginLeft: 8 }}
-                                >
-                                    {t.clear}
-                                </motion.span>
-                            )}
-                        </AnimatePresence>
-                    </motion.button>
+                        {!shouldCollapse && <span className="btn-clear-text" style={{ marginLeft: 8 }}>{t.clear}</span>}
+                    </button>
 
-                    <AnimatePresence mode="popLayout" initial={false}>
-                        {!shouldCollapse && (
-                            <motion.div
-                                key="legal-note"
-                                initial={{ opacity: 0, height: 0, marginTop: 0 }}
-                                animate={{ opacity: 1, height: 'auto', marginTop: 16 }}
-                                exit={{ opacity: 0, height: 0, marginTop: 0 }}
-                                className="legal-note"
-                                style={{ overflow: 'hidden' }}
-                            >
-                                <Info size={16} className="legal-icon" />
-                                <p>{t.legal}</p>
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
+                    {!shouldCollapse && (
+                        <div className="legal-note">
+                            <Info size={16} className="legal-icon" />
+                            <p>{t.legal}</p>
+                        </div>
+                    )}
                 </motion.div>
             </div>
 
