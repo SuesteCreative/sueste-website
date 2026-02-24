@@ -13,18 +13,28 @@
 @media (max-width: 1024px) {
     .calc-sticky-boundary {
         display: block;
-        /* Use block to allow sidebar to follow through selection area */
+        position: relative;
+    }
+
+    .calc-mobile-docking-spacer {
+        display: block;
+        height: 100px;
     }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1025px) {
     .calc-sticky-boundary {
+        display: grid;
         grid-template-columns: 350px 1fr;
         gap: 3rem;
     }
 
     .calc-form-area {
         margin-left: calc(350px + 3rem);
+    }
+
+    .calc-mobile-docking-spacer {
+        display: none;
     }
 }
 
@@ -49,7 +59,8 @@
         position: sticky;
         top: 80px;
         z-index: 50;
-        margin-bottom: 2rem;
+        margin-bottom: 0;
+        /* Allow card to reach the bottom spacer exactly */
     }
 
     /* Remove the has-selector logic and use standard sticky behavior */
@@ -294,6 +305,8 @@
     align-items: center;
     justify-content: center;
     transition: all 0.2s ease;
+    flex-shrink: 0;
+    /* Never squash the checkbox */
 }
 
 .checkbox-custom.checked {

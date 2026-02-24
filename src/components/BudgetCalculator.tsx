@@ -493,7 +493,6 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                     </motion.div>
                 </div>
 
-                {/* RIGHT COLUMN: CONFIGURATOR */}
                 <div className="calc-selection-area">
                     <div className="calc-step-group">
                         {pricingData.services.map((service: any, idx) => renderServiceCard(service, idx))}
@@ -517,7 +516,7 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                                         className={`addon-card ${isActive ? 'active' : ''}`}
                                         onClick={() => toggleAddon(addon.id)}
                                     >
-                                        <div className="addon-icon">
+                                        <div className="addon-icon" style={{ flexShrink: 0 }}>
                                             {isActive ? <CheckSquare size={20} className="check-icon" /> : <Square size={20} className="uncheck-icon" />}
                                         </div>
                                         <div className="addon-content">
@@ -533,6 +532,9 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                             })}
                         </div>
                     </motion.div>
+
+                    {/* DOCKING SPACER: This creates the landing spot for the card in the gap */}
+                    <div className="calc-mobile-docking-spacer" style={{ height: '80px' }}></div>
                 </div>
             </div>
 
