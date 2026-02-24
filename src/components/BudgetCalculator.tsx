@@ -432,95 +432,99 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
 
     return (
         <div className="calc-container">
-            {/* LEFT COLUMN: STICKY Total */}
-            <div className="calc-sidebar">
-                <motion.div
-                    layout
-                    className={`estimate-card glass-panel ${shouldCollapse ? 'mobile-collapsed' : ''}`}
-                    initial={false}
-                    animate={{
-                        padding: shouldCollapse ? '12px 20px' : '40px',
-                        gap: shouldCollapse ? '12px' : '24px'
-                    }}
-                >
-                    {!shouldCollapse && (
-                        <p className="estimate-label">
-                            {hasStartingAt ? t.startingAt : t.estimate}
-                        </p>
-                    )}
-
-                    <div className="estimate-shrink-content">
-                        {shouldCollapse && (
-                            <span className="estimate-label-inline">
-                                {hasStartingAt ? t.startingAt : t.estimate}
-                            </span>
-                        )}
-                        <div className="estimate-value-wrapper">
-                            <span className="estimate-value">{animatedTotal.toLocaleString('pt-PT')}</span>
-                            <span className="estimate-currency">€</span>
-                        </div>
-                    </div>
-
-                    <button
-                        type="button"
-                        className="btn-clear"
-                        onClick={clearBudget}
-                        disabled={marginBase === 0}
+            <div className="calc-sticky-boundary">
+                {/* LEFT COLUMN: STICKY Total */}
+                <div className="calc-sidebar">
+                    <motion.div
+                        layout
+                        className={`estimate-card glass-panel ${shouldCollapse ? 'mobile-collapsed' : ''}`}
+                        initial={false}
+                        animate={{
+                            padding: shouldCollapse ? '12px 20px' : '40px',
+                            gap: shouldCollapse ? '12px' : '24px'
+                        }}
                     >
-                        <Trash2 size={16} />
-                        {!shouldCollapse && <span className="btn-clear-text" style={{ marginLeft: 8 }}>{t.clear}</span>}
-                    </button>
+                        {!shouldCollapse && (
+                            <p className="estimate-label">
+                                {hasStartingAt ? t.startingAt : t.estimate}
+                            </p>
+                        )}
 
-                    {!shouldCollapse && (
-                        <div className="legal-note">
-                            <Info size={16} className="legal-icon" />
-                            <p>{t.legal}</p>
+                        <div className="estimate-shrink-content">
+                            {shouldCollapse && (
+                                <span className="estimate-label-inline">
+                                    {hasStartingAt ? t.startingAt : t.estimate}
+                                </span>
+                            )}
+                            <div className="estimate-value-wrapper">
+                                <span className="estimate-value">{animatedTotal.toLocaleString('pt-PT')}</span>
+                                <span className="estimate-currency">€</span>
+                            </div>
                         </div>
-                    )}
-                </motion.div>
-            </div>
 
-            {/* RIGHT COLUMN: CONFIGURATOR */}
-            <div className="calc-main">
-                <div className="calc-step-group">
-                    {pricingData.services.map((service: any, idx) => renderServiceCard(service, idx))}
+                        <button
+                            type="button"
+                            className="btn-clear"
+                            onClick={clearBudget}
+                            disabled={marginBase === 0}
+                        >
+                            <Trash2 size={16} />
+                            {!shouldCollapse && <span className="btn-clear-text" style={{ marginLeft: 8 }}>{t.clear}</span>}
+                        </button>
+
+                        {!shouldCollapse && (
+                            <div className="legal-note">
+                                <Info size={16} className="legal-icon" />
+                                <p>{t.legal}</p>
+                            </div>
+                        )}
+                    </motion.div>
                 </div>
 
-                {/* ADDONS */}
-                <motion.div
-                    className="addons-section"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.6 }}
-                >
-                    <h3 className="section-title">{t.addonsTitle}</h3>
-                    <div className="addons-grid">
-                        {pricingData.global_addons.map((addon: any) => {
-                            const isActive = !!addons[addon.id];
-                            return (
-                                <div
-                                    key={addon.id}
-                                    className={`addon-card ${isActive ? 'active' : ''}`}
-                                    onClick={() => toggleAddon(addon.id)}
-                                >
-                                    <div className="addon-icon">
-                                        {isActive ? <CheckSquare size={20} className="check-icon" /> : <Square size={20} className="uncheck-icon" />}
-                                    </div>
-                                    <div className="addon-content">
-                                        <span className="addon-name">{lang === 'pt' ? addon.name_pt : addon.name_en}</span>
-                                        <span className="addon-price">
-                                            {addon.on_request
-                                                ? t.onRequest
-                                                : (addon.price > 0 ? `+${addon.price}€` : t.included)}
-                                        </span>
-                                    </div>
-                                </div>
-                            );
-                        })}
+                {/* RIGHT COLUMN: CONFIGURATOR */}
+                <div className="calc-selection-area">
+                    <div className="calc-step-group">
+                        {pricingData.services.map((service: any, idx) => renderServiceCard(service, idx))}
                     </div>
-                </motion.div>
 
-                {/* SUBMISSION FORM */}
+                    {/* ADDONS */}
+                    <motion.div
+                        className="addons-section"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.6 }}
+                    >
+                        <h3 className="section-title">{t.addonsTitle}</h3>
+                        <div className="addons-grid">
+                            {pricingData.global_addons.map((addon: any) => {
+                                const isActive = !!addons[addon.id];
+                                return (
+                                    <div
+                                        key={addon.id}
+                                        className={`addon-card ${isActive ? 'active' : ''}`}
+                                        onClick={() => toggleAddon(addon.id)}
+                                    >
+                                        <div className="addon-icon">
+                                            {isActive ? <CheckSquare size={20} className="check-icon" /> : <Square size={20} className="uncheck-icon" />}
+                                        </div>
+                                        <div className="addon-content">
+                                            <span className="addon-name">{lang === 'pt' ? addon.name_pt : addon.name_en}</span>
+                                            <span className="addon-price">
+                                                {addon.on_request
+                                                    ? t.onRequest
+                                                    : (addon.price > 0 ? `+${addon.price}€` : t.included)}
+                                            </span>
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </motion.div>
+                </div>
+            </div>
+
+            {/* SUBMISSION FORM - Outside sticky boundary */}
+            <div className="calc-form-area">
                 <motion.form
                     id="budget-form-ref"
                     className="quote-form glass-panel"
