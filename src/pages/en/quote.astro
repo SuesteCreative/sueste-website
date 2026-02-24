@@ -1,20 +1,23 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Navbar from '../../components/Navbar.astro';
-import Footer from '../../components/Footer.astro';
-import Section from '../../components/Section.astro';
-import QuoteBuilder from '../../components/QuoteBuilder.jsx';
-import { useTranslations } from '../../utils/i18n';
-
-const t = useTranslations('en');
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import Section from "../../components/Section.astro";
+import BudgetCalculator from "../../components/BudgetCalculator.tsx";
 ---
 
-<BaseLayout title="Quote" description="Configure your project and get an immediate estimate." lang="en">
+<BaseLayout
+  title="Quote | Sueste Creative"
+  description="Configure your project and get an instant estimate for web design, e-commerce, and branding services."
+>
   <Navbar />
-  
+
   <main class="quote-page">
-    <Section title="Quote Calculator" subtitle="Customize the services you need and get a transparent estimate in real time.">
-      <QuoteBuilder client:load lang="en" />
+    <Section
+      title="Budget Calculator"
+      subtitle="Customize the services you need and get a clear, real-time estimate. No strings attached."
+    >
+      <BudgetCalculator client:load lang="en" />
     </Section>
   </main>
 
@@ -23,6 +26,8 @@ const t = useTranslations('en');
 
 <style>
   .quote-page {
-    padding-top: 80px;
+    padding-top: 120px;
+    background: #09090b;
+    min-height: 100vh;
   }
 </style>

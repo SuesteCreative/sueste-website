@@ -1,20 +1,23 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Navbar from '../components/Navbar.astro';
-import Footer from '../components/Footer.astro';
-import Section from '../components/Section.astro';
-import QuoteBuilder from '../components/QuoteBuilder.jsx';
-import { useTranslations } from '../utils/i18n';
-
-const t = useTranslations('pt');
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import Section from "../components/Section.astro";
+import BudgetCalculator from "../components/BudgetCalculator.tsx";
 ---
 
-<BaseLayout title="Orçamento" description="Configure o seu projeto e obtenha uma estimativa imediata.">
+<BaseLayout
+  title="Orçamento | Sueste Creative"
+  description="Configure o seu projeto e obtenha uma estimativa imediata para serviços de web design, e-commerce e branding."
+>
   <Navbar />
-  
+
   <main class="quote-page">
-    <Section title="Calculadora de Orçamento" subtitle="Personalize os serviços de que necessita e obtenha uma estimativa transparente em tempo real.">
-      <QuoteBuilder client:load lang="pt" />
+    <Section
+      title="Calculadora de Orçamento"
+      subtitle="Personalize os serviços de que necessita e obtenha uma estimativa transparente em tempo real. Sem compromissos."
+    >
+      <BudgetCalculator client:load lang="pt" />
     </Section>
   </main>
 
@@ -23,6 +26,8 @@ const t = useTranslations('pt');
 
 <style>
   .quote-page {
-    padding-top: 80px;
+    padding-top: 120px;
+    background: #09090b; /* Dark theme to match the glassmorphism */
+    min-height: 100vh;
   }
 </style>

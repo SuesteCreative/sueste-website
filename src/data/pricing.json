@@ -1,65 +1,175 @@
 {
     "services": [
         {
-            "id": "web",
-            "name_pt": "Desenvolvimento Web",
-            "name_en": "Web Development",
-            "base_price": 1000,
+            "id": "landing_page",
+            "name_pt": "Landing Page",
+            "name_en": "Landing Page",
             "options": [
                 {
-                    "id": "static",
-                    "name_pt": "Website Estático",
-                    "name_en": "Static Website",
-                    "price": 0
+                    "id": "lp_simple",
+                    "name_pt": "Landing page simples (Conteúdo estático + formulário)",
+                    "name_en": "Simple landing page (Static content + form)",
+                    "price": 400
                 },
                 {
-                    "id": "dynamic",
-                    "name_pt": "Website Dinâmico (Backoffice)",
-                    "name_en": "Dynamic Website (Backoffice)",
-                    "price": 500
+                    "id": "lp_dynamic",
+                    "name_pt": "Landing page dinâmica (Animações, interatividade, newsletters)",
+                    "name_en": "Dynamic landing page (Animations, interactivity, newsletters)",
+                    "price": 800
                 }
-            ],
-            "per_page": 100
+            ]
         },
         {
-            "id": "social",
-            "name_pt": "Social Media",
-            "name_en": "Social Media",
-            "base_price": 500,
+            "id": "website",
+            "name_pt": "Website Institucional",
+            "name_en": "Institutional Website",
             "options": [
                 {
-                    "id": "basic",
-                    "name_pt": "Gestão Básica (2 posts/semana)",
-                    "name_en": "Basic Management (2 posts/week)",
-                    "price": 0
+                    "id": "web_small",
+                    "name_pt": "Website pequeno (3 a 5 páginas)",
+                    "name_en": "Small website (3 to 5 pages)",
+                    "price": 1000,
+                    "range_pt": "800€ a 1.200€",
+                    "range_en": "800€ to 1.200€"
                 },
                 {
-                    "id": "pro",
-                    "name_pt": "Gestão Pro (5 posts/semana)",
-                    "name_en": "Pro Management (5 posts/week)",
+                    "id": "web_medium",
+                    "name_pt": "Website médio (Blog, galerias, funcionalidades básicas)",
+                    "name_en": "Medium website (Blog, galleries, basic features)",
+                    "price": 1650,
+                    "range_pt": "1.500€ a 1.800€",
+                    "range_en": "1.500€ to 1.800€"
+                },
+                {
+                    "id": "web_advanced",
+                    "name_pt": "Website avançado (Funcionalidades personalizadas, integrações)",
+                    "name_en": "Advanced website (Custom features, integrations)",
+                    "price": 3000,
+                    "type": "starting_at"
+                }
+            ]
+        },
+        {
+            "id": "ecommerce",
+            "name_pt": "Loja Online (Shopify)",
+            "name_en": "Online Store (Shopify)",
+            "options": [
+                {
+                    "id": "ecom_basic",
+                    "name_pt": "E-commerce básico (Pagamentos e envios simples)",
+                    "name_en": "Basic e-commerce (Simple payments and shipping)",
+                    "price": 1500
+                },
+                {
+                    "id": "ecom_advanced",
+                    "name_pt": "E-commerce avançado (Regras de preços, automatizações)",
+                    "name_en": "Advanced e-commerce (Price rules, automations)",
+                    "price": 2000,
+                    "type": "starting_at"
+                }
+            ]
+        },
+        {
+            "id": "social_media",
+            "name_pt": "Redes Sociais",
+            "name_en": "Social Media",
+            "note_pt": "Valores mensais, mínimo recomendado 3 meses",
+            "note_en": "Monthly values, recommended minimum 3 months",
+            "is_monthly": true,
+            "options": [
+                {
+                    "id": "social_basic",
+                    "name_pt": "Gestão básica (8 a 12 posts)",
+                    "name_en": "Basic management (8 to 12 posts)",
                     "price": 300
+                },
+                {
+                    "id": "social_medium",
+                    "name_pt": "Gestão intermédia (12 a 16 posts)",
+                    "name_en": "Intermediate management (12 to 16 posts)",
+                    "price": 450
+                },
+                {
+                    "id": "social_advanced",
+                    "name_pt": "Gestão avançada (Estratégia, relatórios, ads setup)",
+                    "name_en": "Advanced management (Strategy, reports, ads setup)",
+                    "price": 650
                 }
             ]
         },
         {
             "id": "drone",
-            "name_pt": "Drone & Vídeo",
-            "name_en": "Drone & Video",
-            "base_price": 400,
+            "name_pt": "Drone",
+            "name_en": "Drone",
+            "hourly_rate": 120,
             "options": [
                 {
-                    "id": "half_day",
-                    "name_pt": "Meio Dia de Captação",
-                    "name_en": "Half Day Shoot",
-                    "price": 0
+                    "id": "drone_edit_basic",
+                    "name_pt": "Edição de vídeo básica",
+                    "name_en": "Basic video editing",
+                    "price": 150
                 },
                 {
-                    "id": "full_day",
-                    "name_pt": "Dia Inteiro de Captação",
-                    "name_en": "Full Day Shoot",
+                    "id": "drone_edit_advanced",
+                    "name_pt": "Edição de vídeo avançada",
+                    "name_en": "Advanced video editing",
                     "price": 300
                 }
             ]
+        },
+        {
+            "id": "branding",
+            "name_pt": "Branding",
+            "name_en": "Branding",
+            "options": [
+                {
+                    "id": "brand_logo",
+                    "name_pt": "Criação de logótipo",
+                    "name_en": "Logo creation",
+                    "price": 500
+                },
+                {
+                    "id": "brand_book",
+                    "name_pt": "Logótipo + brandbook",
+                    "name_en": "Logo + brandbook",
+                    "price": 900
+                },
+                {
+                    "id": "brand_full",
+                    "name_pt": "Full rebrand",
+                    "name_en": "Full rebrand",
+                    "price": 1500,
+                    "type": "starting_at"
+                }
+            ]
+        }
+    ],
+    "global_addons": [
+        {
+            "id": "addon_seo",
+            "name_pt": "SEO on-page avançado",
+            "name_en": "Advanced on-page SEO",
+            "price": 300
+        },
+        {
+            "id": "addon_copy",
+            "name_pt": "Copywriting profissional",
+            "name_en": "Professional copywriting",
+            "price": 250
+        },
+        {
+            "id": "addon_content",
+            "name_pt": "Produção de conteúdos",
+            "name_en": "Content production",
+            "price": 0,
+            "on_request": true
+        },
+        {
+            "id": "addon_integrations",
+            "name_pt": "Integrações externas",
+            "name_en": "External integrations",
+            "price": 0,
+            "on_request": true
         }
     ]
 }
