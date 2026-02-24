@@ -13,6 +13,38 @@
     }
 }
 
+@media (max-width: 768px) {
+    .calc-sidebar {
+        position: relative;
+        top: 0;
+        margin-bottom: 2rem;
+    }
+
+    .glass-panel {
+        padding: 1.5rem;
+    }
+
+    .estimate-value {
+        font-size: 3.5rem !important;
+    }
+
+    .service-header {
+        padding: 1.25rem;
+    }
+
+    .service-body {
+        padding: 0 1.25rem 1.5rem 1.25rem;
+    }
+
+    .service-header-left {
+        gap: 0.75rem;
+    }
+
+    .service-title {
+        font-size: 1.1rem;
+    }
+}
+
 .calc-sidebar {
     position: sticky;
     top: 100px;
@@ -59,6 +91,7 @@
     font-weight: 800;
     background: linear-gradient(135deg, #fff 0%, #a1a1aa 100%);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
@@ -301,6 +334,7 @@
     font-size: 1.1rem;
     font-weight: 600;
     -moz-appearance: textfield;
+    appearance: textfield;
 }
 
 .number-input input::-webkit-outer-spin-button,

@@ -33,3 +33,4 @@
 - Use Vanilla CSS as the primary styling method.
 - Maintain a premium, high-end aesthetic.
 - Use dynamic animations and micro-interactions where appropriate.
+- **100% Responsiveness:** Every component and page must be fully responsive across all screen sizes (mobile, tablet, desktop). Always design mobile-first and verify the layout on smaller viewports.
