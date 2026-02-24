@@ -115,9 +115,11 @@
     }
 }
 
-.calc-sidebar {
-    position: sticky;
-    top: 100px;
+@media (min-width: 1025px) {
+    .calc-sidebar {
+        position: sticky;
+        top: 100px;
+    }
 }
 
 .glass-panel {

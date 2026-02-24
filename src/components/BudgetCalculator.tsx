@@ -83,7 +83,10 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
     useEffect(() => {
         const observer = new IntersectionObserver(([entry]) => {
             setIsAtForm(entry.isIntersecting);
-        }, { threshold: 0.05 });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -30% 0px' // Only trigger when form is 30% into the screen
+        });
         const formEl = document.getElementById('budget-form-ref');
         if (formEl) observer.observe(formEl);
         return () => observer.disconnect();
