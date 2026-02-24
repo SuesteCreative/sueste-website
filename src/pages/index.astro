@@ -14,52 +14,54 @@ const t = useTranslations('pt');
   
   <main>
     <HeroScrollSequence>
-      <div class="hero-content container">
-        <h1>{t('hero.headline')}</h1>
-        <p>{t('hero.subheadline')}</p>
-        <a href="/orcamento" class="btn-cta">{t('hero.cta')}</a>
+      <div class="hero-content container" data-reveal>
+        <h1 class="reveal-delay-1">{t('hero.headline')}</h1>
+        <p class="reveal-delay-2">{t('hero.subheadline')}</p>
+        <div class="reveal-delay-3">
+          <a href="/orcamento" class="btn-cta">{t('hero.cta')}</a>
+        </div>
       </div>
     </HeroScrollSequence>
 
-    <Section id="services" title="Serviços" subtitle="Soluções criativas completas para levar a sua marca ao próximo nível.">
+    <Section id="services" title="Serviços" subtitle="Soluções criativas completas para levar a sua marca ao próximo nível." data-reveal>
       <div class="services-grid">
-        <div class="service-card glass">
+        <div class="service-card glass reveal-delay-1" data-reveal>
           <h3>Web Development</h3>
           <p>Websites rápidos, SEO-first e focados em conversão.</p>
         </div>
-        <div class="service-card glass">
+        <div class="service-card glass reveal-delay-2" data-reveal>
           <h3>Social Media</h3>
           <p>Gestão de redes sociais e criação de conteúdo estratégico.</p>
         </div>
-        <div class="service-card glass">
+        <div class="service-card glass reveal-delay-3" data-reveal>
           <h3>Drone Footage</h3>
           <p>Imagens aéreas cinematográficas em 4K para o seu negócio.</p>
         </div>
-        <div class="service-card glass">
+        <div class="service-card glass reveal-delay-1" data-reveal>
           <h3>Graphic Design</h3>
           <p>Identidade visual e design que comunica os seus valores.</p>
         </div>
       </div>
     </Section>
 
-    <Section id="process" title="O Nosso Processo" dark>
+    <Section id="process" title="O Nosso Processo" dark data-reveal>
       <div class="process-steps">
-        <div class="process-step">
+        <div class="process-step reveal-delay-1" data-reveal>
           <span class="step-num">01</span>
           <h4>Discover</h4>
           <p>Analisamos os seus objetivos e o seu mercado.</p>
         </div>
-        <div class="process-step">
+        <div class="process-step reveal-delay-2" data-reveal>
           <span class="step-num">02</span>
           <h4>Design</h4>
           <p>Criamos a estratégia visual e funcional.</p>
         </div>
-        <div class="process-step">
+        <div class="process-step reveal-delay-3" data-reveal>
           <span class="step-num">03</span>
           <h4>Produce</h4>
           <p>Damos vida ao projeto com tecnologia de ponta.</p>
         </div>
-        <div class="process-step">
+        <div class="process-step reveal-delay-1" data-reveal>
           <span class="step-num">04</span>
           <h4>Deliver</h4>
           <p>Entregamos resultados mensuráveis.</p>
@@ -67,8 +69,8 @@ const t = useTranslations('pt');
       </div>
     </Section>
 
-    <Section id="cta" className="final-cta">
-      <div class="cta-box glass">
+    <Section id="cta" className="final-cta" data-reveal>
+      <div class="cta-box glass reveal-delay-1" data-reveal>
         <h2>Pronto para começar?</h2>
         <p>Peça um orçamento gratuito em menos de 2 minutos.</p>
         <a href="/orcamento" class="btn-cta">Pedir Orçamento</a>

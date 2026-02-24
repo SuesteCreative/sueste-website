@@ -35,5 +35,30 @@ const lang = propLang || getLangFromUrl(Astro.url);
   </head>
   <body>
     <slot />
+
+    <script>
+      // Masterful Reveal System
+      const revealCallback = (entries: IntersectionObserverEntry[]) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+          }
+        });
+      };
+
+      const revealObserver = new IntersectionObserver(revealCallback, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
+      });
+
+      document.querySelectorAll('[data-reveal]').forEach(el => {
+        revealObserver.observe(el);
+      });
+
+      // Handle Astro view transitions if used in future
+      document.addEventListener('astro:after-swap', () => {
+        document.querySelectorAll('[data-reveal]').forEach(el => revealObserver.observe(el));
+      });
+    </script>
   </body>
 </html>

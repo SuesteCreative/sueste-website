@@ -1,0 +1,96 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import Section from '../../components/Section.astro';
+---
+
+<BaseLayout title="Services" description="Discover how Sueste Creative can help your brand." lang="en">
+  <Navbar />
+  <main class="services-page">
+    <Section title="Our Services" subtitle="Balancing aesthetics and functionality to create memorable experiences.">
+      <div class="detailed-services">
+        {[
+          {
+            title: "Web Development",
+            desc: "We create high-performance websites, from conversion-focused landing pages to complex platforms. We use the latest technologies to ensure speed, SEO, and a fluid user experience.",
+            features: ["Astro & React", "SEO Optimization", "Mobile First", "Performance Focused"]
+          },
+          {
+            title: "Social Media",
+            desc: "We elevate your digital presence with content that resonates. From strategy to execution, we help build a loyal community and convert followers into customers.",
+            features: ["Content Strategy", "Community Management", "Paid Ads", "Analytics"]
+          },
+          {
+            title: "Drone & Video",
+            desc: "We capture unique perspectives that tell stories. Our cinematic video production, including 4K aerial footage, gives a new dimension to your brand.",
+            features: ["4K Aerial Footage", "Cinematic Editing", "Storytelling", "Color Grading"]
+          }
+        ].map((service, index) => (
+          <div class="service-detail glass" data-reveal class={index % 2 === 0 ? 'reveal-left' : 'reveal-right'}>
+            <div class="service-text">
+              <h3>{service.title}</h3>
+              <p>{service.desc}</p>
+              <ul class="feature-list">
+                {service.features.map(f => <li>{f}</li>)}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
+    </Section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .services-page { padding-top: 80px; }
+  
+  .detailed-services {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+  }
+
+  .service-detail {
+    padding: 4rem;
+    border-radius: 40px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .service-text h3 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: var(--color-accent);
+  }
+
+  .service-text p {
+    font-size: 1.25rem;
+    line-height: 1.8;
+    opacity: 0.8;
+    margin-bottom: 2rem;
+    max-width: 800px;
+  }
+
+  .feature-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    list-style: none;
+  }
+
+  .feature-list li {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  @media (max-width: 768px) {
+    .service-detail { padding: 2.5rem; }
+    .service-text h3 { font-size: 2rem; }
+  }
+</style>

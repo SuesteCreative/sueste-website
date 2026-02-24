@@ -14,52 +14,54 @@ const t = useTranslations('en');
   
   <main>
     <HeroScrollSequence>
-      <div class="hero-content container">
-        <h1>{t('hero.headline')}</h1>
-        <p>{t('hero.subheadline')}</p>
-        <a href="/en/quote" class="btn-cta">{t('hero.cta')}</a>
+      <div class="hero-content container" data-reveal>
+        <h1 class="reveal-delay-1">{t('hero.headline')}</h1>
+        <p class="reveal-delay-2">{t('hero.subheadline')}</p>
+        <div class="reveal-delay-3">
+          <a href="/en/quote" class="btn-cta">{t('hero.cta')}</a>
+        </div>
       </div>
     </HeroScrollSequence>
 
-    <Section id="services" title="Services" subtitle="Complete creative solutions to take your brand to the next level.">
+    <Section id="services" title="Services" subtitle="Complete creative solutions to take your brand to the next level." data-reveal>
       <div class="services-grid">
-        <div class="service-card glass">
+        <div class="service-card glass reveal-delay-1" data-reveal>
           <h3>Web Development</h3>
           <p>Fast, SEO-first websites focused on conversion.</p>
         </div>
-        <div class="service-card glass">
+        <div class="service-card glass reveal-delay-2" data-reveal>
           <h3>Social Media</h3>
           <p>Social media management and strategic content creation.</p>
         </div>
-        <div class="service-card glass">
+        <div class="service-card glass reveal-delay-3" data-reveal>
           <h3>Drone Footage</h3>
           <p>Cinematic 4K aerial imagery for your business.</p>
         </div>
-        <div class="service-card glass">
+        <div class="service-card glass reveal-delay-1" data-reveal>
           <h3>Graphic Design</h3>
           <p>Visual identity and design that communicates your values.</p>
         </div>
       </div>
     </Section>
 
-    <Section id="process" title="Our Process" dark>
+    <Section id="process" title="Our Process" dark data-reveal>
       <div class="process-steps">
-        <div class="process-step">
+        <div class="process-step reveal-delay-1" data-reveal>
           <span class="step-num">01</span>
           <h4>Discover</h4>
           <p>We analyze your goals and your market.</p>
         </div>
-        <div class="process-step">
+        <div class="process-step reveal-delay-2" data-reveal>
           <span class="step-num">02</span>
           <h4>Design</h4>
           <p>We create the visual and functional strategy.</p>
         </div>
-        <div class="process-step">
+        <div class="process-step reveal-delay-3" data-reveal>
           <span class="step-num">03</span>
           <h4>Produce</h4>
           <p>We bring the project to life with cutting-edge technology.</p>
         </div>
-        <div class="process-step">
+        <div class="process-step reveal-delay-1" data-reveal>
           <span class="step-num">04</span>
           <h4>Deliver</h4>
           <p>We deliver measurable results.</p>
@@ -67,8 +69,8 @@ const t = useTranslations('en');
       </div>
     </Section>
 
-    <Section id="cta" className="final-cta">
-      <div class="cta-box glass">
+    <Section id="cta" className="final-cta" data-reveal>
+      <div class="cta-box glass reveal-delay-1" data-reveal>
         <h2>Ready to start?</h2>
         <p>Get a free quote in less than 2 minutes.</p>
         <a href="/en/quote" class="btn-cta">Get a Quote</a>

@@ -1,0 +1,141 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import Section from '../components/Section.astro';
+---
+
+<BaseLayout title="Contacto" description="Entre em contacto com a Sueste Creative.">
+  <Navbar />
+  <main class="contact-page">
+    <Section title="Vamos Conversar" subtitle="Traga a sua ideia e nós damos-lhe vida.">
+      <div class="contact-grid">
+        <div class="contact-info" data-reveal>
+          <div class="info-item">
+            <h4>E-mail</h4>
+            <p>geral@sueste-creative.pt</p>
+          </div>
+          <div class="info-item">
+            <h4>Localização</h4>
+            <p>Lagos, Portugal</p>
+          </div>
+          <div class="info-item">
+             <h4>Redes Sociais</h4>
+             <div class="social-links">
+               <a href="#">Instagram</a>
+               <a href="#">LinkedIn</a>
+             </div>
+          </div>
+        </div>
+
+        <div class="contact-form-wrapper glass" data-reveal class="reveal-delay-1">
+          <form class="contact-form">
+            <div class="form-group">
+              <label for="name">Nome</label>
+              <input type="text" id="name" name="name" placeholder="O seu nome" required />
+            </div>
+            <div class="form-group">
+              <label for="email">E-mail</label>
+              <input type="email" id="email" name="email" placeholder="o-seu@email.com" required />
+            </div>
+            <div class="form-group">
+              <label for="message">Mensagem</label>
+              <textarea id="message" name="message" rows="5" placeholder="Como podemos ajudar?" required></textarea>
+            </div>
+            <button type="submit" class="btn-primary">Enviar Mensagem</button>
+          </form>
+        </div>
+      </div>
+    </Section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .contact-page { padding-top: 80px; }
+  
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .info-item {
+    margin-bottom: 2rem;
+  }
+
+  .info-item h4 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--color-accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .info-item p {
+    font-size: 1.2rem;
+    opacity: 0.8;
+  }
+
+  .social-links {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .social-links a {
+    font-size: 0.9rem;
+    opacity: 0.6;
+    transition: opacity 0.3s;
+  }
+
+  .social-links a:hover { opacity: 1; color: var(--color-accent); }
+
+  .contact-form-wrapper {
+    padding: 3rem;
+    border-radius: 30px;
+  }
+
+  .form-group {
+    margin-bottom: 2rem;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    opacity: 0.7;
+  }
+
+  .form-group input, .form-group textarea {
+    width: 100%;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: white;
+    font-family: inherit;
+    transition: border-color 0.3s;
+  }
+
+  .form-group input:focus, .form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-accent);
+  }
+
+  .btn-primary {
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    cursor: pointer;
+  }
+
+  @media (max-width: 768px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+    .contact-form-wrapper { padding: 2rem; }
+  }
+</style>

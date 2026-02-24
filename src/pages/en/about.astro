@@ -8,10 +8,20 @@ import Section from '../../components/Section.astro';
 <BaseLayout title="About Us" description="Learn more about the Sueste Creative Team." lang="en">
   <Navbar />
   <main class="sub-page">
-    <Section title="About Sueste Creative" subtitle="We are an agency focused on real results through creativity.">
+    <Section title="About Sueste Creative" subtitle="We are an agency focused on real results through creativity." data-reveal>
       <div class="content">
-        <p>Sueste Creative was born from a passion for bridging design, technology, and visual storytelling. We specialize in helping brands stand out in an increasingly digital and visual market.</p>
-        <p>From high-performance website development to cinematic drone footage, our approach is always strategic and detail-oriented.</p>
+        <p class="reveal-delay-1" data-reveal>Sueste Creative was born from a passion for bridging design, technology, and visual storytelling. We specialize in helping brands stand out in an increasingly digital and visual market.</p>
+        <p class="reveal-delay-2" data-reveal>From high-performance website development to cinematic drone footage, our approach is always strategic and detail-oriented.</p>
+        <div class="stats reveal-delay-3" data-reveal>
+          <div class="stat-item">
+            <span class="stat-num">50+</span>
+            <span class="stat-label">Projects Completed</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num">4 Years</span>
+            <span class="stat-label">Of Experience</span>
+          </div>
+        </div>
       </div>
     </Section>
   </main>
@@ -20,5 +30,31 @@ import Section from '../../components/Section.astro';
 
 <style>
   .sub-page { padding-top: 80px; }
-  .content p { margin-bottom: 1.5rem; font-size: 1.1rem; opacity: 0.8; max-width: 800px; }
+  .content p { margin-bottom: 2rem; font-size: 1.25rem; opacity: 0.8; max-width: 800px; line-height: 1.8; }
+  
+  .stats {
+    display: flex;
+    gap: 4rem;
+    margin-top: 4rem;
+    padding-top: 4rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .stat-num {
+    display: block;
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--color-accent);
+  }
+
+  .stat-label {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.6;
+  }
+
+  @media (max-width: 768px) {
+    .stats { gap: 2rem; flex-direction: column; }
+  }
 </style>

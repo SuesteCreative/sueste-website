@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import Section from '../../components/Section.astro';
+---
+
+<BaseLayout title="Work" description="See our projects and success stories." lang="en">
+  <Navbar />
+  <main class="portfolio-page">
+    <Section title="Our Work" subtitle="A selection of projects where creativity meets strategy.">
+      <div class="portfolio-grid">
+        {[1, 2, 3, 4].map((item) => (
+          <div class="portfolio-card glass" data-reveal class={`reveal-delay-${item}`}>
+            <div class="card-image"></div>
+            <div class="card-info">
+              <span>Website</span>
+              <h3>Example Project {item}</h3>
+              <p>A brief description of the impact and innovation of this project.</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </Section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .portfolio-page { padding-top: 80px; }
+  
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 3rem;
+  }
+
+  .portfolio-card {
+    border-radius: 30px;
+    overflow: hidden;
+    transition: transform 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+  }
+
+  .portfolio-card:hover {
+    transform: translateY(-15px) scale(1.02);
+  }
+
+  .card-image {
+    height: 300px;
+    background: linear-gradient(45deg, #111, #222);
+    position: relative;
+  }
+
+  .card-info {
+    padding: 2.5rem;
+  }
+
+  .card-info span {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--color-accent);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  .card-info h3 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .card-info p {
+    opacity: 0.6;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    .portfolio-grid { grid-template-columns: 1fr; }
+  }
+</style>
