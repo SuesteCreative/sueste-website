@@ -84,8 +84,8 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
         const observer = new IntersectionObserver(([entry]) => {
             setIsAtForm(entry.isIntersecting);
         }, {
-            threshold: 0.1,
-            rootMargin: '0px 0px -30% 0px' // Only trigger when form is 30% into the screen
+            threshold: 0,
+            rootMargin: '-140px 0px 0px 0px' // Trigger expansion when form is ~140px from screen top (near collapsed header)
         });
         const formEl = document.getElementById('budget-form-ref');
         if (formEl) observer.observe(formEl);
@@ -384,7 +384,10 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                                             <div className="sub-opt-info">
                                                 <span className="sub-opt-name">Sem edição</span>
                                             </div>
-                                            <span className="sub-opt-price">0€</span>
+                                            <div className="sub-opt-price-wrapper">
+                                                <span className="sub-opt-price">0€</span>
+                                                {!selections[service.id].option && <Check size={16} className="active-check" />}
+                                            </div>
                                         </div>
                                         {service.options.map((opt: any) => (
                                             <div
@@ -395,7 +398,10 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                                                 <div className="sub-opt-info">
                                                     <span className="sub-opt-name">{lang === 'pt' ? opt.name_pt : opt.name_en}</span>
                                                 </div>
-                                                <span className="sub-opt-price">+{opt.price}€</span>
+                                                <div className="sub-opt-price-wrapper">
+                                                    <span className="sub-opt-price">+{opt.price}€</span>
+                                                    {selections[service.id].option === opt.id && <Check size={16} className="active-check" />}
+                                                </div>
                                             </div>
                                         ))}
                                     </div>
@@ -420,7 +426,10 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                                                         </span>
                                                     )}
                                                 </div>
-                                                <span className="sub-opt-price">{priceText}</span>
+                                                <div className="sub-opt-price-wrapper">
+                                                    <span className="sub-opt-price">{priceText}</span>
+                                                    {isOptActive && <Check size={16} className="active-check" />}
+                                                </div>
                                             </div>
                                         );
                                     })}
