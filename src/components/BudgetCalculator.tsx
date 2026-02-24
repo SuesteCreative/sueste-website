@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Check, Info, Trash2, Send, Square, CheckSquare } from 'lucide-react';
+import { Check, Info, Trash2, Send, Square, CheckSquare, ChevronDown } from 'lucide-react';
 import pricingData from '../data/pricing.json';
 import './BudgetCalculator.css';
 
@@ -57,6 +57,7 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
     const [selections, setSelections] = useState<SelectionsState>({});
     const [addons, setAddons] = useState<AddonsState>({});
     const [droneHours, setDroneHours] = useState(1);
+    const [expandedGroups, setExpandedGroups] = useState<{ [key: string]: boolean }>({});
     const [formState, setFormState] = useState<FormState>({ name: '', email: '', company: '', deadline: '', message: '', honey: '' });
     const [status, setStatus] = useState({ type: '', msg: '' });
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -66,10 +67,12 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
         const savedSelections = localStorage.getItem('budgetSelections');
         const savedAddons = localStorage.getItem('budgetAddons');
         const savedHours = localStorage.getItem('budgetDroneHours');
+        const savedGroups = localStorage.getItem('budgetExpandedGroups');
 
         if (savedSelections) setSelections(JSON.parse(savedSelections));
         if (savedAddons) setAddons(JSON.parse(savedAddons));
         if (savedHours) setDroneHours(parseInt(savedHours, 10));
+        if (savedGroups) setExpandedGroups(JSON.parse(savedGroups));
     }, []);
 
     // Save to local storage
@@ -77,39 +80,44 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
         localStorage.setItem('budgetSelections', JSON.stringify(selections));
         localStorage.setItem('budgetAddons', JSON.stringify(addons));
         localStorage.setItem('budgetDroneHours', droneHours.toString());
-    }, [selections, addons, droneHours]);
+        localStorage.setItem('budgetExpandedGroups', JSON.stringify(expandedGroups));
+    }, [selections, addons, droneHours, expandedGroups]);
 
     const calculateEstimation = () => {
         let baseSum = 0;
         let hasStartingAt = false;
 
-        // Services
-        pricingData.services.forEach(service => {
+        pricingData.services.forEach((service: any) => {
+            if (service.is_group && service.sub_services) {
+                service.sub_services.forEach((sub: any) => checkItem(sub));
+            } else {
+                checkItem(service);
+            }
+        });
+
+        function checkItem(service: any) {
             if (selections[service.id]) {
                 if (service.id === 'drone') {
-                    // @ts-ignore
                     baseSum += (service.hourly_rate || 0) * droneHours;
                     const optId = selections[service.id].option;
                     if (optId) {
-                        const opt = service.options.find(o => o.id === optId);
+                        const opt = service.options.find((o: any) => o.id === optId);
                         if (opt) baseSum += opt.price;
                     }
                 } else {
-                    const opt = service.options.find(o => o.id === selections[service.id].option);
+                    const opt = service.options.find((o: any) => o.id === selections[service.id].option);
                     if (opt) {
                         baseSum += opt.price;
-                        // @ts-ignore
                         if (opt.type === 'starting_at') hasStartingAt = true;
                     }
                 }
             }
-        });
+        }
 
         // Global Addons
-        pricingData.global_addons.forEach(addon => {
+        pricingData.global_addons.forEach((addon: any) => {
             if (addons[addon.id]) {
                 baseSum += addon.price;
-                // @ts-ignore
                 if (addon.type === 'starting_at') hasStartingAt = true;
             }
         });
@@ -121,13 +129,25 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
     const { baseSum, marginBase, hasStartingAt } = calculateEstimation();
     const animatedTotal = useCountUp(marginBase, 1200);
 
+    const toggleGroup = (groupId: string) => {
+        setExpandedGroups(prev => ({ ...prev, [groupId]: !prev[groupId] }));
+    };
+
     const toggleService = (serviceId: string) => {
         setSelections(prev => {
             const newSel = { ...prev };
             if (newSel[serviceId]) {
                 delete newSel[serviceId];
             } else {
-                const svc = pricingData.services.find(s => s.id === serviceId);
+                let svc: any = null;
+                pricingData.services.forEach((s: any) => {
+                    if (s.id === serviceId) svc = s;
+                    if (s.is_group && s.sub_services) {
+                        const sub = s.sub_services.find((ss: any) => ss.id === serviceId);
+                        if (sub) svc = sub;
+                    }
+                });
+
                 if (!svc) return newSel;
                 if (svc.id === 'drone') {
                     newSel[serviceId] = { isSelected: true, option: null };
@@ -226,6 +246,161 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
         base: lang === 'pt' ? 'Preço base' : 'Base price'
     };
 
+    const renderServiceCard = (service: any, idx: number, isSub = false) => {
+        if (service.is_group) {
+            const isGroupOpen = !!expandedGroups[service.id];
+            const hasSelectedSub = service.sub_services.some((s: any) => !!selections[s.id]);
+
+            return (
+                <motion.div
+                    key={service.id}
+                    className={`service-card group-card ${hasSelectedSub ? 'has-selection' : ''} ${isGroupOpen ? 'is-open' : ''}`}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, delay: idx * 0.1 }}
+                >
+                    <div
+                        className="service-header group-header"
+                        onClick={() => toggleGroup(service.id)}
+                        role="button"
+                        tabIndex={0}
+                        onKeyDown={(e) => { if (e.key === 'Enter') toggleGroup(service.id) }}
+                    >
+                        <div className="service-header-left">
+                            <h3 className="service-title">{lang === 'pt' ? service.name_pt : service.name_en}</h3>
+                        </div>
+                        <div className="group-indicator">
+                            <ChevronDown size={20} className={`chevron-icon ${isGroupOpen ? 'open' : ''}`} />
+                        </div>
+                    </div>
+
+                    <AnimatePresence>
+                        {isGroupOpen && (
+                            <motion.div
+                                className="group-body"
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: "auto", opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                transition={{ duration: 0.3 }}
+                            >
+                                <div className="sub-services-wrapper">
+                                    {service.sub_services.map((sub: any, subIdx: number) => renderServiceCard(sub, subIdx, true))}
+                                </div>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+                </motion.div>
+            );
+        }
+
+        const isSelected = !!selections[service.id];
+
+        return (
+            <motion.div
+                key={service.id}
+                className={`service-card ${isSub ? 'sub-card' : ''} ${isSelected ? 'selected' : ''}`}
+                initial={isSub ? { opacity: 1 } : { opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={isSub ? { duration: 0 } : { duration: 0.5, delay: idx * 0.1 }}
+                whileHover={!isSelected ? { scale: 1.01 } : {}}
+            >
+                <div
+                    className="service-header"
+                    onClick={() => toggleService(service.id)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => { if (e.key === 'Enter') toggleService(service.id) }}
+                >
+                    <div className="service-header-left">
+                        <div className={`checkbox-custom ${isSelected ? 'checked' : ''}`}>
+                            {isSelected && <Check size={16} strokeWidth={3} className="check-icon" />}
+                        </div>
+                        <h3 className="service-title">{lang === 'pt' ? service.name_pt : service.name_en}</h3>
+                    </div>
+                    {service.is_monthly && <span className="service-badge">{t.monthlyNote}</span>}
+                </div>
+
+                <AnimatePresence>
+                    {isSelected && (
+                        <motion.div
+                            className="service-body"
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.3 }}
+                        >
+                            {service.id === 'drone' ? (
+                                <div className="drone-config">
+                                    <div className="option-row">
+                                        <label className="option-label">{t.hours} ({service.hourly_rate}€ {t.hourly})</label>
+                                        <div className="number-input">
+                                            <button type="button" onClick={() => setDroneHours(Math.max(1, droneHours - 1))}>-</button>
+                                            <input
+                                                type="number"
+                                                min="1"
+                                                value={droneHours}
+                                                onChange={(e) => setDroneHours(parseInt(e.target.value) || 1)}
+                                            />
+                                            <button type="button" onClick={() => setDroneHours(droneHours + 1)}>+</button>
+                                        </div>
+                                    </div>
+                                    <div className="options-list">
+                                        <div
+                                            className={`sub-option ${!selections[service.id].option ? 'active' : ''}`}
+                                            onClick={() => updateOption(service.id, null)}
+                                        >
+                                            <div className="sub-opt-info">
+                                                <span className="sub-opt-name">Sem edição</span>
+                                            </div>
+                                            <span className="sub-opt-price">0€</span>
+                                        </div>
+                                        {service.options.map((opt: any) => (
+                                            <div
+                                                key={opt.id}
+                                                className={`sub-option ${selections[service.id].option === opt.id ? 'active' : ''}`}
+                                                onClick={() => updateOption(service.id, opt.id)}
+                                            >
+                                                <div className="sub-opt-info">
+                                                    <span className="sub-opt-name">{lang === 'pt' ? opt.name_pt : opt.name_en}</span>
+                                                </div>
+                                                <span className="sub-opt-price">+{opt.price}€</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            ) : (
+                                <div className="options-list">
+                                    {service.options.map((opt: any) => {
+                                        const isOptActive = selections[service.id].option === opt.id;
+                                        const priceText = opt.type === 'starting_at' ? `${t.startingAt} ${opt.price}€` : `+${opt.price}€`;
+
+                                        return (
+                                            <div
+                                                key={opt.id}
+                                                className={`sub-option ${isOptActive ? 'active' : ''}`}
+                                                onClick={() => updateOption(service.id, opt.id)}
+                                            >
+                                                <div className="sub-opt-info">
+                                                    <span className="sub-opt-name">{lang === 'pt' ? opt.name_pt : opt.name_en}</span>
+                                                    {(opt.range_pt || opt.range_en) && (
+                                                        <span className="sub-opt-range">
+                                                            {lang === 'pt' ? opt.range_pt : opt.range_en}
+                                                        </span>
+                                                    )}
+                                                </div>
+                                                <span className="sub-opt-price">{priceText}</span>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            )}
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            </motion.div>
+        );
+    };
+
     return (
         <div className="calc-container">
             {/* LEFT COLUMN: STICKY Total */}
@@ -261,116 +436,7 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
             {/* RIGHT COLUMN: CONFIGURATOR */}
             <div className="calc-main">
                 <div className="calc-step-group">
-                    {pricingData.services.map((service, idx) => {
-                        const isSelected = !!selections[service.id];
-
-                        return (
-                            <motion.div
-                                key={service.id}
-                                className={`service-card ${isSelected ? 'selected' : ''}`}
-                                initial={{ opacity: 0, x: 20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                                whileHover={{ scale: 1.01 }}
-                            >
-                                <div
-                                    className="service-header"
-                                    onClick={() => toggleService(service.id)}
-                                    role="button"
-                                    tabIndex={0}
-                                    onKeyDown={(e) => { if (e.key === 'Enter') toggleService(service.id) }}
-                                >
-                                    <div className="service-header-left">
-                                        <div className={`checkbox-custom ${isSelected ? 'checked' : ''}`}>
-                                            {isSelected && <Check size={16} strokeWidth={3} className="check-icon" />}
-                                        </div>
-                                        <h3 className="service-title">{lang === 'pt' ? service.name_pt : service.name_en}</h3>
-                                    </div>
-                                    {/* @ts-ignore */}
-                                    {service.is_monthly && <span className="service-badge">{t.monthlyNote}</span>}
-                                </div>
-
-                                <AnimatePresence>
-                                    {isSelected && (
-                                        <motion.div
-                                            className="service-body"
-                                            initial={{ height: 0, opacity: 0 }}
-                                            animate={{ height: "auto", opacity: 1 }}
-                                            exit={{ height: 0, opacity: 0 }}
-                                            transition={{ duration: 0.3 }}
-                                        >
-                                            {service.id === 'drone' ? (
-                                                <div className="drone-config">
-                                                    <div className="option-row">
-                                                        {/* @ts-ignore */}
-                                                        <label className="option-label">{t.hours} ({service.hourly_rate}€ {t.hourly})</label>
-                                                        <div className="number-input">
-                                                            <button type="button" onClick={() => setDroneHours(Math.max(1, droneHours - 1))}>-</button>
-                                                            <input
-                                                                type="number"
-                                                                min="1"
-                                                                value={droneHours}
-                                                                onChange={(e) => setDroneHours(parseInt(e.target.value) || 1)}
-                                                            />
-                                                            <button type="button" onClick={() => setDroneHours(droneHours + 1)}>+</button>
-                                                        </div>
-                                                    </div>
-                                                    <div className="options-list">
-                                                        <div
-                                                            className={`sub-option ${!selections[service.id].option ? 'active' : ''}`}
-                                                            onClick={() => updateOption(service.id, null)}
-                                                        >
-                                                            <div className="sub-opt-info">
-                                                                <span className="sub-opt-name">Sem edição</span>
-                                                            </div>
-                                                            <span className="sub-opt-price">0€</span>
-                                                        </div>
-                                                        {service.options.map((opt: any) => (
-                                                            <div
-                                                                key={opt.id}
-                                                                className={`sub-option ${selections[service.id].option === opt.id ? 'active' : ''}`}
-                                                                onClick={() => updateOption(service.id, opt.id)}
-                                                            >
-                                                                <div className="sub-opt-info">
-                                                                    <span className="sub-opt-name">{lang === 'pt' ? opt.name_pt : opt.name_en}</span>
-                                                                </div>
-                                                                <span className="sub-opt-price">+{opt.price}€</span>
-                                                            </div>
-                                                        ))}
-                                                    </div>
-                                                </div>
-                                            ) : (
-                                                <div className="options-list">
-                                                    {service.options.map((opt: any) => {
-                                                        const isOptActive = selections[service.id].option === opt.id;
-                                                        const priceText = opt.type === 'starting_at' ? `${t.startingAt} ${opt.price}€` : `+${opt.price}€`;
-
-                                                        return (
-                                                            <div
-                                                                key={opt.id}
-                                                                className={`sub-option ${isOptActive ? 'active' : ''}`}
-                                                                onClick={() => updateOption(service.id, opt.id)}
-                                                            >
-                                                                <div className="sub-opt-info">
-                                                                    <span className="sub-opt-name">{lang === 'pt' ? opt.name_pt : opt.name_en}</span>
-                                                                    {(opt.range_pt || opt.range_en) && (
-                                                                        <span className="sub-opt-range">
-                                                                            {lang === 'pt' ? opt.range_pt : opt.range_en}
-                                                                        </span>
-                                                                    )}
-                                                                </div>
-                                                                <span className="sub-opt-price">{priceText}</span>
-                                                            </div>
-                                                        );
-                                                    })}
-                                                </div>
-                                            )}
-                                        </motion.div>
-                                    )}
-                                </AnimatePresence>
-                            </motion.div>
-                        );
-                    })}
+                    {pricingData.services.map((service: any, idx) => renderServiceCard(service, idx))}
                 </div>
 
                 {/* ADDONS */}
