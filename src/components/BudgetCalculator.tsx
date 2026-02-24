@@ -65,11 +65,12 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
     const [isStickyMobile, setIsStickyMobile] = useState(false);
     const [isAtForm, setIsAtForm] = useState(false);
 
-    // Scroll detection for mobile sticky
+    // Scroll detection: collapse card as soon as we start scrolling past the header
     useEffect(() => {
         const handleScroll = () => {
             if (window.innerWidth <= 1024) {
-                setIsStickyMobile(window.scrollY > 80);
+                // Collapse much earlier: as soon as we scroll 50px
+                setIsStickyMobile(window.scrollY > 50);
             } else {
                 setIsStickyMobile(false);
             }
@@ -79,13 +80,15 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    // Intersection observer for form visibility
+    // Intersection observer: only expand when form is almost hitting the collapsed card
     useEffect(() => {
         const observer = new IntersectionObserver(([entry]) => {
             setIsAtForm(entry.isIntersecting);
         }, {
             threshold: 0,
-            rootMargin: '-140px 0px 0px 0px' // Trigger expansion when form is ~140px from screen top (near collapsed header)
+            // Negative rootMargin on top to trigger ONLY when form hits the sticky bar zone
+            // Negative on bottom to ensure it doesn't trigger while form is still far down
+            rootMargin: '-100px 0px -20% 0px'
         });
         const formEl = document.getElementById('budget-form-ref');
         if (formEl) observer.observe(formEl);
@@ -447,33 +450,93 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
             {/* LEFT COLUMN: STICKY Total */}
             <div className="calc-sidebar">
                 <motion.div
+                    layout
                     className={`estimate-card glass-panel ${shouldCollapse ? 'mobile-collapsed' : ''}`}
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, ease: "easeOut" }}
+                    initial={false}
+                    animate={{
+                        padding: shouldCollapse ? '12px 20px' : '40px',
+                        gap: shouldCollapse ? '12px' : '24px'
+                    }}
+                    transition={{
+                        layout: { duration: 0.4, ease: [0.23, 1, 0.32, 1] },
+                        padding: { duration: 0.4 }
+                    }}
                 >
-                    <p className="estimate-label">{hasStartingAt ? t.startingAt : t.estimate}</p>
-                    <div className="estimate-shrink-content">
-                        <span className="estimate-label-inline">{hasStartingAt ? t.startingAt : t.estimate}</span>
-                        <div className="estimate-value-wrapper">
-                            <span className="estimate-value">{animatedTotal.toLocaleString('pt-PT')}</span>
-                            <span className="estimate-currency">€</span>
-                        </div>
-                    </div>
+                    <AnimatePresence mode="popLayout" initial={false}>
+                        {!shouldCollapse && (
+                            <motion.p
+                                key="label-top"
+                                initial={{ opacity: 0, height: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, height: 'auto', scale: 1 }}
+                                exit={{ opacity: 0, height: 0, scale: 0.9 }}
+                                className="estimate-label"
+                                style={{ overflow: 'hidden' }}
+                            >
+                                {hasStartingAt ? t.startingAt : t.estimate}
+                            </motion.p>
+                        )}
+                    </AnimatePresence>
 
-                    <button
+                    <motion.div layout className="estimate-shrink-content">
+                        <AnimatePresence mode="popLayout" initial={false}>
+                            {shouldCollapse && (
+                                <motion.span
+                                    key="label-inline"
+                                    initial={{ opacity: 0, width: 0 }}
+                                    animate={{ opacity: 1, width: 'auto' }}
+                                    exit={{ opacity: 0, width: 0 }}
+                                    className="estimate-label-inline"
+                                    style={{ whiteSpace: 'nowrap', overflow: 'hidden' }}
+                                >
+                                    {hasStartingAt ? t.startingAt : t.estimate}
+                                </motion.span>
+                            )}
+                        </AnimatePresence>
+                        <motion.div layout className="estimate-value-wrapper">
+                            <motion.span layout className="estimate-value">{animatedTotal.toLocaleString('pt-PT')}</motion.span>
+                            <motion.span layout className="estimate-currency">€</motion.span>
+                        </motion.div>
+                    </motion.div>
+
+                    <motion.button
+                        layout
                         type="button"
                         className="btn-clear"
                         onClick={clearBudget}
                         disabled={marginBase === 0}
                     >
-                        <Trash2 size={16} /> <span className="btn-clear-text">{t.clear}</span>
-                    </button>
+                        <Trash2 size={16} />
+                        <AnimatePresence mode="popLayout" initial={false}>
+                            {!shouldCollapse && (
+                                <motion.span
+                                    key="clear-text"
+                                    initial={{ opacity: 0, width: 0 }}
+                                    animate={{ opacity: 1, width: 'auto' }}
+                                    exit={{ opacity: 0, width: 0 }}
+                                    className="btn-clear-text"
+                                    style={{ overflow: 'hidden', whiteSpace: 'nowrap', marginLeft: 8 }}
+                                >
+                                    {t.clear}
+                                </motion.span>
+                            )}
+                        </AnimatePresence>
+                    </motion.button>
 
-                    <div className="legal-note">
-                        <Info size={16} className="legal-icon" />
-                        <p>{t.legal}</p>
-                    </div>
+                    <AnimatePresence mode="popLayout" initial={false}>
+                        {!shouldCollapse && (
+                            <motion.div
+                                key="legal-note"
+                                initial={{ opacity: 0, height: 0, marginTop: 0 }}
+                                animate={{ opacity: 1, height: 'auto', marginTop: 16 }}
+                                exit={{ opacity: 0, height: 0, marginTop: 0 }}
+                                className="legal-note"
+                                style={{ overflow: 'hidden' }}
+                            >
+                                <Info size={16} className="legal-icon" />
+                                <p>{t.legal}</p>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
                 </motion.div>
             </div>
 

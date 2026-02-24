@@ -63,23 +63,16 @@
 
     /* Mobile collapsed state */
     .estimate-card {
-        transition: all 0.3s ease;
+        transition: padding 0.4s ease, gap 0.4s ease;
     }
 
     .estimate-card.mobile-collapsed {
         flex-direction: row;
-        padding: 1rem 1.5rem;
-        justify-content: space-between;
+        /* Padding and gap handled by Framer Motion for smoothness */
     }
 
-    .estimate-card.mobile-collapsed .estimate-label {
-        display: none;
-    }
-
-    .estimate-card.mobile-collapsed .legal-note,
-    .estimate-card.mobile-collapsed p.estimate-disclaimer {
-        display: none;
-    }
+    /* Elements are now handled by Framer Motion (opacity/height/scale) 
+       so we don't use display: none here to avoid abrupt cuts */
 
     .estimate-card.mobile-collapsed .estimate-shrink-content {
         display: flex;
@@ -108,10 +101,6 @@
     .estimate-card.mobile-collapsed .btn-clear {
         padding: 0.75rem;
         border-radius: 50%;
-    }
-
-    .estimate-card.mobile-collapsed .btn-clear-text {
-        display: none;
     }
 }
 
