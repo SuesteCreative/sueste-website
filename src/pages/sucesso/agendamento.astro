@@ -1,0 +1,29 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import SuccessView from "../../components/SuccessView";
+import { useTranslations } from "../../utils/i18n";
+
+const lang = "pt";
+const t = useTranslations(lang);
+---
+
+<BaseLayout
+    title="Marcação Confirmada"
+    description="O seu pedido de agendamento foi recebido com sucesso."
+>
+    <Navbar />
+    <main>
+        <SuccessView
+            client:load
+            title="Agendamento Confirmado!"
+            subtitle="Obrigado por confiar na Sueste. Recebemos o seu pedido de marcação e entraremos em contacto brevemente para confirmar os detalhes."
+            buttonText="Ir para Portfólio"
+            buttonHref="/portfolio"
+            secondaryButtonText="Voltar ao Início"
+            secondaryButtonHref="/"
+        />
+    </main>
+    <Footer />
+</BaseLayout>

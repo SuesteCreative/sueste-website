@@ -1,0 +1,28 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Navbar from "../../../components/Navbar.astro";
+import Footer from "../../../components/Footer.astro";
+import SuccessView from "../../../components/SuccessView";
+
+const lang = "en";
+---
+
+<BaseLayout
+    title="Subscription Confirmed"
+    description="Your subscription has been processed successfully."
+    lang={lang}
+>
+    <Navbar />
+    <main>
+        <SuccessView
+            client:load
+            title="Subscription Complete!"
+            subtitle="Congratulations! Your subscription has been processed. You will receive a confirmation email with the next steps in a few minutes."
+            buttonText="Client Area"
+            buttonHref="/en/about"
+            secondaryButtonText="Back to Home"
+            secondaryButtonHref="/en/"
+        />
+    </main>
+    <Footer />
+</BaseLayout>

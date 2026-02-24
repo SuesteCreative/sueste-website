@@ -127,11 +127,7 @@ const NavbarUI: React.FC<NavbarUIProps> = ({ lang, navItems, quoteLabel, quoteHr
                             transition={{ type: 'spring', damping: 30, stiffness: 300 }}
                             className="nav-drawer-panel"
                         >
-                            <div className="drawer-header-internal">
-                                <button className="drawer-close-btn" onClick={() => setIsOpen(false)}>
-                                    <X size={32} />
-                                </button>
-                            </div>
+
 
                             <div className="drawer-inner">
                                 <ul className="mobile-nav-list">
@@ -146,12 +142,12 @@ const NavbarUI: React.FC<NavbarUIProps> = ({ lang, navItems, quoteLabel, quoteHr
                                         </motion.li>
                                     ))}
                                     <motion.li
-                                        initial={{ opacity: 0, scale: 0.95 }}
-                                        animate={{ opacity: 1, scale: 1 }}
+                                        initial={{ opacity: 0, x: 20 }}
+                                        animate={{ opacity: 1, x: 0 }}
                                         transition={{ delay: 0.4 }}
                                         className="drawer-cta-item"
                                     >
-                                        <a href={quoteHref} className="btn-primary-nav w-full" onClick={() => setIsOpen(false)}>
+                                        <a href={quoteHref} className="mobile-nav-quote-link" onClick={() => setIsOpen(false)}>
                                             {quoteLabel}
                                         </a>
                                     </motion.li>

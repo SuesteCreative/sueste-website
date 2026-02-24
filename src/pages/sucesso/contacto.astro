@@ -1,0 +1,27 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import SuccessView from "../../components/SuccessView";
+
+const lang = "pt";
+---
+
+<BaseLayout
+    title="Mensagem Enviada"
+    description="A sua mensagem foi enviada com sucesso."
+>
+    <Navbar />
+    <main>
+        <SuccessView
+            client:load
+            title="Mensagem Recebida!"
+            subtitle="Obrigado pela sua mensagem. A nossa equipa irá analisar o seu pedido e responderemos o mais brevemente possível."
+            buttonText="Explorar Serviços"
+            buttonHref="/servicos"
+            secondaryButtonText="Voltar ao Início"
+            secondaryButtonHref="/"
+        />
+    </main>
+    <Footer />
+</BaseLayout>
