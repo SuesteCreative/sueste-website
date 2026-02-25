@@ -37,7 +37,7 @@
     min-height: 100%;
     object-fit: cover;
     z-index: 1;
-    opacity: 0.6; /* Dim the video slightly to make text pop */
+    opacity: 0.95; /* Dim the video slightly to make text pop */
   }
 
   /* Add a dark gradient overlay so text is always readable */
@@ -47,9 +47,10 @@
     z-index: 2;
     background: linear-gradient(
       to bottom,
-      rgba(5, 5, 5, 0.8) 0%,
-      rgba(5, 5, 5, 0.4) 50%,
-      rgba(5, 5, 5, 0.9) 100%
+      rgba(5, 5, 5, 0.4) 0%,
+      rgba(5, 5, 5, 0) 30%,
+      rgba(5, 5, 5, 0) 70%,
+      rgba(5, 5, 5, 0.8) 100%
     );
   }
 
