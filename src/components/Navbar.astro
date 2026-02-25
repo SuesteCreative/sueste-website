@@ -88,12 +88,19 @@ const { isLandingPage = false } = Astro.props;
   }
 
   .nav-link-item {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     font-weight: 500;
     color: #a1a1aa;
     transition: all 0.3s ease;
     text-decoration: none;
     position: relative;
+  }
+
+  /* Make landing page items solid white and with text shadow to pop over video */
+  .navbar-root.is-landing:not(.scrolled) .nav-link-item {
+    color: #ffffff;
+    font-weight: 600;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
   }
 
   .nav-link-item:hover {
@@ -154,6 +161,12 @@ const { isLandingPage = false } = Astro.props;
     transition: all 0.3s ease;
   }
 
+  .navbar-root.is-landing:not(.scrolled) .lang-toggle-track {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+
   .lang-toggle-track:hover {
     border-color: rgba(56, 189, 248, 0.4);
     background: rgba(255, 255, 255, 0.08);
@@ -180,8 +193,19 @@ const { isLandingPage = false } = Astro.props;
     text-align: center;
   }
 
+  .navbar-root.is-landing:not(.scrolled) .lang-label {
+    color: #ffffff;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+  }
+
   .lang-label.active {
     color: #09090b;
+    text-shadow: none;
+  }
+
+  .navbar-root.is-landing:not(.scrolled) .lang-label.active {
+    color: #09090b;
+    text-shadow: none;
   }
 
   .lang-toggle-wrapper.mobile .lang-toggle-track {

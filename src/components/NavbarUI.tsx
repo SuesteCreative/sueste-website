@@ -59,7 +59,7 @@ const NavbarUI: React.FC<NavbarUIProps> = ({ lang, navItems, quoteLabel, quoteHr
     }, [isOpen]);
 
     return (
-        <nav className={`navbar-root ${scrolled ? 'scrolled' : ''}`}>
+        <nav className={`navbar-root ${scrolled ? 'scrolled' : ''} ${isLandingPage ? 'is-landing' : ''}`}>
             <div className="container nav-content">
                 <a href={lang === 'pt' ? '/' : '/en/'} className="logo">
                     <img src="/images/logo-white-hor.webp" alt="Sueste Creative Logo" className="logo-img" />
