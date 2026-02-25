@@ -58,22 +58,14 @@
         grid-row: 3;
         margin-top: 4rem;
         display: flex;
-        /* Ensure it can align its content */
         justify-content: flex-start;
-    }
-
-    .calc-container.is-merged .calc-form-container {
-        margin-top: 0;
-        /* Remove offset when merged to align with bottom of sidebar track */
-        padding-top: 4rem;
-        /* Use padding instead so grid row height is consistent */
+        align-items: stretch;
     }
 
     .calc-form-area {
         width: 100%;
         max-width: 1000px;
-        margin-left: 0;
-        /* Align to the left to touch sidebar */
+        margin-left: 0 !important;
     }
 
     .calc-mobile-docking-spacer {
@@ -768,46 +760,61 @@
         background: rgba(255, 255, 255, 0.04);
         border-color: rgba(56, 189, 248, 0.3);
         box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
-        border-right: none;
+        border-top-right-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+        border-right: none !important;
         overflow: hidden;
-        /* Ensure no internal padding issues */
+        height: 100% !important;
+        margin: 0 !important;
     }
 
     .calc-container.is-merged .quote-form {
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
+        border-top-left-radius: 0 !important;
+        border-bottom-left-radius: 0 !important;
         background: rgba(255, 255, 255, 0.04);
-        border-left: 1px solid rgba(56, 189, 248, 0.3);
-        margin: 0;
-        /* Clear any margins */
+        border-left: 1px solid rgba(56, 189, 248, 0.3) !important;
+        margin: 0 !important;
+        height: 100% !important;
     }
 
     /* Reduce gap when docked on desktop for 'colado' effect */
     .calc-container.is-merged .calc-sticky-boundary {
         gap: 0;
         align-items: stretch;
+        gap: 0 !important;
+        align-items: stretch !important;
+        display: grid !important;
+        grid-template-columns: 350px 1fr !important;
     }
 
     .calc-container.is-merged .calc-sidebar {
         z-index: 60;
-        grid-row: 3;
-        /* Move to the same row as the form code for perfect alignment */
-        align-self: stretch;
-        /* Land next to the form at the bottom of the grid track */
-        position: relative;
-        /* Stop being sticky when docked to lock position with form */
-        top: 0;
+        grid-row: 3 !important;
+        /* Force same row as form */
+        align-self: flex-start !important;
+        /* Fix to top of the row */
+        position: relative !important;
+        top: 0 !important;
+        height: 100% !important;
+        grid-column: 1 !important;
+        align-self: stretch !important;
+        margin: 0 !important;
     }
 
     .calc-container.is-merged .calc-form-container {
-        margin-top: 0;
+        grid-row: 3 !important;
+        margin-top: 0 !important;
+        height: 100% !important;
+        grid-column: 2 !important;
+        display: flex !important;
     }
 
-    /* Remove the gap only on the docked row */
-    .calc-container.is-merged .calc-sticky-boundary {
-        gap: 0;
+    .calc-container.is-merged .calc-form-area {
+        height: 100% !important;
+    }
+
+    .calc-container.is-merged {
+        max-width: 1400px !important;
     }
 }
 
