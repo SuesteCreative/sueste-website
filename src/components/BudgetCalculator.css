@@ -686,13 +686,6 @@
         background: rgba(56, 189, 248, 0.05);
         border-color: rgba(56, 189, 248, 0.3);
         box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(56, 189, 248, 0.1);
-        /* Instead of grid manipulation, just fix the card relative to the viewport so it aligns visually */
-        position: fixed;
-        /* Match the gap/padding distance from top */
-        top: 100px;
-        /* The width should match the original sidebar column width (350px) */
-        width: 350px;
-        z-index: 100;
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
         border-right: none;
@@ -728,7 +721,7 @@
 
 /* Only remove top border on mobile where it merges vertically */
 @media (max-width: 1024px) {
-    .is-merged .quote-form {
+    .is-docked .quote-form {
         border-top-left-radius: 0;
         border-top-right-radius: 0;
         border-top: none;

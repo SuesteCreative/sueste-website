@@ -66,7 +66,7 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
     const [isDocked, setIsDocked] = useState(false);
     const holderRef = React.useRef<HTMLDivElement>(null);
     const cardRef = React.useRef<HTMLDivElement>(null);
-    const sentinelRef = React.useRef<HTMLDivElement>(null);
+    const formSectionRef = React.useRef<HTMLDivElement>(null);
 
     // 1) Prevent layout shift: keep space when card becomes fixed
     useEffect(() => {
@@ -88,42 +88,29 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
         return () => ro.disconnect();
     }, []);
 
-    // 2) Dock trigger with IntersectionObserver and hysteresis
+    // 2) Reliable scroll trigger for docking
     useEffect(() => {
-        if (!sentinelRef.current || typeof IntersectionObserver === 'undefined') return;
+        if (!formSectionRef.current) return;
 
-        let lastY = window.scrollY;
+        const handleScroll = () => {
+            if (!formSectionRef.current) return;
+            const rect = formSectionRef.current.getBoundingClientRect();
+            // On desktop, dock exactly when the form aligns horizontally with the sticky card (~140px from top)
+            // On mobile, dock when the form reaches the middle of the viewport
+            const isDesktop = window.innerWidth > 1024;
+            const triggerPoint = isDesktop ? 140 : window.innerHeight * 0.5;
 
-        const io = new IntersectionObserver(
-            (entries) => {
-                const e = entries[0];
-                const scrollingDown = window.scrollY > lastY;
-                lastY = window.scrollY;
+            setIsDocked(prev => {
+                if (!prev && rect.top <= triggerPoint) return true;
+                if (prev && rect.top > triggerPoint + 80) return false; // Hysteresis
+                return prev;
+            });
+        };
 
-                // Dock when sentinel is inside the middle band
-                if (e.isIntersecting) {
-                    setIsDocked(true);
-                    return;
-                }
-
-                // Hysteresis: only undock when user scrolls up and sentinel has clearly left
-                if (!e.isIntersecting && !scrollingDown) {
-                    setIsDocked(false);
-                }
-            },
-            {
-                // Middle band: trigger when sentinel is between 35% and 65% of viewport
-                root: null,
-                threshold: 0,
-                rootMargin: "-35% 0px -35% 0px",
-            }
-        );
-
-        io.observe(sentinelRef.current);
-        return () => io.disconnect();
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        handleScroll();
+        return () => window.removeEventListener('scroll', handleScroll);
     }, []);
-
-
 
     // Load from local storage
     useEffect(() => {
@@ -573,11 +560,8 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                 </motion.div>
 
                 {/* SUBMISSION FORM - Now a direct child of grid */}
-                <div id="contactSection" className="calc-form-container">
+                <div id="contactSection" className="calc-form-container" ref={formSectionRef}>
                     <div className="calc-form-area">
-                        {/* Sentinel for IntersectionObserver to trigger docking when this reaches middle of screen */}
-                        <div ref={sentinelRef} id="dockSentinel" style={{ position: 'relative', top: '120px', width: '1px', height: '1px', pointerEvents: 'none' }}></div>
-
                         <motion.form
                             id="budget-form-ref"
                             className="quote-form glass-panel"
