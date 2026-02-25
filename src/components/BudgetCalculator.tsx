@@ -400,7 +400,10 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                             {service.id === 'drone' ? (
                                 <div className="drone-config">
                                     <div className="option-row">
-                                        <label className="option-label">{t.hours} ({service.hourly_rate}€ {t.hourly})</label>
+                                        <label className="option-label" style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+                                            <span>{t.hours} ({service.hourly_rate}€ {t.hourly})</span>
+                                            <span style={{ fontWeight: 600, color: 'var(--color-accent)' }}>+{service.hourly_rate * droneHours}€</span>
+                                        </label>
                                         <div className="number-input">
                                             <button type="button" onClick={() => setDroneHours(Math.max(1, droneHours - 1))}>-</button>
                                             <input
@@ -435,7 +438,7 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                                                     <span className="sub-opt-name">{lang === 'pt' ? opt.name_pt : opt.name_en}</span>
                                                 </div>
                                                 <div className="sub-opt-price-wrapper">
-                                                    <span className="sub-opt-price">+{opt.price}€</span>
+                                                    <span className="sub-opt-price">{opt.price > 0 ? `+${opt.price}€` : '0€'}</span>
                                                     {selections[service.id].option === opt.id && <Check size={16} className="active-check" />}
                                                 </div>
                                             </div>
@@ -446,7 +449,7 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                                 <div className="options-list">
                                     {service.options.map((opt: any) => {
                                         const isOptActive = selections[service.id].option === opt.id;
-                                        const priceText = opt.type === 'starting_at' ? `${t.startingAt} ${opt.price}€` : `+${opt.price}€`;
+                                        const priceText = opt.type === 'starting_at' ? `${t.startingAt} +${opt.price}€` : `+${opt.price}€`;
 
                                         return (
                                             <div
