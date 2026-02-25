@@ -74,11 +74,13 @@
         transform-origin: center bottom;
     }
 
-    /* Mobile only hide original sidebar when merged because it exists inside the form now */
-    .calc-container.is-merged .calc-sidebar {
-        opacity: 0;
-        transform: translateY(60px) scale(0.6) blur(10px);
-        pointer-events: none;
+    /* Mobile only hide original sidebar when merged because its content is rendered inside the form card */
+    @media (max-width: 1024px) {
+        .calc-container.is-merged .calc-sidebar {
+            opacity: 0;
+            transform: translateY(60px) scale(0.6) blur(10px);
+            pointer-events: none;
+        }
     }
 
     /* Remove the has-selector logic and use standard sticky behavior */
