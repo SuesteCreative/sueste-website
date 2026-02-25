@@ -5,6 +5,8 @@ import Footer from "../../components/Footer.astro";
 import HeroScrollSequence from "../../components/HeroScrollSequence.astro";
 import Section from "../../components/Section.astro";
 import PortfolioLanding from "../../components/PortfolioLanding.astro";
+import { AceternityServicesEN } from "../../components/AceternityServicesEN";
+import { Meteors } from "../../components/ui/meteors";
 import { useTranslations } from "../../utils/i18n";
 
 const t = useTranslations("en");
@@ -30,23 +32,8 @@ const t = useTranslations("en");
       subtitle="Complete creative solutions to take your brand to the next level."
       data-reveal
     >
-      <div class="services-grid">
-        <div class="service-card glass reveal-delay-1" data-reveal>
-          <h3>Web Development</h3>
-          <p>Fast, SEO-first websites focused on conversion.</p>
-        </div>
-        <div class="service-card glass reveal-delay-2" data-reveal>
-          <h3>Social Media</h3>
-          <p>Social media management and strategic content creation.</p>
-        </div>
-        <div class="service-card glass reveal-delay-3" data-reveal>
-          <h3>Drone Footage</h3>
-          <p>Cinematic 4K aerial imagery for your business.</p>
-        </div>
-        <div class="service-card glass reveal-delay-1" data-reveal>
-          <h3>Graphic Design</h3>
-          <p>Visual identity and design that communicates your values.</p>
-        </div>
+      <div class="mt-8">
+        <AceternityServicesEN client:load />
       </div>
     </Section>
 
@@ -85,10 +72,16 @@ const t = useTranslations("en");
     </Section>
 
     <Section id="cta" className="final-cta" data-reveal>
-      <div class="cta-box glass reveal-delay-1" data-reveal>
-        <h2>Ready to start?</h2>
-        <p>Get a free quote in less than 2 minutes.</p>
-        <a href="/en/quote" class="btn-cta">Get a Quote</a>
+      <div
+        class="cta-box glass reveal-delay-1 overflow-hidden relative"
+        data-reveal
+      >
+        <Meteors client:load number={20} />
+        <div class="relative z-10">
+          <h2>Ready to start?</h2>
+          <p>Get a free quote in less than 2 minutes.</p>
+          <a href="/en/quote" class="btn-cta">Get a Quote</a>
+        </div>
       </div>
     </Section>
   </main>
