@@ -75,7 +75,8 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
             if (formEl) {
                 // Determine height for desktop docking match
                 if (window.innerWidth > 1024) {
-                    setFormHeight(formEl.offsetHeight);
+                    const h = formEl.getBoundingClientRect().height;
+                    if (h > 0) setFormHeight(h);
                 }
 
                 if (window.innerWidth <= 1024) {
@@ -463,7 +464,7 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                         animate={{
                             padding: shouldCollapse ? '12px 20px' : '40px',
                             gap: shouldCollapse ? '12px' : '24px',
-                            height: (isMergedWithForm && typeof window !== 'undefined' && window.innerWidth > 1024) ? formHeight : 'auto'
+                            height: (isMergedWithForm && typeof window !== 'undefined' && window.innerWidth > 1024 && formHeight > 100) ? formHeight : 'auto'
                         }}
                         transition={{
                             height: { type: "spring", stiffness: 300, damping: 30 },
