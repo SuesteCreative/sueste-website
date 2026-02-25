@@ -41,7 +41,8 @@ const NavbarUI: React.FC<NavbarUIProps> = ({ lang, navItems, quoteLabel, quoteHr
     useEffect(() => {
         const handleScroll = () => {
             const scrollY = window.scrollY;
-            const threshold = isLandingPage ? 600 : 20;
+            // HeroScrollSequence is 300vh, so it finishes at ~2 screen heights of scroll
+            const threshold = isLandingPage ? (window.innerHeight * 1.8) : 20;
             setScrolled(scrollY > threshold);
         };
         window.addEventListener('scroll', handleScroll, { passive: true });
