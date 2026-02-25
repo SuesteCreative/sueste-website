@@ -15,11 +15,20 @@ const t = useTranslations("en");
 
   <main>
     <HeroScrollSequence>
-      <div class="hero-content container" data-reveal>
-        <h1 class="reveal-delay-1">{t("hero.headline")}</h1>
-        <p class="reveal-delay-2">{t("hero.subheadline")}</p>
-        <div class="reveal-delay-3">
-          <a href="/en/quote" class="btn-cta">{t("hero.cta")}</a>
+      <div class="hero-content container">
+        <h1>{t("hero.headline")}</h1>
+        <p>{t("hero.subheadline")}</p>
+        <div
+          style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;"
+        >
+          <a href="/en/services" class="btn-outline" style="min-width: 160px;"
+            >Services</a
+          >
+          <a
+            href="/en/quote"
+            class="btn-cta"
+            style="min-width: 160px; margin: 0;">Quote</a
+          >
         </div>
       </div>
     </HeroScrollSequence>

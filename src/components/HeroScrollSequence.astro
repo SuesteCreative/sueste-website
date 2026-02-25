@@ -120,16 +120,35 @@
     // The hero content fading logic
     const heroOverlay = document.querySelector(".hero-overlay");
 
-    // Animate Hero Text revealing natively on page load
-    gsap.to(heroOverlay, {
-      opacity: 1,
-      scale: 1,
-      duration: 2,
-      ease: "power3.out",
-      delay: 0.2,
-    });
+    // Start completely hidden
+    gsap.set(heroOverlay, { opacity: 0, y: 60, scale: 0.95 });
 
-    // Create the ScrollTrigger tied to the timeline
+    // Animate Hero Text revealing natively ON SCROLL, then hiding
+    gsap
+      .timeline({
+        scrollTrigger: {
+          trigger: ".hero-scroll-container",
+          start: "top top", // Starts animating right as you scroll down from top
+          end: "center top", // Ends when container is half way up
+          scrub: 1, // Smooth scrub
+        },
+      })
+      .to(heroOverlay, {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 0.2,
+        ease: "power2.out",
+      }) // Reveal during first 20%
+      .to(heroOverlay, { opacity: 1, duration: 0.5 }) // Hold
+      .to(heroOverlay, {
+        opacity: 0,
+        y: -100,
+        duration: 0.3,
+        ease: "power2.in",
+      }); // Fade out
+
+    // Create the ScrollTrigger tied to the timeline (the video)
     gsap.to(imageSeq, {
       frame: frameCount - 1,
       snap: "frame",
@@ -141,18 +160,6 @@
         scrub: 1.5, // 1.5 seconds smoothing (inertia)
       },
       onUpdate: render,
-    });
-
-    // Optional: Fade out the text slightly as we scroll deep into the video
-    gsap.to(heroOverlay, {
-      opacity: 0,
-      y: -100,
-      scrollTrigger: {
-        trigger: ".hero-scroll-container",
-        start: "top top",
-        end: "center top", // Text disappears halfway through the video pull
-        scrub: true,
-      },
     });
 
     function render() {
