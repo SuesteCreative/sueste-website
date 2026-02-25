@@ -93,10 +93,12 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                 });
             } else {
                 setIsStickyMobile(false);
-                const triggerOn = 140;
+                const triggerOn = 150;
                 setIsMergedWithForm(prev => {
+                    // Start docking slightly earlier to ensure smooth alignment
                     if (!prev && rect.top <= triggerOn) return true;
-                    if (prev && rect.top > triggerOn + 50) return false;
+                    // Provide massive hysteresis so user can scroll up to the center of the screen
+                    if (prev && rect.top > window.innerHeight * 0.75) return false;
                     return prev;
                 });
                 updateMeasurements();

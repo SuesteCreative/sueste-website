@@ -752,6 +752,10 @@
         text-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
     }
 
+    .calc-container.is-merged .calc-sidebar {
+        align-self: flex-end;
+    }
+
     .calc-container.is-merged .quote-form {
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
