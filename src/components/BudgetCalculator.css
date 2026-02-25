@@ -730,12 +730,7 @@
     }
 
     .calc-container.is-merged .estimate-card {
-        background: rgba(56, 189, 248, 0.05);
-        border-color: rgba(56, 189, 248, 0.3);
         box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(56, 189, 248, 0.1);
-        width: calc(100% + 3rem);
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
         border-right: none;
     }
 

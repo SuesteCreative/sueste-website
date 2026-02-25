@@ -489,13 +489,21 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                         animate={{
                             padding: shouldCollapse ? '12px 20px' : '40px',
                             gap: shouldCollapse ? '12px' : '24px',
-                            // On desktop, match form height when docked
-                            height: (isMergedWithForm && !isStickyMobile && formHeight > 100) ? formHeight : 'auto'
+                            // On desktop, match form height when docked, otherwise fluid
+                            height: (isMergedWithForm && !isStickyMobile && formHeight > 100) ? formHeight : 'auto',
+                            // Smoothly bridge the gap on desktop via framer motion
+                            width: (isMergedWithForm && !isStickyMobile) ? 'calc(100% + 3rem)' : '100%',
+                            borderTopRightRadius: (isMergedWithForm && !isStickyMobile) ? 0 : 24,
+                            borderBottomRightRadius: (isMergedWithForm && !isStickyMobile) ? 0 : 24,
+                            borderColor: (isMergedWithForm && !isStickyMobile) ? 'rgba(56, 189, 248, 0.3)' : 'rgba(255, 255, 255, 0.08)',
+                            background: (isMergedWithForm && !isStickyMobile) ? 'rgba(56, 189, 248, 0.05)' : 'rgba(255, 255, 255, 0.03)',
                         }}
                         transition={{
-                            height: { type: "spring", stiffness: 300, damping: 30 },
+                            height: { type: "spring", stiffness: 200, damping: 25 },
+                            width: { type: "spring", stiffness: 200, damping: 25 },
                             padding: { duration: 0.3 },
-                            gap: { duration: 0.3 }
+                            gap: { duration: 0.3 },
+                            layout: { type: "spring", stiffness: 250, damping: 30 }
                         }}
                     >
                         {!shouldCollapse && (
