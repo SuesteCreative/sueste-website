@@ -33,13 +33,35 @@
         display: grid;
         grid-template-columns: 350px 1fr;
         gap: 3rem;
+        align-items: start;
+    }
+
+    .calc-sidebar {
+        grid-column: 1;
+        grid-row: 1 / span 3;
+        /* Track sidebar across all content rows */
+    }
+
+    .calc-selection-area {
+        grid-column: 2;
+        grid-row: 1;
+    }
+
+    .addons-card {
+        /* Specifically target the addons card row if needed */
+        grid-column: 2;
+        grid-row: 2;
+    }
+
+    .calc-form-container {
+        grid-column: 2;
+        grid-row: 3;
+        margin-top: 4rem;
     }
 
     .calc-form-area {
-        /* Removed margin-left as form is now part of the grid */
         width: 100%;
         max-width: 1000px;
-        /* Ensure it stays at a readable but full size */
     }
 
     .calc-mobile-docking-spacer {
@@ -74,16 +96,13 @@
         transform-origin: center bottom;
     }
 
-    /* Mobile only hide original sidebar when merged because its content is rendered inside the form card */
-    @media (max-width: 1024px) {
-        .calc-container.is-merged .calc-sidebar {
-            opacity: 0;
-            transform: translateY(60px) scale(0.6) blur(10px);
-            pointer-events: none;
-        }
+    /* Mobile only: hide sidebar when merged because it exists inside the form header */
+    .calc-container.is-merged .calc-sidebar {
+        opacity: 0;
+        transform: translateY(60px) scale(0.6) blur(10px);
+        pointer-events: none;
     }
 
-    /* Remove the has-selector logic and use standard sticky behavior */
     .calc-sidebar:has(.mobile-collapsed) {
         top: 80px;
     }
@@ -758,7 +777,8 @@
 
     .calc-container.is-merged .calc-sidebar {
         z-index: 60;
-        /* height: auto removed to allow motion height to work correctly in grid */
+        align-self: end;
+        /* Land next to the form */
     }
 }
 

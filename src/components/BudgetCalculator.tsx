@@ -68,50 +68,49 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
 
     // Scroll detection and height measurement
     useEffect(() => {
+        const formEl = document.getElementById('budget-form-ref');
+
         const updateMeasurements = () => {
-            const formEl = document.getElementById('budget-form-ref');
             if (formEl && window.innerWidth > 1024) {
-                const h = formEl.getBoundingClientRect().height;
-                if (h > 100) setFormHeight(h);
+                const rect = formEl.getBoundingClientRect();
+                setFormHeight(rect.height);
             }
         };
 
         const handleScroll = () => {
+            if (!formEl) return;
             const scrollY = window.scrollY;
-            const formEl = document.getElementById('budget-form-ref');
+            const rect = formEl.getBoundingClientRect();
 
             if (window.innerWidth <= 1024) {
                 setIsStickyMobile(scrollY > 50);
-                if (formEl) {
-                    const rect = formEl.getBoundingClientRect();
-                    setIsMergedWithForm(rect.top <= 140);
-                }
+                setIsMergedWithForm(rect.top <= 140);
             } else {
                 setIsStickyMobile(false);
-                if (formEl) {
-                    const rect = formEl.getBoundingClientRect();
-                    // On desktop, the card is at top: 100px. 
-                    // When form reaches ~120px-140px, they are side-by-side.
-                    setIsMergedWithForm(rect.top <= 140);
-                }
+                // On desktop, the card is at top: 100px. 
+                // We consider it merged when the form reaches that area.
+                setIsMergedWithForm(rect.top <= 140);
                 updateMeasurements();
             }
         };
 
-        // Measure on mount and resize
+        // Initial measurement
         updateMeasurements();
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        window.addEventListener('resize', updateMeasurements);
+        handleScroll();
 
-        // Optional: Resize observer for the form itself (in case it grows/shrinks)
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        window.addEventListener('resize', () => {
+            updateMeasurements();
+            handleScroll();
+        });
+
+        // Use ResizeObserver for the form itself
         let observer: ResizeObserver | null = null;
-        const formEl = document.getElementById('budget-form-ref');
         if (formEl && typeof ResizeObserver !== 'undefined') {
             observer = new ResizeObserver(updateMeasurements);
             observer.observe(formEl);
         }
 
-        handleScroll();
         return () => {
             window.removeEventListener('scroll', handleScroll);
             window.removeEventListener('resize', updateMeasurements);
@@ -475,16 +474,17 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                 {/* LEFT COLUMN: STICKY Total */}
                 <div className="calc-sidebar">
                     <motion.div
+                        layout
                         className={`estimate-card glass-panel ${shouldCollapse ? 'mobile-collapsed' : ''}`}
                         initial={false}
                         animate={{
                             padding: shouldCollapse ? '12px 20px' : '40px',
                             gap: shouldCollapse ? '12px' : '24px',
-                            // Only animate height on desktop when merged
+                            // On desktop, match form height when docked
                             height: (isMergedWithForm && !isStickyMobile && formHeight > 100) ? formHeight : 'auto'
                         }}
                         transition={{
-                            height: { type: "spring", stiffness: 300, damping: 30, restDelta: 0.5 },
+                            height: { type: "spring", stiffness: 300, damping: 30 },
                             padding: { duration: 0.3 },
                             gap: { duration: 0.3 }
                         }}
