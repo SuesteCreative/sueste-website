@@ -16,19 +16,21 @@ const t = useTranslations("pt");
   <main>
     <HeroScrollSequence>
       <div class="hero-content container">
-        <h1>{t("hero.headline")}</h1>
-        <p>{t("hero.subheadline")}</p>
-        <div
-          style="display: flex; gap: 1rem; justify-content: center; margin-top: 2.5rem; flex-wrap: wrap;"
-        >
-          <a href="/servicos" class="btn-outline" style="min-width: 160px;"
-            >Serviços</a
+        <div class="hero-content-anim">
+          <h1>{t("hero.headline")}</h1>
+          <p>{t("hero.subheadline")}</p>
+          <div
+            style="display: flex; gap: 1rem; justify-content: center; margin-top: 2.5rem; flex-wrap: wrap;"
           >
-          <a
-            href="/orcamento"
-            class="btn-cta"
-            style="min-width: 160px; margin: 0;">Orçamento</a
-          >
+            <a href="/servicos" class="btn-outline" style="min-width: 160px;"
+              >Serviços</a
+            >
+            <a
+              href="/orcamento"
+              class="btn-cta"
+              style="min-width: 160px; margin: 0;">Saber Mais</a
+            >
+          </div>
         </div>
 
         <div class="scroll-indicator">
@@ -150,19 +152,19 @@ const t = useTranslations("pt");
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--color-accent);
+    background: linear-gradient(135deg, #38bdf8 0%, #2563eb 100%);
     color: white;
     padding: 1rem 2.5rem;
     border-radius: 50px;
     font-weight: 600;
     font-size: 1.1rem;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 14px 0 rgba(0, 112, 243, 0.39);
+    box-shadow: 0 4px 14px 0 rgba(56, 189, 248, 0.3);
   }
 
   .btn-cta:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 112, 243, 0.23);
+    box-shadow: 0 6px 20px rgba(56, 189, 248, 0.5);
   }
 
   .btn-outline {
@@ -215,7 +217,7 @@ const t = useTranslations("pt");
     width: 4px;
     height: 8px;
     border-radius: 2px;
-    background: white;
+    background: linear-gradient(135deg, #38bdf8 0%, #2563eb 100%);
     animation: scroll-wheel 1.5s infinite;
   }
 

@@ -60,8 +60,6 @@
     text-align: center;
     width: 100%;
     /* Start slightly scaled up and fade in */
-    transform: scale(1.05);
-    opacity: 0;
   }
 
   /* Let GSAP handle the reveal, hide standard data-reveal starting state */
@@ -84,7 +82,7 @@
   gsap.registerPlugin(ScrollTrigger);
 
   // Define total frames generated
-  const frameCount = 300;
+  const frameCount = 500;
   const currentFrame = (index: number) =>
     `/images/hero-video/sueste-hero-animation${(index + 1)
       .toString()
@@ -118,10 +116,10 @@
     images[0].onload = render;
 
     // The hero content fading logic
-    const heroOverlay = document.querySelector(".hero-overlay");
+    const heroContentAnim = document.querySelector(".hero-content-anim");
 
     // Start completely hidden
-    gsap.set(heroOverlay, {
+    gsap.set(heroContentAnim, {
       opacity: 0,
       y: 80,
       scale: 0.9,
@@ -138,7 +136,7 @@
           scrub: 1, // Smooth scrub
         },
       })
-      .to(heroOverlay, {
+      .to(heroContentAnim, {
         opacity: 1,
         y: 0,
         scale: 1,
@@ -146,8 +144,8 @@
         duration: 0.25,
         ease: "power2.out",
       }) // Reveal during first 20%
-      .to(heroOverlay, { opacity: 1, duration: 0.45 }) // Hold
-      .to(heroOverlay, {
+      .to(heroContentAnim, { opacity: 1, duration: 0.45 }) // Hold
+      .to(heroContentAnim, {
         opacity: 0,
         y: -150,
         scale: 1.05,
