@@ -204,7 +204,8 @@
     justify-content: center;
     /* Center content when height grows */
     gap: 1.5rem;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
         border-radius 0.4s ease,
         background 0.4s ease,
         border-color 0.4s ease,
@@ -655,12 +656,6 @@
     font-size: 0.9rem;
 }
 
-/* MERGED FORM HEADER Styles cleaned and refined */
-.is-merged .quote-form {
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    border-top: none;
-}
 
 .merged-estimate-header {
     background: rgba(255, 255, 255, 0.03);
@@ -738,12 +733,10 @@
         background: rgba(56, 189, 248, 0.05);
         border-color: rgba(56, 189, 248, 0.3);
         box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(56, 189, 248, 0.1);
-        width: 350px;
+        width: calc(100% + 3rem);
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
         border-right: none;
-        /* Slide across the 3rem gap without altering the grid layout */
-        transform: translateX(3rem);
     }
 
     /* Apply gradient to desktop card when docked next to form */
