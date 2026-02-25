@@ -399,20 +399,22 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                         >
                             {service.id === 'drone' ? (
                                 <div className="drone-config">
-                                    <div className="option-row">
-                                        <label className="option-label" style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-                                            <span>{t.hours} ({service.hourly_rate}€ {t.hourly})</span>
-                                            <span style={{ fontWeight: 600, color: 'var(--color-accent)' }}>+{service.hourly_rate * droneHours}€</span>
+                                    <div className="option-row drone-option-row">
+                                        <label className="option-label">
+                                            {t.hours} <span className="drone-hourly-note">({service.hourly_rate}€ {t.hourly})</span>
                                         </label>
-                                        <div className="number-input">
-                                            <button type="button" onClick={() => setDroneHours(Math.max(1, droneHours - 1))}>-</button>
-                                            <input
-                                                type="number"
-                                                min="1"
-                                                value={droneHours}
-                                                onChange={(e) => setDroneHours(parseInt(e.target.value) || 1)}
-                                            />
-                                            <button type="button" onClick={() => setDroneHours(droneHours + 1)}>+</button>
+                                        <div className="drone-actions">
+                                            <span className="drone-total-neon">+{service.hourly_rate * droneHours}€</span>
+                                            <div className="number-input">
+                                                <button type="button" onClick={() => setDroneHours(Math.max(1, droneHours - 1))}>-</button>
+                                                <input
+                                                    type="number"
+                                                    min="1"
+                                                    value={droneHours}
+                                                    onChange={(e) => setDroneHours(parseInt(e.target.value) || 1)}
+                                                />
+                                                <button type="button" onClick={() => setDroneHours(droneHours + 1)}>+</button>
+                                            </div>
                                         </div>
                                     </div>
                                     <div className="options-list">

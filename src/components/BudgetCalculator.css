@@ -527,11 +527,52 @@
     background: rgba(0, 0, 0, 0.2);
     padding: 1rem 1.5rem;
     border-radius: 12px;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.drone-option-row {
+    justify-content: space-between;
+}
+
+.drone-hourly-note {
+    opacity: 0.6;
+    font-size: 0.9em;
+    font-weight: 400;
+}
+
+.drone-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-left: auto;
+}
+
+.drone-total-neon {
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: #38bdf8;
+    text-shadow: 0 0 10px rgba(56, 189, 248, 0.6), 0 0 20px rgba(56, 189, 248, 0.3);
+    white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+    .drone-option-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .drone-actions {
+        width: 100%;
+        justify-content: space-between;
+        margin-left: 0;
+    }
 }
 
 .option-label {
     color: #e2e8f0;
     font-weight: 500;
+    line-height: 1.4;
 }
 
 .number-input {
