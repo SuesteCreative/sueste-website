@@ -57,11 +57,23 @@
         grid-column: 2;
         grid-row: 3;
         margin-top: 4rem;
+        display: flex;
+        /* Ensure it can align its content */
+        justify-content: flex-start;
+    }
+
+    .calc-container.is-merged .calc-form-container {
+        margin-top: 0;
+        /* Remove offset when merged to align with bottom of sidebar track */
+        padding-top: 4rem;
+        /* Use padding instead so grid row height is consistent */
     }
 
     .calc-form-area {
         width: 100%;
         max-width: 1000px;
+        margin-left: 0;
+        /* Align to the left to touch sidebar */
     }
 
     .calc-mobile-docking-spacer {
@@ -760,6 +772,7 @@
         border-bottom-right-radius: 0;
         border-right: none;
         overflow: hidden;
+        /* Ensure no internal padding issues */
     }
 
     .calc-container.is-merged .quote-form {
@@ -767,6 +780,8 @@
         border-bottom-left-radius: 0;
         background: rgba(255, 255, 255, 0.04);
         border-left: 1px solid rgba(56, 189, 248, 0.3);
+        margin: 0;
+        /* Clear any margins */
     }
 
     /* Reduce gap when docked on desktop for 'colado' effect */
@@ -777,8 +792,22 @@
 
     .calc-container.is-merged .calc-sidebar {
         z-index: 60;
-        align-self: end;
-        /* Land next to the form */
+        grid-row: 3;
+        /* Move to the same row as the form code for perfect alignment */
+        align-self: stretch;
+        /* Land next to the form at the bottom of the grid track */
+        position: relative;
+        /* Stop being sticky when docked to lock position with form */
+        top: 0;
+    }
+
+    .calc-container.is-merged .calc-form-container {
+        margin-top: 0;
+    }
+
+    /* Remove the gap only on the docked row */
+    .calc-container.is-merged .calc-sticky-boundary {
+        gap: 0;
     }
 }
 
