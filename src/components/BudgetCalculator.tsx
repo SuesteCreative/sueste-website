@@ -66,40 +66,57 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
     const [isMergedWithForm, setIsMergedWithForm] = useState(false);
     const [formHeight, setFormHeight] = useState(0);
 
-    // Scroll detection: collapse card and handle merge logic
+    // Scroll detection and height measurement
     useEffect(() => {
-        const handleScroll = () => {
-            const scrollY = window.scrollY;
-
+        const updateMeasurements = () => {
             const formEl = document.getElementById('budget-form-ref');
-            if (formEl) {
-                // Determine height for desktop docking match
-                if (window.innerWidth > 1024) {
-                    const h = formEl.getBoundingClientRect().height;
-                    if (h > 0) setFormHeight(h);
-                }
-
-                if (window.innerWidth <= 1024) {
-                    // Collapse much earlier: as soon as we scroll 50px
-                    setIsStickyMobile(scrollY > 50);
-
-                    const rect = formEl.getBoundingClientRect();
-                    // Merge logic: Swap the element into the form when close
-                    const mergeThreshold = 140;
-                    setIsMergedWithForm(rect.top <= mergeThreshold);
-                } else {
-                    // Desktop logic: Detect when sticky card aligns with form
-                    setIsStickyMobile(false);
-                    const rect = formEl.getBoundingClientRect();
-                    // On desktop, the card is at top: 100px. 
-                    // When form reaches ~120px, they are side-by-side.
-                    setIsMergedWithForm(rect.top <= 140);
-                }
+            if (formEl && window.innerWidth > 1024) {
+                const h = formEl.getBoundingClientRect().height;
+                if (h > 100) setFormHeight(h);
             }
         };
+
+        const handleScroll = () => {
+            const scrollY = window.scrollY;
+            const formEl = document.getElementById('budget-form-ref');
+
+            if (window.innerWidth <= 1024) {
+                setIsStickyMobile(scrollY > 50);
+                if (formEl) {
+                    const rect = formEl.getBoundingClientRect();
+                    setIsMergedWithForm(rect.top <= 140);
+                }
+            } else {
+                setIsStickyMobile(false);
+                if (formEl) {
+                    const rect = formEl.getBoundingClientRect();
+                    // On desktop, the card is at top: 100px. 
+                    // When form reaches ~120px-140px, they are side-by-side.
+                    setIsMergedWithForm(rect.top <= 140);
+                }
+                updateMeasurements();
+            }
+        };
+
+        // Measure on mount and resize
+        updateMeasurements();
         window.addEventListener('scroll', handleScroll, { passive: true });
+        window.addEventListener('resize', updateMeasurements);
+
+        // Optional: Resize observer for the form itself (in case it grows/shrinks)
+        let observer: ResizeObserver | null = null;
+        const formEl = document.getElementById('budget-form-ref');
+        if (formEl && typeof ResizeObserver !== 'undefined') {
+            observer = new ResizeObserver(updateMeasurements);
+            observer.observe(formEl);
+        }
+
         handleScroll();
-        return () => window.removeEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('resize', updateMeasurements);
+            if (observer) observer.disconnect();
+        };
     }, []);
 
     const shouldCollapse = isStickyMobile;
@@ -458,17 +475,18 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                 {/* LEFT COLUMN: STICKY Total */}
                 <div className="calc-sidebar">
                     <motion.div
-                        layout
-                        className={`estimate-card glass-panel ${shouldCollapse ? 'mobile-collapsed' : ''} ${isMergedWithForm && !isStickyMobile ? 'is-docked-desktop' : ''}`}
+                        className={`estimate-card glass-panel ${shouldCollapse ? 'mobile-collapsed' : ''}`}
                         initial={false}
                         animate={{
                             padding: shouldCollapse ? '12px 20px' : '40px',
                             gap: shouldCollapse ? '12px' : '24px',
-                            height: (isMergedWithForm && typeof window !== 'undefined' && window.innerWidth > 1024 && formHeight > 100) ? formHeight : 'auto'
+                            // Only animate height on desktop when merged
+                            height: (isMergedWithForm && !isStickyMobile && formHeight > 100) ? formHeight : 'auto'
                         }}
                         transition={{
-                            height: { type: "spring", stiffness: 300, damping: 30 },
-                            default: { duration: 0.5 }
+                            height: { type: "spring", stiffness: 300, damping: 30, restDelta: 0.5 },
+                            padding: { duration: 0.3 },
+                            gap: { duration: 0.3 }
                         }}
                     >
                         {!shouldCollapse && (

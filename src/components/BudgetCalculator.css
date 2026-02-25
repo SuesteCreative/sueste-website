@@ -74,7 +74,8 @@
         transform-origin: center bottom;
     }
 
-    .calc-container:has(.is-merged) .calc-sidebar {
+    /* Mobile only hide original sidebar when merged because it exists inside the form now */
+    .calc-container.is-merged .calc-sidebar {
         opacity: 0;
         transform: translateY(60px) scale(0.6) blur(10px);
         pointer-events: none;
@@ -704,9 +705,7 @@
         display: none !important;
     }
 
-    .estimate-card {
-        transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
+    /* CSS transitions removed to avoid fighting with Framer Motion height animations */
 
     .calc-container.is-merged .estimate-card {
         background: rgba(56, 189, 248, 0.05);
@@ -739,7 +738,7 @@
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
         border-right: none;
-        /* Vertical center is now handled by flex in .estimate-card */
+        overflow: hidden;
     }
 
     .calc-container.is-merged .quote-form {
