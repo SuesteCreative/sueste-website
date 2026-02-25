@@ -37,19 +37,12 @@ const LangSwitcher: React.FC<{ lang: 'pt' | 'en', mobile?: boolean }> = ({ lang,
 const NavbarUI: React.FC<NavbarUIProps> = ({ lang, navItems, quoteLabel, quoteHref, isLandingPage = false }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
-    const [visible, setVisible] = useState(!isLandingPage);
 
     useEffect(() => {
         const handleScroll = () => {
             const scrollY = window.scrollY;
             const threshold = isLandingPage ? 600 : 20;
             setScrolled(scrollY > threshold);
-
-            if (isLandingPage) {
-                setVisible(scrollY > threshold);
-            } else {
-                setVisible(true);
-            }
         };
         window.addEventListener('scroll', handleScroll, { passive: true });
         handleScroll();
@@ -65,7 +58,7 @@ const NavbarUI: React.FC<NavbarUIProps> = ({ lang, navItems, quoteLabel, quoteHr
     }, [isOpen]);
 
     return (
-        <nav className={`navbar-root ${scrolled ? 'scrolled' : ''} ${!visible ? 'navbar-hidden' : ''}`}>
+        <nav className={`navbar-root ${scrolled ? 'scrolled' : ''}`}>
             <div className="container nav-content">
                 <a href={lang === 'pt' ? '/' : '/en/'} className="logo">
                     <img src="/images/logo-white-hor.webp" alt="Sueste Creative Logo" className="logo-img" />
