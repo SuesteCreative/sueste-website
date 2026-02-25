@@ -484,79 +484,79 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
             <div className="calc-sticky-boundary">
                 {/* LEFT COLUMN: STICKY Total */}
                 <div className="calc-sidebar">
-                    <AnimatePresence mode="wait">
-                        <motion.div
-                            key={isMergedWithForm ? 'merged' : 'floating'}
-                            className={`estimate-card glass-panel ${shouldCollapse ? 'mobile-collapsed' : ''}`}
-                            initial={{ opacity: 0, scale: 0.98 }}
-                            animate={{
-                                opacity: 1,
-                                scale: 1,
-                                padding: shouldCollapse ? '12px 20px' : '40px',
-                                gap: shouldCollapse ? '12px' : '24px',
-                                // On desktop, match form height when docked, otherwise fluid
-                                height: (isMergedWithForm && !isStickyMobile && formHeight > 100) ? formHeight : 'auto',
-                                // Smoothly bridge the gap on desktop via framer motion
-                                width: (isMergedWithForm && !isStickyMobile) ? 'calc(100% + 3rem)' : '100%',
-                                borderTopRightRadius: (isMergedWithForm && !isStickyMobile) ? 0 : 24,
-                                borderBottomRightRadius: (isMergedWithForm && !isStickyMobile) ? 0 : 24,
-                                borderColor: (isMergedWithForm && !isStickyMobile) ? 'rgba(56, 189, 248, 0.3)' : 'rgba(255, 255, 255, 0.08)',
-                                background: (isMergedWithForm && !isStickyMobile) ? 'rgba(56, 189, 248, 0.05)' : 'rgba(255, 255, 255, 0.03)',
-                            }}
-                            exit={{ opacity: 0, scale: 0.98 }}
-                            transition={{
-                                duration: 0.25,
-                                ease: [0.16, 1, 0.3, 1]
-                            }}
-                        >
-                            {!shouldCollapse && (
-                                <p className="estimate-label">
+                    <motion.div
+                        layout
+                        className={`estimate-card glass-panel ${shouldCollapse ? 'mobile-collapsed' : ''}`}
+                        initial={false}
+                        animate={{
+                            padding: shouldCollapse ? '12px 20px' : '40px',
+                            gap: shouldCollapse ? '12px' : '24px',
+                            // On desktop, match form height when docked, otherwise fluid
+                            height: (isMergedWithForm && !isStickyMobile && formHeight > 100) ? formHeight : 'auto',
+                            // Smoothly bridge the gap on desktop via framer motion
+                            width: (isMergedWithForm && !isStickyMobile) ? 'calc(100% + 3rem)' : '100%',
+                            borderTopRightRadius: (isMergedWithForm && !isStickyMobile) ? 0 : 24,
+                            borderBottomRightRadius: (isMergedWithForm && !isStickyMobile) ? 0 : 24,
+                            borderColor: (isMergedWithForm && !isStickyMobile) ? 'rgba(56, 189, 248, 0.3)' : 'rgba(255, 255, 255, 0.08)',
+                            background: (isMergedWithForm && !isStickyMobile) ? 'rgba(56, 189, 248, 0.05)' : 'rgba(255, 255, 255, 0.03)',
+                        }}
+                        transition={{
+                            height: { type: "tween", ease: [0.16, 1, 0.3, 1], duration: 0.5 },
+                            width: { type: "tween", ease: [0.16, 1, 0.3, 1], duration: 0.5 },
+                            padding: { duration: 0.3 },
+                            gap: { duration: 0.3 },
+                            layout: { type: "tween", ease: [0.16, 1, 0.3, 1], duration: 0.5 },
+                            borderColor: { duration: 0.5 },
+                            background: { duration: 0.5 }
+                        }}
+                    >
+                        {!shouldCollapse && (
+                            <p className="estimate-label">
+                                {hasStartingAt ? t.startingAt : t.estimate}
+                            </p>
+                        )}
+
+                        <div className="estimate-shrink-content">
+                            {shouldCollapse && (
+                                <span className="estimate-label-inline">
                                     {hasStartingAt ? t.startingAt : t.estimate}
-                                </p>
+                                </span>
                             )}
-
-                            <div className="estimate-shrink-content">
-                                {shouldCollapse && (
-                                    <span className="estimate-label-inline">
-                                        {hasStartingAt ? t.startingAt : t.estimate}
-                                    </span>
-                                )}
-                                <div className="estimate-value-wrapper">
-                                    <span className="estimate-value">{animatedTotal.toLocaleString('pt-PT')}</span>
-                                    <span className="estimate-currency">€</span>
-                                    <AnimatePresence>
-                                        {marginBase > 0 && (
-                                            <motion.span
-                                                initial={{ opacity: 0, x: -10 }}
-                                                animate={{ opacity: 1, x: 0 }}
-                                                exit={{ opacity: 0, x: -10 }}
-                                                className="estimate-iva"
-                                            >
-                                                + IVA
-                                            </motion.span>
-                                        )}
-                                    </AnimatePresence>
-                                </div>
+                            <div className="estimate-value-wrapper">
+                                <span className="estimate-value">{animatedTotal.toLocaleString('pt-PT')}</span>
+                                <span className="estimate-currency">€</span>
+                                <AnimatePresence>
+                                    {marginBase > 0 && (
+                                        <motion.span
+                                            initial={{ opacity: 0, x: -10 }}
+                                            animate={{ opacity: 1, x: 0 }}
+                                            exit={{ opacity: 0, x: -10 }}
+                                            className="estimate-iva"
+                                        >
+                                            + IVA
+                                        </motion.span>
+                                    )}
+                                </AnimatePresence>
                             </div>
+                        </div>
 
-                            <button
-                                type="button"
-                                className="btn-clear"
-                                onClick={clearBudget}
-                                disabled={marginBase === 0}
-                            >
-                                <Trash2 size={16} />
-                                {!shouldCollapse && <span className="btn-clear-text" style={{ marginLeft: 8 }}>{t.clear}</span>}
-                            </button>
+                        <button
+                            type="button"
+                            className="btn-clear"
+                            onClick={clearBudget}
+                            disabled={marginBase === 0}
+                        >
+                            <Trash2 size={16} />
+                            {!shouldCollapse && <span className="btn-clear-text" style={{ marginLeft: 8 }}>{t.clear}</span>}
+                        </button>
 
-                            {!shouldCollapse && (
-                                <div className="legal-note">
-                                    <Info size={16} className="legal-icon" />
-                                    <p>{t.legal}</p>
-                                </div>
-                            )}
-                        </motion.div>
-                    </AnimatePresence>
+                        {!shouldCollapse && (
+                            <div className="legal-note">
+                                <Info size={16} className="legal-icon" />
+                                <p>{t.legal}</p>
+                            </div>
+                        )}
+                    </motion.div>
                 </div>
 
                 <div className={`calc-selection-area ${isStickyMobile ? 'has-sticky-margin' : ''}`}>
