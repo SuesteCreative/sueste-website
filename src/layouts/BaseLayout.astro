@@ -60,7 +60,38 @@ const lang = propLang || getLangFromUrl(Astro.url);
     <slot />
 
     <script>
-      // Masterful Reveal System
+      // Load and Initialize Lenis & GSAP interactions
+      import Lenis from "lenis";
+      import { gsap } from "gsap";
+      import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Setup smooth scrolling for the entire app
+      const lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        orientation: "vertical",
+        gestureOrientation: "vertical",
+        smoothWheel: true,
+        wheelMultiplier: 1,
+        infinite: false,
+      });
+
+      lenis.on("scroll", ScrollTrigger.update);
+
+      gsap.ticker.add((time) => {
+        lenis.raf(time * 1000);
+      });
+
+      gsap.ticker.lagSmoothing(0);
+
+      // Handle Astro view transitions if used in future
+      document.addEventListener("astro:after-swap", () => {
+        // You could re-init Lenis here if the DOM swaps heavily
+      });
+
+      // Masterful Reveal System that we left working
       const revealCallback = (entries: IntersectionObserverEntry[]) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
@@ -78,7 +109,6 @@ const lang = propLang || getLangFromUrl(Astro.url);
         revealObserver.observe(el);
       });
 
-      // Handle Astro view transitions if used in future
       document.addEventListener("astro:after-swap", () => {
         document
           .querySelectorAll("[data-reveal]")
