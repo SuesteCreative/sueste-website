@@ -30,9 +30,9 @@
 @media (min-width: 1025px) {
     .calc-sticky-boundary {
         display: grid;
-        grid-template-columns: 350px 1fr;
+        /* Col 1: Sidebar (350px), Col 2: Gap (3rem), Col 3: Content (1fr) */
+        grid-template-columns: 350px 3rem 1fr;
         gap: 0;
-        /* Gap is managed by padding inside cells to prevent width jumps */
         align-items: start;
     }
 
@@ -42,27 +42,25 @@
         position: sticky;
         top: 100px;
         z-index: 60;
+        display: flex;
+        flex-direction: column;
     }
 
     .calc-selection-area {
-        grid-column: 2;
+        grid-column: 3;
         grid-row: 1;
-        padding-left: 3rem;
-        /* Simulate the gap */
     }
 
     .addons-card-row {
-        grid-column: 2;
+        grid-column: 3;
         grid-row: 2;
         margin-top: 2rem;
-        padding-left: 3rem;
     }
 
     .calc-form-container {
-        grid-column: 2;
+        grid-column: 3;
         grid-row: 3;
         margin-top: 4rem;
-        padding-left: 3rem;
     }
 
     .calc-form-area {
@@ -759,23 +757,20 @@
     }
 
     .calc-container.is-merged .calc-sidebar {
-        z-index: 60;
-        grid-column: 1;
+        grid-column: 1 / span 2;
+        /* Expand into the gap column */
         grid-row: 1 / span 3;
         position: sticky;
         top: 100px;
         align-self: end;
-        /* This "locks" it next to the form row at the end of scroll */
-    }
-
-    .calc-container.is-merged .calc-selection-area,
-    .calc-container.is-merged .addons-card-row,
-    .calc-container.is-merged .calc-form-container {
-        padding-left: 0;
-        /* Remove padding to touch the sidebar */
+        /* Dock at the bottom next to the form */
+        align-items: flex-end;
+        /* Push the estimate-card child to the right edge */
     }
 
     .calc-container.is-merged .estimate-card {
+        width: 350px;
+        /* Keep width stable */
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
         border-right: none;
@@ -784,13 +779,27 @@
     .calc-container.is-merged .quote-form {
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
+        border-left: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    /* Content columns MUST stay fixed to column 3 to prevent width jumps */
+    .calc-container.is-merged .calc-selection-area,
+    .calc-container.is-merged .addons-card-row,
+    .calc-container.is-merged .calc-form-container {
+        grid-column: 3;
+        padding-left: 0;
+        /* No padding needed as gap is handled by col 2 */
+        margin-top: inherit;
+    }
+
+    .calc-container.is-merged .calc-form-container {
+        margin-top: 0;
+        height: 100%;
     }
 }
 
 /* Merge Zone Transitions */
-@media (max-width: 1024px) {
-    /* Transitions are handled via classes on parents */
-}
+/* Transitions are handled via classes on parents */
 
 /* Only remove top border on mobile where it merges vertically */
 @media (max-width: 1024px) {

@@ -1,0 +1,253 @@
+---
+interface Project {
+    title: string;
+    category: string;
+    metric: string;
+    metricLabel: string;
+    image: string;
+    size: "small" | "large";
+}
+
+const projects: Project[] = [
+    {
+        title: "Marítima Alvor",
+        category: "Social Media & Content",
+        metric: "140%",
+        metricLabel: "Engagement Rate",
+        image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&q=80&w=800",
+        size: "small",
+    },
+    {
+        title: "Mental8work",
+        category: "Web Design & UX",
+        metric: "85%",
+        metricLabel: "Efficiency Boost",
+        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800",
+        size: "small",
+    },
+    {
+        title: "ICON Property",
+        category: "Full Digital Presence",
+        metric: "12k+",
+        metricLabel: "Qualified Leads",
+        image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=800",
+        size: "large",
+    },
+];
+
+const { lang = "pt" } = Astro.props;
+const viewAllLabel =
+    lang === "pt" ? "Ver Todos os Projetos" : "View All Projects";
+const viewAllHref = lang === "pt" ? "/portfolio" : "/en/work";
+---
+
+<div class="portfolio-grid-container">
+    <div class="portfolio-grid">
+        {
+            projects.map((project, idx) => (
+                <div
+                    class={`portfolio-card ${project.size}`}
+                    data-reveal
+                    class:list={[`reveal-delay-${idx + 1}`]}
+                >
+                    <div class="card-image-wrapper">
+                        <img
+                            src={project.image}
+                            alt={project.title}
+                            class="card-image"
+                        />
+                        <div class="card-overlay" />
+                    </div>
+
+                    <div class="card-content">
+                        <div class="card-header">
+                            <span class="category">{project.category}</span>
+                            <h3>{project.title}</h3>
+                        </div>
+
+                        <div class="analytics-box">
+                            <span class="metric-value">{project.metric}</span>
+                            <span class="metric-label">
+                                {project.metricLabel}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            ))
+        }
+    </div>
+
+    <div class="portfolio-footer" data-reveal>
+        <a href={viewAllHref} class="btn-outline">
+            {viewAllLabel}
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                ><line x1="5" y1="12" x2="19" y2="12"></line><polyline
+                    points="12 5 19 12 12 19"></polyline>
+            </svg>
+        </a>
+    </div>
+</div>
+
+<style>
+    .portfolio-grid-container {
+        width: 100%;
+        margin-top: 4rem;
+    }
+
+    .portfolio-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 400px 400px;
+        gap: 2rem;
+    }
+
+    .portfolio-card {
+        position: relative;
+        border-radius: 24px;
+        overflow: hidden;
+        background: #111;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .portfolio-card.large {
+        grid-column: 2;
+        grid-row: 1 / span 2;
+    }
+
+    .portfolio-card:hover {
+        transform: translateY(-8px);
+        border-color: rgba(56, 189, 248, 0.3);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .card-image-wrapper {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+    }
+
+    .card-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.4;
+        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .portfolio-card:hover .card-image {
+        transform: scale(1.05);
+        opacity: 0.6;
+    }
+
+    .card-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            to top,
+            rgba(0, 0, 0, 0.9) 0%,
+            rgba(0, 0, 0, 0.2) 50%,
+            transparent 100%
+        );
+    }
+
+    .card-content {
+        position: relative;
+        z-index: 1;
+        height: 100%;
+        padding: 3rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .category {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: #38bdf8;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        display: block;
+    }
+
+    .card-content h3 {
+        font-size: 2rem;
+        font-weight: 800;
+        color: #fff;
+        margin: 0;
+    }
+
+    .analytics-box {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .metric-value {
+        font-size: 4rem;
+        font-weight: 900;
+        line-height: 1;
+        background: linear-gradient(135deg, #38bdf8 0%, #2563eb 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        letter-spacing: -2px;
+    }
+
+    .metric-label {
+        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.6);
+        font-weight: 500;
+        margin-top: 0.25rem;
+    }
+
+    .portfolio-footer {
+        margin-top: 4rem;
+        display: flex;
+        justify-content: center;
+    }
+
+    .btn-outline {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 1rem 2.5rem;
+        border-radius: 50px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: #fff;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        background: rgba(255, 255, 255, 0.02);
+    }
+
+    .btn-outline:hover {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: #38bdf8;
+        transform: translateY(-2px);
+    }
+
+    @media (max-width: 1024px) {
+        .portfolio-grid {
+            grid-template-columns: 1fr;
+            grid-template-rows: repeat(3, 400px);
+        }
+
+        .portfolio-card.large {
+            grid-column: 1;
+            grid-row: auto;
+        }
+
+        .metric-value {
+            font-size: 3rem;
+        }
+    }
+</style>

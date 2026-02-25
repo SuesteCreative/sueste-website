@@ -1,29 +1,35 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Navbar from '../components/Navbar.astro';
-import Footer from '../components/Footer.astro';
-import HeroScrollSequence from '../components/HeroScrollSequence.astro';
-import Section from '../components/Section.astro';
-import { useTranslations } from '../utils/i18n';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import HeroScrollSequence from "../components/HeroScrollSequence.astro";
+import Section from "../components/Section.astro";
+import PortfolioLanding from "../components/PortfolioLanding.astro";
+import { useTranslations } from "../utils/i18n";
 
-const t = useTranslations('pt');
+const t = useTranslations("pt");
 ---
 
-<BaseLayout title="Home" description={t('hero.subheadline')}>
-  <Navbar />
-  
+<BaseLayout title="Home" description={t("hero.subheadline")}>
+  <Navbar isLandingPage={true} />
+
   <main>
     <HeroScrollSequence>
       <div class="hero-content container" data-reveal>
-        <h1 class="reveal-delay-1">{t('hero.headline')}</h1>
-        <p class="reveal-delay-2">{t('hero.subheadline')}</p>
+        <h1 class="reveal-delay-1">{t("hero.headline")}</h1>
+        <p class="reveal-delay-2">{t("hero.subheadline")}</p>
         <div class="reveal-delay-3">
-          <a href="/orcamento" class="btn-cta">{t('hero.cta')}</a>
+          <a href="/orcamento" class="btn-cta">{t("hero.cta")}</a>
         </div>
       </div>
     </HeroScrollSequence>
 
-    <Section id="services" title="Serviços" subtitle="Soluções criativas completas para levar a sua marca ao próximo nível." data-reveal>
+    <Section
+      id="services"
+      title="Serviços"
+      subtitle="Soluções criativas completas para levar a sua marca ao próximo nível."
+      data-reveal
+    >
       <div class="services-grid">
         <div class="service-card glass reveal-delay-1" data-reveal>
           <h3>Web Development</h3>
@@ -42,6 +48,15 @@ const t = useTranslations('pt');
           <p>Identidade visual e design que comunica os seus valores.</p>
         </div>
       </div>
+    </Section>
+
+    <Section
+      id="portfolio"
+      title="Portfólio"
+      subtitle="Projetos reais com resultados reais. Criatividade guiada por dados."
+      data-reveal
+    >
+      <PortfolioLanding />
     </Section>
 
     <Section id="process" title="O Nosso Processo" dark data-reveal>
@@ -85,7 +100,7 @@ const t = useTranslations('pt');
   .hero-content {
     max-width: 800px;
   }
-  
+
   .hero-content h1 {
     font-size: 4.5rem;
     font-weight: 800;
@@ -93,7 +108,7 @@ const t = useTranslations('pt');
     margin-bottom: 2rem;
     letter-spacing: -2px;
   }
-  
+
   .hero-content p {
     font-size: 1.25rem;
     opacity: 0.8;
@@ -110,7 +125,7 @@ const t = useTranslations('pt');
     font-size: 1.1rem;
     transition: transform 0.3s ease;
   }
-  
+
   .btn-cta:hover {
     transform: scale(1.05);
   }
@@ -120,17 +135,17 @@ const t = useTranslations('pt');
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
   }
-  
+
   .service-card {
     padding: 3rem 2rem;
     border-radius: 20px;
     transition: transform 0.3s ease;
   }
-  
+
   .service-card:hover {
     transform: translateY(-10px);
   }
-  
+
   .service-card h3 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
@@ -142,11 +157,11 @@ const t = useTranslations('pt');
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 3rem;
   }
-  
+
   .process-step {
     position: relative;
   }
-  
+
   .step-num {
     font-size: 3rem;
     font-weight: 800;
@@ -154,7 +169,7 @@ const t = useTranslations('pt');
     display: block;
     margin-bottom: -1.5rem;
   }
-  
+
   .process-step h4 {
     font-size: 1.25rem;
     margin-bottom: 0.5rem;
@@ -163,17 +178,17 @@ const t = useTranslations('pt');
   .final-cta {
     text-align: center;
   }
-  
+
   .cta-box {
     padding: 6rem 2rem;
     border-radius: 40px;
   }
-  
+
   .cta-box h2 {
     font-size: 3rem;
     margin-bottom: 1rem;
   }
-  
+
   .cta-box p {
     margin-bottom: 3rem;
     font-size: 1.2rem;

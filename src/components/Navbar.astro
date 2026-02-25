@@ -21,6 +21,7 @@ const navItems = [
 
 const quoteHref = lang === "pt" ? "/orcamento" : "/en/quote";
 const quoteLabel = t("nav.quote");
+const { isLandingPage = false } = Astro.props;
 ---
 
 <NavbarUI
@@ -29,6 +30,7 @@ const quoteLabel = t("nav.quote");
   navItems={navItems}
   quoteLabel={quoteLabel}
   quoteHref={quoteHref}
+  isLandingPage={isLandingPage}
 />
 
 <style is:global>
@@ -38,8 +40,14 @@ const quoteLabel = t("nav.quote");
     left: 0;
     width: 100%;
     z-index: 1000;
-    padding: 1.5rem 0;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    padding: 2.5rem 0;
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .navbar-root.navbar-hidden {
+    opacity: 0;
+    transform: translateY(-20px);
+    pointer-events: none;
   }
 
   .navbar-root.scrolled {
@@ -57,9 +65,13 @@ const quoteLabel = t("nav.quote");
   }
 
   .logo-img {
-    height: 32px;
+    height: 80px;
     width: auto;
-    transition: transform 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .navbar-root.scrolled .logo-img {
+    height: 36px;
   }
 
   .logo:hover .logo-img {

@@ -1,6 +1,6 @@
 ---
-import '../styles/global.css';
-import { getLangFromUrl } from '../utils/i18n';
+import "../styles/global.css";
+import { getLangFromUrl } from "../utils/i18n";
 
 interface Props {
   title: string;
@@ -8,7 +8,11 @@ interface Props {
   lang?: string;
 }
 
-const { title, description = "Sueste Creative - Creative Agency", lang: propLang } = Astro.props;
+const {
+  title,
+  description = "Sueste Creative - Creative Agency",
+  lang: propLang,
+} = Astro.props;
 const lang = propLang || getLangFromUrl(Astro.url);
 ---
 
@@ -21,17 +25,33 @@ const lang = propLang || getLangFromUrl(Astro.url);
     <meta name="generator" content={Astro.generator} />
     <title>{title} | Sueste Creative</title>
     <meta name="description" content={description} />
-    
+
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={Astro.url} />
-    
+
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CV0NZQC6HW"
+    ></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-CV0NZQC6HW");
+    </script>
   </head>
   <body>
     <slot />
@@ -39,25 +59,27 @@ const lang = propLang || getLangFromUrl(Astro.url);
     <script>
       // Masterful Reveal System
       const revealCallback = (entries: IntersectionObserverEntry[]) => {
-        entries.forEach(entry => {
+        entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('revealed');
+            entry.target.classList.add("revealed");
           }
         });
       };
 
       const revealObserver = new IntersectionObserver(revealCallback, {
         threshold: 0.15,
-        rootMargin: '0px 0px -50px 0px'
+        rootMargin: "0px 0px -50px 0px",
       });
 
-      document.querySelectorAll('[data-reveal]').forEach(el => {
+      document.querySelectorAll("[data-reveal]").forEach((el) => {
         revealObserver.observe(el);
       });
 
       // Handle Astro view transitions if used in future
-      document.addEventListener('astro:after-swap', () => {
-        document.querySelectorAll('[data-reveal]').forEach(el => revealObserver.observe(el));
+      document.addEventListener("astro:after-swap", () => {
+        document
+          .querySelectorAll("[data-reveal]")
+          .forEach((el) => revealObserver.observe(el));
       });
     </script>
   </body>

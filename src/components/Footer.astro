@@ -1,5 +1,5 @@
 ---
-import { getLangFromUrl, useTranslations } from '../utils/i18n';
+import { getLangFromUrl, useTranslations } from "../utils/i18n";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -10,67 +10,100 @@ const year = new Date().getFullYear();
   <div class="container footer-content">
     <div class="footer-brand">
       <a href="/" class="logo">
-        <img src="/images/logo-white-vert.webp" alt="Sueste Creative Logo" class="footer-logo-img" />
+        <img
+          src="/images/logo-white-vert.webp"
+          alt="Sueste Creative Logo"
+          class="footer-logo-img"
+        />
       </a>
-      <p>{t('hero.subheadline')}</p>
+      <p>{t("hero.subheadline")}</p>
     </div>
-    
+
     <div class="footer-links">
       <div class="link-group">
         <h4>Sueste</h4>
-        <a href={lang === 'pt' ? '/sobre' : '/en/about'}>{t('nav.about')}</a>
-        <a href={lang === 'pt' ? '/servicos' : '/en/services'}>{t('nav.services')}</a>
-        <a href={lang === 'pt' ? '/portfolio' : '/en/work'}>{t('nav.work')}</a>
+        <a href={lang === "pt" ? "/sobre" : "/en/about"}>{t("nav.about")}</a>
+        <a href={lang === "pt" ? "/servicos" : "/en/services"}
+          >{t("nav.services")}</a
+        >
+        <a href={lang === "pt" ? "/portfolio" : "/en/work"}>{t("nav.work")}</a>
       </div>
+
+      <div class="link-group">
+        <h4>{t("footer.contact")}</h4>
+        <p class="footer-text">Pct. Fernando Valle, Lisboa</p>
+        <a href="tel:+351965494727" class="footer-text">+351 965 494 727</a>
+      </div>
+
+      <div class="link-group">
+        <h4>{t("footer.socials")}</h4>
+        <a
+          href="https://www.instagram.com/sueste.agency/"
+          target="_blank"
+          rel="noopener noreferrer">Instagram</a
+        >
+        <a
+          href="https://www.facebook.com/sueste.agency"
+          target="_blank"
+          rel="noopener noreferrer">Facebook</a
+        >
+      </div>
+
       <div class="link-group">
         <h4>Legal</h4>
-        <a href={lang === 'pt' ? '/privacidade' : '/en/privacy'}>{t('footer.privacy')}</a>
-        <a href={lang === 'pt' ? '/termos' : '/en/terms'}>{t('footer.terms')}</a>
+        <a href={lang === "pt" ? "/privacidade" : "/en/privacy"}
+          >{t("footer.privacy")}</a
+        >
+        <a href={lang === "pt" ? "/termos" : "/en/terms"}>{t("footer.terms")}</a
+        >
       </div>
     </div>
   </div>
-  
+
   <div class="container footer-bottom">
-    <p>&copy; {year} Sueste Creative. {t('footer.rights')}</p>
+    <p>&copy; {year} Sueste Creative. {t("footer.rights")}</p>
   </div>
 </footer>
 
 <style>
   .footer {
-    background-color: #0a0a0a;
-    padding: 4rem 0 2rem;
-    margin-top: 4rem;
+    background-color: var(--color-bg);
+    padding: 8rem 0 2rem;
+    margin-top: 0;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
   }
-  
+
   .footer-content {
     display: flex;
     justify-content: space-between;
     gap: 4rem;
     margin-bottom: 4rem;
   }
-  
+
   .footer-brand {
-    max-width: 400px;
+    max-width: 300px;
   }
-  
+
   .footer-brand p {
     margin-top: 1rem;
     opacity: 0.6;
     font-size: 0.9rem;
+    line-height: 1.6;
   }
-  
+
   .footer-links {
     display: flex;
     gap: 4rem;
+    flex-wrap: wrap;
   }
-  
+
   .link-group {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    min-width: 150px;
   }
-  
+
   .link-group h4 {
     font-size: 0.8rem;
     text-transform: uppercase;
@@ -78,17 +111,24 @@ const year = new Date().getFullYear();
     margin-bottom: 0.5rem;
     color: var(--color-accent);
   }
-  
-  .link-group a {
+
+  .link-group a,
+  .footer-text {
     font-size: 0.9rem;
     opacity: 0.7;
-    transition: opacity 0.3s;
+    transition: all 0.3s;
   }
-  
+
   .link-group a:hover {
     opacity: 1;
+    color: var(--color-accent);
   }
-  
+
+  .footer-text {
+    margin: 0;
+    line-height: 1.5;
+  }
+
   .footer-bottom {
     padding-top: 2rem;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
@@ -96,21 +136,20 @@ const year = new Date().getFullYear();
     font-size: 0.8rem;
     opacity: 0.5;
   }
-  
+
   .footer-logo-img {
     height: 80px;
     width: auto;
     margin-bottom: 1rem;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     .footer-content {
       flex-direction: column;
       gap: 3rem;
     }
     .footer-links {
-      gap: 2rem;
-      flex-wrap: wrap;
+      gap: 3rem;
     }
   }
 </style>
