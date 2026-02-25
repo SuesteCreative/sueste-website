@@ -62,63 +62,68 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
     const [status, setStatus] = useState({ type: '', msg: '' });
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const [isStickyMobile, setIsStickyMobile] = useState(false);
-    const [isMergedWithForm, setIsMergedWithForm] = useState(false);
-    const [formHeight, setFormHeight] = useState(0);
+    // Docking logic refs & state
+    const [isDocked, setIsDocked] = useState(false);
+    const holderRef = React.useRef<HTMLDivElement>(null);
+    const cardRef = React.useRef<HTMLDivElement>(null);
+    const sentinelRef = React.useRef<HTMLDivElement>(null);
 
-    // Scroll detection and height measurement
+    // 1) Prevent layout shift: keep space when card becomes fixed
     useEffect(() => {
-        const formEl = document.getElementById('budget-form-ref');
+        if (!cardRef.current || !holderRef.current || typeof ResizeObserver === 'undefined') return;
 
-        const updateMeasurements = () => {
-            if (formEl && window.innerWidth > 1024) {
-                const rect = formEl.getBoundingClientRect();
-                setFormHeight(rect.height);
+        const ro = new ResizeObserver(() => {
+            if (!cardRef.current || !holderRef.current) return;
+            // Only sync height if we are NOT docked. When docked, the element is fixed and might change height.
+            // Actually, we WANT to preserve the original height it had before docking so the layout doesn't collapse.
+            // A better approach is to only update the placeholder height if the card is NOT fixed, 
+            // or just rely on the CSS grid row filling. For this implementation we'll follow the user's exact instruction:
+            const h = cardRef.current.getBoundingClientRect().height;
+            if (h > 0) {
+                holderRef.current.style.minHeight = `${h}px`;
             }
-        };
-
-        const handleScroll = () => {
-            if (!formEl) return;
-            const scrollY = window.scrollY;
-            const rect = formEl.getBoundingClientRect();
-
-            if (window.innerWidth <= 1024) {
-                setIsStickyMobile(scrollY > 50);
-                setIsMergedWithForm(rect.top <= 140);
-            } else {
-                setIsStickyMobile(false);
-                // On desktop, the card is at top: 100px. 
-                // We consider it merged when the form reaches that area.
-                setIsMergedWithForm(rect.top <= 140);
-                updateMeasurements();
-            }
-        };
-
-        // Initial measurement
-        updateMeasurements();
-        handleScroll();
-
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        window.addEventListener('resize', () => {
-            updateMeasurements();
-            handleScroll();
         });
 
-        // Use ResizeObserver for the form itself
-        let observer: ResizeObserver | null = null;
-        if (formEl && typeof ResizeObserver !== 'undefined') {
-            observer = new ResizeObserver(updateMeasurements);
-            observer.observe(formEl);
-        }
-
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-            window.removeEventListener('resize', updateMeasurements);
-            if (observer) observer.disconnect();
-        };
+        ro.observe(cardRef.current);
+        return () => ro.disconnect();
     }, []);
 
-    const shouldCollapse = isStickyMobile;
+    // 2) Dock trigger with IntersectionObserver and hysteresis
+    useEffect(() => {
+        if (!sentinelRef.current || typeof IntersectionObserver === 'undefined') return;
+
+        let lastY = window.scrollY;
+
+        const io = new IntersectionObserver(
+            (entries) => {
+                const e = entries[0];
+                const scrollingDown = window.scrollY > lastY;
+                lastY = window.scrollY;
+
+                // Dock when sentinel is inside the middle band
+                if (e.isIntersecting) {
+                    setIsDocked(true);
+                    return;
+                }
+
+                // Hysteresis: only undock when user scrolls up and sentinel has clearly left
+                if (!e.isIntersecting && !scrollingDown) {
+                    setIsDocked(false);
+                }
+            },
+            {
+                // Middle band: trigger when sentinel is between 35% and 65% of viewport
+                root: null,
+                threshold: 0,
+                rootMargin: "-35% 0px -35% 0px",
+            }
+        );
+
+        io.observe(sentinelRef.current);
+        return () => io.disconnect();
+    }, []);
+
+
 
     // Load from local storage
     useEffect(() => {
@@ -469,76 +474,63 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
     };
 
     return (
-        <div className={`calc-container ${isMergedWithForm ? 'is-merged' : ''} ${marginBase === 0 ? 'is-zero' : ''}`}>
+        <div className={`calc-container ${isDocked ? 'is-docked' : ''} ${marginBase === 0 ? 'is-zero' : ''}`}>
             <div className="calc-sticky-boundary">
                 {/* LEFT COLUMN: STICKY Total */}
                 <div className="calc-sidebar">
-                    <motion.div
-                        layout
-                        className={`estimate-card glass-panel ${shouldCollapse ? 'mobile-collapsed' : ''}`}
-                        initial={false}
-                        animate={{
-                            padding: shouldCollapse ? '12px 20px' : '40px',
-                            gap: shouldCollapse ? '12px' : '24px',
-                            // On desktop, match form height when docked
-                            height: (isMergedWithForm && !isStickyMobile && formHeight > 100) ? formHeight : 'auto'
-                        }}
-                        transition={{
-                            height: { type: "spring", stiffness: 300, damping: 30 },
-                            padding: { duration: 0.3 },
-                            gap: { duration: 0.3 }
-                        }}
-                    >
-                        {!shouldCollapse && (
+                    <div id="estimateHolder" className="estimate-holder" ref={holderRef}>
+                        <motion.div
+                            ref={cardRef}
+                            id="estimateCard"
+                            layout
+                            className="estimate-card glass-panel"
+                            initial={false}
+                        >
                             <p className="estimate-label">
                                 {hasStartingAt ? t.startingAt : t.estimate}
                             </p>
-                        )}
 
-                        <div className="estimate-shrink-content">
-                            {shouldCollapse && (
+                            <div className="estimate-shrink-content">
                                 <span className="estimate-label-inline">
                                     {hasStartingAt ? t.startingAt : t.estimate}
                                 </span>
-                            )}
-                            <div className="estimate-value-wrapper">
-                                <span className="estimate-value">{animatedTotal.toLocaleString('pt-PT')}</span>
-                                <span className="estimate-currency">€</span>
-                                <AnimatePresence>
-                                    {marginBase > 0 && (
-                                        <motion.span
-                                            initial={{ opacity: 0, x: -10 }}
-                                            animate={{ opacity: 1, x: 0 }}
-                                            exit={{ opacity: 0, x: -10 }}
-                                            className="estimate-iva"
-                                        >
-                                            + IVA
-                                        </motion.span>
-                                    )}
-                                </AnimatePresence>
+                                <div className="estimate-value-wrapper">
+                                    <span className="estimate-value">{animatedTotal.toLocaleString('pt-PT')}</span>
+                                    <span className="estimate-currency">€</span>
+                                    <AnimatePresence>
+                                        {marginBase > 0 && (
+                                            <motion.span
+                                                initial={{ opacity: 0, x: -10 }}
+                                                animate={{ opacity: 1, x: 0 }}
+                                                exit={{ opacity: 0, x: -10 }}
+                                                className="estimate-iva"
+                                            >
+                                                + IVA
+                                            </motion.span>
+                                        )}
+                                    </AnimatePresence>
+                                </div>
                             </div>
-                        </div>
 
-                        <button
-                            type="button"
-                            className="btn-clear"
-                            onClick={clearBudget}
-                            disabled={marginBase === 0}
-                        >
-                            <Trash2 size={16} />
-                            {!shouldCollapse && <span className="btn-clear-text" style={{ marginLeft: 8 }}>{t.clear}</span>}
-                        </button>
+                            <button
+                                type="button"
+                                className="btn-clear"
+                                onClick={clearBudget}
+                                disabled={marginBase === 0}
+                            >
+                                <Trash2 size={16} />
+                                <span className="btn-clear-text" style={{ marginLeft: 8 }}>{t.clear}</span>
+                            </button>
 
-                        {!shouldCollapse && (
                             <div className="legal-note">
                                 <Info size={16} className="legal-icon" />
                                 <p>{t.legal}</p>
                             </div>
-                        )}
-                    </motion.div>
+                        </motion.div>
+                    </div>
                 </div>
 
-                <div className={`calc-selection-area ${isStickyMobile ? 'has-sticky-margin' : ''}`}>
+                <div className="calc-selection-area">
                     <div className="calc-step-group">
                         {pricingData.services.map((service: any, idx) => renderServiceCard(service, idx))}
                     </div>
@@ -581,8 +573,11 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                 </motion.div>
 
                 {/* SUBMISSION FORM - Now a direct child of grid */}
-                <div className={`calc-form-container ${isMergedWithForm ? 'is-merged' : ''}`}>
+                <div id="contactSection" className="calc-form-container">
                     <div className="calc-form-area">
+                        {/* Sentinel for IntersectionObserver to trigger docking when this reaches middle of screen */}
+                        <div ref={sentinelRef} id="dockSentinel" style={{ position: 'relative', top: '120px', width: '1px', height: '1px', pointerEvents: 'none' }}></div>
+
                         <motion.form
                             id="budget-form-ref"
                             className="quote-form glass-panel"
@@ -591,48 +586,6 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: 0.8 }}
                         >
-                            {/* If merged (mobile), show the sticky content inside the form card at the top */}
-                            <AnimatePresence>
-                                {(isMergedWithForm && typeof window !== 'undefined' && window.innerWidth <= 1024) && (
-                                    <motion.div
-                                        initial={{ opacity: 0, y: -20 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        exit={{ opacity: 0, y: -20 }}
-                                        className="merged-estimate-header"
-                                    >
-                                        <div className="estimate-shrink-content">
-                                            <span className="estimate-label-inline">
-                                                {hasStartingAt ? t.startingAt : t.estimate}
-                                            </span>
-                                            <div className="estimate-value-wrapper">
-                                                <span className="estimate-value">{animatedTotal.toLocaleString('pt-PT')}</span>
-                                                <span className="estimate-currency">€</span>
-                                                <AnimatePresence>
-                                                    {marginBase > 0 && (
-                                                        <motion.span
-                                                            initial={{ opacity: 0, x: -10 }}
-                                                            animate={{ opacity: 1, x: 0 }}
-                                                            exit={{ opacity: 0, x: -10 }}
-                                                            className="estimate-iva"
-                                                        >
-                                                            + IVA
-                                                        </motion.span>
-                                                    )}
-                                                </AnimatePresence>
-                                            </div>
-                                        </div>
-                                        <button
-                                            type="button"
-                                            className="btn-clear"
-                                            onClick={clearBudget}
-                                            disabled={marginBase === 0}
-                                        >
-                                            <Trash2 size={16} />
-                                        </button>
-                                    </motion.div>
-                                )}
-                            </AnimatePresence>
-
                             <h3 className="form-title">{t.yourDetails}</h3>
 
                             <div className="form-row pair">
