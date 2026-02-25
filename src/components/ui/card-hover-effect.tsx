@@ -26,14 +26,14 @@ export const HoverEffect = ({
                 <a
                     href={item?.link || "#"}
                     key={item?.link || idx}
-                    className="relative group  block p-2 h-full w-full"
+                    className="relative group block p-4 md:p-6 h-full w-full"
                     onMouseEnter={() => setHoveredIndex(idx)}
                     onMouseLeave={() => setHoveredIndex(null)}
                 >
                     <AnimatePresence>
                         {hoveredIndex === idx && (
                             <motion.span
-                                className="absolute inset-0 h-full w-full bg-neutral-200 dark:bg-sky-400/[0.1] block  rounded-3xl"
+                                className="absolute inset-0 h-full w-full bg-[rgba(56,189,248,0.1)] block rounded-3xl"
                                 layoutId="hoverBackground"
                                 initial={{ opacity: 0 }}
                                 animate={{
@@ -67,15 +67,12 @@ export const Card = ({
     return (
         <div
             className={cn(
-                "rounded-2xl h-full w-full p-4 overflow-hidden bg-black/40 border border-white/[0.05] dark:border-white/[0.1] group-hover:border-slate-700 relative z-20 transition-all duration-300",
+                "rounded-[20px] h-full w-full p-4 overflow-hidden glass group-hover:border-[var(--color-accent)] relative z-20 transition-colors duration-300",
                 className
             )}
-            style={{
-                backdropFilter: "blur(10px)",
-            }}
         >
             <div className="relative z-50">
-                <div className="p-4">{children}</div>
+                <div className="p-4 sm:p-6">{children}</div>
             </div>
         </div>
     );
@@ -89,9 +86,9 @@ export const CardTitle = ({
     children: React.ReactNode;
 }) => {
     return (
-        <h4 className={cn("text-sky-400 font-bold tracking-wide mt-4 text-xl", className)}>
+        <h3 className={cn("font-bold tracking-wide mt-2 text-2xl", className)} style={{ color: "var(--color-accent)" }}>
             {children}
-        </h4>
+        </h3>
     );
 };
 
@@ -105,9 +102,10 @@ export const CardDescription = ({
     return (
         <p
             className={cn(
-                "mt-4 text-zinc-400 tracking-wide leading-relaxed text-sm",
+                "mt-4 tracking-wide leading-relaxed text-[1.1rem]",
                 className
             )}
+            style={{ color: "rgba(255, 255, 255, 0.7)" }}
         >
             {children}
         </p>

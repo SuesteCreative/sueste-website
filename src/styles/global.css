@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@source "../";
 
 @theme {
   --animate-meteor-effect: meteor 5s linear infinite;

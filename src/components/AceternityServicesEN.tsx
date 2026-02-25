@@ -2,7 +2,7 @@ import { HoverEffect } from "./ui/card-hover-effect";
 
 export const AceternityServicesEN = () => {
     return (
-        <div className="max-w-5xl mx-auto px-8">
+        <div className="w-full">
             <HoverEffect items={services} />
         </div>
     );
