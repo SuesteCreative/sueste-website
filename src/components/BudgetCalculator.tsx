@@ -542,15 +542,16 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                     <div className="calc-step-group">
                         {pricingData.services.map((service: any, idx) => renderServiceCard(service, idx))}
                     </div>
+                </div>
 
-                    {/* ADDONS - Now wrapped in a card */}
-                    <motion.div
-                        className="addons-section glass-panel"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: 0.6 }}
-                        style={{ marginTop: '2rem' }}
-                    >
+                {/* ADDONS - Now a direct child of grid */}
+                <motion.div
+                    className="addons-card-row"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.6 }}
+                >
+                    <div className="addons-section glass-panel">
                         <h3 className="section-title" style={{ marginTop: 0 }}>{t.addonsTitle}</h3>
                         <div className="addons-grid">
                             {pricingData.global_addons.map((addon: any) => {
@@ -576,115 +577,113 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                                 );
                             })}
                         </div>
-                    </motion.div>
+                    </div>
+                </motion.div>
 
-                    {/* DOCKING AREA: Removed spacer in favor of liquid merge */}
-
-                    {/* SUBMISSION FORM - Now inside the right column for desktop follow-through */}
-                    <div className={`calc-form-container ${isMergedWithForm ? 'is-merged' : ''}`}>
-                        <div className="calc-form-area">
-                            <motion.form
-                                id="budget-form-ref"
-                                className="quote-form glass-panel"
-                                onSubmit={handleSubmit}
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.5, delay: 0.8 }}
-                            >
-                                {/* If merged (mobile), show the sticky content inside the form card at the top */}
-                                <AnimatePresence>
-                                    {(isMergedWithForm && typeof window !== 'undefined' && window.innerWidth <= 1024) && (
-                                        <motion.div
-                                            initial={{ opacity: 0, y: -20 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            exit={{ opacity: 0, y: -20 }}
-                                            className="merged-estimate-header"
-                                        >
-                                            <div className="estimate-shrink-content">
-                                                <span className="estimate-label-inline">
-                                                    {hasStartingAt ? t.startingAt : t.estimate}
-                                                </span>
-                                                <div className="estimate-value-wrapper">
-                                                    <span className="estimate-value">{animatedTotal.toLocaleString('pt-PT')}</span>
-                                                    <span className="estimate-currency">€</span>
-                                                    <AnimatePresence>
-                                                        {marginBase > 0 && (
-                                                            <motion.span
-                                                                initial={{ opacity: 0, x: -10 }}
-                                                                animate={{ opacity: 1, x: 0 }}
-                                                                exit={{ opacity: 0, x: -10 }}
-                                                                className="estimate-iva"
-                                                            >
-                                                                + IVA
-                                                            </motion.span>
-                                                        )}
-                                                    </AnimatePresence>
-                                                </div>
-                                            </div>
-                                            <button
-                                                type="button"
-                                                className="btn-clear"
-                                                onClick={clearBudget}
-                                                disabled={marginBase === 0}
-                                            >
-                                                <Trash2 size={16} />
-                                            </button>
-                                        </motion.div>
-                                    )}
-                                </AnimatePresence>
-
-                                <h3 className="form-title">{t.yourDetails}</h3>
-
-                                <div className="form-row pair">
-                                    <div className="input-group">
-                                        <input type="text" name="name" required placeholder=" " value={formState.name} onChange={handleInputChange} />
-                                        <label>{t.name}</label>
-                                    </div>
-                                    <div className="input-group">
-                                        <input type="email" name="email" required placeholder=" " value={formState.email} onChange={handleInputChange} />
-                                        <label>Email</label>
-                                    </div>
-                                </div>
-
-                                <div className="form-row pair">
-                                    <div className="input-group">
-                                        <input type="text" name="company" required placeholder=" " value={formState.company} onChange={handleInputChange} />
-                                        <label>{t.company}</label>
-                                    </div>
-                                    <div className="input-group">
-                                        <input type="text" name="deadline" required placeholder=" " value={formState.deadline} onChange={handleInputChange} />
-                                        <label>{t.deadline}</label>
-                                    </div>
-                                </div>
-
-                                <div className="form-row full">
-                                    <div className="input-group">
-                                        <textarea name="message" placeholder=" " value={formState.message} onChange={handleInputChange} rows={3}></textarea>
-                                        <label>{t.msgOpt}</label>
-                                    </div>
-                                </div>
-
-                                <input type="text" name="honey" style={{ display: 'none' }} value={formState.honey} onChange={handleInputChange} aria-hidden="true" />
-
-                                {status.msg && (
+                {/* SUBMISSION FORM - Now a direct child of grid */}
+                <div className={`calc-form-container ${isMergedWithForm ? 'is-merged' : ''}`}>
+                    <div className="calc-form-area">
+                        <motion.form
+                            id="budget-form-ref"
+                            className="quote-form glass-panel"
+                            onSubmit={handleSubmit}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: 0.8 }}
+                        >
+                            {/* If merged (mobile), show the sticky content inside the form card at the top */}
+                            <AnimatePresence>
+                                {(isMergedWithForm && typeof window !== 'undefined' && window.innerWidth <= 1024) && (
                                     <motion.div
-                                        initial={{ opacity: 0, height: 0 }}
-                                        animate={{ opacity: 1, height: 'auto' }}
-                                        className={`form-status ${status.type}`}
+                                        initial={{ opacity: 0, y: -20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -20 }}
+                                        className="merged-estimate-header"
                                     >
-                                        {status.msg}
+                                        <div className="estimate-shrink-content">
+                                            <span className="estimate-label-inline">
+                                                {hasStartingAt ? t.startingAt : t.estimate}
+                                            </span>
+                                            <div className="estimate-value-wrapper">
+                                                <span className="estimate-value">{animatedTotal.toLocaleString('pt-PT')}</span>
+                                                <span className="estimate-currency">€</span>
+                                                <AnimatePresence>
+                                                    {marginBase > 0 && (
+                                                        <motion.span
+                                                            initial={{ opacity: 0, x: -10 }}
+                                                            animate={{ opacity: 1, x: 0 }}
+                                                            exit={{ opacity: 0, x: -10 }}
+                                                            className="estimate-iva"
+                                                        >
+                                                            + IVA
+                                                        </motion.span>
+                                                    )}
+                                                </AnimatePresence>
+                                            </div>
+                                        </div>
+                                        <button
+                                            type="button"
+                                            className="btn-clear"
+                                            onClick={clearBudget}
+                                            disabled={marginBase === 0}
+                                        >
+                                            <Trash2 size={16} />
+                                        </button>
                                     </motion.div>
                                 )}
+                            </AnimatePresence>
 
-                                <button type="submit" className="submit-btn" disabled={isSubmitting || marginBase === 0}>
-                                    {isSubmitting ? (
-                                        <span className="sending"><Spinner /> {t.sending}</span>
-                                    ) : (
-                                        <span className="sending">{t.send} <Send size={18} /></span>
-                                    )}
-                                </button>
-                            </motion.form>
-                        </div>
+                            <h3 className="form-title">{t.yourDetails}</h3>
+
+                            <div className="form-row pair">
+                                <div className="input-group">
+                                    <input type="text" name="name" required placeholder=" " value={formState.name} onChange={handleInputChange} />
+                                    <label>{t.name}</label>
+                                </div>
+                                <div className="input-group">
+                                    <input type="email" name="email" required placeholder=" " value={formState.email} onChange={handleInputChange} />
+                                    <label>Email</label>
+                                </div>
+                            </div>
+
+                            <div className="form-row pair">
+                                <div className="input-group">
+                                    <input type="text" name="company" required placeholder=" " value={formState.company} onChange={handleInputChange} />
+                                    <label>{t.company}</label>
+                                </div>
+                                <div className="input-group">
+                                    <input type="text" name="deadline" required placeholder=" " value={formState.deadline} onChange={handleInputChange} />
+                                    <label>{t.deadline}</label>
+                                </div>
+                            </div>
+
+                            <div className="form-row full">
+                                <div className="input-group">
+                                    <textarea name="message" placeholder=" " value={formState.message} onChange={handleInputChange} rows={3}></textarea>
+                                    <label>{t.msgOpt}</label>
+                                </div>
+                            </div>
+
+                            <input type="text" name="honey" style={{ display: 'none' }} value={formState.honey} onChange={handleInputChange} aria-hidden="true" />
+
+                            {status.msg && (
+                                <motion.div
+                                    initial={{ opacity: 0, height: 0 }}
+                                    animate={{ opacity: 1, height: 'auto' }}
+                                    className={`form-status ${status.type}`}
+                                >
+                                    {status.msg}
+                                </motion.div>
+                            )}
+
+                            <button type="submit" className="submit-btn" disabled={isSubmitting || marginBase === 0}>
+                                {isSubmitting ? (
+                                    <span className="sending"><Spinner /> {t.sending}</span>
+                                ) : (
+                                    <span className="sending">{t.send} <Send size={18} /></span>
+                                )}
+                            </button>
+                        </motion.form>
                     </div>
                 </div>
             </div>
