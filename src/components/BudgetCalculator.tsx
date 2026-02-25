@@ -501,11 +501,11 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                             background: (isMergedWithForm && !isStickyMobile) ? 'rgba(56, 189, 248, 0.05)' : 'rgba(255, 255, 255, 0.03)',
                         }}
                         transition={{
-                            height: { type: "spring", stiffness: 200, damping: 25 },
-                            width: { type: "spring", stiffness: 200, damping: 25 },
+                            height: { type: "tween", ease: [0.16, 1, 0.3, 1], duration: 0.5 },
+                            width: { type: "tween", ease: [0.16, 1, 0.3, 1], duration: 0.5 },
                             padding: { duration: 0.3 },
                             gap: { duration: 0.3 },
-                            layout: { type: "spring", stiffness: 250, damping: 30 }
+                            layout: { type: "tween", ease: [0.16, 1, 0.3, 1], duration: 0.5 }
                         }}
                     >
                         {!shouldCollapse && (
