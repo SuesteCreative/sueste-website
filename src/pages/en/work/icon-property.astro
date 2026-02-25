@@ -1,0 +1,134 @@
+---
+import ProjectLayout from "../../../layouts/ProjectLayout.astro";
+import Section from "../../../components/Section.astro";
+---
+
+<ProjectLayout
+    title="ICON Property"
+    category="Full Digital Presence"
+    client="ICON Property"
+    year="2025"
+    description="Real estate digital presence revamp focused on attracting and capturing high-value leads."
+    heroImage="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=1600"
+    lang="en"
+    metrics={[
+        { label: "Qualified Leads", value: "+12k" },
+        { label: "Acquisition Cost", value: "-45%" },
+        { label: "Global ROI", value: "320%" },
+    ]}
+>
+    <div class="container project-content-grid">
+        <div class="project-media project-media-left" data-reveal>
+            <img
+                src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=1000"
+                alt="Luxury Real Estate Mansion"
+                class="rounded-xl glass-panel p-2"
+            />
+        </div>
+
+        <div class="project-text-block" data-reveal class="reveal-delay-1">
+            <h2>Holistic Presence</h2>
+            <p>
+                For a real estate company operating in the luxury and high-yield
+                investment niche, a static digital presence was insufficient.
+                ICON Property needed a reliable, technological, and elegant
+                ecosystem.
+            </p>
+            <p>
+                We built the brand from its core (branding) to its visual
+                interface in the online real estate market (website). In
+                parallel, we designed automated funnels for contact acquisition.
+            </p>
+        </div>
+
+        <div class="project-full-media mt-24 project-text-block" data-reveal>
+            <h2>Omnichannel Strategy</h2>
+            <p>
+                The focus on Performance Metrics completely changed ICON's
+                customer acquisition. We reduced visual noise and launched
+                targeted campaigns integrated with the new real estate portal,
+                built from scratch by our engineering team.
+            </p>
+        </div>
+
+        <div
+            class="project-media project-media-right"
+            style="grid-column: 1 / -1; margin-top: 2rem;"
+            data-reveal
+        >
+            <img
+                src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1600"
+                alt="Corporate architectural building reflecting digital presence"
+                class="rounded-2xl glass-panel p-2 w-full"
+            />
+        </div>
+    </div>
+</ProjectLayout>
+
+<style>
+    .project-content-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+        margin-top: 4rem;
+    }
+
+    .project-text-block {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .project-text-block h2 {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: #fff;
+        margin-bottom: 1rem;
+        position: relative;
+        display: inline-block;
+    }
+
+    .project-text-block h2::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 60px;
+        height: 4px;
+        background: #38bdf8;
+        border-radius: 2px;
+    }
+
+    .project-text-block p {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    .project-media img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        transition: transform 0.8s ease;
+    }
+
+    .project-media:hover img {
+        transform: scale(1.02);
+    }
+
+    .project-full-media {
+        grid-column: 1 / -1;
+    }
+
+    @media (max-width: 900px) {
+        .project-content-grid {
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+
+        .project-media-left {
+            order: 1;
+        }
+    }
+</style>

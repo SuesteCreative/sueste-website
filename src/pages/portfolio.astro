@@ -1,25 +1,89 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Navbar from '../components/Navbar.astro';
-import Footer from '../components/Footer.astro';
-import Section from '../components/Section.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import Section from "../components/Section.astro";
 ---
 
-<BaseLayout title="Portfólio" description="Veja os nossos projetos e casos de sucesso.">
+<BaseLayout
+  title="Portfólio"
+  description="Veja os nossos projetos e casos de sucesso."
+>
   <Navbar />
   <main class="portfolio-page">
-    <Section title="O Nosso Trabalho" subtitle="Uma seleção de projetos onde a criatividade encontra a estratégia.">
+    <Section
+      title="O Nosso Trabalho"
+      subtitle="Uma seleção de projetos onde a criatividade encontra a estratégia."
+    >
       <div class="portfolio-grid">
-        {[1, 2, 3, 4].map((item) => (
-          <div class="portfolio-card glass" data-reveal class={`reveal-delay-${item}`}>
-            <div class="card-image"></div>
-            <div class="card-info">
-              <span>Website</span>
-              <h3>Projeto Exemplo {item}</h3>
-              <p>Uma breve descrição do impacto e inovação deste projeto.</p>
-            </div>
+        <a
+          href="/portfolio/maritima-alvor"
+          class="portfolio-card glass"
+          data-reveal
+        >
+          <div
+            class="card-image"
+            style="background-image: url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&q=80&w=800'); background-size: cover; background-position: center;"
+          >
+            <div class="card-overlay"></div>
           </div>
-        ))}
+          <div class="card-info">
+            <span>Social Media & Content</span>
+            <h3>Marítima Alvor</h3>
+            <p>
+              Estratégia completa de redes sociais e produção de conteúdos de
+              alta taxa de engagement.
+            </p>
+          </div>
+        </a>
+
+        <a
+          href="/portfolio/mental8work"
+          class="portfolio-card glass"
+          data-reveal
+          class="reveal-delay-2"
+        >
+          <div
+            class="card-image"
+            style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800'); background-size: cover; background-position: center;"
+          >
+            <div class="card-overlay"></div>
+          </div>
+          <div class="card-info">
+            <span>Web Design & UX</span>
+            <h3>Mental8work</h3>
+            <p>
+              Plataforma imersiva de suporte a soluções empresariais em saúde
+              mental, maximizando a eficiência.
+            </p>
+          </div>
+        </a>
+
+        <a
+          href="/portfolio/icon-property"
+          class="portfolio-card glass"
+          data-reveal
+          class="reveal-delay-3"
+          style="grid-column: 1 / -1;"
+        >
+          <div
+            class="card-image"
+            style="background-image: url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=1600'); background-size: cover; background-position: center; height: 400px;"
+          >
+            <div class="card-overlay"></div>
+          </div>
+          <div
+            class="card-info"
+            style="display: flex; flex-direction: column; justify-content: flex-end; position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%);"
+          >
+            <span>Full Digital Presence</span>
+            <h3>ICON Property</h3>
+            <p>
+              Renovação da presença digital imobiliária focada na atração e
+              captação de leads de alto valor.
+            </p>
+          </div>
+        </a>
       </div>
     </Section>
   </main>
@@ -27,8 +91,10 @@ import Section from '../components/Section.astro';
 </BaseLayout>
 
 <style>
-  .portfolio-page { padding-top: 80px; }
-  
+  .portfolio-page {
+    padding-top: 80px;
+  }
+
   .portfolio-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -76,6 +142,8 @@ import Section from '../components/Section.astro';
   }
 
   @media (max-width: 768px) {
-    .portfolio-grid { grid-template-columns: 1fr; }
+    .portfolio-grid {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

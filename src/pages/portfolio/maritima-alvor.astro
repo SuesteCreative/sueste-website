@@ -1,0 +1,193 @@
+---
+import ProjectLayout from "../../layouts/ProjectLayout.astro";
+import Section from "../../components/Section.astro";
+---
+
+<ProjectLayout
+    title="Marítima Alvor"
+    category="Social Media & Content"
+    client="Marítima Alvor"
+    year="2023 - Presente"
+    description="Uma estratégia completa de redes sociais e produção de conteúdos no coração do Algarve."
+    heroImage="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&q=80&w=1600"
+    lang="pt"
+    metrics={[
+        { label: "Engagement Rate", value: "+140%" },
+        { label: "Reach Orgânico", value: "+210%" },
+        { label: "Seguidores", value: "+5k" },
+    ]}
+>
+    <div class="container project-content-grid">
+        <div class="project-text-block" data-reveal>
+            <h2>O Desafio</h2>
+            <p>
+                A Marítima Alvor, uma das referências náuticas e de turismo do
+                Algarve, necessitava de uma presença digital que fizesse jus à
+                qualidade e à imersão das suas experiências no mar.
+            </p>
+            <p>
+                O principal desafio foi transformar os serviços num "lifestyle",
+                através de uma abordagem orientada para os sentimentos e para a
+                exclusividade da marca.
+            </p>
+        </div>
+
+        <div
+            class="project-media project-media-right"
+            data-reveal
+            class="reveal-delay-1"
+        >
+            <img
+                src="https://images.unsplash.com/photo-1534440058864-4dccf1423cf9?auto=format&fit=crop&q=80&w=1000"
+                alt="Alvor coast social media shot"
+                class="rounded-xl glass-panel p-2"
+            />
+        </div>
+
+        <div class="project-media project-media-left mt-16" data-reveal>
+            <img
+                src="https://images.unsplash.com/photo-1506544777-64cfbea50616?auto=format&fit=crop&q=80&w=1000"
+                alt="Marítima lifestyle photography"
+                class="rounded-xl glass-panel p-2"
+            />
+        </div>
+
+        <div
+            class="project-text-block mt-16"
+            data-reveal
+            class="reveal-delay-1"
+        >
+            <h2>A Solução</h2>
+            <p>
+                Redesenhámos completamente a comunicação através do <strong
+                    >Instagram e Facebook</strong
+                >, recorrendo a campanhas fotográficas dedicadas e captação de
+                imagem, bem como produção de Reels de alta performance centrados
+                na estética mediterrânica e ritmos dinâmicos de turismo.
+            </p>
+            <ul>
+                <li>
+                    Sessões fotográficas focadas em lifestyle e experiência do
+                    cliente.
+                </li>
+                <li>
+                    Gestão dedicada da comunidade e crescimento de embaixadores
+                    (UGC).
+                </li>
+                <li>
+                    Edição rítmica e de drone em vídeos curtos (&lt;15s) para
+                    maximizar o Discovery de Reels.
+                </li>
+            </ul>
+        </div>
+
+        <div class="project-full-media mt-24" data-reveal>
+            <video
+                autoplay
+                loop
+                muted
+                playsinline
+                class="rounded-2xl glass-panel w-full"
+                style="padding: 0.5rem;"
+            >
+                <!-- Placeholder video from coverr/pexels -->
+                <source
+                    src="https://player.vimeo.com/external/498216173.sd.mp4?s=d0fb5b6e22f87a3cb1d4fbeb7f12ac26ddafb5fb&profile_id=165&oauth2_token_id=57447761"
+                    type="video/mp4"
+                />
+                O seu navegador não suporta este vídeo.
+            </video>
+        </div>
+    </div>
+</ProjectLayout>
+
+<style>
+    .project-content-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+        margin-top: 4rem;
+    }
+
+    .project-text-block {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .project-text-block h2 {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: #fff;
+        margin-bottom: 1rem;
+        position: relative;
+        display: inline-block;
+    }
+
+    .project-text-block h2::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 60px;
+        height: 4px;
+        background: #38bdf8;
+        border-radius: 2px;
+    }
+
+    .project-text-block p {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    .project-text-block ul {
+        list-style-type: none;
+        padding: 0;
+        margin-top: 1rem;
+    }
+
+    .project-text-block li {
+        font-size: 1.1rem;
+        color: rgba(255, 255, 255, 0.8);
+        position: relative;
+        padding-left: 1.5rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .project-text-block li::before {
+        content: "→";
+        position: absolute;
+        left: 0;
+        color: #38bdf8;
+        font-weight: bold;
+    }
+
+    .project-media img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        transition: transform 0.8s ease;
+    }
+
+    .project-media:hover img {
+        transform: scale(1.02);
+    }
+
+    .project-full-media {
+        grid-column: 1 / -1;
+    }
+
+    @media (max-width: 900px) {
+        .project-content-grid {
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+
+        .project-media-left {
+            order: -1; /* Move images up on mobile depending on logic */
+            margin-top: 0;
+        }
+    }
+</style>

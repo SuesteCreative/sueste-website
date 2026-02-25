@@ -1,0 +1,306 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import Section from "../components/Section.astro";
+
+interface Props {
+    title: string;
+    category: string;
+    client: string;
+    year: string;
+    description: string;
+    heroImage: string;
+    lang?: string;
+    metrics?: { label: string; value: string }[];
+}
+
+const {
+    title,
+    category,
+    client,
+    year,
+    description,
+    heroImage,
+    lang = "pt",
+    metrics,
+} = Astro.props;
+---
+
+<BaseLayout
+    title={`${title} | Portfólio`}
+    description={description}
+    lang={lang}
+>
+    <Navbar />
+
+    <main class="project-page">
+        <!-- Hero Section -->
+        <section class="project-hero">
+            <div
+                class="hero-bg"
+                style={`background-image: url('${heroImage}');`}
+            >
+            </div>
+            <div class="hero-overlay"></div>
+
+            <div class="container hero-content">
+                <div class="hero-text" data-reveal>
+                    <span class="category">{category}</span>
+                    <h1>{title}</h1>
+                    <p class="lead-desc">{description}</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Project Metadata -->
+        <Section className="project-meta-section">
+            <div class="meta-grid" data-reveal>
+                <div class="meta-item">
+                    <span class="meta-label"
+                        >{lang === "pt" ? "Cliente" : "Client"}</span
+                    >
+                    <span class="meta-value">{client}</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label"
+                        >{lang === "pt" ? "Serviço" : "Service"}</span
+                    >
+                    <span class="meta-value">{category}</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label"
+                        >{lang === "pt" ? "Ano" : "Year"}</span
+                    >
+                    <span class="meta-value">{year}</span>
+                </div>
+            </div>
+
+            {
+                metrics && metrics.length > 0 && (
+                    <div
+                        class="metrics-container"
+                        data-reveal
+                        class="reveal-delay-1"
+                    >
+                        {metrics.map((m) => (
+                            <div class="metric-box glass-panel">
+                                <span class="metric-number">{m.value}</span>
+                                <span class="metric-name">{m.label}</span>
+                            </div>
+                        ))}
+                    </div>
+                )
+            }
+        </Section>
+
+        <!-- Main Content Slot -->
+        <div class="project-body">
+            <slot />
+        </div>
+
+        <!-- Next Project / Call to Action -->
+        <Section className="project-cta-section" dark>
+            <div class="cta-inner" data-reveal>
+                <h2>
+                    {
+                        lang === "pt"
+                            ? "Pronto para elevar a sua marca?"
+                            : "Ready to elevate your brand?"
+                    }
+                </h2>
+                <a
+                    href={lang === "pt" ? "/contacto" : "/en/contact"}
+                    class="btn btn-primary mt-8 inline-block"
+                >
+                    {lang === "pt" ? "Iniciar Projeto" : "Start a Project"}
+                </a>
+            </div>
+        </Section>
+    </main>
+
+    <Footer />
+</BaseLayout>
+
+<style>
+    .project-page {
+        /* No padding top because we want the hero to bleed behind the transparent navbar */
+        min-height: 100vh;
+    }
+
+    .project-hero {
+        position: relative;
+        height: 80vh;
+        min-height: 600px;
+        display: flex;
+        align-items: flex-end;
+        padding-bottom: 4rem;
+    }
+
+    .hero-bg {
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed; /* Parallax effect */
+        z-index: 0;
+    }
+
+    .hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            to top,
+            #000 0%,
+            rgba(0, 0, 0, 0.5) 40%,
+            rgba(0, 0, 0, 0.1) 100%
+        );
+        z-index: 1;
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+    }
+
+    .hero-text {
+        max-width: 800px;
+    }
+
+    .category {
+        display: inline-block;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        color: #38bdf8;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        background: rgba(56, 189, 248, 0.1);
+        padding: 0.5rem 1rem;
+        border-radius: 50px;
+        border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+
+    .hero-text h1 {
+        font-size: 4.5rem;
+        font-weight: 900;
+        line-height: 1.1;
+        margin-bottom: 1.5rem;
+        color: #fff;
+        text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    }
+
+    .lead-desc {
+        font-size: 1.5rem;
+        color: rgba(255, 255, 255, 0.9);
+        line-height: 1.6;
+        max-width: 700px;
+    }
+
+    /* Meta Section */
+    .meta-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+        padding-bottom: 4rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        margin-bottom: 4rem;
+    }
+
+    .meta-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .meta-label {
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: rgba(255, 255, 255, 0.5);
+        font-weight: 600;
+    }
+
+    .meta-value {
+        font-size: 1.25rem;
+        color: #fff;
+        font-weight: 500;
+    }
+
+    .metrics-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+    }
+
+    .metric-box {
+        padding: 3rem 2rem;
+        text-align: center;
+        border-radius: 24px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.4s ease;
+    }
+
+    .metric-box:hover {
+        transform: translateY(-5px);
+    }
+
+    .metric-number {
+        font-size: 4rem;
+        font-weight: 900;
+        line-height: 1;
+        margin-bottom: 0.5rem;
+        background: linear-gradient(135deg, #38bdf8 0%, #2563eb 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .metric-name {
+        font-size: 1.1rem;
+        color: rgba(255, 255, 255, 0.7);
+        font-weight: 500;
+    }
+
+    .project-body {
+        padding-bottom: 4rem;
+    }
+
+    .cta-inner {
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .cta-inner h2 {
+        font-size: 3rem;
+    }
+
+    @media (max-width: 768px) {
+        .project-hero {
+            height: 70vh;
+            min-height: 500px;
+        }
+
+        .hero-text h1 {
+            font-size: 2.5rem;
+        }
+
+        .lead-desc {
+            font-size: 1.2rem;
+        }
+
+        .meta-grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .metric-number {
+            font-size: 3rem;
+        }
+    }
+</style>

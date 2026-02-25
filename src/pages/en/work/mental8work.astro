@@ -1,0 +1,123 @@
+---
+import ProjectLayout from "../../../layouts/ProjectLayout.astro";
+import Section from "../../../components/Section.astro";
+---
+
+<ProjectLayout
+    title="Mental8work"
+    category="Web Design & UX"
+    client="Mental8work"
+    year="2024"
+    description="Immersive platform supporting corporate mental health solutions, maximizing efficiency."
+    heroImage="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1600"
+    lang="en"
+    metrics={[
+        { label: "Design System", value: "Complex" },
+        { label: "Performance", value: "A+" },
+        { label: "UX Conversion", value: "+85%" },
+    ]}
+>
+    <div class="container project-content-grid">
+        <div class="project-text-block" data-reveal>
+            <h2>Health and Performance</h2>
+            <p>
+                Mental8work operates at the frontier of corporate performance
+                through mental well-being. As such, the information architecture
+                needed to translate medical science into a transparent, calm,
+                and inviting B2B process.
+            </p>
+        </div>
+
+        <div
+            class="project-media project-media-right"
+            data-reveal
+            class="reveal-delay-1"
+        >
+            <img
+                src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&q=80&w=1000"
+                alt="Corporate health consulting"
+                class="rounded-xl glass-panel p-2"
+            />
+        </div>
+
+        <!-- Additional full width section inside the grid -->
+        <div class="project-full-media mt-24 project-text-block" data-reveal>
+            <h2>Design Thinking and Interface</h2>
+            <p>
+                Transition fluidity was our main focus. Through Framer Motion
+                and native web technologies, we achieved the true feel of a
+                premium consulting portal, equipped with progressively embedded
+                forms (avoiding any cognitive overload to the executives).
+            </p>
+            <img
+                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1600"
+                alt="Data dashboard and UI metrics"
+                class="rounded-2xl glass-panel p-2 mt-8 w-full"
+            />
+        </div>
+    </div>
+</ProjectLayout>
+
+<style>
+    .project-content-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+        margin-top: 4rem;
+    }
+
+    .project-text-block {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .project-text-block h2 {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: #fff;
+        margin-bottom: 1rem;
+        position: relative;
+        display: inline-block;
+    }
+
+    .project-text-block h2::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 60px;
+        height: 4px;
+        background: #38bdf8;
+        border-radius: 2px;
+    }
+
+    .project-text-block p {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    .project-media img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        transition: transform 0.8s ease;
+    }
+
+    .project-media:hover img {
+        transform: scale(1.02);
+    }
+
+    .project-full-media {
+        grid-column: 1 / -1;
+    }
+
+    @media (max-width: 900px) {
+        .project-content-grid {
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+    }
+</style>
