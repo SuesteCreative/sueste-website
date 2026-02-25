@@ -121,7 +121,12 @@
     const heroOverlay = document.querySelector(".hero-overlay");
 
     // Start completely hidden
-    gsap.set(heroOverlay, { opacity: 0, y: 60, scale: 0.95 });
+    gsap.set(heroOverlay, {
+      opacity: 0,
+      y: 80,
+      scale: 0.9,
+      filter: "blur(10px)",
+    });
 
     // Animate Hero Text revealing natively ON SCROLL, then hiding
     gsap
@@ -137,13 +142,16 @@
         opacity: 1,
         y: 0,
         scale: 1,
-        duration: 0.2,
+        filter: "blur(0px)",
+        duration: 0.25,
         ease: "power2.out",
       }) // Reveal during first 20%
-      .to(heroOverlay, { opacity: 1, duration: 0.5 }) // Hold
+      .to(heroOverlay, { opacity: 1, duration: 0.45 }) // Hold
       .to(heroOverlay, {
         opacity: 0,
-        y: -100,
+        y: -150,
+        scale: 1.05,
+        filter: "blur(15px)",
         duration: 0.3,
         ease: "power2.in",
       }); // Fade out
