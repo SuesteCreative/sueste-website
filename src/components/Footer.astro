@@ -7,149 +7,204 @@ const year = new Date().getFullYear();
 ---
 
 <footer class="footer">
-  <div class="container footer-content">
-    <div class="footer-brand">
-      <a href="/" class="logo">
-        <img
-          src="/images/logo-white-vert.webp"
-          alt="Sueste Creative Logo"
-          class="footer-logo-img"
-        />
-      </a>
-      <p>{t("hero.subheadline")}</p>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="logo">
+          <img
+            src="/images/logo-white-hor.webp"
+            alt="Sueste Creative Logo"
+            class="footer-logo-img"
+          />
+        </a>
+        <p class="brand-description">{t("hero.subheadline")}</p>
+        <div class="footer-contact-info">
+          <p>Pct. Fernando Valle, Lisboa</p>
+          <a href="tel:+351965494727" class="phone-link">+351 965 494 727</a>
+          <a href="mailto:info@sueste-creative.pt" class="email-link"
+            >info@sueste-creative.pt</a
+          >
+        </div>
+      </div>
+
+      <div class="footer-nav-columns">
+        <div class="link-group">
+          <h4>Sueste</h4>
+          <ul class="footer-list">
+            <li>
+              <a href={lang === "pt" ? "/sobre" : "/en/about"}
+                >{t("nav.about")}</a>
+            </li>
+            <li>
+              <a href={lang === "pt" ? "/servicos" : "/en/services"}
+                >{t("nav.services")}</a>
+            </li>
+            <li>
+              <a href={lang === "pt" ? "/portfolio" : "/en/work"}
+                >{t("nav.work")}</a>
+            </li>
+            <li>
+              <a href={lang === "pt" ? "/contacto" : "/en/contact"}
+                >{t("nav.contact")}</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="link-group">
+          <h4>{t("footer.socials")}</h4>
+          <ul class="footer-list">
+            <li>
+              <a
+                href="https://www.instagram.com/sueste.agency/"
+                target="_blank"
+                rel="noopener noreferrer">Instagram</a>
+            </li>
+            <li>
+              <a
+                href="https://www.facebook.com/sueste.agency"
+                target="_blank"
+                rel="noopener noreferrer">Facebook</a>
+            </li>
+            <li>
+              <a
+                href="https://linkedin.com/company/sueste-creative"
+                target="_blank"
+                rel="noopener noreferrer">LinkedIn</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="link-group">
+          <h4>Legal</h4>
+          <ul class="footer-list">
+            <li>
+              <a href={lang === "pt" ? "/privacidade" : "/en/privacy"}
+                >{t("footer.privacy")}</a>
+            </li>
+            <li>
+              <a href={lang === "pt" ? "/termos" : "/en/terms"}
+                >{t("footer.terms")}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
 
-    <div class="footer-links">
-      <div class="link-group">
-        <h4>Sueste</h4>
-        <a href={lang === "pt" ? "/sobre" : "/en/about"}>{t("nav.about")}</a>
-        <a href={lang === "pt" ? "/servicos" : "/en/services"}
-          >{t("nav.services")}</a
-        >
-        <a href={lang === "pt" ? "/portfolio" : "/en/work"}>{t("nav.work")}</a>
-      </div>
-
-      <div class="link-group">
-        <h4>{t("footer.contact")}</h4>
-        <p class="footer-text">Pct. Fernando Valle, Lisboa</p>
-        <a href="tel:+351965494727" class="footer-text">+351 965 494 727</a>
-      </div>
-
-      <div class="link-group">
-        <h4>{t("footer.socials")}</h4>
-        <a
-          href="https://www.instagram.com/sueste.agency/"
-          target="_blank"
-          rel="noopener noreferrer">Instagram</a
-        >
-        <a
-          href="https://www.facebook.com/sueste.agency"
-          target="_blank"
-          rel="noopener noreferrer">Facebook</a
-        >
-      </div>
-
-      <div class="link-group">
-        <h4>Legal</h4>
-        <a href={lang === "pt" ? "/privacidade" : "/en/privacy"}
-          >{t("footer.privacy")}</a
-        >
-        <a href={lang === "pt" ? "/termos" : "/en/terms"}>{t("footer.terms")}</a
-        >
-      </div>
+    <div class="footer-bottom">
+      <p>&copy; {year} Sueste Creative. {t("footer.rights")}</p>
     </div>
-  </div>
-
-  <div class="container footer-bottom">
-    <p>&copy; {year} Sueste Creative. {t("footer.rights")}</p>
   </div>
 </footer>
 
 <style>
   .footer {
-    background-color: var(--color-bg);
-    padding: 8rem 0 2rem;
-    margin-top: 0;
+    background-color: transparent;
+    padding: 10rem 0 4rem;
+    position: relative;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
   }
 
-  .footer-content {
-    display: flex;
-    justify-content: space-between;
-    gap: 4rem;
-    margin-bottom: 4rem;
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 3fr;
+    gap: 6rem;
+    margin-bottom: 6rem;
   }
 
   .footer-brand {
-    max-width: 300px;
-  }
-
-  .footer-brand p {
-    margin-top: 1rem;
-    opacity: 0.6;
-    font-size: 0.9rem;
-    line-height: 1.6;
-  }
-
-  .footer-links {
-    display: flex;
-    gap: 4rem;
-    flex-wrap: wrap;
-  }
-
-  .link-group {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    min-width: 150px;
+    gap: 2rem;
   }
 
-  .link-group h4 {
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 0.5rem;
-    color: var(--color-accent);
+  .footer-logo-img {
+    height: 40px;
+    width: auto;
   }
 
-  .link-group a,
-  .footer-text {
+  .brand-description {
+    opacity: 0.5;
+    font-size: 1rem;
+    line-height: 1.6;
+    max-width: 320px;
+  }
+
+  .footer-contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .footer-contact-info p,
+  .footer-contact-info a {
     font-size: 0.9rem;
-    opacity: 0.7;
-    transition: all 0.3s;
+    opacity: 0.6;
+    transition: opacity 0.3s;
   }
 
-  .link-group a:hover {
+  .footer-contact-info a:hover {
     opacity: 1;
     color: var(--color-accent);
   }
 
-  .footer-text {
+  .footer-nav-columns {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .link-group h4 {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 2rem;
+    color: var(--color-accent);
+    font-weight: 800;
+  }
+
+  .footer-list {
+    list-style: none;
+    padding: 0;
     margin: 0;
-    line-height: 1.5;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .footer-list a {
+    font-size: 1rem;
+    opacity: 0.6;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+
+  .footer-list a:hover {
+    opacity: 1;
+    color: #fff;
+    padding-left: 4px;
   }
 
   .footer-bottom {
     padding-top: 2rem;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
     text-align: center;
-    font-size: 0.8rem;
-    opacity: 0.5;
-  }
-
-  .footer-logo-img {
-    height: 80px;
-    width: auto;
-    margin-bottom: 1rem;
+    font-size: 0.85rem;
+    opacity: 0.4;
   }
 
   @media (max-width: 1024px) {
-    .footer-content {
-      flex-direction: column;
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: 4rem;
+    }
+
+    .footer-nav-columns {
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
       gap: 3rem;
     }
-    .footer-links {
-      gap: 3rem;
+
+    .brand-description {
+      max-width: 100%;
     }
   }
 </style>
