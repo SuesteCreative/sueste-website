@@ -19,7 +19,7 @@ const t = useTranslations("en");
         <h1>{t("hero.headline")}</h1>
         <p>{t("hero.subheadline")}</p>
         <div
-          style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;"
+          style="display: flex; gap: 1rem; justify-content: center; margin-top: 2.5rem; flex-wrap: wrap;"
         >
           <a href="/en/services" class="btn-outline" style="min-width: 160px;"
             >Services</a
@@ -29,6 +29,13 @@ const t = useTranslations("en");
             class="btn-cta"
             style="min-width: 160px; margin: 0;">Quote</a
           >
+        </div>
+
+        <div class="scroll-indicator">
+          <span class="scroll-text">Scroll down</span>
+          <div class="mouse">
+            <div class="wheel"></div>
+          </div>
         </div>
       </div>
     </HeroScrollSequence>
@@ -111,32 +118,103 @@ const t = useTranslations("en");
   }
 
   .hero-content h1 {
-    font-size: 4.5rem;
+    font-size: 4.8rem;
     font-weight: 800;
     line-height: 1.1;
     margin-bottom: 2rem;
-    letter-spacing: -2px;
+    letter-spacing: -2.5px;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
   }
 
   .hero-content p {
-    font-size: 1.25rem;
-    opacity: 0.8;
+    font-size: 1.35rem;
+    opacity: 0.9;
     margin-bottom: 3rem;
+    font-weight: 400;
   }
 
   .btn-cta {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     background-color: var(--color-accent);
     color: white;
     padding: 1rem 2.5rem;
     border-radius: 50px;
-    font-weight: 700;
+    font-weight: 600;
     font-size: 1.1rem;
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 14px 0 rgba(0, 112, 243, 0.39);
   }
 
   .btn-cta:hover {
-    transform: scale(1.05);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 112, 243, 0.23);
+  }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: white;
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+  }
+
+  .btn-outline:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .scroll-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 6rem;
+    opacity: 0.8;
+  }
+
+  .scroll-text {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+
+  .mouse {
+    width: 26px;
+    height: 40px;
+    border-radius: 15px;
+    border: 2px solid white;
+    display: flex;
+    justify-content: center;
+    padding-top: 6px;
+  }
+
+  .wheel {
+    width: 4px;
+    height: 8px;
+    border-radius: 2px;
+    background: white;
+    animation: scroll-wheel 1.5s infinite;
+  }
+
+  @keyframes scroll-wheel {
+    0% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(12px);
+      opacity: 0;
+    }
   }
 
   .services-grid {
