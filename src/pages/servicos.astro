@@ -33,24 +33,24 @@ import Footer from "../components/Footer.astro";
         [
           {
             id: "web",
-            title: "Web Development",
+            title: "Desenvolvimento Web",
             icon: `<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/><line x1="14" y1="4" x2="10" y2="20"/></svg>`,
             desc: "Construímos infraestruturas digitais que servem como o motor do seu negócio. Do código à conversão, cada detalhe é otimizado para performance extrema e experiência de utilizador fluida.",
             features: [
               {
-                label: "Modern Stack",
+                label: "Stack Moderna",
                 val: "Astro / React / Next.js",
                 icon: "💎",
               },
               {
-                label: "High Performance",
+                label: "Alta Performance",
                 val: "Scores 95+ LightHouse",
                 icon: "⚡",
               },
               { label: "SEO Nativo", val: "Estrutura Semântica", icon: "🎯" },
               {
-                label: "Scalability",
-                val: "Cloud Native Architecture",
+                label: "Escalabilidade",
+                val: "Arquitetura Cloud Native",
                 icon: "🚀",
               },
             ],
@@ -58,7 +58,7 @@ import Footer from "../components/Footer.astro";
           },
           {
             id: "design",
-            title: "Design Gráfico & Branding",
+            title: "Design Gráfico & Identidade",
             icon: `<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19 7-7 3 3-7 7-3-3z"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="m2 2 5 5"/><path d="m5.2 11.7 4.2 4.2"/></svg>`,
             desc: "A sua identidade visual é o primeiro aperto de mão com o cliente. Criamos sistemas visuais coerentes e memoráveis que comunicam os seus valores de forma instantânea e profissional.",
             features: [
@@ -83,33 +83,37 @@ import Footer from "../components/Footer.astro";
           },
           {
             id: "social",
-            title: "Estratégia Social Media",
+            title: "Gestão de Redes Sociais",
             icon: `<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>`,
             desc: "Não se trata apenas de publicar, mas de criar diálogo. Transformamos a sua marca numa voz influente através de conteúdo estratégico que ressoa, retém e converte comunidades fiéis.",
             features: [
               {
-                label: "Content Creation",
+                label: "Criação de Conteúdo",
                 val: "Multiformato & Reels",
                 icon: "🎨",
               },
-              { label: "Community", val: "Gestão Ativa", icon: "🤝" },
+              { label: "Comunidade", val: "Gestão Ativa", icon: "🤝" },
               {
                 label: "Paid Media",
                 val: "Tráfego Pago Otimizado",
                 icon: "📈",
               },
-              { label: "Data Insights", val: "Relatórios de ROI", icon: "📊" },
+              {
+                label: "Análise de Dados",
+                val: "Relatórios de ROI",
+                icon: "📊",
+              },
             ],
             img: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=1600",
           },
           {
             id: "video",
-            title: "Drone & Cinematic Video",
-            icon: `<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-5c1.62-2.2 5-3 5-3"/><path d="M12 15v5s3.03-.55 5-2c2.2-1.62 3-5 3-5"/></svg>`,
+            title: "Vídeo & Fotografia Drone",
+            icon: `<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-5c1.62-2.2 5-3 5-3"/><path d="M12 15v5s3.03-.55 5-2c2.2-1.62 3-5 3-3"/></svg>`,
             desc: "Perspetivas que mudam a perceção. Utilizamos tecnologia de ponta para captar imagens aéreas e cinematográficas que elevam o valor percebido da sua marca e contam histórias impossíveis de ignorar.",
             features: [
               { label: "4K Aerial", val: "Captação com Drone FPV", icon: "🚁" },
-              { label: "Cinematography", val: "Lentes de Cinema", icon: "📽️" },
+              { label: "Cinematografia", val: "Lentes de Cinema", icon: "📽️" },
               {
                 label: "Color Grading",
                 val: "Looks Profissionais",
