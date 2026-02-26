@@ -6,6 +6,7 @@ interface Project {
     metricLabel: string;
     image: string;
     size: "small" | "large";
+    link: string;
 }
 
 const projects: Project[] = [
@@ -14,24 +15,27 @@ const projects: Project[] = [
         category: "E-Commerce & Merch",
         metric: "Web",
         metricLabel: "Shopify Store",
-        image: "/images/portfolio/desportos.png",
+        image: "/images/portfolio/desportos.jpg",
         size: "small",
+        link: "https://desportosnauticosalvor.com/",
     },
     {
         title: "Mental8Works",
         category: "Pyschology & Health",
         metric: "Sys",
         metricLabel: "Custom Backoffice",
-        image: "/images/portfolio/mental8works.png",
+        image: "/images/portfolio/mental8works.jpg",
         size: "small",
+        link: "https://www.mental8works.pt/",
     },
     {
         title: "Algo Atelier",
         category: "Architecture",
         metric: "90+",
         metricLabel: "SEO Score",
-        image: "/images/portfolio/algoatelier.png",
+        image: "/images/portfolio/algoatelier.jpg",
         size: "large",
+        link: "https://algoatelier.pt/",
     },
 ];
 
@@ -65,11 +69,37 @@ const viewAllHref = lang === "pt" ? "/portfolio" : "/en/work";
                             <h3>{project.title}</h3>
                         </div>
 
-                        <div class="analytics-box">
-                            <span class="metric-value">{project.metric}</span>
-                            <span class="metric-label">
-                                {project.metricLabel}
-                            </span>
+                        <div class="card-bottom">
+                            <div class="analytics-box">
+                                <span class="metric-value">
+                                    {project.metric}
+                                </span>
+                                <span class="metric-label">
+                                    {project.metricLabel}
+                                </span>
+                            </div>
+                            <a
+                                href={project.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="btn-project"
+                            >
+                                {lang === "pt" ? "Ver Projeto" : "View Website"}
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="16"
+                                    height="16"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                >
+                                    <line x1="5" y1="12" x2="19" y2="12" />
+                                    <polyline points="12 5 19 12 12 19" />
+                                </svg>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -208,6 +238,32 @@ const viewAllHref = lang === "pt" ? "/portfolio" : "/en/work";
         color: rgba(255, 255, 255, 0.6);
         font-weight: 500;
         margin-top: 0.25rem;
+    }
+
+    .card-bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
+
+    .btn-project {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.5rem;
+        border-radius: 50px;
+        background: rgba(255, 255, 255, 0.1);
+        color: #fff;
+        font-size: 0.9rem;
+        font-weight: 600;
+        backdrop-filter: blur(10px);
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+
+    .btn-project:hover {
+        background: rgba(56, 189, 248, 0.8);
+        transform: translateY(-2px);
     }
 
     .portfolio-footer {
