@@ -102,6 +102,33 @@ const viewAllHref = lang === "pt" ? "/portfolio" : "/en/work";
                         <div class="row-mockup-container">
                             {project.deviceType === "macbook" && (
                                 <div class="mockup-macbook inline-mockup">
+                                    <div class="hover-badge">
+                                        Hover me{" "}
+                                        <span class="cursor-icon">🖱️</span>
+                                        <svg
+                                            class="wrinkles"
+                                            width="36"
+                                            height="36"
+                                            viewBox="0 0 36 36"
+                                            fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                d="M6 18 Q16 8 30 10"
+                                                stroke="#38bdf8"
+                                                stroke-width="3"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                            />
+                                            <path
+                                                d="M12 28 Q22 18 34 22"
+                                                stroke="#38bdf8"
+                                                stroke-width="3"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                            />
+                                        </svg>
+                                    </div>
                                     <div class="macbook-screen">
                                         <div
                                             class="mockup-scroll-view"
@@ -261,6 +288,47 @@ const viewAllHref = lang === "pt" ? "/portfolio" : "/en/work";
         border-radius: 0 0 4px 4px;
         position: absolute; /* Fix notch placement */
         top: 0;
+    }
+
+    .hover-badge {
+        position: absolute;
+        top: -30px;
+        right: -30px;
+        background: rgba(56, 189, 248, 0.9);
+        color: #fff;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        transform: rotate(10deg);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        z-index: 20;
+        pointer-events: none;
+        animation: float-badge 3s ease-in-out infinite;
+    }
+
+    .wrinkles {
+        position: absolute;
+        right: -30px;
+        top: -15px;
+        transform: rotate(20deg);
+        pointer-events: none;
+    }
+
+    @keyframes float-badge {
+        0%,
+        100% {
+            transform: translateY(0) rotate(10deg);
+        }
+        50% {
+            transform: translateY(-8px) rotate(12deg);
+        }
+    }
+
+    .cursor-icon {
+        font-size: 1rem;
+        margin-left: 0.25rem;
     }
 
     /* iPad Mockup */
