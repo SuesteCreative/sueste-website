@@ -288,6 +288,23 @@ import Footer from "../components/Footer.astro";
     letter-spacing: -0.05em;
   }
 
+  .bg-number::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30vw;
+    height: 30vw;
+    background: radial-gradient(
+      circle,
+      rgba(56, 189, 248, 0.08) 0%,
+      transparent 70%
+    );
+    filter: blur(60px);
+    z-index: -1;
+  }
+
   .reverse .bg-number {
     left: auto;
     right: 0;
@@ -374,40 +391,36 @@ import Footer from "../components/Footer.astro";
     border-radius: 20px;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(255, 255, 255, 0.05);
-    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    gap: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.03);
     backdrop-filter: blur(10px);
-  }
-
-  .bento-item:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(56, 189, 248, 0.5);
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
   }
 
   .bento-item .icon {
     font-size: 2.5rem;
-    transition: transform 0.4s ease;
   }
 
-  .bento-item:hover .icon {
-    transform: scale(1.1);
+  .bento-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
   }
 
   .bento-label {
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     font-weight: 700;
     color: #71717a;
     text-transform: uppercase;
     letter-spacing: 0.15em;
+    display: block;
   }
   .bento-val {
-    font-size: 1.15rem;
-    font-weight: 600;
+    font-size: 1.25rem;
+    font-weight: 700;
     color: #fff;
+    display: block;
+    line-height: 1.2;
   }
 
   /* FINAL CTA */
@@ -617,7 +630,8 @@ import Footer from "../components/Footer.astro";
       },
     });
 
-    // Bento Stagger
+    // Bento Stagger removed - keeping them visible as requested
+    /*
     gsap.from(bentoItems, {
       y: 30,
       opacity: 0,
@@ -629,6 +643,7 @@ import Footer from "../components/Footer.astro";
         start: "top 75%",
       },
     });
+    */
   });
 
   // Final CTA Reveal
