@@ -37,9 +37,9 @@ const projects: Project[] = [
     },
     {
         title: "Algo Atelier",
-        category: "Architecture Algo Atelier",
-        metric: "90%",
-        metricLabel: "SEO Score",
+        category: "Architecture",
+        metric: "Site Dinâmico",
+        metricLabel: "98% SEO Score",
         image: "/images/portfolio/algoatelier.jpg",
         size: "large",
         link: "https://algoatelier.pt/",
@@ -457,7 +457,7 @@ const viewAllHref = lang === "pt" ? "/portfolio" : "/en/work";
     }
 
     .category {
-        font-size: 0.8rem;
+        font-size: 0.7rem;
         text-transform: uppercase;
         letter-spacing: 2px;
         color: #38bdf8;
@@ -607,7 +607,7 @@ const viewAllHref = lang === "pt" ? "/portfolio" : "/en/work";
 
             let animationId: number | null = null;
             let currentTranslateY = 0;
-            const scrollSpeed = 1.2; // pixels per frame
+            const scrollSpeed = 2.4; // Doubled speed (pixels per frame)
 
             function getScrollParams() {
                 const containerHeight = container.clientHeight;
@@ -622,7 +622,7 @@ const viewAllHref = lang === "pt" ? "/portfolio" : "/en/work";
                     const { maxTranslate } = getScrollParams();
                     if (maxTranslate >= 0) return;
 
-                    const duration = Math.abs(maxTranslate) / 100; // 100px per second
+                    const duration = Math.abs(maxTranslate) / 200; // 200px per second (doubled speed)
                     img.style.transition = `transform ${duration}s linear`;
                     img.style.transform = `translateY(${maxTranslate}px)`;
                 }

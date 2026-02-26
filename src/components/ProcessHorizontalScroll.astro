@@ -4,31 +4,35 @@ const { lang = "pt" } = Astro.props;
 const processData = [
     {
         step: "01",
-        titlePt: "Discover",
-        titleEn: "Discover",
-        descPt: "Analisamos os seus objetivos, mercado e concorrência para definir uma direção estratégica clara.",
-        descEn: "We analyze your goals, market, and competition to define a clear strategic direction.",
+        titlePt: "Discovery & Estratégia",
+        titleEn: "Discovery & Strategy",
+        descPt: "Iniciamos com uma imersão profunda no seu ecossistema. Analisamos detalhadamente os seus objetivos de negócio, o comportamento do seu público-alvo e a movimentação da concorrência para traçar um roteiro estratégico que garanta uma vantagem competitiva real.",
+        descEn: "We start with a deep immersion into your ecosystem. We analyze your business goals, target audience behavior, and competitor movements in detail to map out a strategic roadmap that ensures a real competitive edge.",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="panel-icon"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>`,
     },
     {
         step: "02",
-        titlePt: "Design",
-        titleEn: "Design",
-        descPt: "Criamos a identidade visual e o design funcional adaptado à jornada do utilizador.",
-        descEn: "We create the visual identity and functional design tailored to the user journey.",
+        titlePt: "Design & Experiência",
+        titleEn: "Design & Experience",
+        descPt: "Transformamos estratégia em interfaces memoráveis. Criamos uma identidade visual impactante e um design focado na conversão, onde cada interação é pensada para guiar o utilizador de forma fluida e intuitiva através da jornada da sua marca.",
+        descEn: "We transform strategy into memorable interfaces. We create an impactful visual identity and a conversion-focused design, where every interaction is designed to guide the user fluently and intuitively through your brand journey.",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="panel-icon"><path d="m12 19 7-7 3 3-7 7-3-3z"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="m2 2 5 5"/><path d="m5.2 11.7 4.2 4.2"/></svg>`,
     },
     {
         step: "03",
-        titlePt: "Produce",
-        titleEn: "Produce",
-        descPt: "Damos vida ao projeto com tecnologia de ponta, animações fluidas e código otimizado.",
-        descEn: "We bring the project to life with cutting-edge tech, fluid animations, and optimized code.",
+        titlePt: "Desenvolvimento & Performance",
+        titleEn: "Development & Performance",
+        descPt: "Damos vida à visão com tecnologia de última geração. O nosso desenvolvimento foca-se em código limpo, animações ultra-suaves e tempos de carregamento instantâneos, garantindo que o seu projeto não seja apenas bonito, mas tecnicamente impecável.",
+        descEn: "We bring vision to life with state-of-the-art technology. Our development focuses on clean code, ultra-smooth animations, and instant loading times, ensuring your project is not only beautiful but technically flawless.",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="panel-icon"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/><line x1="14" y1="4" x2="10" y2="20"/></svg>`,
     },
     {
         step: "04",
-        titlePt: "Deliver",
-        titleEn: "Deliver",
-        descPt: "Lançamento impecável, monitorização contínua e entrega de resultados mensuráveis.",
-        descEn: "Flawless launch, continuous monitoring, and delivery of measurable results.",
+        titlePt: "Lançamento & Resultados",
+        titleEn: "Launch & Results",
+        descPt: "O sucesso não termina no lançamento. Implementamos uma monitorização contínua de performance e SEO para assegurar que a sua presença digital continue a crescer e a entregar resultados mensuráveis, escalando o seu negócio consistentemente.",
+        descEn: "Success doesn't end at launch. We implement continuous performance and SEO monitoring to ensure your digital presence continues to grow and deliver measurable results, scaling your business consistently.",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="panel-icon"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-5c1.62-2.2 5-3 5-3"/><path d="M12 15v5s3.03-.55 5-2c2.2-1.62 3-5 3-5"/></svg>`,
     },
 ];
 ---
@@ -60,7 +64,13 @@ const processData = [
                         data-reveal
                     >
                         <div class="panel-inner">
-                            <span class="step-num">{item.step}</span>
+                            <div class="panel-header-row">
+                                <span class="step-num">{item.step}</span>
+                                <div
+                                    class="icon-container"
+                                    set:html={item.icon}
+                                />
+                            </div>
                             <div class="panel-content">
                                 <h3>
                                     {lang === "pt"
@@ -133,17 +143,49 @@ const processData = [
     }
 
     .process-panel {
-        width: 450px;
-        height: 450px;
+        width: 750px;
+        min-height: 520px;
         flex-shrink: 0;
-        border-radius: 30px;
-        padding: 3.5rem;
+        border-radius: 40px;
+        padding: 4rem;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: flex-start;
         transition: transform 0.3s ease;
         border: 1px solid rgba(255, 255, 255, 0.05);
         background: rgba(255, 255, 255, 0.02);
+        backdrop-filter: blur(20px);
+    }
+
+    .panel-header-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        width: 100%;
+        margin-bottom: 2rem;
+    }
+
+    .icon-container {
+        width: 6rem;
+        height: 6rem;
+        color: rgba(255, 255, 255, 0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.05) 0%,
+            rgba(255, 255, 255, 0) 100%
+        );
+        border-radius: 20px;
+        padding: 1.5rem;
+    }
+
+    .icon-container :global(.panel-icon) {
+        width: 100%;
+        height: 100%;
+        stroke-width: 1;
+        opacity: 0.8;
     }
 
     .step-num {
