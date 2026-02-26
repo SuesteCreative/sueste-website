@@ -1,0 +1,121 @@
+--- DEBUG FILTER ---
+Row 1: 
+      Topic: "Novo Projeto Lançado"
+      Approval: "Yes" (Pass: true)
+      Status: "Draft" (Pass: false)
+      Date: "46085.45833333333" (Pass: true)
+      Platform: "Instagram" (Pass: true)
+      OVERALL: false
+
+Row 2: 
+      Topic: "3 erros no design do site"
+      Approval: "Yes" (Pass: true)
+      Status: "Draft" (Pass: false)
+      Date: "46088.75" (Pass: true)
+      Platform: "Instagram" (Pass: true)
+      OVERALL: false
+
+Row 3: 
+      Topic: "Reunião de brainstorm"
+      Approval: "Yes" (Pass: true)
+      Status: "Draft" (Pass: false)
+      Date: "46092.4375" (Pass: true)
+      Platform: "Instagram" (Pass: true)
+      OVERALL: false
+
+Row 4: 
+      Topic: "Pacote Criação Websites"
+      Approval: "Yes" (Pass: true)
+      Status: "Draft" (Pass: false)
+      Date: "46095.58333333333" (Pass: true)
+      Platform: "Instagram" (Pass: true)
+      OVERALL: false
+
+Row 5: 
+      Topic: "O que dizem de nós"
+      Approval: "Yes" (Pass: true)
+      Status: "Draft" (Pass: false)
+      Date: "46099.72916666667" (Pass: true)
+      Platform: "Instagram" (Pass: true)
+      OVERALL: false
+
+Row 6: 
+      Topic: "1 dia no nosso escritório"
+      Approval: "Yes" (Pass: true)
+      Status: "Draft" (Pass: false)
+      Date: "46102.375" (Pass: true)
+      Platform: "Instagram" (Pass: true)
+      OVERALL: false
+
+Row 7: 
+      Topic: "Aumento de 200% tráfego"
+      Approval: "Yes" (Pass: true)
+      Status: "Draft" (Pass: false)
+      Date: "46106.79166666667" (Pass: true)
+      Platform: "Instagram" (Pass: true)
+      OVERALL: false
+
+Row 8: 
+      Topic: "Novo Projeto Lançado"
+      Approval: "Yes" (Pass: true)
+      Status: "Draft" (Pass: false)
+      Date: "46109.45833333333" (Pass: true)
+      Platform: "Instagram" (Pass: true)
+      OVERALL: false
+
+Row 9: 
+      Topic: "3 erros no design do site"
+      Approval: "Yes" (Pass: true)
+      Status: "Draft" (Pass: false)
+      Date: "46113.70833333333" (Pass: true)
+      Platform: "Instagram" (Pass: true)
+      OVERALL: false
+
+Row 10: 
+      Topic: "Reunião de brainstorm"
+      Approval: "Yes" (Pass: true)
+      Status: "Draft" (Pass: false)
+      Date: "46116.39583333333" (Pass: true)
+      Platform: "Instagram" (Pass: true)
+      OVERALL: false
+
+Row 11: 
+      Topic: "Pacote Criação Websites"
+      Approval: "Yes" (Pass: true)
+      Status: "Draft" (Pass: false)
+      Date: "46120.54166666667" (Pass: true)
+      Platform: "Instagram" (Pass: true)
+      OVERALL: false
+
+Row 12: 
+      Topic: "O que dizem de nós"
+      Approval: "Yes" (Pass: true)
+      Status: "Draft" (Pass: false)
+      Date: "46123.6875" (Pass: true)
+      Platform: "Instagram" (Pass: true)
+      OVERALL: false
+
+Row 13: 
+      Topic: "1 dia no nosso escritório"
+      Approval: "Yes" (Pass: true)
+      Status: "Draft" (Pass: false)
+      Date: "46127.33333333333" (Pass: true)
+      Platform: "Instagram" (Pass: true)
+      OVERALL: false
+
+Row 14: 
+      Topic: "Aumento de 200% tráfego"
+      Approval: "Yes" (Pass: true)
+      Status: "Draft" (Pass: false)
+      Date: "46130.75" (Pass: true)
+      Platform: "Instagram" (Pass: true)
+      OVERALL: false
+
+Row 15: 
+      Topic: "Novo Projeto Lançado"
+      Approval: "Yes" (Pass: true)
+      Status: "Draft" (Pass: false)
+      Date: "46134.41666666667" (Pass: true)
+      Platform: "Instagram" (Pass: true)
+      OVERALL: false
+

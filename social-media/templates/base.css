@@ -80,14 +80,17 @@ body.video-format {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 30px;
+    gap: 40px;
 }
 
 .hook {
     font-size: 80px;
     font-weight: 900;
-    line-height: 1.1;
+    line-height: 1.2;
     letter-spacing: -0.04em;
+    padding: 0.1em 0;
+    margin-left: -5px;
+    /* Adjust for quote marks */
     background: linear-gradient(135deg, #ffffff 0%, #a1a1aa 100%);
     -webkit-background-clip: text;
     background-clip: text;

@@ -8,6 +8,7 @@ import Section from "../components/Section.astro";
 import PortfolioLanding from "../components/PortfolioLanding.astro";
 import BentoServices from "../components/BentoServices.astro";
 import ProcessHorizontalScroll from "../components/ProcessHorizontalScroll.astro";
+import Testimonials from "../components/Testimonials.astro";
 import HeroPills from "../components/HeroPills.astro";
 import { useTranslations } from "../utils/i18n";
 
@@ -69,6 +70,8 @@ const t = useTranslations("pt");
     <Section id="process" title="" dark data-reveal>
       <ProcessHorizontalScroll lang="pt" />
     </Section>
+
+    <Testimonials lang="pt" />
 
     <Section id="cta" className="final-cta" data-reveal>
       <div class="cta-box glass reveal-delay-1" data-reveal>

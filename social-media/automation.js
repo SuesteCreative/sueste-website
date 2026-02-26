@@ -54,11 +54,15 @@ async function run() {
 
     // Filter approved posts
     const approvedPosts = rows.filter(row => {
-        const isApproved = String(row['Approval']).toLowerCase() === 'sim';
-        const isStatusApproved = String(row['Status']).toLowerCase() === 'approved';
+        const approvalVal = String(row['Approval'] || '').toLowerCase();
+        const statusVal = String(row['Status'] || '').toLowerCase();
+
+        const isApproved = approvalVal === 'sim' || approvalVal === 'yes';
+        const isStatusOk = statusVal === 'approved' || statusVal === 'active' || statusVal === 'draft';
+
         const hasDate = !!row['Publish DateTime'];
         const hasPlatform = !!row['Platform'];
-        return isApproved && isStatusApproved && hasDate && hasPlatform;
+        return isApproved && isStatusOk && hasDate && hasPlatform;
     });
 
     log(`Encontrados ${approvedPosts.length} posts aprovados para exportar.`);

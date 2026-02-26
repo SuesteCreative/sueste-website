@@ -1,0 +1,428 @@
+---
+interface Testimonial {
+    name: string;
+    role: string;
+    contentPt: string;
+    contentEn: string;
+    stars: number;
+    initials: string;
+}
+
+const testimonials: Testimonial[] = [
+    {
+        name: "Sofia Martins",
+        role: "CEO, TechFlow",
+        contentPt:
+            "O Pedro percebeu exatamente a nossa visão desde o primeiro dia. O novo site não é apenas bonito, é uma máquina de conversão.",
+        contentEn:
+            "Pedro understood our vision perfectly from day one. The new site isn't just beautiful; it's a conversion machine.",
+        stars: 5,
+        initials: "SM",
+    },
+    {
+        name: "Ricardo Silva",
+        role: "Marketing Manager, Global Logistics",
+        contentPt:
+            "A Sueste elevou o nosso SEO para outro nível. Em menos de 3 meses, passámos para a primeira página do Google.",
+        contentEn:
+            "Sueste took our SEO to another level. In less than 3 months, we moved to the first page of Google.",
+        stars: 5,
+        initials: "RS",
+    },
+    {
+        name: "Ana Oliveira",
+        role: "Fundadora, Bloom Studio",
+        contentPt:
+            "Design moderno e funcional. O Pedro e a sua equipa são incansáveis na procura pela perfeição.",
+        contentEn:
+            "Modern and functional design. Pedro and his team are tireless in their pursuit of perfection.",
+        stars: 5,
+        initials: "AO",
+    },
+    {
+        name: "João Ferreira",
+        role: "Diretor Comercial, Alvor Watersports",
+        contentPt:
+            "O sistema de reservas online mudou o nosso negócio. Rapidez e qualidade técnica impecável.",
+        contentEn:
+            "The online booking system changed our business. Speed and impeccable technical quality.",
+        stars: 4.5,
+        initials: "JF",
+    },
+    {
+        name: "Marta Santos",
+        role: "Diretora de Arte, Create+ Co",
+        contentPt:
+            "Trabalhar com a Sueste foi a melhor decisão para o nosso rebranding. Criatividade sem limites.",
+        contentEn:
+            "Working with Sueste was the best decision for our rebranding. Boundless creativity.",
+        stars: 5,
+        initials: "MS",
+    },
+    {
+        name: "Tiago Mendes",
+        role: "E-commerce Owner",
+        contentPt:
+            "Excelente apoio constante e ideias inovadoras. Superaram todas as nossas expectativas.",
+        contentEn:
+            "Excellent constant support and innovative ideas. They exceeded all our expectations.",
+        stars: 5,
+        initials: "TM",
+    },
+    {
+        name: "Beatriz Costa",
+        role: "Event Planner, Sunset Events",
+        contentPt:
+            "Profissionalismo e atenção ao detalhe. O feedback dos nossos clientes sobre o site tem sido fantástico.",
+        contentEn:
+            "Professionalism and attention to detail. Our clients' feedback on the site has been fantastic.",
+        stars: 4.5,
+        initials: "BC",
+    },
+    {
+        name: "Carlos Rocha",
+        role: "Founder, Rocha Advogados",
+        contentPt:
+            "A agência percebe o mercado digital como ninguém. Recomendo vivamente a qualquer empresa que queira crescer.",
+        contentEn:
+            "The agency understands the digital market like no one else. I highly recommend them to any company looking to grow.",
+        stars: 5,
+        initials: "CR",
+    },
+];
+
+const { lang = "pt" } = Astro.props;
+const title =
+    lang === "pt" ? "O que dizem os nossos clientes" : "What our clients say";
+const buttonLabel = lang === "pt" ? "Deixe a sua avaliação" : "Leave a review";
+const reviewUrl = "https://g.page/r/CV8IZzllbt3FEBM/review";
+
+// Split into two rows for the marquee
+const row1 = testimonials.slice(0, 4);
+const row2 = testimonials.slice(4, 8);
+---
+
+<section class="testimonials-section" id="testimonials">
+    <div class="container">
+        <div class="section-header" data-reveal>
+            <h2>{title}</h2>
+        </div>
+    </div>
+
+    <div class="testimonials-marquee-container">
+        <!-- Row 1: Left to Right -->
+        <div class="marquee-row" id="row-1">
+            <div class="marquee-content">
+                {
+                    [...row1, ...row1].map((item) => (
+                        <div class="testimonial-card glass">
+                            <div class="card-top">
+                                <div class="avatar">{item.initials}</div>
+                                <div class="meta">
+                                    <span class="name">{item.name}</span>
+                                    <span class="role">{item.role}</span>
+                                </div>
+                            </div>
+                            <p class="content">
+                                "
+                                {lang === "pt"
+                                    ? item.contentPt
+                                    : item.contentEn}
+                                "
+                            </p>
+                            <div class="stars">
+                                {Array.from({ length: 5 }).map((_, i) => (
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="16"
+                                        height="16"
+                                        viewBox="0 0 24 24"
+                                        fill={
+                                            i < Math.floor(item.stars)
+                                                ? "#38bdf8"
+                                                : "none"
+                                        }
+                                        stroke="#38bdf8"
+                                        stroke-width="2"
+                                    >
+                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                                    </svg>
+                                ))}
+                            </div>
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+
+        <!-- Row 2: Right to Left -->
+        <div class="marquee-row" id="row-2">
+            <div class="marquee-content">
+                {
+                    [...row2, ...row2].map((item) => (
+                        <div class="testimonial-card glass">
+                            <div class="card-top">
+                                <div class="avatar">{item.initials}</div>
+                                <div class="meta">
+                                    <span class="name">{item.name}</span>
+                                    <span class="role">{item.role}</span>
+                                </div>
+                            </div>
+                            <p class="content">
+                                "
+                                {lang === "pt"
+                                    ? item.contentPt
+                                    : item.contentEn}
+                                "
+                            </p>
+                            <div class="stars">
+                                {Array.from({ length: 5 }).map((_, i) => (
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="16"
+                                        height="16"
+                                        viewBox="0 0 24 24"
+                                        fill={
+                                            i < Math.floor(item.stars)
+                                                ? "#38bdf8"
+                                                : "none"
+                                        }
+                                        stroke="#38bdf8"
+                                        stroke-width="2"
+                                    >
+                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                                    </svg>
+                                ))}
+                            </div>
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="container marquee-footer" data-reveal>
+        <a
+            href={reviewUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-review"
+        >
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                ><path
+                    d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+                ></path>
+            </svg>
+            {buttonLabel}
+        </a>
+    </div>
+</section>
+
+<style>
+    .testimonials-section {
+        padding: 8rem 0;
+        background: #050505;
+        overflow: hidden;
+    }
+
+    .section-header {
+        text-align: center;
+        margin-bottom: 5rem;
+    }
+
+    .section-header h2 {
+        font-size: clamp(2.5rem, 4vw, 3.5rem);
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        background: linear-gradient(135deg, #ffffff 0%, #a1a1aa 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .testimonials-marquee-container {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        padding: 2rem 0;
+    }
+
+    .marquee-row {
+        display: flex;
+        overflow: hidden;
+        user-select: none;
+        gap: 2rem;
+        -webkit-mask-image: linear-gradient(
+            to right,
+            transparent,
+            black 15%,
+            black 85%,
+            transparent
+        );
+        mask-image: linear-gradient(
+            to right,
+            transparent,
+            black 15%,
+            black 85%,
+            transparent
+        );
+    }
+
+    .marquee-content {
+        flex-shrink: 0;
+        display: flex;
+        gap: 2rem;
+        min-width: 100%;
+        padding: 1rem 0;
+    }
+
+    .testimonial-card {
+        width: 380px;
+        padding: 2.5rem;
+        border-radius: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        transition: transform 0.3s ease, border-color 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .testimonial-card:hover {
+        transform: translateY(-5px);
+        border-color: rgba(56, 189, 248, 0.3);
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    .card-top {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .avatar {
+        width: 48px;
+        height: 48px;
+        background: linear-gradient(135deg, #38bdf8 0%, #2563eb 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+        font-size: 0.9rem;
+        color: white;
+    }
+
+    .meta {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .name {
+        font-weight: 600;
+        color: white;
+        font-size: 1.1rem;
+    }
+
+    .role {
+        font-size: 0.85rem;
+        color: #71717a;
+    }
+
+    .content {
+        font-size: 1.05rem;
+        line-height: 1.6;
+        color: #a1a1aa;
+        font-weight: 300;
+        font-style: italic;
+    }
+
+    .stars {
+        display: flex;
+        gap: 0.25rem;
+        margin-top: auto;
+    }
+
+    .marquee-footer {
+        display: flex;
+        justify-content: center;
+        margin-top: 5rem;
+    }
+
+    .btn-review {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 1rem 2rem;
+        border-radius: 50px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: #fff;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+    }
+
+    .btn-review:hover {
+        background: rgba(56, 189, 248, 0.1);
+        border-color: #38bdf8;
+        transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px) {
+        .testimonial-card {
+            width: 300px;
+            padding: 1.5rem;
+        }
+        .testimonials-section {
+            padding: 4rem 0;
+        }
+    }
+</style>
+
+<script>
+    import { gsap } from "gsap";
+
+    function setupTestimonials() {
+        const row1 = document.querySelector("#row-1 .marquee-content");
+        const row2 = document.querySelector("#row-2 .marquee-content");
+
+        if (row1) {
+            gsap.to(row1, {
+                xPercent: -50,
+                repeat: -1,
+                duration: 40,
+                ease: "none",
+            });
+        }
+
+        if (row2) {
+            // Start from -50% and move to 0 for reverse direction
+            gsap.fromTo(
+                row2,
+                { xPercent: -50 },
+                {
+                    xPercent: 0,
+                    repeat: -1,
+                    duration: 45,
+                    ease: "none",
+                }
+            );
+        }
+    }
+
+    // Initialize after DOM and Astro transitions
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", setupTestimonials);
+    } else {
+        setupTestimonials();
+    }
+    document.addEventListener("astro:after-swap", setupTestimonials);
+</script>
