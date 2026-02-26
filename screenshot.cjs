@@ -3,9 +3,29 @@ const { chromium, devices } = require('playwright');
 (async () => {
     const browser = await chromium.launch();
 
-    // Function to hide sticky elements like cookie banners
+    // Function to hide sticky elements like cookie banners and wait for animations
     const hideSticky = async (page) => {
-        await page.waitForTimeout(3000); // Wait for animations
+        // Slow manual scroll down and up to trigger animations
+        await page.evaluate(async () => {
+            await new Promise((resolve) => {
+                let totalHeight = 0;
+                const distance = 250;
+                const timer = setInterval(() => {
+                    const scrollHeight = document.body.scrollHeight;
+                    window.scrollBy(0, distance);
+                    totalHeight += distance;
+
+                    if (totalHeight >= scrollHeight - window.innerHeight) {
+                        clearInterval(timer);
+                        window.scrollTo(0, 0); // go back to top
+                        resolve();
+                    }
+                }, 100);
+            });
+        });
+
+        await page.waitForTimeout(5000); // 5 extra seconds to settle everything
+
         await page.evaluate(() => {
             const elements = document.querySelectorAll('*');
             elements.forEach(el => {
@@ -18,6 +38,8 @@ const { chromium, devices } = require('playwright');
             // Specific overrides if needed
             const wpCookie = document.querySelector('#cookie-law-info-bar');
             if (wpCookie) wpCookie.style.display = 'none';
+            const acceptBtn = document.querySelector('.cc-btn');
+            if (acceptBtn) acceptBtn.click();
         });
     };
 
@@ -32,7 +54,7 @@ const { chromium, devices } = require('playwright');
     try { await page1.click('text=Aceito'); } catch (e) { }
     try { await page1.click('text=Accept'); } catch (e) { }
     await hideSticky(page1);
-    await page1.screenshot({ path: 'public/images/portfolio/algoatelier.jpg', fullPage: true, type: 'jpeg', quality: 85 });
+    await page1.screenshot({ path: 'public/images/portfolio/algoatelier.jpg', fullPage: true, type: 'jpeg', quality: 90 });
 
     console.log("Mental8Works (iPad)...");
     const context2 = await browser.newContext({
@@ -44,18 +66,19 @@ const { chromium, devices } = require('playwright');
     try { await page2.click('text=Aceitar'); } catch (e) { }
     try { await page2.click('text=Aceito'); } catch (e) { }
     await hideSticky(page2);
-    await page2.screenshot({ path: 'public/images/portfolio/mental8works.jpg', fullPage: true, type: 'jpeg', quality: 85 });
+    await page2.screenshot({ path: 'public/images/portfolio/mental8works.jpg', fullPage: true, type: 'jpeg', quality: 90 });
 
     console.log("Desportos (Macbook)...");
     const context3 = await browser.newContext({
-        viewport: { width: 1440, height: 900 }
+        viewport: { width: 1440, height: 900 },
+        deviceScaleFactor: 1
     });
     const page3 = await context3.newPage();
     await page3.goto('https://desportosnauticosalvor.com/', { waitUntil: 'networkidle' });
     try { await page3.click('text=Aceitar'); } catch (e) { }
     try { await page3.click('text=Accept'); } catch (e) { }
     await hideSticky(page3);
-    await page3.screenshot({ path: 'public/images/portfolio/desportos.jpg', fullPage: true, type: 'jpeg', quality: 90 });
+    await page3.screenshot({ path: 'public/images/portfolio/desportos.jpg', fullPage: true, type: 'jpeg', quality: 92 });
 
     await browser.close();
     console.log("Done!");
