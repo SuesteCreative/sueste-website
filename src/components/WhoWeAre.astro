@@ -1,0 +1,100 @@
+---
+import { getLangFromUrl, useTranslations } from "../utils/i18n";
+
+const { lang = "pt" } = Astro.props;
+const textPt =
+    "Não fazemos apenas sites. Construímos presenças digitais que dominam.";
+const textEn =
+    "We don't just build websites. We build digital presences that dominate.";
+const text = lang === "pt" ? textPt : textEn;
+
+const words = text.split(" ");
+---
+
+<section class="who-we-are-section" id="who-we-are">
+    <div class="container who-content">
+        <h2 class="statement-text" aria-label={text}>
+            {
+                words.map((word, index) => (
+                    <span class="word-wrapper">
+                        <span class="word" set:html={word + "&nbsp;"} />
+                    </span>
+                ))
+            }
+        </h2>
+    </div>
+</section>
+
+<style>
+    .who-we-are-section {
+        padding: 12rem 0;
+        background: var(--color-bg);
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .who-content {
+        max-width: 1000px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .statement-text {
+        font-size: clamp(2.5rem, 6vw, 5.5rem);
+        font-weight: 800;
+        line-height: 1.1;
+        color: #fff;
+        text-align: center;
+        letter-spacing: -0.03em;
+    }
+
+    .word-wrapper {
+        display: inline-block;
+        overflow: hidden; /* Clips the word as it animates up */
+        vertical-align: top;
+    }
+
+    .word {
+        display: inline-block;
+        transform: translateY(100%);
+        opacity: 0;
+        background: linear-gradient(135deg, #ffffff 0%, #a1a1aa 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    /* Specifically highlight 'dominam' or 'dominate' */
+    .word:nth-last-child(1) {
+        background: linear-gradient(135deg, #38bdf8 0%, #2563eb 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+</style>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const sections = document.querySelectorAll(".who-we-are-section");
+
+    sections.forEach((section) => {
+        const words = section.querySelectorAll(".word");
+
+        gsap.to(words, {
+            y: "0%",
+            opacity: 1,
+            duration: 1.2,
+            stagger: 0.05,
+            ease: "power4.out",
+            scrollTrigger: {
+                trigger: section,
+                start: "top 75%",
+            },
+        });
+    });
+</script>

@@ -3,8 +3,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import HeroScrollSequence from "../components/HeroScrollSequence.astro";
+import WhoWeAre from "../components/WhoWeAre.astro";
 import Section from "../components/Section.astro";
 import PortfolioLanding from "../components/PortfolioLanding.astro";
+import BentoServices from "../components/BentoServices.astro";
+import ProcessHorizontalScroll from "../components/ProcessHorizontalScroll.astro";
 import HeroPills from "../components/HeroPills.astro";
 import { useTranslations } from "../utils/i18n";
 
@@ -43,30 +46,15 @@ const t = useTranslations("pt");
       </div>
     </HeroScrollSequence>
 
+    <WhoWeAre lang="pt" />
+
     <Section
       id="services"
       title="Serviços"
       subtitle="Soluções criativas completas para levar a sua marca ao próximo nível."
       data-reveal
     >
-      <div class="services-grid">
-        <div class="service-card glass reveal-delay-1" data-reveal>
-          <h3>Web Development</h3>
-          <p>Websites rápidos, SEO-first e focados em conversão.</p>
-        </div>
-        <div class="service-card glass reveal-delay-2" data-reveal>
-          <h3>Social Media</h3>
-          <p>Gestão de redes sociais e criação de conteúdo estratégico.</p>
-        </div>
-        <div class="service-card glass reveal-delay-3" data-reveal>
-          <h3>Drone Footage</h3>
-          <p>Imagens aéreas cinematográficas em 4K para o seu negócio.</p>
-        </div>
-        <div class="service-card glass reveal-delay-1" data-reveal>
-          <h3>Graphic Design</h3>
-          <p>Identidade visual e design que comunica os seus valores.</p>
-        </div>
-      </div>
+      <BentoServices lang="pt" />
     </Section>
 
     <Section
@@ -78,29 +66,8 @@ const t = useTranslations("pt");
       <PortfolioLanding />
     </Section>
 
-    <Section id="process" title="O Nosso Processo" dark data-reveal>
-      <div class="process-steps">
-        <div class="process-step reveal-delay-1" data-reveal>
-          <span class="step-num">01</span>
-          <h4>Discover</h4>
-          <p>Analisamos os seus objetivos e o seu mercado.</p>
-        </div>
-        <div class="process-step reveal-delay-2" data-reveal>
-          <span class="step-num">02</span>
-          <h4>Design</h4>
-          <p>Criamos a estratégia visual e funcional.</p>
-        </div>
-        <div class="process-step reveal-delay-3" data-reveal>
-          <span class="step-num">03</span>
-          <h4>Produce</h4>
-          <p>Damos vida ao projeto com tecnologia de ponta.</p>
-        </div>
-        <div class="process-step reveal-delay-1" data-reveal>
-          <span class="step-num">04</span>
-          <h4>Deliver</h4>
-          <p>Entregamos resultados mensuráveis.</p>
-        </div>
-      </div>
+    <Section id="process" title="" dark data-reveal>
+      <ProcessHorizontalScroll lang="pt" />
     </Section>
 
     <Section id="cta" className="final-cta" data-reveal>

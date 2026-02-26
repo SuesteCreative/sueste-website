@@ -1,0 +1,233 @@
+---
+const { lang = "pt" } = Astro.props;
+
+const services = [
+    {
+        id: "web",
+        title: "Web Development",
+        descPt: "Websites rápidos, SEO-first e focados em conversão. Desenvolvidos com as melhores tecnologias modernas.",
+        descEn: "Fast, SEO-first, conversion-focused websites. Built with the best modern technologies.",
+        size: "large", // Takes up 2 columns
+    },
+    {
+        id: "drone",
+        title: "Drone Footage",
+        descPt: "Imagens aéreas cinematográficas em 4K que elevam o seu negócio.",
+        descEn: "Cinematic 4K aerial footage that elevates your business.",
+        size: "small", // Takes up 1 column
+    },
+    {
+        id: "social",
+        title: "Social Media",
+        descPt: "Gestão estratégica, métricas e design para engajamento.",
+        descEn: "Strategic management, metrics, and design for engagement.",
+        size: "small", // Takes up 1 column
+    },
+    {
+        id: "graphic",
+        title: "Graphic Design",
+        descPt: "Identidade visual premium para marcas de liderança global.",
+        descEn: "Premium visual identity for globally leading brands.",
+        size: "medium", // Can take wide row
+    },
+];
+---
+
+<div class="bento-container" id="bento-services">
+    <div class="bento-grid">
+        {
+            services.map((service) => (
+                <div
+                    class={`bento-card bento-${service.size} glass magnetic-card`}
+                    data-reveal
+                >
+                    <div class="bento-glow" />
+                    <div class="bento-content">
+                        <h3>{service.title}</h3>
+                        <p>{lang === "pt" ? service.descPt : service.descEn}</p>
+                    </div>
+                </div>
+            ))
+        }
+    </div>
+</div>
+
+<style>
+    .bento-container {
+        width: 100%;
+        margin-top: 3rem;
+    }
+
+    .bento-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(2, minmax(280px, auto));
+        gap: 1.5rem;
+    }
+
+    .bento-card {
+        position: relative;
+        border-radius: 24px;
+        padding: 3rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        overflow: hidden;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        will-change: transform;
+        cursor: pointer;
+    }
+
+    /* Grid Area Assignments */
+    .bento-large {
+        grid-column: span 2;
+        grid-row: span 1;
+        background: linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.05) 0%,
+            rgba(255, 255, 255, 0.01) 100%
+        );
+    }
+
+    .bento-small {
+        grid-column: span 1;
+        grid-row: span 1;
+    }
+
+    .bento-medium {
+        grid-column: span 2; /* takes remaining 2 slots on bottom row */
+        grid-row: span 1;
+    }
+
+    /* Glow trail effect */
+    .bento-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: 24px;
+        padding: 2px;
+        background: linear-gradient(
+            135deg,
+            rgba(56, 189, 248, 0) 0%,
+            rgba(56, 189, 248, 0) 50%,
+            rgba(56, 189, 248, 0) 100%
+        );
+        -webkit-mask: linear-gradient(#fff 0 0) content-box,
+            linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        transition: background 0.3s ease;
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    .bento-glow {
+        position: absolute;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(
+            circle,
+            rgba(56, 189, 248, 0.15) 0%,
+            transparent 70%
+        );
+        border-radius: 50%;
+        top: -200px;
+        left: -200px;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 0;
+        /* We update this via JS */
+        transform: translate(var(--mouse-x, 0), var(--mouse-y, 0));
+    }
+
+    .bento-card:hover .bento-glow {
+        opacity: 1;
+    }
+
+    .bento-content {
+        position: relative;
+        z-index: 2;
+        pointer-events: none; /* Let mousemove hit the card easily */
+    }
+
+    .bento-card h3 {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: #fff;
+        letter-spacing: -0.02em;
+    }
+
+    .bento-card p {
+        font-size: 1.1rem;
+        color: #a1a1aa;
+        line-height: 1.5;
+        max-width: 90%;
+    }
+
+    .bento-large h3 {
+        font-size: 2.5rem;
+    }
+
+    @media (max-width: 900px) {
+        .bento-grid {
+            grid-template-columns: 1fr;
+            grid-template-rows: auto;
+        }
+        .bento-large,
+        .bento-small,
+        .bento-medium {
+            grid-column: span 1;
+        }
+    }
+</style>
+
+<script>
+    import { gsap } from "gsap";
+
+    // Glow Trails & Magnetic Effect
+    document.querySelectorAll(".magnetic-card").forEach((card) => {
+        const el = card as HTMLElement;
+
+        el.addEventListener("mousemove", (e) => {
+            const rect = el.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            // Update glow position
+            el.style.setProperty("--mouse-x", `${x}px`);
+            el.style.setProperty("--mouse-y", `${y}px`);
+
+            // Magnetic effect (subtle tilt/shift towards mouse)
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            const tiltX = (y - centerY) / 20; // smaller = more intense
+            const tiltY = (centerX - x) / 20;
+
+            gsap.to(el, {
+                duration: 0.5,
+                rotateX: tiltX,
+                rotateY: tiltY,
+                transformPerspective: 1000,
+                ease: "power2.out",
+            });
+        });
+
+        el.addEventListener("mouseleave", () => {
+            // Reset magnetic effect
+            gsap.to(el, {
+                duration: 0.7,
+                rotateX: 0,
+                rotateY: 0,
+                ease: "elastic.out(1, 0.3)",
+            });
+        });
+    });
+</script>

@@ -1,0 +1,258 @@
+---
+const { lang = "pt" } = Astro.props;
+
+const processData = [
+    {
+        step: "01",
+        titlePt: "Discover",
+        titleEn: "Discover",
+        descPt: "Analisamos os seus objetivos, mercado e concorrência para definir uma direção estratégica clara.",
+        descEn: "We analyze your goals, market, and competition to define a clear strategic direction.",
+    },
+    {
+        step: "02",
+        titlePt: "Design",
+        titleEn: "Design",
+        descPt: "Criamos a identidade visual e o design funcional adaptado à jornada do utilizador.",
+        descEn: "We create the visual identity and functional design tailored to the user journey.",
+    },
+    {
+        step: "03",
+        titlePt: "Produce",
+        titleEn: "Produce",
+        descPt: "Damos vida ao projeto com tecnologia de ponta, animações fluidas e código otimizado.",
+        descEn: "We bring the project to life with cutting-edge tech, fluid animations, and optimized code.",
+    },
+    {
+        step: "04",
+        titlePt: "Deliver",
+        titleEn: "Deliver",
+        descPt: "Lançamento impecável, monitorização contínua e entrega de resultados mensuráveis.",
+        descEn: "Flawless launch, continuous monitoring, and delivery of measurable results.",
+    },
+];
+---
+
+<div class="process-horizontal-container" id="process-pin-container">
+    <div class="process-sticky-left">
+        <div class="sticky-content">
+            <h2 class="process-title">
+                {lang === "pt" ? "O Nosso Processo" : "Our Process"}
+            </h2>
+            <p class="process-subtitle">
+                {
+                    lang === "pt"
+                        ? "Metodologia testada para transformar ideias em presenças digitais dominantes."
+                        : "Tested methodology to transform ideas into dominating digital presences."
+                }
+            </p>
+        </div>
+    </div>
+
+    <div class="process-scroll-right">
+        <div class="horizontal-scroll-track" id="process-track">
+            {
+                processData.map((item, index) => (
+                    <div class="process-panel glass">
+                        <div class="panel-inner">
+                            <span class="step-num">{item.step}</span>
+                            <div class="panel-content">
+                                <h3>
+                                    {lang === "pt"
+                                        ? item.titlePt
+                                        : item.titleEn}
+                                </h3>
+                                <p>
+                                    {lang === "pt" ? item.descPt : item.descEn}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</div>
+
+<style>
+    .process-horizontal-container {
+        display: flex;
+        position: relative;
+        /* We don't hide overflow here, GSAP needs to read the scroll bounds */
+        padding: 8rem 0;
+    }
+
+    /* LEFT SIDE (Static/Sticky Title) */
+    .process-sticky-left {
+        width: 35%;
+        flex-shrink: 0;
+        padding-right: 4rem;
+        position: relative;
+    }
+
+    .sticky-content {
+        position: sticky;
+        top: 30vh; /* Sticks a third of the way down the screen */
+    }
+
+    .process-title {
+        font-size: clamp(3rem, 5vw, 4.5rem);
+        font-weight: 800;
+        line-height: 1.1;
+        margin-bottom: 1.5rem;
+        background: linear-gradient(135deg, #ffffff 0%, #a1a1aa 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .process-subtitle {
+        font-size: 1.25rem;
+        color: #a1a1aa;
+        line-height: 1.6;
+        max-width: 90%;
+    }
+
+    /* RIGHT SIDE (Horizontal Scrolling Panels) */
+    .process-scroll-right {
+        width: 65%;
+        /* Hide overflow horizontally to mask the scrolling track */
+        overflow: hidden;
+    }
+
+    .horizontal-scroll-track {
+        display: flex;
+        gap: 3rem;
+        width: max-content; /* Force it to be as wide as all panels */
+        /* Padding right to allow the last item to reach the center */
+        padding-right: 50vw;
+    }
+
+    .process-panel {
+        width: 450px;
+        height: 450px;
+        flex-shrink: 0;
+        border-radius: 30px;
+        padding: 3.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: transform 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        background: rgba(255, 255, 255, 0.02);
+    }
+
+    .step-num {
+        font-size: 6rem;
+        font-weight: 800;
+        line-height: 1;
+        background: linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.1) 0%,
+            rgba(255, 255, 255, 0) 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        display: block;
+        margin-bottom: 2rem;
+    }
+
+    .panel-content h3 {
+        font-size: 2.25rem;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 1rem;
+    }
+
+    .panel-content p {
+        font-size: 1.15rem;
+        color: #a1a1aa;
+        line-height: 1.5;
+    }
+
+    /* Mobile Fallback - stack them instead of horizontal scroll */
+    @media (max-width: 1024px) {
+        .process-horizontal-container {
+            flex-direction: column;
+            padding: 4rem 0;
+        }
+
+        .process-sticky-left,
+        .process-scroll-right {
+            width: 100%;
+        }
+
+        .process-sticky-left {
+            padding-right: 0;
+            margin-bottom: 4rem;
+        }
+
+        .sticky-content {
+            position: static;
+        }
+
+        .horizontal-scroll-track {
+            flex-direction: column;
+            width: 100%;
+            padding-right: 0;
+            gap: 2rem;
+        }
+
+        .process-panel {
+            width: 100%;
+            height: auto;
+            padding: 2.5rem;
+        }
+
+        .step-num {
+            margin-bottom: 1rem;
+            font-size: 4rem;
+        }
+    }
+</style>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Only run GSAP horizontal scroll on desktop screens
+    const mm = gsap.matchMedia();
+
+    mm.add("(min-width: 1025px)", () => {
+        const containers = document.querySelectorAll("#process-pin-container");
+
+        containers.forEach((container) => {
+            const track = container.querySelector(
+                "#process-track"
+            ) as HTMLElement;
+
+            // Calculate how far the track needs to slide left
+            // It's the full width of the track minus the width of its viewing container
+            const getScrollAmount = () =>
+                -(
+                    track.scrollWidth -
+                    (
+                        container.querySelector(
+                            ".process-scroll-right"
+                        ) as HTMLElement
+                    ).offsetWidth
+                );
+
+            const tween = gsap.to(track, {
+                x: getScrollAmount,
+                ease: "none",
+            });
+
+            ScrollTrigger.create({
+                trigger: container,
+                start: "top 20%",
+                end: () => `+=${getScrollAmount() * -1}`, // scroll distance equals the physical slide distance
+                animation: tween,
+                pin: true,
+                scrub: 1, // smooth dragging effect
+                invalidateOnRefresh: true, // Recalculate if window resizes
+            });
+        });
+    });
+</script>
