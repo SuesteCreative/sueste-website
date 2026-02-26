@@ -156,9 +156,8 @@ const { isLandingPage = false } = Astro.props;
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 0 8px;
     transition: all 0.3s ease;
+    overflow: hidden;
   }
 
   .navbar-root.is-landing:not(.scrolled) .lang-toggle-track {
@@ -184,13 +183,14 @@ const { isLandingPage = false } = Astro.props;
   }
 
   .lang-label {
+    flex: 1;
     font-size: 0.65rem;
     font-weight: 800;
     color: #71717a;
     z-index: 2;
     transition: color 0.3s ease;
-    width: 20px;
     text-align: center;
+    pointer-events: none;
   }
 
   .navbar-root.is-landing:not(.scrolled) .lang-label {

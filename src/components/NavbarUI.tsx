@@ -17,14 +17,69 @@ interface NavbarUIProps {
 
 const LangSwitcher: React.FC<{ lang: 'pt' | 'en', mobile?: boolean }> = ({ lang, mobile }) => {
     const isPT = lang === 'pt';
-    const targetUrl = isPT ? '/en/' : '/';
+    const [targetUrl, setTargetUrl] = useState(isPT ? '/en/' : '/');
+
+    useEffect(() => {
+        const getSwitchLanguageUrl = (pathname: string, currentLang: 'pt' | 'en') => {
+            const isPT = currentLang === 'pt';
+
+            // Mapping for specific static pages
+            const ptToEnMap: Record<string, string> = {
+                '/servicos': '/en/services',
+                '/portfolio': '/en/work',
+                '/sobre': '/en/about',
+                '/contacto': '/en/contact',
+                '/orcamento': '/en/quote',
+                '/servicos/': '/en/services/',
+                '/portfolio/': '/en/work/',
+                '/sobre/': '/en/about/',
+                '/contacto/': '/en/contact/',
+                '/orcamento/': '/en/quote/',
+            };
+
+            const enToPtMap: Record<string, string> = {
+                '/en/services': '/servicos',
+                '/en/work': '/portfolio',
+                '/en/about': '/sobre',
+                '/en/contact': '/contacto',
+                '/en/quote': '/orcamento',
+                '/en/services/': '/servicos/',
+                '/en/work/': '/portfolio/',
+                '/en/about/': '/sobre/',
+                '/en/contact/': '/contacto/',
+                '/en/quote/': '/orcamento/',
+            };
+
+            const normalizedPath = pathname.endsWith('/') && pathname !== '/' && pathname !== '/en/'
+                ? pathname.slice(0, -1)
+                : pathname;
+
+            if (isPT) {
+                if (normalizedPath === '/') return '/en/';
+                if (ptToEnMap[normalizedPath]) return ptToEnMap[normalizedPath];
+                if (normalizedPath.startsWith('/portfolio/')) {
+                    return normalizedPath.replace('/portfolio/', '/en/work/');
+                }
+                return '/en/';
+            } else {
+                if (normalizedPath === '/en' || normalizedPath === '/en/') return '/';
+                if (enToPtMap[normalizedPath]) return enToPtMap[normalizedPath];
+                if (normalizedPath.startsWith('/en/work/')) {
+                    return normalizedPath.replace('/en/work/', '/portfolio/');
+                }
+                return '/';
+            }
+        };
+
+        setTargetUrl(getSwitchLanguageUrl(window.location.pathname, lang));
+    }, [lang]);
 
     return (
         <a href={targetUrl} className={`lang-toggle-wrapper ${mobile ? 'mobile' : ''}`}>
             <div className="lang-toggle-track">
                 <motion.div
                     className="lang-toggle-thumb"
-                    animate={{ x: isPT ? 0 : 32 }}
+                    animate={{ x: isPT ? 0 : (mobile ? 40 : 32) }}
                     transition={{ type: "spring", stiffness: 500, damping: 30 }}
                 />
                 <span className={`lang-label pt ${isPT ? 'active' : ''}`}>PT</span>
