@@ -563,26 +563,27 @@ const viewAllHref = lang === "pt" ? "/portfolio" : "/en/work";
             let currentTranslateY = 0;
             const scrollSpeed = 1.2; // pixels per frame
 
+            function getScrollParams() {
+                const containerHeight = container.clientHeight;
+                const imageHeight = img.getBoundingClientRect().height;
+                const maxTranslate = containerHeight - imageHeight;
+                return { maxTranslate, containerHeight, imageHeight };
+            }
+
             // Handle hover for desktop
             container.addEventListener("mouseenter", () => {
-                if (
-                    window.innerWidth > 1024 &&
-                    !container.classList.contains("is-autoscrolling")
-                ) {
-                    const maxTranslate =
-                        container.clientHeight - img.scrollHeight;
-                    img.style.transition = `transform ${
-                        Math.abs(maxTranslate) / 100
-                    }s linear`;
+                if (window.innerWidth > 1024) {
+                    const { maxTranslate } = getScrollParams();
+                    if (maxTranslate >= 0) return;
+
+                    const duration = Math.abs(maxTranslate) / 100; // 100px per second
+                    img.style.transition = `transform ${duration}s linear`;
                     img.style.transform = `translateY(${maxTranslate}px)`;
                 }
             });
 
             container.addEventListener("mouseleave", () => {
-                if (
-                    window.innerWidth > 1024 &&
-                    !container.classList.contains("is-autoscrolling")
-                ) {
+                if (window.innerWidth > 1024) {
                     img.style.transition = "transform 2s ease-in-out";
                     img.style.transform = "translateY(0)";
                 }
@@ -604,7 +605,8 @@ const viewAllHref = lang === "pt" ? "/portfolio" : "/en/work";
             });
 
             function startAutoScroll() {
-                const maxTranslate = container.clientHeight - img.scrollHeight;
+                const { maxTranslate } = getScrollParams();
+                if (maxTranslate >= 0) return;
 
                 function step() {
                     if (!container.classList.contains("is-autoscrolling"))
@@ -628,13 +630,20 @@ const viewAllHref = lang === "pt" ? "/portfolio" : "/en/work";
                     cancelAnimationFrame(animationId);
                     animationId = null;
                 }
-                // Optional: smoothen the stop?
                 img.style.transition = "transform 0.5s ease-out";
+                // Optionally reset or stay put? We stay put and let user tap again.
+            }
+
+            // Ensure we handle image loading
+            if (!img.complete) {
+                img.addEventListener("load", () => {
+                    // Force a recalculation if needed
+                });
             }
         });
     }
 
-    // Initialize
+    // Initialize after DOM and Astro transitions
     if (document.readyState === "loading") {
         document.addEventListener("DOMContentLoaded", setupMockups);
     } else {
