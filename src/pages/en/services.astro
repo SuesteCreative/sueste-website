@@ -15,7 +15,8 @@ import Footer from "../../components/Footer.astro";
     <header class="services-hero">
       <div class="container hero-inner">
         <h1 class="reveal-text">
-          Digital Excellence <span class="highlight">in every pixel.</span>
+          What moves <span class="highlight">isn't always seen.</span>
+          <br />But the impact is inevitable.
         </h1>
         <p class="reveal-subtitle">
           Balancing aesthetics and functionality to create experiences that
@@ -89,7 +90,7 @@ import Footer from "../../components/Footer.astro";
             desc: "It's not just about posting; it's about creating dialogue. We transform your brand into an influential voice through strategic content that resonates, retains, and converts loyal communities.",
             features: [
               {
-                label: "Content Creation",
+                label: "Criação de Conteúdo",
                 val: "Multi-format & Reels",
                 icon: "🎨",
               },
@@ -106,7 +107,7 @@ import Footer from "../../components/Footer.astro";
           {
             id: "video",
             title: "Drone & Cinematic Video",
-            icon: `<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-5c1.62-2.2 5-3 5-3"/><path d="M12 15v5s3.03-.55 5-2c2.2-1.62 3-5 3-5"/></svg>`,
+            icon: `<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-5c1.62-2.2 5-3 5-3"/><path d="M12 15v5s3.03-.55 5-2c2.2-1.62 3-5 3-3"/></svg>`,
             desc: "Perspectives that change perception. We use cutting-edge technology to capture aerial and cinematic imagery that elevates your brand's perceived value and tells stories impossible to ignore.",
             features: [
               { label: "4K Aerial", val: "FPV Drone Capture", icon: "🚁" },
@@ -122,7 +123,7 @@ import Footer from "../../components/Footer.astro";
                 icon: "🔊",
               },
             ],
-            img: "https://images.unsplash.com/photo-1473968512647-3e44a224fe8f?auto=format&fit=crop&q=80&w=1600",
+            img: "https://images.unsplash.com/photo-1473968512647-3e44a224fe8f?q=80&w=2070&auto=format&fit=crop",
           },
         ].map((service, idx) => (
           <section
@@ -219,7 +220,7 @@ import Footer from "../../components/Footer.astro";
   .services-hero h1 {
     font-size: clamp(3rem, 8vw, 6rem);
     font-weight: 800;
-    line-height: 1;
+    line-height: 1.1;
     letter-spacing: -0.04em;
     max-width: 900px;
   }
@@ -325,15 +326,6 @@ import Footer from "../../components/Footer.astro";
     font-family: monospace;
   }
 
-  .service-num {
-    font-size: 1rem;
-    font-weight: 800;
-    color: #38bdf8;
-    letter-spacing: 0.2em;
-    display: block;
-    margin-bottom: 1.5rem;
-  }
-
   .service-content h2 {
     font-size: clamp(2.5rem, 4vw, 3.8rem);
     font-weight: 800;
@@ -363,14 +355,15 @@ import Footer from "../../components/Footer.astro";
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.08);
     transition: all 0.4s ease;
+    backdrop-filter: blur(10px);
   }
 
   .bento-item:hover {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(56, 189, 248, 0.3);
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(56, 189, 248, 0.4);
     transform: translateY(-5px);
   }
 
@@ -380,7 +373,7 @@ import Footer from "../../components/Footer.astro";
   .bento-label {
     font-size: 0.7rem;
     font-weight: 700;
-    color: #71717a;
+    color: #a1a1aa;
     text-transform: uppercase;
     letter-spacing: 0.15em;
   }
