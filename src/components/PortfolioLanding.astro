@@ -9,6 +9,7 @@ interface Project {
     link: string;
     internalLink: string;
     deviceType: "macbook" | "ipad" | "iphone";
+    metricSublabel?: string;
 }
 
 const projects: Project[] = [
@@ -44,6 +45,7 @@ const projects: Project[] = [
         link: "https://algoatelier.pt/",
         internalLink: "/portfolio/algo-atelier",
         deviceType: "iphone",
+        metricSublabel: "Alcance Ampliado",
     },
 ];
 
@@ -72,12 +74,29 @@ const viewAllHref = lang === "pt" ? "/portfolio" : "/en/work";
                             </div>
 
                             <div class="analytics-box">
-                                <span class="metric-value">
+                                <span
+                                    class={`metric-value ${
+                                        project.title === "Algo Atelier"
+                                            ? "text-blue"
+                                            : ""
+                                    }`}
+                                >
                                     {project.metric}
                                 </span>
-                                <span class="metric-label">
+                                <span
+                                    class={`metric-label ${
+                                        project.title === "Algo Atelier"
+                                            ? "text-white"
+                                            : ""
+                                    }`}
+                                >
                                     {project.metricLabel}
                                 </span>
+                                {project.metricSublabel && (
+                                    <span class="metric-sublabel">
+                                        {project.metricSublabel}
+                                    </span>
+                                )}
                             </div>
 
                             <a href={project.internalLink} class="btn-project">
@@ -103,29 +122,38 @@ const viewAllHref = lang === "pt" ? "/portfolio" : "/en/work";
                             {project.deviceType === "macbook" && (
                                 <div class="mockup-macbook inline-mockup">
                                     <div class="hover-badge">
-                                        Hover me{" "}
-                                        <span class="cursor-icon">🖱️</span>
+                                        Hover me
                                         <svg
                                             class="wrinkles"
-                                            width="36"
-                                            height="36"
-                                            viewBox="0 0 36 36"
+                                            width="64"
+                                            height="64"
+                                            viewBox="0 0 64 64"
                                             fill="none"
                                             xmlns="http://www.w3.org/2000/svg"
                                         >
                                             <path
-                                                d="M6 18 Q16 8 30 10"
+                                                d="M10 10 L2 10 L2 2"
                                                 stroke="#38bdf8"
-                                                stroke-width="3"
+                                                stroke-width="1.5"
                                                 stroke-linecap="round"
-                                                stroke-linejoin="round"
                                             />
                                             <path
-                                                d="M12 28 Q22 18 34 22"
+                                                d="M54 10 L62 10 L62 2"
                                                 stroke="#38bdf8"
-                                                stroke-width="3"
+                                                stroke-width="1.5"
                                                 stroke-linecap="round"
-                                                stroke-linejoin="round"
+                                            />
+                                            <path
+                                                d="M10 54 L2 54 L2 62"
+                                                stroke="#38bdf8"
+                                                stroke-width="1.5"
+                                                stroke-linecap="round"
+                                            />
+                                            <path
+                                                d="M54 54 L62 54 L62 62"
+                                                stroke="#38bdf8"
+                                                stroke-width="1.5"
+                                                stroke-linecap="round"
                                             />
                                         </svg>
                                     </div>
@@ -313,17 +341,15 @@ const viewAllHref = lang === "pt" ? "/portfolio" : "/en/work";
 
     .hover-badge {
         position: absolute;
-        top: -30px;
-        right: -30px;
-        background: rgba(56, 189, 248, 0.9);
-        color: #fff;
-        padding: 0.5rem 1rem;
-        border-radius: 20px;
-        font-size: 0.9rem;
+        top: -45px;
+        right: -45px;
+        color: #38bdf8;
+        padding: 0.5rem;
+        font-size: 0.8rem;
         font-weight: 700;
-        letter-spacing: 0.5px;
-        transform: rotate(10deg);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transform: rotate(-5deg);
         z-index: 20;
         pointer-events: none;
         animation: float-badge 3s ease-in-out infinite;
@@ -331,10 +357,11 @@ const viewAllHref = lang === "pt" ? "/portfolio" : "/en/work";
 
     .wrinkles {
         position: absolute;
-        right: -30px;
-        top: -15px;
-        transform: rotate(20deg);
-        pointer-events: none;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        transform: scale(2.5);
+        opacity: 0.6;
     }
 
     @keyframes float-badge {
@@ -463,12 +490,28 @@ const viewAllHref = lang === "pt" ? "/portfolio" : "/en/work";
         letter-spacing: -2px;
         padding-bottom: 0.1em; /* Prevent clipping */
     }
+    .metric-value.text-blue {
+        background: none;
+        -webkit-text-fill-color: #38bdf8;
+        color: #38bdf8;
+    }
 
     .metric-label {
         font-size: 1rem;
         color: rgba(255, 255, 255, 0.6);
         font-weight: 500;
         margin-top: 0.25rem;
+    }
+    .metric-label.text-white {
+        color: #fff;
+        opacity: 1;
+    }
+
+    .metric-sublabel {
+        font-size: 0.85rem;
+        color: rgba(255, 255, 255, 0.4);
+        font-weight: 400;
+        margin-top: 0.1rem;
     }
 
     .card-bottom {
@@ -481,12 +524,13 @@ const viewAllHref = lang === "pt" ? "/portfolio" : "/en/work";
         display: inline-flex;
         align-items: center;
         gap: 0.5rem;
-        padding: 0.75rem 1.5rem;
+        padding: 0.6rem 1.2rem;
         border-radius: 50px;
         background: rgba(255, 255, 255, 0.1);
         color: #fff;
-        font-size: 0.9rem;
+        font-size: 0.85rem;
         font-weight: 600;
+        width: fit-content;
         backdrop-filter: blur(10px);
         transition: all 0.3s ease;
         text-decoration: none;
