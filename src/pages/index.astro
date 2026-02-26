@@ -74,10 +74,26 @@ const t = useTranslations("pt");
     <Testimonials lang="pt" />
 
     <Section id="cta" className="final-cta" data-reveal>
-      <div class="cta-box glass reveal-delay-1" data-reveal>
-        <h2>Pronto para começar?</h2>
-        <p>Peça um orçamento gratuito em menos de 2 minutos.</p>
-        <a href="/orcamento" class="btn-cta">Pedir Orçamento</a>
+      <div class="cta-box glass reveal-delay-1 interactive-cta" data-reveal>
+        <div class="cta-glow"></div>
+        <h2>{lang === "pt" ? "Pronto para começar?" : "Ready to start?"}</h2>
+        <p>
+          {
+            lang === "pt"
+              ? "Transforme a sua visão numa presença digital de elite. A nossa equipa está pronta para criar a solução personalizada que o seu negócio merece."
+              : "Transform your vision into an elite digital presence. Our team is ready to create the customized solution your business deserves."
+          }
+        </p>
+        <p style="margin-top: -1.5rem; font-size: 1rem; opacity: 0.5;">
+          {
+            lang === "pt"
+              ? "Peça um orçamento gratuito em menos de 2 minutos e receba uma análise estratégica."
+              : "Request a free quote in less than 2 minutes and receive a strategic analysis."
+          }
+        </p>
+        <a href={lang === "pt" ? "/orcamento" : "/en/quote"} class="btn-cta">
+          {lang === "pt" ? "Pedir Orçamento Agora" : "Request Quote Now"}
+        </a>
       </div>
     </Section>
   </main>
@@ -255,8 +271,44 @@ const t = useTranslations("pt");
   }
 
   .cta-box {
-    padding: 6rem 2rem;
+    padding: 8rem 2rem;
     border-radius: 40px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: border-color 0.3s ease;
+  }
+
+  .interactive-cta:hover {
+    border-color: rgba(56, 189, 248, 0.3);
+  }
+
+  .cta-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(
+      circle,
+      rgba(56, 189, 248, 0.15) 0%,
+      transparent 70%
+    );
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  .interactive-cta:hover .cta-glow {
+    opacity: 1;
+  }
+
+  .cta-box > * {
+    position: relative;
+    z-index: 1;
   }
 
   .cta-box h2 {
@@ -272,8 +324,12 @@ const t = useTranslations("pt");
 
   .cta-box p {
     margin-bottom: 3rem;
-    font-size: 1.2rem;
+    font-size: 1.25rem;
     opacity: 0.7;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
   }
 
   @media (max-width: 768px) {
@@ -282,3 +338,50 @@ const t = useTranslations("pt");
     }
   }
 </style>
+
+<script>
+  import { gsap } from "gsap";
+
+  function setupInteractiveCTA() {
+    const cta = document.querySelector(".interactive-cta") as HTMLElement;
+    const glow = document.querySelector(".cta-glow") as HTMLElement;
+
+    if (!cta || !glow) return;
+
+    cta.addEventListener("mousemove", (e) => {
+      const rect = cta.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      gsap.to(glow, {
+        x: x - rect.width / 2,
+        y: y - rect.height / 2,
+        duration: 0.6,
+        ease: "power2.out",
+      });
+
+      // Subtle tilt effect
+      const tiltX = (y / rect.height - 0.5) * 4;
+      const tiltY = (x / rect.width - 0.5) * -4;
+
+      gsap.to(cta, {
+        rotateX: tiltX,
+        rotateY: tiltY,
+        duration: 0.5,
+        ease: "power2.out",
+      });
+    });
+
+    cta.addEventListener("mouseleave", () => {
+      gsap.to(cta, {
+        rotateX: 0,
+        rotateY: 0,
+        duration: 0.8,
+        ease: "elastic.out(1, 0.5)",
+      });
+    });
+  }
+
+  setupInteractiveCTA();
+  document.addEventListener("astro:after-swap", setupInteractiveCTA);
+</script>

@@ -9,13 +9,14 @@
     },
     "hero": {
         "headline": "O que move nem sempre se vê.<br/>Mas o impacto é inevitável.",
-        "subheadline": "",
+        "subheadline": "Building digital elite.",
         "cta": "Começar Projeto"
     },
     "footer": {
         "rights": "Todos os direitos reservados.",
-        "privacy": "Privacidade",
-        "terms": "Termos",
+        "privacy": "Política de Privacidade",
+        "terms": "Termos e Condições",
+        "cookies": "Cookies",
         "socials": "Redes Sociais",
         "contact": "Contacto"
     }

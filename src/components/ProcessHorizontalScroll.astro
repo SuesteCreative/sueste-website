@@ -28,11 +28,20 @@ const processData = [
     },
     {
         step: "04",
-        titlePt: "Lançamento & Resultados",
-        titleEn: "Launch & Results",
-        descPt: "O sucesso não termina no lançamento. Implementamos uma monitorização contínua de performance e SEO para assegurar que a sua presença digital continue a crescer e a entregar resultados mensuráveis, escalando o seu negócio consistentemente.",
-        descEn: "Success doesn't end at launch. We implement continuous performance and SEO monitoring to ensure your digital presence continues to grow and deliver measurable results, scaling your business consistently.",
+        titlePt: "Lançamento",
+        titleEn: "Launch",
+        descPt: "Chegou o momento de apresentar o seu projeto ao mundo. Realizamos uma transição suave e controlada, garantindo que tudo funcione impecavelmente no dia mais importante da jornada digital da sua marca.",
+        descEn: "The moment to present your project to the world has arrived. We perform a smooth and controlled transition, ensuring everything works flawlessly on the most important day of your brand's digital journey.",
         icon: `<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="panel-icon"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-5c1.62-2.2 5-3 5-3"/><path d="M12 15v5s3.03-.55 5-2c2.2-1.62 3-5 3-5"/></svg>`,
+    },
+    {
+        step: "05",
+        titlePt: "Resultados & Escala",
+        titleEn: "Results & Scale",
+        descPt: "O sucesso não termina no lançamento. Implementamos uma monitorização contínua de performance e SEO para assegurar que a sua presença digital continue a crescer e a entregar resultados mensuráveis.",
+        descEn: "Success doesn't end at launch. We implement continuous performance and SEO monitoring to ensure your digital presence continues to grow and deliver measurable results.",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="panel-icon"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>`,
+        highlight: true,
     },
 ];
 ---
@@ -58,9 +67,9 @@ const processData = [
             {
                 processData.map((item, index) => (
                     <div
-                        class={`process-panel glass reveal-delay-${
-                            (index % 3) + 1
-                        }`}
+                        class={`process-panel glass ${
+                            item.highlight ? "panel-highlight" : ""
+                        } reveal-delay-${(index % 3) + 1}`}
                         data-reveal
                     >
                         <div class="panel-inner">
@@ -151,10 +160,31 @@ const processData = [
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
-        transition: transform 0.3s ease;
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+            border-color 0.4s ease;
         border: 1px solid rgba(255, 255, 255, 0.05);
         background: rgba(255, 255, 255, 0.02);
         backdrop-filter: blur(20px);
+        position: relative;
+    }
+
+    .process-panel.panel-highlight {
+        border: 2px solid #38bdf8;
+        box-shadow: 0 0 30px rgba(56, 189, 248, 0.2),
+            inset 0 0 20px rgba(56, 189, 248, 0.1);
+        background: rgba(56, 189, 248, 0.05);
+    }
+
+    .process-panel.panel-highlight .step-num {
+        background: linear-gradient(135deg, #38bdf8 0%, #2563eb 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        opacity: 0.4;
+    }
+
+    .process-panel.panel-highlight .icon-container {
+        color: #38bdf8;
+        border: 1px solid rgba(56, 189, 248, 0.3);
     }
 
     .panel-header-row {

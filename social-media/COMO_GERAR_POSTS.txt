@@ -1,0 +1,36 @@
+🚀 COMO GERAR NOVOS POSTS - SUESTE CREATIVE
+
+Sempre que quiseres criar novas artes e legendas, segue estes passos:
+
+1. PREPARAR O EXCEL
+   - Abre o ficheiro: social-media/SocialMedia.xlsx
+   - Vai à folha: CALENDAR
+   - Preenche as novas linhas com o conteúdo (Hook, Subtitle, etc.).
+   - IMPORTANTE: Para o robô processar o post, tens de marcar:
+     * Approval = "Sim" (ou "Yes")
+     * Status = "Approved" (ou "Active" ou "Draft")
+     * Publish DateTime = Uma data válida
+     * Platform = "Instagram" (ou outra)
+
+2. CORRER O COMANDO
+   - Abre o terminal no VS Code.
+   - Garante que estás na pasta do projeto:
+     cd "C:\Users\pedro\OneDrive\Github\Sueste"
+   - Corre o comando de geração:
+     npm run build:social
+
+3. RECOLHER OS RESULTADOS
+   - Os ficheiros aparecem na pasta: social-media/outbox/
+   - Estão organizados por Semana e Dia.
+   - Cada pasta contém:
+     * Imagens (ou capas) prontas a usar.
+     * captions.txt (Legendas PT e EN unificadas).
+     * final_url.txt (Link com o teu rastreio UTM).
+
+💡 DICAS RÁPIDAS:
+- Fecha o Excel antes de correr o comando para evitar erros de leitura.
+- Se correres o comando novamente para o mesmo post, ele faz OVERWRITE (atualiza a imagem).
+- As imagens de fundo rodam automaticamente entre as 12 fotos realistas que guardámos.
+
+---
+Dúvidas? Consulta o ficheiro RULEBOOK.md na mesma pasta.
