@@ -15,8 +15,8 @@ const projects: Project[] = [
     {
         title: "Desportos Náuticos de Alvor",
         category: "E-Commerce & Merch",
-        metric: "Loja",
-        metricLabel: "Online",
+        metric: "E-commerce",
+        metricLabel: "Reservas Online",
         image: "/images/portfolio/desportos.jpg",
         size: "small",
         link: "https://desportosnauticosalvor.com/",
@@ -26,7 +26,7 @@ const projects: Project[] = [
     {
         title: "Mental8Works",
         category: "Sys & Backoffice",
-        metric: "Sys",
+        metric: "Site Dinâmico",
         metricLabel: "Custom Backoffice",
         image: "/images/portfolio/mental8works.jpg",
         size: "small",
@@ -439,11 +439,12 @@ const viewAllHref = lang === "pt" ? "/portfolio" : "/en/work";
         display: block;
     }
 
-    .card-content h3 {
-        font-size: 3rem;
+    .card-header h3 {
+        font-size: 3.5rem;
         font-weight: 800;
         color: #fff;
         margin: 0;
+        line-height: 1.1;
     }
 
     .analytics-box {
@@ -454,12 +455,13 @@ const viewAllHref = lang === "pt" ? "/portfolio" : "/en/work";
     .metric-value {
         font-size: 4rem;
         font-weight: 900;
-        line-height: 1;
+        line-height: 1.1;
         background: linear-gradient(135deg, #38bdf8 0%, #2563eb 100%);
         -webkit-background-clip: text;
         background-clip: text;
         -webkit-text-fill-color: transparent;
         letter-spacing: -2px;
+        padding-bottom: 0.1em; /* Prevent clipping */
     }
 
     .metric-label {

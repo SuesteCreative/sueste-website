@@ -23,3 +23,7 @@ pnpm-debug.log*
 # local backups
 cartao-euro-v1.md
 
+# social media
+social-media/outbox/
+~$*.xlsx
+
