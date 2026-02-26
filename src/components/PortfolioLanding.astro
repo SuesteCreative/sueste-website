@@ -7,6 +7,7 @@ interface Project {
     image: string;
     size: "small" | "large";
     link: string;
+    deviceType: "macbook" | "ipad" | "iphone";
 }
 
 const projects: Project[] = [
@@ -18,6 +19,7 @@ const projects: Project[] = [
         image: "/images/portfolio/desportos.jpg",
         size: "small",
         link: "https://desportosnauticosalvor.com/",
+        deviceType: "macbook",
     },
     {
         title: "Mental8Works",
@@ -27,6 +29,7 @@ const projects: Project[] = [
         image: "/images/portfolio/mental8works.jpg",
         size: "small",
         link: "https://www.mental8works.pt/",
+        deviceType: "ipad",
     },
     {
         title: "Algo Atelier",
@@ -36,6 +39,7 @@ const projects: Project[] = [
         image: "/images/portfolio/algoatelier.jpg",
         size: "large",
         link: "https://algoatelier.pt/",
+        deviceType: "iphone",
     },
 ];
 
@@ -55,11 +59,43 @@ const viewAllHref = lang === "pt" ? "/portfolio" : "/en/work";
                     class:list={[`reveal-delay-${idx + 1}`]}
                 >
                     <div class="card-image-wrapper">
-                        <img
-                            src={project.image}
-                            alt={project.title}
-                            class="card-image"
-                        />
+                        {project.deviceType === "macbook" && (
+                            <div class="mockup-macbook">
+                                <div class="macbook-screen">
+                                    <img
+                                        src={project.image}
+                                        alt={project.title}
+                                        class="mockup-img"
+                                    />
+                                </div>
+                                <div class="macbook-base">
+                                    <div class="macbook-notch" />
+                                </div>
+                            </div>
+                        )}
+                        {project.deviceType === "ipad" && (
+                            <div class="mockup-ipad">
+                                <div class="ipad-screen">
+                                    <img
+                                        src={project.image}
+                                        alt={project.title}
+                                        class="mockup-img"
+                                    />
+                                </div>
+                            </div>
+                        )}
+                        {project.deviceType === "iphone" && (
+                            <div class="mockup-iphone">
+                                <div class="iphone-notch" />
+                                <div class="iphone-screen">
+                                    <img
+                                        src={project.image}
+                                        alt={project.title}
+                                        class="mockup-img"
+                                    />
+                                </div>
+                            </div>
+                        )}
                         <div class="card-overlay" />
                     </div>
 
@@ -164,28 +200,140 @@ const viewAllHref = lang === "pt" ? "/portfolio" : "/en/work";
         position: absolute;
         inset: 0;
         z-index: 0;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* Ambient subtle radial background */
+        background: radial-gradient(
+            circle at center,
+            rgba(37, 99, 235, 0.1) 0%,
+            transparent 60%
+        );
     }
 
-    .card-image {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        opacity: 0.4;
+    /* Macbook Mockup */
+    .mockup-macbook {
+        position: absolute;
+        width: 85%;
+        max-width: 500px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        z-index: 0;
         transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        transform: translateY(20px);
+    }
+    .portfolio-card:hover .mockup-macbook {
+        transform: translateY(0px) scale(1.02);
+    }
+    .macbook-screen {
+        width: 100%;
+        aspect-ratio: 16 / 10;
+        background: #000;
+        border-radius: 12px 12px 0 0;
+        border: 8px solid #1a1a1a;
+        border-bottom: 12px solid #1a1a1a;
+        overflow: hidden;
+        position: relative;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+    }
+    .macbook-base {
+        width: 120%;
+        height: 12px;
+        background: #2a2a2a;
+        border-radius: 0 0 16px 16px;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        box-shadow: inset 0 -2px 5px rgba(0, 0, 0, 0.5);
+    }
+    .macbook-notch {
+        width: 15%;
+        height: 4px;
+        background: #111;
+        border-radius: 0 0 4px 4px;
     }
 
-    .portfolio-card:hover .card-image {
-        transform: scale(1.05);
-        opacity: 0.6;
+    /* iPad Mockup */
+    .mockup-ipad {
+        position: absolute;
+        width: 70%;
+        max-width: 320px;
+        z-index: 0;
+        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        transform: translateY(20px);
+    }
+    .portfolio-card:hover .mockup-ipad {
+        transform: translateY(0px) scale(1.02);
+    }
+    .ipad-screen {
+        width: 100%;
+        aspect-ratio: 3 / 4;
+        background: #000;
+        border-radius: 24px;
+        border: 14px solid #1a1a1a;
+        overflow: hidden;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+    }
+
+    /* iPhone Mockup */
+    .mockup-iphone {
+        position: absolute;
+        width: 75%;
+        max-width: 280px;
+        z-index: 0;
+        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        transform: translateY(20px);
+    }
+    .portfolio-card:hover .mockup-iphone {
+        transform: translateY(0px) scale(1.02);
+    }
+    .iphone-screen {
+        width: 100%;
+        aspect-ratio: 9 / 19.5;
+        background: #000;
+        border-radius: 36px;
+        border: 10px solid #1a1a1a;
+        overflow: hidden;
+        position: relative;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+    }
+    .iphone-notch {
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 35%;
+        height: 25px;
+        background: #1a1a1a;
+        border-radius: 0 0 16px 16px;
+        z-index: 10;
+    }
+
+    .mockup-img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        object-position: top;
+        opacity: 0.8;
+        transition: transform 4s ease, opacity 0.6s ease;
+    }
+
+    .portfolio-card:hover .mockup-img {
+        opacity: 1;
+        /* Slow pan effect for tall screenshots */
+        transform: translateY(-5%);
     }
 
     .card-overlay {
         position: absolute;
         inset: 0;
+        pointer-events: none;
         background: linear-gradient(
             to top,
-            rgba(0, 0, 0, 0.9) 0%,
-            rgba(0, 0, 0, 0.2) 50%,
+            rgba(0, 0, 0, 0.95) 0%,
+            rgba(0, 0, 0, 0.5) 40%,
             transparent 100%
         );
     }
