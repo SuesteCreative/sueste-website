@@ -11,7 +11,7 @@ interface Testimonial {
 const testimonials: Testimonial[] = [
     {
         name: "Sofia Martins",
-        role: "CEO, TechFlow",
+        role: "CEO",
         contentPt:
             "O Pedro percebeu exatamente a nossa visão desde o primeiro dia. O novo site não é apenas bonito, é uma máquina de conversão.",
         contentEn:
@@ -21,7 +21,7 @@ const testimonials: Testimonial[] = [
     },
     {
         name: "Ricardo Silva",
-        role: "Marketing Manager, Global Logistics",
+        role: "Marketing Manager",
         contentPt:
             "A Sueste elevou o nosso SEO para outro nível. Em menos de 3 meses, passámos para a primeira página do Google.",
         contentEn:
@@ -31,7 +31,7 @@ const testimonials: Testimonial[] = [
     },
     {
         name: "Ana Oliveira",
-        role: "Fundadora, Bloom Studio",
+        role: "Fundadora",
         contentPt:
             "Design moderno e funcional. O Pedro e a sua equipa são incansáveis na procura pela perfeição.",
         contentEn:
@@ -40,8 +40,28 @@ const testimonials: Testimonial[] = [
         initials: "AO",
     },
     {
+        name: "John Miller",
+        role: "CTO",
+        contentPt:
+            "Trabalhar com o Pedro e a equipa da Sueste foi transformador para a nossa plataforma. Altamente recomendado!",
+        contentEn:
+            "Working with Pedro and the Sueste team was a game-changer for our platform. Highly recommend!",
+        stars: 5,
+        initials: "JM",
+    },
+    {
+        name: "Elena García",
+        role: "Directora Creativa",
+        contentPt:
+            "Excelente trabajo de Sueste. El proceso fue muy fluido y el resultado superó nuestras expectativas.",
+        contentEn:
+            "Excelente trabajo de Sueste. El proceso fue muy fluido y el resultado superó nuestras expectativas.",
+        stars: 5,
+        initials: "EG",
+    },
+    {
         name: "João Ferreira",
-        role: "Diretor Comercial, Alvor Watersports",
+        role: "Diretor Comercial",
         contentPt:
             "O sistema de reservas online mudou o nosso negócio. Rapidez e qualidade técnica impecável.",
         contentEn:
@@ -51,7 +71,7 @@ const testimonials: Testimonial[] = [
     },
     {
         name: "Marta Santos",
-        role: "Diretora de Arte, Create+ Co",
+        role: "Diretora de Arte",
         contentPt:
             "Trabalhar com a Sueste foi a melhor decisão para o nosso rebranding. Criatividade sem limites.",
         contentEn:
@@ -60,34 +80,14 @@ const testimonials: Testimonial[] = [
         initials: "MS",
     },
     {
-        name: "Tiago Mendes",
-        role: "E-commerce Owner",
+        name: "Sarah Thompson",
+        role: "Founder",
         contentPt:
-            "Excelente apoio constante e ideias inovadoras. Superaram todas as nossas expectativas.",
+            "A atenção ao detalhe e a visão criativa da Sueste são inigualáveis no mundo das agências.",
         contentEn:
-            "Excellent constant support and innovative ideas. They exceeded all our expectations.",
+            "The attention to detail and creative vision at Sueste is unparalleled in the agency world.",
         stars: 5,
-        initials: "TM",
-    },
-    {
-        name: "Beatriz Costa",
-        role: "Event Planner, Sunset Events",
-        contentPt:
-            "Profissionalismo e atenção ao detalhe. O feedback dos nossos clientes sobre o site tem sido fantástico.",
-        contentEn:
-            "Professionalism and attention to detail. Our clients' feedback on the site has been fantastic.",
-        stars: 4.5,
-        initials: "BC",
-    },
-    {
-        name: "Carlos Rocha",
-        role: "Founder, Rocha Advogados",
-        contentPt:
-            "A agência percebe o mercado digital como ninguém. Recomendo vivamente a qualquer empresa que queira crescer.",
-        contentEn:
-            "The agency understands the digital market like no one else. I highly recommend them to any company looking to grow.",
-        stars: 5,
-        initials: "CR",
+        initials: "ST",
     },
 ];
 
@@ -125,7 +125,9 @@ const row2 = testimonials.slice(4, 8);
                             </div>
                             <p class="content">
                                 "
-                                {lang === "pt"
+                                {item.name === "Elena García"
+                                    ? "Excelente trabajo de Sueste. El proceso fue muy fluido y el resultado superó nuestras expectativas."
+                                    : lang === "pt"
                                     ? item.contentPt
                                     : item.contentEn}
                                 "
