@@ -121,8 +121,44 @@ const viewAllHref = lang === "pt" ? "/portfolio" : "/en/work";
                         <div class="row-mockup-container">
                             {project.deviceType === "macbook" && (
                                 <div class="mockup-macbook inline-mockup">
-                                    <div class="hover-badge">
+                                    <div class="hover-badge desktop-only">
                                         Hover me
+                                        <svg
+                                            class="wrinkles"
+                                            width="64"
+                                            height="64"
+                                            viewBox="0 0 64 64"
+                                            fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                d="M10 10 L2 10 L2 2"
+                                                stroke="#38bdf8"
+                                                stroke-width="1.5"
+                                                stroke-linecap="round"
+                                            />
+                                            <path
+                                                d="M54 10 L62 10 L62 2"
+                                                stroke="#38bdf8"
+                                                stroke-width="1.5"
+                                                stroke-linecap="round"
+                                            />
+                                            <path
+                                                d="M10 54 L2 54 L2 62"
+                                                stroke="#38bdf8"
+                                                stroke-width="1.5"
+                                                stroke-linecap="round"
+                                            />
+                                            <path
+                                                d="M54 54 L62 54 L62 62"
+                                                stroke="#38bdf8"
+                                                stroke-width="1.5"
+                                                stroke-linecap="round"
+                                            />
+                                        </svg>
+                                    </div>
+                                    <div class="hover-badge mobile-only">
+                                        Tap me
                                         <svg
                                             class="wrinkles"
                                             width="64"
@@ -175,9 +211,46 @@ const viewAllHref = lang === "pt" ? "/portfolio" : "/en/work";
                                     </div>
                                 </div>
                             )}
-                            {project.deviceType === "ipad" && (
-                                <div class="mockup-ipad inline-mockup">
-                                    <div class="ipad-screen">
+                            {project.deviceType === "iphone" && (
+                                <div class="mockup-iphone inline-mockup">
+                                    <div class="hover-badge mobile-only">
+                                        Tap me
+                                        <svg
+                                            class="wrinkles"
+                                            width="64"
+                                            height="64"
+                                            viewBox="0 0 64 64"
+                                            fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                d="M10 10 L2 10 L2 2"
+                                                stroke="#38bdf8"
+                                                stroke-width="1.5"
+                                                stroke-linecap="round"
+                                            />
+                                            <path
+                                                d="M54 10 L62 10 L62 2"
+                                                stroke="#38bdf8"
+                                                stroke-width="1.5"
+                                                stroke-linecap="round"
+                                            />
+                                            <path
+                                                d="M10 54 L2 54 L2 62"
+                                                stroke="#38bdf8"
+                                                stroke-width="1.5"
+                                                stroke-linecap="round"
+                                            />
+                                            <path
+                                                d="M54 54 L62 54 L62 62"
+                                                stroke="#38bdf8"
+                                                stroke-width="1.5"
+                                                stroke-linecap="round"
+                                            />
+                                        </svg>
+                                    </div>
+                                    <div class="iphone-notch" />
+                                    <div class="iphone-screen">
                                         <div
                                             class="mockup-scroll-container"
                                             data-mockup
@@ -192,10 +265,45 @@ const viewAllHref = lang === "pt" ? "/portfolio" : "/en/work";
                                     </div>
                                 </div>
                             )}
-                            {project.deviceType === "iphone" && (
-                                <div class="mockup-iphone inline-mockup">
-                                    <div class="iphone-notch" />
-                                    <div class="iphone-screen">
+                            {project.deviceType === "ipad" && (
+                                <div class="mockup-ipad inline-mockup">
+                                    <div class="hover-badge mobile-only">
+                                        Tap me
+                                        <svg
+                                            class="wrinkles"
+                                            width="64"
+                                            height="64"
+                                            viewBox="0 0 64 64"
+                                            fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                d="M10 10 L2 10 L2 2"
+                                                stroke="#38bdf8"
+                                                stroke-width="1.5"
+                                                stroke-linecap="round"
+                                            />
+                                            <path
+                                                d="M54 10 L62 10 L62 2"
+                                                stroke="#38bdf8"
+                                                stroke-width="1.5"
+                                                stroke-linecap="round"
+                                            />
+                                            <path
+                                                d="M10 54 L2 54 L2 62"
+                                                stroke="#38bdf8"
+                                                stroke-width="1.5"
+                                                stroke-linecap="round"
+                                            />
+                                            <path
+                                                d="M54 54 L62 54 L62 62"
+                                                stroke="#38bdf8"
+                                                stroke-width="1.5"
+                                                stroke-linecap="round"
+                                            />
+                                        </svg>
+                                    </div>
+                                    <div class="ipad-screen">
                                         <div
                                             class="mockup-scroll-container"
                                             data-mockup
@@ -583,14 +691,29 @@ const viewAllHref = lang === "pt" ? "/portfolio" : "/en/work";
         }
 
         .mockup-ipad {
-            width: 80%;
+            width: 90%;
+            max-width: 400px;
         }
         .mockup-iphone {
-            width: 60%;
+            width: 75%;
+            max-width: 280px;
         }
 
         .metric-value {
-            font-size: 3rem;
+            font-size: 3.5rem;
+        }
+
+        .desktop-only {
+            display: none !important;
+        }
+        .mobile-only {
+            display: block !important;
+        }
+    }
+
+    @media (min-width: 1025px) {
+        .mobile-only {
+            display: none !important;
         }
     }
 </style>
