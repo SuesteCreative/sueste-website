@@ -276,8 +276,8 @@ import Footer from "../../components/Footer.astro";
     transform: translateY(-50%);
     font-size: 50rem;
     font-weight: 900;
-    color: rgba(255, 255, 255, 0.05);
-    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.02);
+    color: rgba(255, 255, 255, 0.1);
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.05);
     line-height: 0.8;
     pointer-events: none;
     z-index: 0;
@@ -291,14 +291,14 @@ import Footer from "../../components/Footer.astro";
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 30vw;
-    height: 30vw;
+    width: 45vw;
+    height: 45vw;
     background: radial-gradient(
       circle,
-      rgba(56, 189, 248, 0.08) 0%,
+      rgba(56, 189, 248, 0.2) 0%,
       transparent 70%
     );
-    filter: blur(60px);
+    filter: blur(80px);
     z-index: -1;
   }
 
@@ -392,10 +392,46 @@ import Footer from "../../components/Footer.astro";
     border: 1px solid rgba(255, 255, 255, 0.08);
     background: rgba(255, 255, 255, 0.03);
     backdrop-filter: blur(10px);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bento-item:hover {
+    border-color: #38bdf8;
+    background: rgba(56, 189, 248, 0.05);
+    transform: translateY(-5px);
+    box-shadow: 0 0 30px rgba(56, 189, 248, 0.3);
+  }
+
+  /* Neon border highlight */
+  .bento-item::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    padding: 1px;
+    background: linear-gradient(135deg, transparent, #38bdf8, transparent);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .bento-item:hover::after {
+    opacity: 1;
   }
 
   .bento-item .icon {
     font-size: 2.5rem;
+    transition: transform 0.4s ease;
+  }
+
+  .bento-item:hover .icon {
+    transform: scale(1.1) rotate(5deg);
   }
 
   .bento-text {
@@ -460,11 +496,14 @@ import Footer from "../../components/Footer.astro";
     font-weight: 700;
     text-decoration: none;
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    z-index: 10;
   }
 
   .btn-magnetic-v2:hover {
     transform: scale(1.05);
-    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+    box-shadow: 0 10px 40px rgba(56, 189, 248, 0.5);
+    background: #fff;
   }
 
   /* VISUALS */
@@ -627,20 +666,18 @@ import Footer from "../../components/Footer.astro";
       },
     });
 
-    // Bento Stagger removed - keeping them visible as requested
-    /*
+    // Bento Stagger re-added
     gsap.from(bentoItems, {
-      y: 30,
+      y: 40,
       opacity: 0,
       stagger: 0.1,
-      duration: 0.8,
-      ease: "power3.out",
+      duration: 1,
+      ease: "power4.out",
       scrollTrigger: {
         trigger: section,
-        start: "top 75%",
+        start: "top 85%",
       },
     });
-    */
   });
 
   // Final CTA Reveal
@@ -652,7 +689,7 @@ import Footer from "../../components/Footer.astro";
     ease: "power3.out",
     scrollTrigger: {
       trigger: ".services-final-cta",
-      start: "top 80%",
+      start: "top 95%",
     },
   });
 </script>
