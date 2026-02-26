@@ -131,7 +131,7 @@ const viewAllHref = lang === "pt" ? "/portfolio" : "/en/work";
                                     </div>
                                     <div class="macbook-screen">
                                         <div
-                                            class="mockup-viewport"
+                                            class="mockup-scroll-container"
                                             data-mockup
                                         >
                                             <img
@@ -151,7 +151,7 @@ const viewAllHref = lang === "pt" ? "/portfolio" : "/en/work";
                                 <div class="mockup-ipad inline-mockup">
                                     <div class="ipad-screen">
                                         <div
-                                            class="mockup-viewport"
+                                            class="mockup-scroll-container"
                                             data-mockup
                                         >
                                             <img
@@ -169,7 +169,7 @@ const viewAllHref = lang === "pt" ? "/portfolio" : "/en/work";
                                     <div class="iphone-notch" />
                                     <div class="iphone-screen">
                                         <div
-                                            class="mockup-viewport"
+                                            class="mockup-scroll-container"
                                             data-mockup
                                         >
                                             <img
@@ -395,32 +395,38 @@ const viewAllHref = lang === "pt" ? "/portfolio" : "/en/work";
         z-index: 10;
     }
 
-    .mockup-viewport {
+    .mockup-scroll-container {
         width: 100%;
         height: 100%;
-        overflow-y: auto;
-        overflow-x: hidden;
-        overscroll-behavior: contain;
-        scrollbar-width: none; /* Firefox */
-        -ms-overflow-style: none; /* IE/Edge */
-        cursor: ns-resize;
-    }
-
-    .mockup-viewport::-webkit-scrollbar {
-        display: none; /* Chrome/Safari */
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
     }
 
     .mockup-img {
         width: 100%;
         height: auto;
-        display: block;
-        transition: transform 0.3s ease-out;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: transform 15s linear;
+        transform: translateY(0);
+        will-change: transform;
     }
 
-    /* Auto-scrolling state for mobile */
-    .mockup-viewport.is-autoscrolling {
-        overflow-y: hidden; /* Lock manual during auto */
-        cursor: pointer;
+    /* Desktop Hover Behavior */
+    @media (min-width: 1025px) {
+        .portfolio-row:hover .mockup-img {
+            transform: translateY(
+                calc(-100% + 100%)
+            ); /* Fallback logic handled by JS for precise calc */
+        }
+    }
+
+    /* Mobile Auto-scrolling state */
+    .mockup-scroll-container.is-autoscrolling .mockup-img {
+        /* Animation handled by JS for smooth looping */
+        transition: none;
     }
 
     .category {
@@ -545,62 +551,94 @@ const viewAllHref = lang === "pt" ? "/portfolio" : "/en/work";
 
 <script>
     function setupMockups() {
-        const mockups = document.querySelectorAll("[data-mockup]");
+        const mockupContainers = document.querySelectorAll("[data-mockup]");
 
-        mockups.forEach((mockup) => {
+        mockupContainers.forEach((container) => {
+            const img = container.querySelector(
+                ".mockup-img"
+            ) as HTMLImageElement;
+            if (!img) return;
+
             let animationId: number | null = null;
-            let scrollPos = 0;
-            const scrollSpeed = 1.5; // pixels per frame
+            let currentTranslateY = 0;
+            const scrollSpeed = 1.2; // pixels per frame
 
-            mockup.addEventListener("click", () => {
-                // Only auto-scroll on mobile/touch devices
+            // Handle hover for desktop
+            container.addEventListener("mouseenter", () => {
+                if (
+                    window.innerWidth > 1024 &&
+                    !container.classList.contains("is-autoscrolling")
+                ) {
+                    const maxTranslate =
+                        container.clientHeight - img.scrollHeight;
+                    img.style.transition = `transform ${
+                        Math.abs(maxTranslate) / 100
+                    }s linear`;
+                    img.style.transform = `translateY(${maxTranslate}px)`;
+                }
+            });
+
+            container.addEventListener("mouseleave", () => {
+                if (
+                    window.innerWidth > 1024 &&
+                    !container.classList.contains("is-autoscrolling")
+                ) {
+                    img.style.transition = "transform 2s ease-in-out";
+                    img.style.transform = "translateY(0)";
+                }
+            });
+
+            // Handle tap for mobile
+            container.addEventListener("click", (e) => {
                 if (window.innerWidth <= 1024) {
+                    e.preventDefault();
                     const isAutoscrolling =
-                        mockup.classList.toggle("is-autoscrolling");
+                        container.classList.toggle("is-autoscrolling");
 
                     if (isAutoscrolling) {
                         startAutoScroll();
                     } else {
-                        cancelAutoScroll();
+                        stopAutoScroll();
                     }
                 }
             });
 
             function startAutoScroll() {
-                const maxScroll = mockup.scrollHeight - mockup.clientHeight;
+                const maxTranslate = container.clientHeight - img.scrollHeight;
 
                 function step() {
-                    if (!mockup.classList.contains("is-autoscrolling")) return;
+                    if (!container.classList.contains("is-autoscrolling"))
+                        return;
 
-                    scrollPos += scrollSpeed;
-                    if (scrollPos >= maxScroll) {
-                        scrollPos = 0; // loop back to top
+                    currentTranslateY -= scrollSpeed;
+                    if (currentTranslateY <= maxTranslate) {
+                        currentTranslateY = 0; // Loop back
                     }
 
-                    mockup.scrollTop = scrollPos;
+                    img.style.transform = `translateY(${currentTranslateY}px)`;
                     animationId = requestAnimationFrame(step);
                 }
 
+                img.style.transition = "none";
                 animationId = requestAnimationFrame(step);
             }
 
-            function cancelAutoScroll() {
+            function stopAutoScroll() {
                 if (animationId) {
                     cancelAnimationFrame(animationId);
                     animationId = null;
                 }
+                // Optional: smoothen the stop?
+                img.style.transition = "transform 0.5s ease-out";
             }
-
-            // Sync scrollPos with reached position when manual scrolling
-            mockup.addEventListener("scroll", () => {
-                if (!mockup.classList.contains("is-autoscrolling")) {
-                    scrollPos = mockup.scrollTop;
-                }
-            });
         });
     }
 
-    // Initialize on load and after swaps
-    setupMockups();
+    // Initialize
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", setupMockups);
+    } else {
+        setupMockups();
+    }
     document.addEventListener("astro:after-swap", setupMockups);
 </script>
