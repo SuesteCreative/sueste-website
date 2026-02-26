@@ -63,22 +63,34 @@ const LangSwitcher: React.FC<{ lang: 'pt' | 'en', mobile?: boolean }> = ({ lang,
         const travel = mobile ? 40 : 32;
         const targetX = isPT ? 0 : travel;
 
-        gsap.to(thumbRef.current, {
-            x: targetX,
-            duration: 0.8,
-            ease: "elastic.out(1, 0.75)",
-            overwrite: true
-        });
+        const tl = gsap.timeline({ overwrite: true });
 
+        // Liquid squash and stretch move
+        tl.to(thumbRef.current, {
+            x: targetX,
+            scaleX: 1.5,
+            scaleY: 0.7,
+            duration: 0.3,
+            ease: "power2.in",
+            yPercent: -50 // Ensure vertical centering since we are animating X
+        })
+            .to(thumbRef.current, {
+                scaleX: 1,
+                scaleY: 1,
+                duration: 0.7,
+                ease: "elastic.out(1, 0.5)"
+            }, "-=0.1");
+
+        // Label scaling and intensity
         gsap.to(ptLabelRef.current, {
-            scale: isPT ? 1.2 : 1,
-            fontWeight: isPT ? "800" : "500",
+            scale: isPT ? 1.25 : 0.85,
+            fontWeight: isPT ? "900" : "500",
             color: isPT ? "#000" : (mobile ? "#fff" : "rgba(255,255,255,0.4)"),
             duration: 0.4
         });
         gsap.to(enLabelRef.current, {
-            scale: !isPT ? 1.2 : 1,
-            fontWeight: !isPT ? "800" : "500",
+            scale: !isPT ? 1.25 : 0.85,
+            fontWeight: !isPT ? "900" : "500",
             color: !isPT ? "#000" : (mobile ? "#fff" : "rgba(255,255,255,0.4)"),
             duration: 0.4
         });
