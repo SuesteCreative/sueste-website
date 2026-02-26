@@ -15,8 +15,8 @@ const projects: Project[] = [
     {
         title: "Desportos Náuticos de Alvor",
         category: "E-Commerce & Merch",
-        metric: "Web",
-        metricLabel: "Shopify Store",
+        metric: "Loja",
+        metricLabel: "Online",
         image: "/images/portfolio/desportos.jpg",
         size: "small",
         link: "https://desportosnauticosalvor.com/",
@@ -25,7 +25,7 @@ const projects: Project[] = [
     },
     {
         title: "Mental8Works",
-        category: "Pyschology & Health",
+        category: "Sys & Backoffice",
         metric: "Sys",
         metricLabel: "Custom Backoffice",
         image: "/images/portfolio/mental8works.jpg",
@@ -36,8 +36,8 @@ const projects: Project[] = [
     },
     {
         title: "Algo Atelier",
-        category: "Architecture",
-        metric: "90+",
+        category: "Architecture Algo Atelier",
+        metric: "90%",
         metricLabel: "SEO Score",
         image: "/images/portfolio/algoatelier.jpg",
         size: "large",
@@ -103,10 +103,10 @@ const viewAllHref = lang === "pt" ? "/portfolio" : "/en/work";
                             {project.deviceType === "macbook" && (
                                 <div class="mockup-macbook inline-mockup">
                                     <div class="macbook-screen">
-                                        <img
-                                            src={project.image}
-                                            alt={project.title}
-                                            class="mockup-img"
+                                        <iframe
+                                            src={project.link}
+                                            title={project.title}
+                                            loading="lazy"
                                         />
                                     </div>
                                     <div class="macbook-base">
@@ -117,10 +117,10 @@ const viewAllHref = lang === "pt" ? "/portfolio" : "/en/work";
                             {project.deviceType === "ipad" && (
                                 <div class="mockup-ipad inline-mockup">
                                     <div class="ipad-screen">
-                                        <img
-                                            src={project.image}
-                                            alt={project.title}
-                                            class="mockup-img"
+                                        <iframe
+                                            src={project.link}
+                                            title={project.title}
+                                            loading="lazy"
                                         />
                                     </div>
                                 </div>
@@ -129,10 +129,10 @@ const viewAllHref = lang === "pt" ? "/portfolio" : "/en/work";
                                 <div class="mockup-iphone inline-mockup">
                                     <div class="iphone-notch" />
                                     <div class="iphone-screen">
-                                        <img
-                                            src={project.image}
-                                            alt={project.title}
-                                            class="mockup-img"
+                                        <iframe
+                                            src={project.link}
+                                            title={project.title}
+                                            loading="lazy"
                                         />
                                     </div>
                                 </div>
@@ -324,9 +324,10 @@ const viewAllHref = lang === "pt" ? "/portfolio" : "/en/work";
         z-index: 10;
     }
 
-    .mockup-img {
+    iframe {
         width: 100%;
-        height: auto;
+        height: 100%;
+        border: none;
         display: block;
     }
 
