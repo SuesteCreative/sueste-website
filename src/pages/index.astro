@@ -77,24 +77,30 @@ const t = useTranslations(lang);
     <Section id="cta" className="final-cta" data-reveal>
       <div class="cta-box glass reveal-delay-1 interactive-cta" data-reveal>
         <div class="cta-glow"></div>
-        <h2>{lang === "pt" ? "Pronto para começar?" : "Ready to start?"}</h2>
-        <p>
-          {
-            lang === "pt"
-              ? "Transforme a sua visão numa presença digital de elite. A nossa equipa está pronta para criar a solução personalizada que o seu negócio merece."
-              : "Transform your vision into an elite digital presence. Our team is ready to create the customized solution your business deserves."
-          }
-        </p>
-        <p style="margin-top: -1.5rem; font-size: 1rem; opacity: 0.5;">
-          {
-            lang === "pt"
-              ? "Peça um orçamento gratuito em menos de 2 minutos e receba uma análise estratégica."
-              : "Request a free quote in less than 2 minutes and receive a strategic analysis."
-          }
-        </p>
-        <a href={lang === "pt" ? "/orcamento" : "/en/quote"} class="btn-cta">
-          {lang === "pt" ? "Pedir Orçamento Agora" : "Request Quote Now"}
-        </a>
+        <div class="cta-content-grid">
+          <div class="cta-left">
+            <h2>
+              {lang === "pt" ? "Pronto para começar?" : "Ready to start?"}
+            </h2>
+          </div>
+          <div class="cta-right">
+            <p>
+              {
+                lang === "pt"
+                  ? "Transforme a sua visão numa presença digital de elite. A nossa equipa está pronta para criar a solução personalizada que o seu negócio merece."
+                  : "Transform your vision into an elite digital presence. Our team is ready to create the customized solution your business deserves."
+              }
+            </p>
+            <div class="cta-actions">
+              <a
+                href={lang === "pt" ? "/orcamento" : "/en/quote"}
+                class="btn-cta"
+              >
+                {lang === "pt" ? "Pedir Orçamento Agora" : "Request Quote Now"}
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </Section>
   </main>
@@ -272,27 +278,61 @@ const t = useTranslations(lang);
   }
 
   .cta-box {
-    padding: 8rem 2rem;
+    padding: 10rem 4rem;
     border-radius: 40px;
     position: relative;
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.05);
-    transition: border-color 0.3s ease;
+    background: rgba(255, 255, 255, 0.02);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .cta-content-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    text-align: left;
+  }
+
+  .cta-left h2 {
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    background: linear-gradient(135deg, #ffffff 0%, #71717a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .cta-right p {
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    opacity: 0.8;
+    line-height: 1.5;
+    margin-bottom: 3rem;
+    font-weight: 300;
+  }
+
+  .cta-actions {
+    display: flex;
+    justify-content: flex-start;
   }
 
   .interactive-cta:hover {
-    border-color: rgba(56, 189, 248, 0.3);
+    border-color: rgba(56, 189, 248, 0.4);
+    background: rgba(255, 255, 255, 0.04);
+    transform: scale(1.01);
   }
 
   .cta-glow {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 400px;
-    height: 400px;
+    width: 600px;
+    height: 600px;
     background: radial-gradient(
       circle,
-      rgba(56, 189, 248, 0.15) 0%,
+      rgba(56, 189, 248, 0.25) 0%,
       transparent 70%
     );
     border-radius: 50%;
@@ -300,11 +340,8 @@ const t = useTranslations(lang);
     pointer-events: none;
     z-index: 0;
     opacity: 0;
-    transition: opacity 0.5s ease;
-  }
-
-  .interactive-cta:hover .cta-glow {
-    opacity: 1;
+    filter: blur(40px);
+    transition: opacity 0.8s ease;
   }
 
   .cta-box > * {
@@ -312,25 +349,18 @@ const t = useTranslations(lang);
     z-index: 1;
   }
 
-  .cta-box h2 {
-    font-size: clamp(2.5rem, 5vw, 4.5rem);
-    font-weight: 800;
-    margin-bottom: 1.5rem;
-    background: linear-gradient(135deg, #ffffff 0%, #a1a1aa 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-  }
-
-  .cta-box p {
-    margin-bottom: 3rem;
-    font-size: 1.25rem;
-    opacity: 0.7;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-    line-height: 1.6;
+  @media (max-width: 1024px) {
+    .cta-content-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      text-align: center;
+    }
+    .cta-actions {
+      justify-content: center;
+    }
+    .cta-box {
+      padding: 6rem 2rem;
+    }
   }
 
   @media (max-width: 768px) {
@@ -357,18 +387,18 @@ const t = useTranslations(lang);
       gsap.to(glow, {
         x: x - rect.width / 2,
         y: y - rect.height / 2,
-        duration: 0.6,
+        duration: 1.2,
         ease: "power2.out",
       });
 
-      // Subtle tilt effect
-      const tiltX = (y / rect.height - 0.5) * 4;
-      const tiltY = (x / rect.width - 0.5) * -4;
+      // Stronger tilt effect
+      const tiltX = (y / rect.height - 0.5) * 8;
+      const tiltY = (x / rect.width - 0.5) * -8;
 
       gsap.to(cta, {
         rotateX: tiltX,
         rotateY: tiltY,
-        duration: 0.5,
+        duration: 0.8,
         ease: "power2.out",
       });
     });
