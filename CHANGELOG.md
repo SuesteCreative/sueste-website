@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased] - 2026-02-26
+### Added
+- **Hero Video & Animations**: Updated hero rendering to 500 images with GSAP timeline adjustments, Lenis smooth scroll for zoom out sequences, and scroll-triggered text reveals.
+- **Modern UI Elements**: Modernized hero typography and buttons, including an animated scroll-down indicator and button gradient text matching.
+- **Docking Animations**: Migrated budget calculator docking transitions to physics-based Framer Motion springs and clean AnimatePresence wait fade transitions.
+
+### Changed
+- **Typography & Styling**: Applied ultra-premium typography with fluid sizing, glassmorphic buttons, and GSAP blur reveals across the site.
+- **Visuals**: Increased canvas brightness and reduced gradient overlay darkness to make the hero video stand out.
+- **Project Structure**: Changed project layout CTA to link to the budget page (Orçamento) instead of contact.
+- **Codebase Simplification**: Reverted the addition of external UI libraries (Aceternity UI/Tailwind) to preserve the original, bespoke glassmorphism aesthetics.
+- **Budget Calculator**: Replaced IntersectionObserver with a reliable scroll bounding box trigger for smoother docking.
+
+### Fixed
+- **Budget Accuracy**: Made the drone hourly calculation explicit in the UI budget so mathematical formulas make precise sense to the end user.
+- **Layout & Rendering**: Restored seamless fluid interpolation, prevented double render flashes during docking state transitions, and bound vertical layout alignment to avoid wobbling.
+- **Desktop Docking**: Visually connected the estimate card by expanding its width, corrected desktop flexbox grid shape shifting, and restored missing borders.
+- **Portfolio Pages**: Restored missing Astro syntax symbols, fixed nested imports, and implemented individual portfolio pages correctly.
+- **Drone UI**: Perfected drone neon total layout on both mobile and desktop views.
+
 ## [v1] - 2026-02-25
 ### Added
 - **Portfolio Section**: New premium landing page grid with 3 projects and data-driven metrics.
