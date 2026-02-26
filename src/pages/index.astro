@@ -12,7 +12,8 @@ import Testimonials from "../components/Testimonials.astro";
 import HeroPills from "../components/HeroPills.astro";
 import { useTranslations } from "../utils/i18n";
 
-const t = useTranslations("pt");
+const lang = "pt";
+const t = useTranslations(lang);
 ---
 
 <BaseLayout title="Home" description={t("hero.subheadline")}>
