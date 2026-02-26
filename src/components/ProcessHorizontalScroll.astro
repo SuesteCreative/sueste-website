@@ -34,12 +34,12 @@ const processData = [
 ---
 
 <div class="process-horizontal-container" id="process-pin-container">
-    <div class="process-sticky-left">
+    <div class="process-sticky-left" data-reveal>
         <div class="sticky-content">
-            <h2 class="process-title">
+            <h2 class="process-title reveal-delay-1" data-reveal>
                 {lang === "pt" ? "O Nosso Processo" : "Our Process"}
             </h2>
-            <p class="process-subtitle">
+            <p class="process-subtitle reveal-delay-2" data-reveal>
                 {
                     lang === "pt"
                         ? "Metodologia testada para transformar ideias em presenças digitais dominantes."
@@ -53,7 +53,12 @@ const processData = [
         <div class="horizontal-scroll-track" id="process-track">
             {
                 processData.map((item, index) => (
-                    <div class="process-panel glass">
+                    <div
+                        class={`process-panel glass reveal-delay-${
+                            (index % 3) + 1
+                        }`}
+                        data-reveal
+                    >
                         <div class="panel-inner">
                             <span class="step-num">{item.step}</span>
                             <div class="panel-content">

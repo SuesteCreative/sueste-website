@@ -36,9 +36,11 @@ const services = [
 <div class="bento-container" id="bento-services">
     <div class="bento-grid">
         {
-            services.map((service) => (
+            services.map((service, index) => (
                 <div
-                    class={`bento-card bento-${service.size} glass magnetic-card`}
+                    class={`bento-card bento-${
+                        service.size
+                    } glass magnetic-card reveal-delay-${(index % 3) + 1}`}
                     data-reveal
                 >
                     <div class="bento-glow" />
