@@ -264,12 +264,14 @@ const t = useTranslations(lang);
   }
 
   .cta-box {
-    padding: 8rem 2rem;
+    padding: 7rem 4rem;
     border-radius: 40px;
     position: relative;
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.05);
-    transition: border-color 0.3s ease;
+    background: rgba(255, 255, 255, 0.02);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: default;
   }
 
   .interactive-cta:hover {
@@ -338,6 +340,9 @@ const t = useTranslations(lang);
   function setupInteractiveCTA() {
     const cta = document.querySelector(".interactive-cta") as HTMLElement;
     const glow = document.querySelector(".cta-glow") as HTMLElement;
+    const btn = cta?.querySelector(".btn-cta") as HTMLElement;
+    const title = cta?.querySelector("h2") as HTMLElement;
+    const text = cta?.querySelector("p") as HTMLElement;
 
     if (!cta || !glow) return;
 
@@ -346,32 +351,87 @@ const t = useTranslations(lang);
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
 
+      // Magnetic Glow
       gsap.to(glow, {
         x: x - rect.width / 2,
         y: y - rect.height / 2,
-        duration: 0.6,
-        ease: "power2.out",
+        duration: 1.5,
+        ease: "power3.out",
       });
 
-      // Subtle tilt effect
-      const tiltX = (y / rect.height - 0.5) * 4;
-      const tiltY = (x / rect.width - 0.5) * -4;
+      // 3D Tilt for the whole card
+      const tiltX = (y / rect.height - 0.5) * 12;
+      const tiltY = (x / rect.width - 0.5) * -12;
 
       gsap.to(cta, {
         rotateX: tiltX,
         rotateY: tiltY,
-        duration: 0.5,
+        duration: 0.8,
         ease: "power2.out",
       });
+
+      // Parallax for content
+      if (title)
+        gsap.to(title, {
+          x: (x / rect.width - 0.5) * 20,
+          y: (y / rect.height - 0.5) * 20,
+          duration: 1,
+          ease: "power2.out",
+        });
+      if (text)
+        gsap.to(text, {
+          x: (x / rect.width - 0.5) * 10,
+          y: (y / rect.height - 0.5) * 10,
+          duration: 1.2,
+          ease: "power2.out",
+        });
+
+      // Magnetic Button
+      if (btn) {
+        const btnRect = btn.getBoundingClientRect();
+        const btnX = e.clientX - btnRect.left - btnRect.width / 2;
+        const btnY = e.clientY - btnRect.top - btnRect.height / 2;
+
+        // Only if mouse is somewhat close to the button
+        const dist = Math.sqrt(btnX * btnX + btnY * btnY);
+        if (dist < 150) {
+          gsap.to(btn, {
+            x: btnX * 0.4,
+            y: btnY * 0.4,
+            scale: 1.1,
+            duration: 0.4,
+            ease: "power2.out",
+          });
+        } else {
+          gsap.to(btn, {
+            x: 0,
+            y: 0,
+            scale: 1,
+            duration: 0.6,
+            ease: "power2.out",
+          });
+        }
+      }
     });
 
     cta.addEventListener("mouseleave", () => {
       gsap.to(cta, {
         rotateX: 0,
         rotateY: 0,
-        duration: 0.8,
-        ease: "elastic.out(1, 0.5)",
+        duration: 1.2,
+        ease: "elastic.out(1, 0.4)",
       });
+      if (title)
+        gsap.to(title, { x: 0, y: 0, duration: 1, ease: "power3.out" });
+      if (text) gsap.to(text, { x: 0, y: 0, duration: 1, ease: "power3.out" });
+      if (btn)
+        gsap.to(btn, {
+          x: 0,
+          y: 0,
+          scale: 1,
+          duration: 1,
+          ease: "elastic.out(1, 0.4)",
+        });
     });
   }
 
