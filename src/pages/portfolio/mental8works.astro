@@ -4,27 +4,32 @@ import Section from "../../components/Section.astro";
 ---
 
 <ProjectLayout
-    title="Mental8work"
-    category="Web Design & UX"
-    client="Mental8work"
+    title="Mental8Works"
+    category="Sys & Backoffice"
+    client="Mental8Works"
     year="2024"
-    description="Plataforma imersiva de suporte a soluções empresariais em saúde mental, maximizando a eficiência."
-    heroImage="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1600"
+    description="Plataforma de gestão de saúde mental corporativa com backoffice customizado e análise de dados em tempo real."
+    heroImage="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1600"
     lang="pt"
     metrics={[
-        { label: "Design System", value: "Complex" },
-        { label: "Performance", value: "A+" },
-        { label: "UX Conversion", value: "+85%" },
+        { label: "Utilizadores Ativos", value: "+8k" },
+        { label: "Tempo de Resposta", value: "-60%" },
+        { label: "Satisfação (NPS)", value: "9.2/10" },
     ]}
 >
     <div class="container project-content-grid">
         <div class="project-text-block" data-reveal>
-            <h2>Saúde e Performance</h2>
+            <h2>O Desafio</h2>
             <p>
-                A Mental8work atua na fronteira da performance corporativa
-                através do bem-estar mental. Como tal, a arquitetura de
-                informação precisava de traduzir a ciência médica em processos
-                B2B transparentes, calmos e convidativos.
+                A Mental8Works necessitava de uma ferramenta capaz de liidat com
+                volumes massivos de dados sensíveis, garantindo ao mesmo tempo
+                uma experiência de utilizador fluida e empática para pacientes e
+                terapeutas.
+            </p>
+            <p>
+                O sistema anterior era lento e fragmentado, dificultando a
+                extração de métricas críticas para os departamentos de RH das
+                empresas clientes.
             </p>
         </div>
 
@@ -34,27 +39,43 @@ import Section from "../../components/Section.astro";
             class="reveal-delay-1"
         >
             <img
-                src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&q=80&w=1000"
-                alt="Corporate health consulting"
+                src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000"
+                alt="Dashboard interface"
                 class="rounded-xl glass-panel p-2"
             />
         </div>
 
-        <!-- Additional full width section inside the grid -->
-        <div class="project-full-media mt-24 project-text-block" data-reveal>
-            <h2>Design Thinking e Interface</h2>
-            <p>
-                A fluidez das transições foi o nosso foco. Através de Framer
-                Motion e tecnologias nativas da web, alcançámos a sensação real
-                de um portal de aconselhamento premium, com formulários
-                embutidos de modo progressivo (sem causar sobrecarga cognitiva
-                aos executivos).
-            </p>
+        <div class="project-media project-media-left mt-16" data-reveal>
             <img
-                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1600"
-                alt="Data dashboard and UI metrics"
-                class="rounded-2xl glass-panel p-2 mt-8 w-full"
+                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1000"
+                alt="Data analytics view"
+                class="rounded-xl glass-panel p-2"
             />
+        </div>
+
+        <div
+            class="project-text-block mt-16"
+            data-reveal
+            class="reveal-delay-1"
+        >
+            <h2>A Solução</h2>
+            <p>
+                Projetámos um <strong>Backoffice Customizado</strong> que serve de
+                centro nevrálgico para a operação. Focámo-nos em arquitetura de dados
+                escalável e um design de dashboard intuitivo que prioriza a leitura
+                de indicadores de bem-estar.
+            </p>
+            <ul>
+                <li>Gestão automatizada de sessões e pagamentos.</li>
+                <li>
+                    Módulo de Business Intelligence para relatórios em tempo
+                    real.
+                </li>
+                <li>
+                    Infraestrutura redundante com foco em segurança de dados
+                    (RGPD).
+                </li>
+            </ul>
         </div>
     </div>
 </ProjectLayout>
@@ -100,6 +121,28 @@ import Section from "../../components/Section.astro";
         color: rgba(255, 255, 255, 0.7);
     }
 
+    .project-text-block ul {
+        list-style-type: none;
+        padding: 0;
+        margin-top: 1rem;
+    }
+
+    .project-text-block li {
+        font-size: 1.1rem;
+        color: rgba(255, 255, 255, 0.8);
+        position: relative;
+        padding-left: 1.5rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .project-text-block li::before {
+        content: "→";
+        position: absolute;
+        left: 0;
+        color: #38bdf8;
+        font-weight: bold;
+    }
+
     .project-media img {
         width: 100%;
         height: auto;
@@ -109,10 +152,6 @@ import Section from "../../components/Section.astro";
 
     .project-media:hover img {
         transform: scale(1.02);
-    }
-
-    .project-full-media {
-        grid-column: 1 / -1;
     }
 
     @media (max-width: 900px) {
