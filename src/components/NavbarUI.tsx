@@ -71,8 +71,7 @@ const LangSwitcher: React.FC<{ lang: 'pt' | 'en', mobile?: boolean }> = ({ lang,
             scaleX: 1.5,
             scaleY: 0.7,
             duration: 0.3,
-            ease: "power2.in",
-            yPercent: -50 // Ensure vertical centering since we are animating X
+            ease: "power2.in"
         })
             .to(thumbRef.current, {
                 scaleX: 1,
