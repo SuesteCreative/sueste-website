@@ -74,32 +74,53 @@ const t = useTranslations(lang);
 
     <Testimonials lang="pt" />
 
-    <Section id="cta" className="final-cta" data-reveal>
-      <div class="cta-box glass reveal-delay-1 interactive-cta" data-reveal>
-        <div class="cta-glow"></div>
-        <div class="cta-content-grid">
-          <div class="cta-left">
-            <h2>
-              {lang === "pt" ? "Pronto para começar?" : "Ready to start?"}
-            </h2>
+    <Section id="cta" className="final-cta-new">
+      <div class="cta-container-v2">
+        <div class="cta-massive-text" id="cta-reveal-text">
+          <div class="cta-line">
+            <span class="word">{lang === "pt" ? "PRONTO" : "READY"}</span>
           </div>
-          <div class="cta-right">
-            <p>
-              {
-                lang === "pt"
-                  ? "Transforme a sua visão numa presença digital de elite. A nossa equipa está pronta para criar a solução personalizada que o seu negócio merece."
-                  : "Transform your vision into an elite digital presence. Our team is ready to create the customized solution your business deserves."
-              }
-            </p>
-            <div class="cta-actions">
-              <a
-                href={lang === "pt" ? "/orcamento" : "/en/quote"}
-                class="btn-cta"
-              >
-                {lang === "pt" ? "Pedir Orçamento Agora" : "Request Quote Now"}
-              </a>
-            </div>
+          <div class="cta-line">
+            <span class="word">{lang === "pt" ? "PARA" : "TO"}</span>
           </div>
+          <div class="cta-line">
+            <span class="word highlight"
+              >{lang === "pt" ? "COMEÇAR?" : "START?"}</span
+            >
+          </div>
+        </div>
+
+        <div class="cta-footer-v2">
+          <p class="cta-desc-v2">
+            {
+              lang === "pt"
+                ? "Transforme a sua visão numa presença digital de elite. A nossa equipa está pronta para criar a solução personalizada que o seu negócio merece."
+                : "Transform your vision into an elite digital presence. Our team is ready to create the customized solution your business deserves."
+            }
+          </p>
+          <a
+            href={lang === "pt" ? "/orcamento" : "/en/quote"}
+            class="btn-cta-v2"
+          >
+            <span
+              >{
+                lang === "pt" ? "Pedir Orçamento Agora" : "Request Quote Now"
+              }</span
+            >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              ><line x1="7" y1="17" x2="17" y2="7"></line><polyline
+                points="7 7 17 7 17 17"></polyline>
+            </svg>
+          </a>
         </div>
       </div>
     </Section>
@@ -273,94 +294,132 @@ const t = useTranslations(lang);
     margin-bottom: 0.5rem;
   }
 
-  .final-cta {
+  .final-cta-new {
+    padding: 10rem 0;
+    background: transparent;
+    overflow: hidden;
+  }
+
+  .cta-container-v2 {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4rem;
+  }
+
+  .cta-massive-text {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
   }
 
-  .cta-box {
-    padding: 7rem 4rem;
-    border-radius: 40px;
-    position: relative;
+  .cta-line {
     overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    background: rgba(255, 255, 255, 0.02);
-    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    cursor: default;
+    height: auto;
+    margin: -1rem 0;
+    display: flex;
+    justify-content: center;
   }
 
-  .cta-content-grid {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 4rem;
-    align-items: center;
-    text-align: left;
+  .cta-massive-text .word {
+    font-size: clamp(4rem, 15vw, 13rem);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.05em;
+    text-transform: uppercase;
+    display: inline-block;
+    background: linear-gradient(180deg, #fff 0%, #333 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transform: translateY(105%); /* Hidden initially */
   }
 
-  .cta-left h2 {
-    font-size: clamp(3rem, 8vw, 6.5rem);
-    font-weight: 800;
-    line-height: 0.95;
-    letter-spacing: -0.04em;
-    background: linear-gradient(135deg, #ffffff 0%, #71717a 100%);
+  .cta-massive-text .word.highlight {
+    background: linear-gradient(135deg, #38bdf8 0%, #2563eb 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
-  .cta-right p {
-    font-size: clamp(1.1rem, 2vw, 1.4rem);
-    opacity: 0.8;
-    line-height: 1.5;
-    margin-bottom: 3rem;
+  .cta-footer-v2 {
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  .cta-desc-v2 {
+    font-size: 1.25rem;
+    color: #a1a1aa;
+    line-height: 1.6;
+    text-align: center;
     font-weight: 300;
   }
 
-  .cta-actions {
-    display: flex;
-    justify-content: flex-start;
-  }
-
-  .interactive-cta:hover {
-    border-color: rgba(56, 189, 248, 0.4);
-    background: rgba(255, 255, 255, 0.04);
-    transform: scale(1.01);
-  }
-
-  .cta-glow {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(
-      circle,
-      rgba(56, 189, 248, 0.25) 0%,
-      transparent 70%
-    );
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0;
-    filter: blur(40px);
-    transition: opacity 0.8s ease;
-  }
-
-  .cta-box > * {
+  .btn-cta-v2 {
+    display: inline-flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.25rem 3rem;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 100px;
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     position: relative;
-    z-index: 1;
+    overflow: hidden;
   }
 
-  @media (max-width: 1024px) {
-    .cta-content-grid {
-      grid-template-columns: 1fr;
+  .btn-cta-v2:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.05),
+      transparent
+    );
+    transition: left 0.6s ease;
+  }
+
+  .btn-cta-v2:hover {
+    background: #fff;
+    color: #000;
+    border-color: #fff;
+    transform: scale(1.05);
+  }
+
+  .btn-cta-v2:hover:before {
+    left: 100%;
+  }
+
+  .btn-cta-v2 svg {
+    transition: transform 0.4s ease;
+  }
+
+  .btn-cta-v2:hover svg {
+    transform: translate(3px, -3px);
+  }
+
+  @media (max-width: 768px) {
+    .cta-line {
+      margin: -0.5rem 0;
+    }
+    .cta-container-v2 {
       gap: 2rem;
-      text-align: center;
-    }
-    .cta-actions {
-      justify-content: center;
-    }
-    .cta-box {
-      padding: 6rem 2rem;
     }
   }
 
@@ -375,101 +434,74 @@ const t = useTranslations(lang);
   import { gsap } from "gsap";
 
   function setupInteractiveCTA() {
-    const cta = document.querySelector(".interactive-cta") as HTMLElement;
-    const glow = document.querySelector(".cta-glow") as HTMLElement;
-    const btn = cta?.querySelector(".btn-cta") as HTMLElement;
-    const title = cta?.querySelector("h2") as HTMLElement;
-    const text = cta?.querySelector("p") as HTMLElement;
+    const section = document.querySelector(".final-cta-new");
+    const words = document.querySelectorAll(".cta-massive-text .word");
+    const footer = document.querySelector(".cta-footer-v2");
 
-    if (!cta || !glow) return;
+    if (!section || words.length === 0) return;
 
-    cta.addEventListener("mousemove", (e) => {
-      const rect = cta.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+    // Reveal Animation inspired by Studio Ardé
+    gsap.to(words, {
+      y: 0,
+      duration: 1.5,
+      stagger: 0.15,
+      ease: "power4.out",
+      scrollTrigger: {
+        trigger: section,
+        start: "top 70%",
+      },
+    });
 
-      // Magnetic Glow
-      gsap.to(glow, {
-        x: x - rect.width / 2,
-        y: y - rect.height / 2,
-        duration: 1.5,
-        ease: "power3.out",
-      });
+    gsap.to(footer, {
+      opacity: 1,
+      y: 0,
+      duration: 1,
+      delay: 0.8,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: section,
+        start: "top 70%",
+      },
+    });
 
-      // 3D Tilt for the whole card
-      const tiltX = (y / rect.height - 0.5) * 12;
-      const tiltY = (x / rect.width - 0.5) * -12;
+    // Magnetic Button Effect
+    const btn = document.querySelector(".btn-cta-v2") as HTMLElement;
+    if (btn) {
+      btn.addEventListener("mousemove", (e) => {
+        const rect = btn.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
 
-      gsap.to(cta, {
-        rotateX: tiltX,
-        rotateY: tiltY,
-        duration: 0.8,
-        ease: "power2.out",
-      });
-
-      // Parallax for content
-      if (title)
-        gsap.to(title, {
-          x: (x / rect.width - 0.5) * 20,
-          y: (y / rect.height - 0.5) * 20,
-          duration: 1,
-          ease: "power2.out",
-        });
-      if (text)
-        gsap.to(text, {
-          x: (x / rect.width - 0.5) * 10,
-          y: (y / rect.height - 0.5) * 10,
-          duration: 1.2,
+        gsap.to(btn, {
+          x: x * 0.3,
+          y: y * 0.3,
+          duration: 0.4,
           ease: "power2.out",
         });
 
-      // Magnetic Button
-      if (btn) {
-        const btnRect = btn.getBoundingClientRect();
-        const btnX = e.clientX - btnRect.left - btnRect.width / 2;
-        const btnY = e.clientY - btnRect.top - btnRect.height / 2;
-
-        // Only if mouse is somewhat close to the button
-        const dist = Math.sqrt(btnX * btnX + btnY * btnY);
-        if (dist < 150) {
-          gsap.to(btn, {
-            x: btnX * 0.4,
-            y: btnY * 0.4,
-            scale: 1.1,
+        const innerSpan = btn.querySelector("span");
+        if (innerSpan) {
+          gsap.to(innerSpan, {
+            x: x * 0.2,
+            y: y * 0.2,
             duration: 0.4,
             ease: "power2.out",
           });
-        } else {
-          gsap.to(btn, {
+        }
+      });
+
+      btn.addEventListener("mouseleave", () => {
+        gsap.to(btn, { x: 0, y: 0, duration: 1, ease: "elastic.out(1, 0.4)" });
+        const innerSpan = btn.querySelector("span");
+        if (innerSpan)
+          gsap.to(innerSpan, {
             x: 0,
             y: 0,
-            scale: 1,
-            duration: 0.6,
-            ease: "power2.out",
+            duration: 1,
+            ease: "elastic.out(1, 0.4)",
           });
-        }
-      }
-    });
-
-    cta.addEventListener("mouseleave", () => {
-      gsap.to(cta, {
-        rotateX: 0,
-        rotateY: 0,
-        duration: 1.2,
-        ease: "elastic.out(1, 0.4)",
       });
-      if (title)
-        gsap.to(title, { x: 0, y: 0, duration: 1, ease: "power3.out" });
-      if (text) gsap.to(text, { x: 0, y: 0, duration: 1, ease: "power3.out" });
-      if (btn)
-        gsap.to(btn, {
-          x: 0,
-          y: 0,
-          scale: 1,
-          duration: 1,
-          ease: "elastic.out(1, 0.4)",
-        });
-    });
+    }
   }
 
   setupInteractiveCTA();
