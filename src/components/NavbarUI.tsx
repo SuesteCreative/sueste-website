@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Globe } from 'lucide-react';
+import { gsap } from 'gsap';
 
 interface NavItem {
     href: string;
@@ -18,72 +19,110 @@ interface NavbarUIProps {
 const LangSwitcher: React.FC<{ lang: 'pt' | 'en', mobile?: boolean }> = ({ lang, mobile }) => {
     const isPT = lang === 'pt';
     const [targetUrl, setTargetUrl] = useState(isPT ? '/en/' : '/');
+    const containerRef = useRef<HTMLAnchorElement>(null);
+    const thumbRef = useRef<HTMLDivElement>(null);
+    const ptLabelRef = useRef<HTMLSpanElement>(null);
+    const enLabelRef = useRef<HTMLSpanElement>(null);
 
     useEffect(() => {
         const getSwitchLanguageUrl = (pathname: string, currentLang: 'pt' | 'en') => {
             const isPT = currentLang === 'pt';
-
-            // Mapping for specific static pages
             const ptToEnMap: Record<string, string> = {
-                '/servicos': '/en/services',
-                '/portfolio': '/en/work',
-                '/sobre': '/en/about',
-                '/contacto': '/en/contact',
-                '/orcamento': '/en/quote',
-                '/servicos/': '/en/services/',
-                '/portfolio/': '/en/work/',
-                '/sobre/': '/en/about/',
-                '/contacto/': '/en/contact/',
+                '/servicos': '/en/services', '/portfolio': '/en/work', '/sobre': '/en/about',
+                '/contacto': '/en/contact', '/orcamento': '/en/quote', '/servicos/': '/en/services/',
+                '/portfolio/': '/en/work/', '/sobre/': '/en/about/', '/contacto/': '/en/contact/',
                 '/orcamento/': '/en/quote/',
             };
-
             const enToPtMap: Record<string, string> = {
-                '/en/services': '/servicos',
-                '/en/work': '/portfolio',
-                '/en/about': '/sobre',
-                '/en/contact': '/contacto',
-                '/en/quote': '/orcamento',
-                '/en/services/': '/servicos/',
-                '/en/work/': '/portfolio/',
-                '/en/about/': '/sobre/',
-                '/en/contact/': '/contacto/',
+                '/en/services': '/servicos', '/en/work': '/portfolio', '/en/about': '/sobre',
+                '/en/contact': '/contacto', '/en/quote': '/orcamento', '/en/services/': '/servicos/',
+                '/en/work/': '/portfolio/', '/en/about/': '/sobre/', '/en/contact/': '/contacto/',
                 '/en/quote/': '/orcamento/',
             };
-
             const normalizedPath = pathname.endsWith('/') && pathname !== '/' && pathname !== '/en/'
-                ? pathname.slice(0, -1)
-                : pathname;
+                ? pathname.slice(0, -1) : pathname;
 
             if (isPT) {
                 if (normalizedPath === '/') return '/en/';
                 if (ptToEnMap[normalizedPath]) return ptToEnMap[normalizedPath];
-                if (normalizedPath.startsWith('/portfolio/')) {
-                    return normalizedPath.replace('/portfolio/', '/en/work/');
-                }
+                if (normalizedPath.startsWith('/portfolio/')) return normalizedPath.replace('/portfolio/', '/en/work/');
                 return '/en/';
             } else {
                 if (normalizedPath === '/en' || normalizedPath === '/en/') return '/';
                 if (enToPtMap[normalizedPath]) return enToPtMap[normalizedPath];
-                if (normalizedPath.startsWith('/en/work/')) {
-                    return normalizedPath.replace('/en/work/', '/portfolio/');
-                }
+                if (normalizedPath.startsWith('/en/work/')) return normalizedPath.replace('/en/work/', '/portfolio/');
                 return '/';
             }
         };
-
         setTargetUrl(getSwitchLanguageUrl(window.location.pathname, lang));
     }, [lang]);
 
+    useEffect(() => {
+        if (!thumbRef.current) return;
+
+        const travel = mobile ? 40 : 32;
+        const targetX = isPT ? 0 : travel;
+
+        gsap.to(thumbRef.current, {
+            x: targetX,
+            duration: 0.8,
+            ease: "elastic.out(1, 0.75)",
+            overwrite: true
+        });
+
+        gsap.to(ptLabelRef.current, {
+            scale: isPT ? 1.2 : 1,
+            fontWeight: isPT ? "800" : "500",
+            color: isPT ? "#000" : (mobile ? "#fff" : "rgba(255,255,255,0.4)"),
+            duration: 0.4
+        });
+        gsap.to(enLabelRef.current, {
+            scale: !isPT ? 1.2 : 1,
+            fontWeight: !isPT ? "800" : "500",
+            color: !isPT ? "#000" : (mobile ? "#fff" : "rgba(255,255,255,0.4)"),
+            duration: 0.4
+        });
+    }, [isPT, mobile]);
+
+    const handleMouseMove = (e: React.MouseEvent) => {
+        if (!containerRef.current) return;
+        const rect = containerRef.current.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        const moveX = (e.clientX - centerX) * 0.3;
+        const moveY = (e.clientY - centerY) * 0.3;
+
+        gsap.to(containerRef.current, {
+            x: moveX,
+            y: moveY,
+            duration: 0.4,
+            ease: "power2.out"
+        });
+    };
+
+    const handleMouseLeave = () => {
+        if (!containerRef.current) return;
+        gsap.to(containerRef.current, {
+            x: 0,
+            y: 0,
+            duration: 0.7,
+            ease: "elastic.out(1, 0.4)"
+        });
+    };
+
     return (
-        <a href={targetUrl} className={`lang-toggle-wrapper ${mobile ? 'mobile' : ''}`}>
+        <a
+            ref={containerRef}
+            href={targetUrl}
+            className={`lang-toggle-wrapper ${mobile ? 'mobile' : ''}`}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            style={{ display: 'inline-block', transition: 'none' }}
+        >
             <div className="lang-toggle-track">
-                <motion.div
-                    className="lang-toggle-thumb"
-                    animate={{ x: isPT ? 0 : (mobile ? 40 : 32) }}
-                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                />
-                <span className={`lang-label pt ${isPT ? 'active' : ''}`}>PT</span>
-                <span className={`lang-label en ${!isPT ? 'active' : ''}`}>EN</span>
+                <div className="lang-toggle-thumb" ref={thumbRef} />
+                <span ref={ptLabelRef} className={`lang-label pt ${isPT ? 'active' : ''}`}>PT</span>
+                <span ref={enLabelRef} className={`lang-label en ${!isPT ? 'active' : ''}`}>EN</span>
             </div>
         </a>
     );

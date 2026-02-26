@@ -178,7 +178,7 @@ const { isLandingPage = false } = Astro.props;
     height: 24px;
     background: #fff;
     border-radius: 50%;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 0 2px 8px rgba(0, 0, 0, 0.3);
     z-index: 1;
   }
 
@@ -188,9 +188,9 @@ const { isLandingPage = false } = Astro.props;
     font-weight: 800;
     color: #71717a;
     z-index: 2;
-    transition: color 0.3s ease;
     text-align: center;
     pointer-events: none;
+    transition: none; /* Let GSAP handle it */
   }
 
   .navbar-root.is-landing:not(.scrolled) .lang-label {
@@ -199,12 +199,6 @@ const { isLandingPage = false } = Astro.props;
   }
 
   .lang-label.active {
-    color: #09090b;
-    text-shadow: none;
-  }
-
-  .navbar-root.is-landing:not(.scrolled) .lang-label.active {
-    color: #09090b;
     text-shadow: none;
   }
 
