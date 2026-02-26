@@ -5,6 +5,7 @@ import Footer from "../../components/Footer.astro";
 import HeroScrollSequence from "../../components/HeroScrollSequence.astro";
 import Section from "../../components/Section.astro";
 import PortfolioLanding from "../../components/PortfolioLanding.astro";
+import HeroPills from "../../components/HeroPills.astro";
 import { useTranslations } from "../../utils/i18n";
 
 const t = useTranslations("en");
@@ -17,8 +18,8 @@ const t = useTranslations("en");
     <HeroScrollSequence>
       <div class="hero-content container">
         <div class="hero-content-anim">
-          <h1>{t("hero.headline")}</h1>
-          <p>{t("hero.subheadline")}</p>
+          <h1 set:html={t("hero.headline")}></h1>
+          <HeroPills />
           <div
             style="display: flex; gap: 1rem; justify-content: center; margin-top: 2.5rem; flex-wrap: wrap;"
           >
@@ -116,15 +117,16 @@ const t = useTranslations("en");
 
 <style>
   .hero-content {
-    max-width: 800px;
+    max-width: 900px;
+    width: 100%;
   }
 
   .hero-content h1 {
-    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-size: clamp(2rem, 5vw, 4.8rem);
     font-weight: 800;
-    line-height: 1.05;
-    margin-bottom: 1.5rem;
-    letter-spacing: -0.04em;
+    line-height: 1.15;
+    margin-bottom: 2rem;
+    letter-spacing: -0.02em;
     background: linear-gradient(
       135deg,
       #ffffff 0%,
@@ -146,6 +148,7 @@ const t = useTranslations("en");
     margin-left: auto;
     margin-right: auto;
     text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    display: none; /* Subheadline is hidden but style kept for safety */
   }
 
   .btn-cta {
@@ -299,7 +302,7 @@ const t = useTranslations("en");
 
   @media (max-width: 768px) {
     .hero-content h1 {
-      font-size: 2.5rem;
+      font-size: 2.2rem;
     }
   }
 </style>

@@ -1,0 +1,107 @@
+---
+import { Monitor, Share2, Palette, Video } from "lucide-react";
+---
+
+<div class="hero-pills">
+    <div class="pill">
+        <div class="icon-wrap">
+            <Monitor size={20} />
+        </div>
+        <span class="pill-text">Web Design</span>
+    </div>
+
+    <div class="pill">
+        <div class="icon-wrap">
+            <Share2 size={20} />
+        </div>
+        <span class="pill-text">Social Media</span>
+    </div>
+
+    <div class="pill">
+        <div class="icon-wrap">
+            <Palette size={20} />
+        </div>
+        <span class="pill-text">Graphic Design</span>
+    </div>
+
+    <div class="pill">
+        <div class="icon-wrap">
+            <Video size={20} />
+        </div>
+        <span class="pill-text">Vídeo Drone</span>
+    </div>
+</div>
+
+<style>
+    .hero-pills {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 2.5rem;
+    }
+
+    .pill {
+        display: flex;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 50px;
+        padding: 0.35rem;
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .pill:hover {
+        background: rgba(56, 189, 248, 0.1); /* subtle neon blue */
+        border-color: rgba(56, 189, 248, 0.3);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(56, 189, 248, 0.15);
+    }
+
+    .icon-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.9);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        flex-shrink: 0;
+    }
+
+    .pill:hover .icon-wrap {
+        background: linear-gradient(135deg, #38bdf8 0%, #2563eb 100%);
+        color: white;
+        transform: rotate(5deg) scale(1.05);
+    }
+
+    .pill-text {
+        max-width: 0;
+        opacity: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        font-weight: 500;
+        font-size: 0.95rem;
+        color: white;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        margin-left: 0;
+    }
+
+    .pill:hover .pill-text {
+        max-width: 150px; /* Large enough to reveal the text */
+        opacity: 1;
+        margin-left: 0.75rem;
+        margin-right: 1.25rem;
+    }
+
+    @media (max-width: 768px) {
+        .hero-pills {
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+    }
+</style>
