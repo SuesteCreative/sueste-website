@@ -1,100 +1,281 @@
 ---
-import { getLangFromUrl, useTranslations } from "../utils/i18n";
-
 const { lang = "pt" } = Astro.props;
-const textPt =
-    "Não fazemos apenas sites. Construímos presenças digitais que dominam.";
-const textEn =
-    "We don't just build websites. We build digital presences that dominate.";
-const text = lang === "pt" ? textPt : textEn;
 
-const words = text.split(" ");
+const titlePt = "Sobre Nós";
+const titleEn = "About Us";
+
+const headlinePt =
+    "Não fazemos apenas sites.<br/><span class='text-gradient'>Construímos presenças digitais que dominam.</span>";
+const headlineEn =
+    "We don't just build websites.<br/><span class='text-gradient'>We build digital presences that dominate.</span>";
+
+const descPt1 =
+    "A Sueste Creative é mais do que uma agência. Somos o seu parceiro estratégico no mundo digital. Combinamos design de classe mundial, tecnologia de ponta e uma mentalidade focada em resultados para elevar a sua marca ao topo.";
+const descEn1 =
+    "Sueste Creative is more than an agency. We are your strategic partner in the digital world. We combine world-class design, cutting-edge technology, and a results-driven mindset to elevate your brand to the top.";
+
+const descPt2 =
+    "A nossa equipa multidisciplinar domina desde o código à cinematografia com drones, garantindo que cada ponto de contacto da sua marca comunica excelência e atrai efetivamente o seu público-alvo.";
+const descEn2 =
+    "Our multidisciplinary team masters everything from code to drone cinematography, ensuring that every touchpoint of your brand communicates excellence and effectively attracts your target audience.";
+
+const imageUrl =
+    "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop";
 ---
 
-<section class="who-we-are-section" id="who-we-are">
-    <div class="container who-content">
-        <h2 class="statement-text" aria-label={text}>
-            {
-                words.map((word, index) => (
-                    <span class="word-wrapper">
-                        <span class="word" set:html={word + "&nbsp;"} />
-                    </span>
-                ))
-            }
-        </h2>
+<section class="about-section" id="about">
+    <div class="container">
+        <div class="about-grid">
+            <div class="about-content">
+                <span class="section-badge" data-reveal
+                    >{lang === "pt" ? titlePt : titleEn}</span
+                >
+                <h2
+                    class="about-headline reveal-delay-1"
+                    data-reveal
+                    set:html={lang === "pt" ? headlinePt : headlineEn}
+                >
+                </h2>
+                <div class="about-text-wrapper reveal-delay-2" data-reveal>
+                    <p>{lang === "pt" ? descPt1 : descEn1}</p>
+                    <p>{lang === "pt" ? descPt2 : descEn2}</p>
+                </div>
+                <div class="about-stats reveal-delay-3" data-reveal>
+                    <div class="stat-item">
+                        <span class="stat-number"
+                            >100<span class="text-gradient">%</span>
+                        </span>
+                        <span class="stat-label"
+                            >{
+                                lang === "pt"
+                                    ? "Foco em Conversão"
+                                    : "Conversion Focused"
+                            }</span
+                        >
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number"
+                            >4<span class="text-gradient">K</span>
+                        </span>
+                        <span class="stat-label"
+                            >{
+                                lang === "pt"
+                                    ? "Qualidade de Drone"
+                                    : "Drone Quality"
+                            }</span
+                        >
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-image-wrapper reveal-delay-2" data-reveal>
+                <div class="image-glass-frame">
+                    <img
+                        src={imageUrl}
+                        alt={lang === "pt" ? "Equipa Sueste" : "Sueste Team"}
+                        loading="lazy"
+                    />
+                    <div class="image-overlay-gradient"></div>
+                </div>
+                <!-- Decorative blobs behind image -->
+                <div class="decor-blob blob-1"></div>
+                <div class="decor-blob blob-2"></div>
+            </div>
+        </div>
     </div>
 </section>
 
 <style>
-    .who-we-are-section {
-        padding: 12rem 0;
-        background: var(--color-bg);
+    .about-section {
+        padding: 10rem 0;
         position: relative;
         overflow: hidden;
-        display: flex;
+    }
+
+    .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
         align-items: center;
-        justify-content: center;
     }
 
-    .who-content {
-        max-width: 1000px;
-        position: relative;
-        z-index: 2;
+    .section-badge {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 50px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 2rem;
+        backdrop-filter: blur(10px);
     }
 
-    .statement-text {
-        font-size: clamp(2.5rem, 6vw, 5.5rem);
+    .about-headline {
+        font-size: clamp(2.5rem, 4vw, 3.5rem);
         font-weight: 800;
-        line-height: 1.1;
-        color: #fff;
-        text-align: center;
-        letter-spacing: -0.03em;
+        line-height: 1.15;
+        margin-bottom: 2rem;
+        letter-spacing: -0.02em;
     }
 
-    .word-wrapper {
-        display: inline-block;
-        overflow: hidden; /* Clips the word as it animates up */
-        vertical-align: top;
-    }
-
-    .word {
-        display: inline-block;
-        transform: translateY(100%);
-        opacity: 0;
-        background: linear-gradient(135deg, #ffffff 0%, #a1a1aa 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-
-    /* Specifically highlight 'dominam' or 'dominate' */
-    .word:nth-last-child(1) {
+    .text-gradient {
         background: linear-gradient(135deg, #38bdf8 0%, #2563eb 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }
+
+    .about-text-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        margin-bottom: 3rem;
+    }
+
+    .about-text-wrapper p {
+        font-size: 1.15rem;
+        color: #a1a1aa;
+        line-height: 1.6;
+        font-weight: 300;
+    }
+
+    .about-stats {
+        display: flex;
+        gap: 3rem;
+    }
+
+    .stat-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .stat-number {
+        font-size: 3.5rem;
+        font-weight: 800;
+        line-height: 1;
+        color: #fff;
+    }
+
+    .stat-label {
+        font-size: 0.9rem;
+        color: #71717a;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .about-image-wrapper {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        min-height: 500px;
+    }
+
+    .image-glass-frame {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        min-height: 500px;
+        border-radius: 24px;
+        overflow: hidden;
+        z-index: 2;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        transform: perspective(1000px) rotateY(-5deg);
+        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .about-image-wrapper:hover .image-glass-frame {
+        transform: perspective(1000px) rotateY(0deg) scale(1.02);
+    }
+
+    .image-glass-frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.6s ease;
+    }
+
+    .about-image-wrapper:hover .image-glass-frame img {
+        transform: scale(1.05); /* Slight image zoom on hover */
+    }
+
+    .image-overlay-gradient {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            135deg,
+            rgba(5, 5, 5, 0.1) 0%,
+            rgba(37, 99, 235, 0.2) 100%
+        );
+        z-index: 3;
+        mix-blend-mode: overlay;
+        pointer-events: none;
+    }
+
+    .decor-blob {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(60px);
+        z-index: 1;
+        opacity: 0.5;
+    }
+
+    .blob-1 {
+        width: 300px;
+        height: 300px;
+        background: #38bdf8;
+        top: -50px;
+        right: -50px;
+    }
+
+    .blob-2 {
+        width: 250px;
+        height: 250px;
+        background: #2563eb;
+        bottom: -50px;
+        left: -50px;
+    }
+
+    @media (max-width: 1024px) {
+        .about-grid {
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+
+        .about-image-wrapper {
+            min-height: 400px;
+        }
+
+        .image-glass-frame {
+            min-height: 400px;
+            transform: none;
+        }
+
+        .about-image-wrapper:hover .image-glass-frame {
+            transform: none;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .about-section {
+            padding: 6rem 0;
+        }
+
+        .about-headline {
+            font-size: 2.2rem;
+        }
+
+        .about-stats {
+            gap: 1.5rem;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+        }
+    }
 </style>
-
-<script>
-    import { gsap } from "gsap";
-    import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-    gsap.registerPlugin(ScrollTrigger);
-
-    const sections = document.querySelectorAll(".who-we-are-section");
-
-    sections.forEach((section) => {
-        const words = section.querySelectorAll(".word");
-
-        gsap.to(words, {
-            y: "0%",
-            opacity: 1,
-            duration: 1.2,
-            stagger: 0.05,
-            ease: "power4.out",
-            scrollTrigger: {
-                trigger: section,
-                start: "top 75%",
-            },
-        });
-    });
-</script>
