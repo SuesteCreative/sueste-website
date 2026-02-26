@@ -1,96 +1,476 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Navbar from '../components/Navbar.astro';
-import Footer from '../components/Footer.astro';
-import Section from '../components/Section.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
 ---
 
-<BaseLayout title="Serviços" description="Descubra como a Sueste Creative pode ajudar a sua marca.">
+<BaseLayout
+  title="Serviços"
+  description="Descubra como a Sueste Creative pode ajudar a sua marca."
+>
   <Navbar />
   <main class="services-page">
-    <Section title="Os Nossos Serviços" subtitle="Equilibrando estética e funcionalidade para criar experiências memoráveis.">
-      <div class="detailed-services">
-        {[
-          {
-            title: "Web Development",
-            desc: "Criamos websites de alta performance, desde landing pages focadas em conversão a plataformas complexas. Utilizamos as tecnologias mais recentes para garantir velocidade, SEO e uma experiência de utilizador fluida.",
-            features: ["Astro & React", "SEO Optimization", "Mobile First", "Performance Focused"]
-          },
-          {
-            title: "Social Media",
-            desc: "Elevamos a sua presença digital com conteúdo que ressoa. Da estratégia à execução, ajudamos a construir uma comunidade fiel e a converter seguidores em clientes.",
-            features: ["Content Strategy", "Community Management", "Paid Ads", "Analytics"]
-          },
-          {
-            title: "Drone & Video",
-            desc: "Capturamos perspetivas únicas que contam histórias. A nossa produção de vídeo cinematográfico, incluindo captação aérea em 4K, dá uma nova dimensão à sua marca.",
-            features: ["4K Aerial Footage", "Cinematic Editing", "Storytelling", "Color Grading"]
-          }
-        ].map((service, index) => (
-          <div class="service-detail glass" data-reveal class={index % 2 === 0 ? 'reveal-left' : 'reveal-right'}>
-            <div class="service-text">
-              <h3>{service.title}</h3>
-              <p>{service.desc}</p>
-              <ul class="feature-list">
-                {service.features.map(f => <li>{f}</li>)}
-              </ul>
-            </div>
-          </div>
-        ))}
+    <!-- HERO SECTION -->
+    <header class="services-hero">
+      <div class="container hero-inner">
+        <h1 class="reveal-text">
+          Excelência Digital <span class="highlight">em cada pixel.</span>
+        </h1>
+        <p class="reveal-subtitle">
+          Equilibrando estética e funcionalidade para criar experiências que não
+          só dão nas vistas, mas entregam resultados mensuráveis.
+        </p>
+        <div class="hero-blobs">
+          <div class="blob blob-1"></div>
+          <div class="blob blob-2"></div>
+        </div>
       </div>
-    </Section>
+    </header>
+
+    <!-- DETAILED SERVICES WITH STICKY REVEAL -->
+    <div class="services-showcase">
+      {
+        [
+          {
+            id: "web",
+            title: "Web Development",
+            desc: "Construímos infraestruturas digitais que servem como o motor do seu negócio. Do código à conversão, cada detalhe é otimizado para performance extrema e experiência de utilizador fluida.",
+            features: [
+              {
+                label: "Modern Stack",
+                val: "Astro / React / Next.js",
+                icon: "💎",
+              },
+              {
+                label: "High Performance",
+                val: "Scores 95+ LightHouse",
+                icon: "⚡",
+              },
+              { label: "SEO Nativo", val: "Estrutura Semântica", icon: "🎯" },
+              {
+                label: "Scalability",
+                val: "Cloud Native Architecture",
+                icon: "🚀",
+              },
+            ],
+            img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1600",
+          },
+          {
+            id: "social",
+            title: "Social Media Strategy",
+            desc: "Não se trata apenas de publicar, mas de criar diálogo. Transformamos a sua marca numa voz influente através de conteúdo estratégico que ressoa, retém e converte comunidades fiéis.",
+            features: [
+              {
+                label: "Content Creation",
+                val: "Multiformato & Reels",
+                icon: "🎨",
+              },
+              { label: "Community", val: "Gestão Ativa", icon: "🤝" },
+              {
+                label: "Paid Media",
+                val: "Tráfego Pago Otimizado",
+                icon: "📈",
+              },
+              { label: "Data Insights", val: "Relatórios de ROI", icon: "📊" },
+            ],
+            img: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=1600",
+          },
+          {
+            id: "video",
+            title: "Drone & Cinematic Video",
+            desc: "Perspetivas que mudam a perceção. Utilizamos tecnologia de ponta para captar imagens aéreas e cinematográficas que elevam o valor percebido da sua marca e contam histórias impossíveis de ignorar.",
+            features: [
+              { label: "4K Aerial", val: "Captação com Drone FPV", icon: "🚁" },
+              { label: "Cinematography", val: "Lentes de Cinema", icon: "📽️" },
+              {
+                label: "Color Grading",
+                val: "Looks Profissionais",
+                icon: "🎞️",
+              },
+              {
+                label: "Sound Design",
+                val: "Imersivo & Envolvente",
+                icon: "🔊",
+              },
+            ],
+            img: "https://images.unsplash.com/photo-1508614589041-3959a7212ecd?auto=format&fit=crop&q=80&w=1600",
+          },
+        ].map((service, idx) => (
+          <section
+            class={`service-section ${idx % 2 !== 0 ? "reverse" : ""}`}
+            id={service.id}
+          >
+            <div class="container grid-layout">
+              <div class="service-content">
+                <span class="service-num">0{idx + 1}</span>
+                <h2>{service.title}</h2>
+                <p>{service.desc}</p>
+
+                <div class="bento-features">
+                  {service.features.map((f) => (
+                    <div class="bento-item glass">
+                      <span class="icon">{f.icon}</span>
+                      <div class="bento-text">
+                        <span class="bento-label">{f.label}</span>
+                        <span class="bento-val">{f.val}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <a href="/orcamento" class="btn-magnetic-v2">
+                  <span>Solicitar Orçamento</span>
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <line x1="7" y1="17" x2="17" y2="7" />
+                    <polyline points="7 7 17 7 17 17" />
+                  </svg>
+                </a>
+              </div>
+
+              <div class="service-visual">
+                <div class="image-reveal-wrapper">
+                  <img
+                    src={service.img}
+                    alt={service.title}
+                    class="reveal-image"
+                  />
+                  <div class="parallax-overlay">Sueste Creative</div>
+                </div>
+              </div>
+            </div>
+          </section>
+        ))
+      }
+    </div>
   </main>
   <Footer />
 </BaseLayout>
 
 <style>
-  .services-page { padding-top: 80px; }
-  
-  .detailed-services {
+  .services-page {
+    background-color: #050505;
+    color: #fff;
+  }
+
+  /* HERO */
+  .services-hero {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding-top: 120px;
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 10;
+  }
+
+  .services-hero h1 {
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    max-width: 900px;
+  }
+
+  .services-hero .highlight {
+    background: linear-gradient(135deg, #38bdf8 0%, #2563eb 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .reveal-subtitle {
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    color: #a1a1aa;
+    max-width: 650px;
+    margin-top: 2rem;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  .hero-blobs .blob {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    filter: blur(80px);
+    border-radius: 50%;
+    z-index: -1;
+    opacity: 0.3;
+  }
+
+  .blob-1 {
+    background: #38bdf8;
+    top: 10%;
+    right: -5%;
+  }
+  .blob-2 {
+    background: #2563eb;
+    bottom: -10%;
+    left: -5%;
+  }
+
+  /* SERVICE SECTIONS */
+  .service-section {
+    padding: 10rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+  }
+
+  .grid-layout {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 8rem;
+    align-items: center;
+  }
+
+  .reverse .grid-layout {
+    grid-template-columns: 1fr 1.2fr;
+  }
+
+  .reverse .service-content {
+    grid-column: 2;
+  }
+
+  .reverse .service-visual {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .service-num {
+    font-size: 1rem;
+    font-weight: 800;
+    color: #38bdf8;
+    letter-spacing: 0.2em;
+    display: block;
+    margin-bottom: 1.5rem;
+  }
+
+  .service-content h2 {
+    font-size: clamp(2.5rem, 4vw, 3.8rem);
+    font-weight: 800;
+    margin-bottom: 2rem;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  .service-content p {
+    font-size: 1.25rem;
+    color: #a1a1aa;
+    line-height: 1.7;
+    margin-bottom: 3.5rem;
+    font-weight: 300;
+  }
+
+  /* BENTO FEATURES */
+  .bento-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+  }
+
+  .bento-item {
+    padding: 2rem;
+    border-radius: 20px;
     display: flex;
     flex-direction: column;
-    gap: 4rem;
-  }
-
-  .service-detail {
-    padding: 4rem;
-    border-radius: 40px;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-
-  .service-text h3 {
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
-    color: var(--color-accent);
-  }
-
-  .service-text p {
-    font-size: 1.25rem;
-    line-height: 1.8;
-    opacity: 0.8;
-    margin-bottom: 2rem;
-    max-width: 800px;
-  }
-
-  .feature-list {
-    display: flex;
-    flex-wrap: wrap;
     gap: 1rem;
-    list-style: none;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.02);
+    transition: all 0.4s ease;
   }
 
-  .feature-list li {
+  .bento-item:hover {
     background: rgba(255, 255, 255, 0.05);
-    padding: 0.5rem 1.5rem;
-    border-radius: 50px;
-    font-size: 0.9rem;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-color: rgba(56, 189, 248, 0.3);
+    transform: translateY(-5px);
   }
 
-  @media (max-width: 768px) {
-    .service-detail { padding: 2.5rem; }
-    .service-text h3 { font-size: 2rem; }
+  .bento-item .icon {
+    font-size: 2.5rem;
+  }
+  .bento-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #71717a;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+  }
+  .bento-val {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  /* BUTTON V2 */
+  .btn-magnetic-v2 {
+    display: inline-flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.25rem 3rem;
+    background: #fff;
+    border-radius: 100px;
+    color: #000;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .btn-magnetic-v2:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+  }
+
+  /* VISUALS */
+  .service-visual {
+    position: relative;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+  }
+
+  .image-reveal-wrapper {
+    width: 100%;
+    aspect-ratio: 4/5;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .image-reveal-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.2);
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .parallax-overlay {
+    position: absolute;
+    bottom: 2rem;
+    left: 2rem;
+    font-size: 4rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.05);
+    white-space: nowrap;
+    pointer-events: none;
+    line-height: 1;
+  }
+
+  @media (max-width: 1024px) {
+    .grid-layout,
+    .reverse .grid-layout {
+      grid-template-columns: 1fr;
+      gap: 4rem;
+    }
+    .service-visual,
+    .reverse .service-visual {
+      grid-column: 1;
+      grid-row: auto;
+      order: -1;
+    }
+    .reverse .service-content {
+      grid-column: 1;
+    }
+    .bento-features {
+      grid-template-columns: 1fr;
+    }
   }
 </style>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Hero Animations
+  const tl = gsap.timeline();
+  tl.from(".reveal-text", {
+    y: 100,
+    opacity: 0,
+    duration: 1.5,
+    ease: "power4.out",
+    delay: 0.2,
+  }).from(
+    ".reveal-subtitle",
+    {
+      y: 50,
+      opacity: 0,
+      duration: 1.2,
+      ease: "power4.out",
+    },
+    "-=1"
+  );
+
+  // Floating blobs
+  gsap.to(".blob-1", {
+    x: 50,
+    y: 100,
+    duration: 20,
+    repeat: -1,
+    yoyo: true,
+    ease: "sine.inOut",
+  });
+  gsap.to(".blob-2", {
+    x: -80,
+    y: -40,
+    duration: 25,
+    repeat: -1,
+    yoyo: true,
+    ease: "sine.inOut",
+  });
+
+  // Service Sections Reveal
+  const sections = document.querySelectorAll(".service-section");
+  sections.forEach((section) => {
+    const img = section.querySelector(".reveal-image");
+    const overlay = section.querySelector(".parallax-overlay");
+    const content = section.querySelector(".service-content");
+    const bentoItems = section.querySelectorAll(".bento-item");
+
+    // Image Zoom Parallax
+    gsap.to(img, {
+      scale: 1,
+      scrollTrigger: {
+        trigger: section,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true,
+      },
+    });
+
+    // Text Overlay Parallax
+    gsap.to(overlay, {
+      x: -50,
+      scrollTrigger: {
+        trigger: section,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true,
+      },
+    });
+
+    // Bento Stagger
+    gsap.from(bentoItems, {
+      y: 50,
+      opacity: 0,
+      stagger: 0.1,
+      duration: 1,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: section,
+        start: "top 70%",
+      },
+    });
+  });
+</script>
