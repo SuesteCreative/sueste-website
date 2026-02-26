@@ -34,6 +34,7 @@ import Footer from "../components/Footer.astro";
           {
             id: "web",
             title: "Web Development",
+            icon: `<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/><line x1="14" y1="4" x2="10" y2="20"/></svg>`,
             desc: "Construímos infraestruturas digitais que servem como o motor do seu negócio. Do código à conversão, cada detalhe é otimizado para performance extrema e experiência de utilizador fluida.",
             features: [
               {
@@ -58,6 +59,7 @@ import Footer from "../components/Footer.astro";
           {
             id: "design",
             title: "Design Gráfico & Branding",
+            icon: `<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19 7-7 3 3-7 7-3-3z"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="m2 2 5 5"/><path d="m5.2 11.7 4.2 4.2"/></svg>`,
             desc: "A sua identidade visual é o primeiro aperto de mão com o cliente. Criamos sistemas visuais coerentes e memoráveis que comunicam os seus valores de forma instantânea e profissional.",
             features: [
               { label: "Branding", val: "Logotipos & Identidade", icon: "📐" },
@@ -82,6 +84,7 @@ import Footer from "../components/Footer.astro";
           {
             id: "social",
             title: "Estratégia Social Media",
+            icon: `<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>`,
             desc: "Não se trata apenas de publicar, mas de criar diálogo. Transformamos a sua marca numa voz influente através de conteúdo estratégico que ressoa, retém e converte comunidades fiéis.",
             features: [
               {
@@ -102,6 +105,7 @@ import Footer from "../components/Footer.astro";
           {
             id: "video",
             title: "Drone & Cinematic Video",
+            icon: `<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-5c1.62-2.2 5-3 5-3"/><path d="M12 15v5s3.03-.55 5-2c2.2-1.62 3-5 3-5"/></svg>`,
             desc: "Perspetivas que mudam a perceção. Utilizamos tecnologia de ponta para captar imagens aéreas e cinematográficas que elevam o valor percebido da sua marca e contam histórias impossíveis de ignorar.",
             features: [
               { label: "4K Aerial", val: "Captação com Drone FPV", icon: "🚁" },
@@ -117,7 +121,7 @@ import Footer from "../components/Footer.astro";
                 icon: "🔊",
               },
             ],
-            img: "https://images.unsplash.com/photo-1508614589041-3959a7212ecd?auto=format&fit=crop&q=80&w=1600",
+            img: "https://images.unsplash.com/photo-1473968512647-3e44a224fe8f?auto=format&fit=crop&q=80&w=1600",
           },
         ].map((service, idx) => (
           <section
@@ -126,7 +130,10 @@ import Footer from "../components/Footer.astro";
           >
             <div class="container grid-layout">
               <div class="service-content">
-                <span class="service-num">0{idx + 1}</span>
+                <div class="service-header-with-icon">
+                  <div class="service-icon-container" set:html={service.icon} />
+                  <span class="service-index">0{idx + 1}</span>
+                </div>
                 <h2>{service.title}</h2>
                 <p>{service.desc}</p>
 
@@ -141,21 +148,6 @@ import Footer from "../components/Footer.astro";
                     </div>
                   ))}
                 </div>
-
-                <a href="/orcamento" class="btn-magnetic-v2">
-                  <span>Solicitar Orçamento</span>
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                  >
-                    <line x1="7" y1="17" x2="17" y2="7" />
-                    <polyline points="7 7 17 7 17 17" />
-                  </svg>
-                </a>
               </div>
 
               <div class="service-visual">
@@ -173,6 +165,31 @@ import Footer from "../components/Footer.astro";
         ))
       }
     </div>
+
+    <!-- CENTRAL CTA -->
+    <section class="services-final-cta">
+      <div class="container text-center">
+        <h2 class="cta-title">Pronto para elevar o seu projeto?</h2>
+        <p class="cta-desc">
+          Vamos transformar a sua visão em realidade com uma estratégia focada
+          em resultados.
+        </p>
+        <a href="/orcamento" class="btn-magnetic-v2">
+          <span>Solicitar Orçamento Agora</span>
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+          >
+            <line x1="7" y1="17" x2="17" y2="7"></line>
+            <polyline points="7 7 17 7 17 17"></polyline>
+          </svg>
+        </a>
+      </div>
+    </section>
   </main>
   <Footer />
 </BaseLayout>
@@ -269,6 +286,44 @@ import Footer from "../components/Footer.astro";
     grid-row: 1;
   }
 
+  .service-header-with-icon {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .service-icon-container {
+    width: 4rem;
+    height: 4rem;
+    color: #38bdf8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(56, 189, 248, 0.1);
+    border-radius: 16px;
+    padding: 1rem;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .service-icon-container :global(svg) {
+    width: 100%;
+    height: 100%;
+  }
+
+  .service-section:hover .service-icon-container {
+    transform: scale(1.1) rotate(5deg);
+    background: rgba(56, 189, 248, 0.2);
+    box-shadow: 0 0 30px rgba(56, 189, 248, 0.2);
+  }
+
+  .service-index {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.2);
+    font-family: monospace;
+  }
+
   .service-num {
     font-size: 1rem;
     font-weight: 800;
@@ -299,7 +354,6 @@ import Footer from "../components/Footer.astro";
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
-    margin-bottom: 4rem;
   }
 
   .bento-item {
@@ -333,6 +387,34 @@ import Footer from "../components/Footer.astro";
     font-size: 1.15rem;
     font-weight: 600;
     color: #fff;
+  }
+
+  /* FINAL CTA */
+  .services-final-cta {
+    padding: 10rem 0;
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      rgba(56, 189, 248, 0.05)
+    );
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .cta-title {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 800;
+    margin-bottom: 2rem;
+    letter-spacing: -0.03em;
+  }
+
+  .cta-desc {
+    font-size: 1.25rem;
+    color: #a1a1aa;
+    max-width: 600px;
+    margin: 0 auto 4rem;
   }
 
   /* BUTTON V2 */
@@ -461,6 +543,7 @@ import Footer from "../components/Footer.astro";
     const overlay = section.querySelector(".parallax-overlay");
     const content = section.querySelector(".service-content");
     const bentoItems = section.querySelectorAll(".bento-item");
+    const icon = section.querySelector(".service-icon-container");
 
     // Image Zoom Parallax
     gsap.to(img, {
@@ -484,6 +567,19 @@ import Footer from "../components/Footer.astro";
       },
     });
 
+    // Icon Pop
+    gsap.from(icon, {
+      scale: 0.5,
+      opacity: 0,
+      rotation: -45,
+      duration: 1,
+      ease: "back.out(1.7)",
+      scrollTrigger: {
+        trigger: section,
+        start: "top 80%",
+      },
+    });
+
     // Bento Stagger
     gsap.from(bentoItems, {
       y: 50,
@@ -496,5 +592,18 @@ import Footer from "../components/Footer.astro";
         start: "top 70%",
       },
     });
+  });
+
+  // Final CTA Reveal
+  gsap.from(".cta-title, .cta-desc, .services-final-cta .btn-magnetic-v2", {
+    y: 50,
+    opacity: 0,
+    stagger: 0.2,
+    duration: 1,
+    ease: "power3.out",
+    scrollTrigger: {
+      trigger: ".services-final-cta",
+      start: "top 80%",
+    },
   });
 </script>
