@@ -392,8 +392,13 @@ import Footer from "../components/Footer.astro";
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(
+      15,
+      15,
+      15,
+      1
+    ); /* Solid dark background to prevent bleed-through */
     backdrop-filter: blur(10px);
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     position: relative;
@@ -402,7 +407,12 @@ import Footer from "../components/Footer.astro";
 
   .bento-item:hover {
     border-color: #38bdf8;
-    background: rgba(56, 189, 248, 0.05);
+    background: rgba(
+      56,
+      189,
+      248,
+      0.08
+    ); /* slightly more visible blue on hover */
     transform: translateY(-5px);
     box-shadow: 0 0 30px rgba(56, 189, 248, 0.3);
   }
@@ -669,10 +679,9 @@ import Footer from "../components/Footer.astro";
       },
     });
 
-    // Bento Stagger re-added
+    // Bento Stagger re-added - removing opacity to ensure absolute visibility
     gsap.from(bentoItems, {
       y: 40,
-      opacity: 0,
       stagger: 0.1,
       duration: 1,
       ease: "power4.out",
