@@ -142,6 +142,20 @@ const LangSwitcher: React.FC<{ lang: 'pt' | 'en', mobile?: boolean }> = ({ lang,
 const NavbarUI: React.FC<NavbarUIProps> = ({ lang, navItems, quoteLabel, quoteHref, isLandingPage = false }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const [currentPath, setCurrentPath] = useState('');
+
+    useEffect(() => {
+        // Set initial path
+        setCurrentPath(window.location.pathname);
+
+        // Handle client-side navigation (if any, though Astro is mostly MPAs)
+        const handlePathChange = () => {
+            setCurrentPath(window.location.pathname);
+        };
+
+        window.addEventListener('popstate', handlePathChange);
+        return () => window.removeEventListener('popstate', handlePathChange);
+    }, []);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -173,11 +187,23 @@ const NavbarUI: React.FC<NavbarUIProps> = ({ lang, navItems, quoteLabel, quoteHr
 
                 {/* DESKTOP LINKS */}
                 <ul className="nav-links desktop-only">
-                    {navItems.map((item, idx) => (
-                        <li key={idx}>
-                            <a href={item.href} className="nav-link-item">{item.label}</a>
-                        </li>
-                    ))}
+                    {navItems.map((item, idx) => {
+                        const isHome = item.href === '/' || item.href === '/en/';
+                        const isActive = isHome
+                            ? currentPath === item.href
+                            : currentPath.startsWith(item.href);
+
+                        return (
+                            <li key={idx}>
+                                <a
+                                    href={item.href}
+                                    className={`nav-link-item ${isActive ? 'active' : ''}`}
+                                >
+                                    {item.label}
+                                </a>
+                            </li>
+                        );
+                    })}
                     <li>
                         <a href={quoteHref} className="btn-primary-nav">{quoteLabel}</a>
                     </li>
@@ -225,16 +251,29 @@ const NavbarUI: React.FC<NavbarUIProps> = ({ lang, navItems, quoteLabel, quoteHr
                             </div>
                             <div className="drawer-inner">
                                 <ul className="mobile-nav-list">
-                                    {navItems.map((item, idx) => (
-                                        <motion.li
-                                            key={idx}
-                                            initial={{ opacity: 0, x: 20 }}
-                                            animate={{ opacity: 1, x: 0 }}
-                                            transition={{ delay: 0.1 + idx * 0.05 }}
-                                        >
-                                            <a href={item.href} onClick={() => setIsOpen(false)}>{item.label}</a>
-                                        </motion.li>
-                                    ))}
+                                    {navItems.map((item, idx) => {
+                                        const isHome = item.href === '/' || item.href === '/en/';
+                                        const isActive = isHome
+                                            ? currentPath === item.href
+                                            : currentPath.startsWith(item.href);
+
+                                        return (
+                                            <motion.li
+                                                key={idx}
+                                                initial={{ opacity: 0, x: 20 }}
+                                                animate={{ opacity: 1, x: 0 }}
+                                                transition={{ delay: 0.1 + idx * 0.05 }}
+                                            >
+                                                <a
+                                                    href={item.href}
+                                                    className={isActive ? 'active' : ''}
+                                                    onClick={() => setIsOpen(false)}
+                                                >
+                                                    {item.label}
+                                                </a>
+                                            </motion.li>
+                                        );
+                                    })}
                                     <motion.li
                                         initial={{ opacity: 0, x: 20 }}
                                         animate={{ opacity: 1, x: 0 }}

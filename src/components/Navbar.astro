@@ -124,7 +124,8 @@ const { isLandingPage = false } = Astro.props;
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
   }
 
-  .nav-link-item:hover {
+  .nav-link-item:hover,
+  .nav-link-item.active {
     color: #fff;
   }
 
@@ -139,7 +140,8 @@ const { isLandingPage = false } = Astro.props;
     transition: width 0.3s ease;
   }
 
-  .nav-link-item:hover::after {
+  .nav-link-item:hover::after,
+  .nav-link-item.active::after {
     width: 100%;
   }
 
@@ -360,7 +362,8 @@ const { isLandingPage = false } = Astro.props;
     line-height: 1.2;
   }
 
-  .mobile-nav-list a:hover {
+  .mobile-nav-list a:hover,
+  .mobile-nav-list a.active {
     color: #38bdf8;
     padding-left: 8px;
   }
