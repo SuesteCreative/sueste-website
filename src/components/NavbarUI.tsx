@@ -214,7 +214,7 @@ const NavbarUI: React.FC<NavbarUIProps> = ({ lang, navItems, quoteLabel, quoteHr
                             transition={{ type: 'spring', damping: 30, stiffness: 300 }}
                             className="nav-drawer-panel"
                         >
-                            <div className="drawer-header-internal" style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '1.25rem' }}>
+                            <div className="drawer-header-internal" style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '1rem' }}>
                                 <button
                                     className="drawer-close-btn"
                                     onClick={() => setIsOpen(false)}
