@@ -75,6 +75,7 @@ const t = useTranslations(lang);
     <Testimonials lang="en" />
 
     <Section id="cta" className="final-cta-new">
+      <div class="cta-bg-blob"></div>
       <div class="cta-container-v2">
         <div class="cta-massive-text" id="cta-reveal-text">
           <div class="cta-line">
@@ -295,6 +296,24 @@ const t = useTranslations(lang);
     padding: 10rem 0;
     background: transparent;
     overflow: hidden;
+    position: relative;
+  }
+
+  .cta-bg-blob {
+    position: absolute;
+    width: 60vw;
+    height: 60vw;
+    background: radial-gradient(
+      circle,
+      rgba(56, 189, 248, 0.1) 0%,
+      transparent 70%
+    );
+    filter: blur(100px);
+    z-index: 1;
+    pointer-events: none;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 
   .cta-container-v2 {

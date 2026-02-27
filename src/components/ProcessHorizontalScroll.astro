@@ -47,6 +47,7 @@ const processData = [
 ---
 
 <div class="process-horizontal-container" id="process-pin-container">
+    <div class="process-bg-blob"></div>
     <div class="process-sticky-left" data-reveal>
         <div class="sticky-content">
             <h2 class="process-title reveal-delay-1" data-reveal>
@@ -104,6 +105,24 @@ const processData = [
         position: relative;
         /* We don't hide overflow here, GSAP needs to read the scroll bounds */
         padding: 8rem 0;
+        background: transparent;
+    }
+
+    .process-bg-blob {
+        position: absolute;
+        width: 60vw;
+        height: 60vw;
+        background: radial-gradient(
+            circle,
+            rgba(37, 99, 235, 0.1) 0%,
+            transparent 70%
+        );
+        filter: blur(80px);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 0;
+        pointer-events: none;
     }
 
     /* LEFT SIDE (Static/Sticky Title) */

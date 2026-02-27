@@ -1,23 +1,28 @@
 ---
 interface Project {
     title: string;
-    category: string;
-    metric: string;
-    metricLabel: string;
+    categoryPt: string;
+    categoryEn: string;
+    metricPt: string;
+    metricEn: string;
+    metricLabelPt: string;
+    metricLabelEn: string;
     image: string;
     size: "small" | "large";
     link: string;
     internalLink: string;
     deviceType: "macbook" | "ipad" | "iphone";
-    metricSublabel?: string;
 }
 
 const projects: Project[] = [
     {
         title: "Desportos Náuticos de Alvor",
-        category: "E-Commerce & Merch",
-        metric: "E-commerce",
-        metricLabel: "Reservas Online",
+        categoryPt: "E-Commerce & Merch",
+        categoryEn: "E-Commerce & Merch",
+        metricPt: "E-commerce",
+        metricEn: "E-commerce",
+        metricLabelPt: "Reservas Online",
+        metricLabelEn: "Online Bookings",
         image: "/images/portfolio/desportos.jpg",
         size: "small",
         link: "https://desportosnauticosalvor.com/",
@@ -26,9 +31,12 @@ const projects: Project[] = [
     },
     {
         title: "Mental8Works",
-        category: "Sys & Backoffice",
-        metric: "Site Dinâmico",
-        metricLabel: "Custom Backoffice",
+        categoryPt: "Sys & Backoffice",
+        categoryEn: "Sys & Backoffice",
+        metricPt: "Site Dinâmico",
+        metricEn: "Dynamic Site",
+        metricLabelPt: "Custom Backoffice",
+        metricLabelEn: "Custom Backoffice",
         image: "/images/portfolio/mental8works.jpg",
         size: "small",
         link: "https://www.mental8works.pt/",
@@ -37,9 +45,12 @@ const projects: Project[] = [
     },
     {
         title: "Algo Atelier",
-        category: "Architecture",
-        metric: "98%",
-        metricLabel: "SEO Score",
+        categoryPt: "Arquitetura",
+        categoryEn: "Architecture",
+        metricPt: "Site Estático",
+        metricEn: "Static Site",
+        metricLabelPt: "98% SEO Score",
+        metricLabelEn: "98% SEO Score",
         image: "/images/portfolio/algoatelier.jpg",
         size: "large",
         link: "https://algoatelier.pt/",
@@ -49,9 +60,9 @@ const projects: Project[] = [
 ];
 
 const { lang = "pt" } = Astro.props;
-const viewAllLabel =
-    lang === "pt" ? "Ver Todos os Projetos" : "View All Projects";
-const viewAllHref = lang === "pt" ? "/portfolio" : "/en/work";
+const isPt = lang === "pt";
+const viewAllLabel = isPt ? "Ver Todos os Projetos" : "View All Projects";
+const viewAllHref = isPt ? "/portfolio" : "/en/work";
 ---
 
 <div class="portfolio-showcase-container">
@@ -65,10 +76,15 @@ const viewAllHref = lang === "pt" ? "/portfolio" : "/en/work";
                             isEven ? "row-left" : "row-right"
                         }`}
                         data-reveal
+                        data-title={project.title}
                     >
                         <div class="row-content">
                             <div class="card-header">
-                                <span class="category">{project.category}</span>
+                                <span class="category">
+                                    {isPt
+                                        ? project.categoryPt
+                                        : project.categoryEn}
+                                </span>
                                 <h3>{project.title}</h3>
                             </div>
 
@@ -80,7 +96,7 @@ const viewAllHref = lang === "pt" ? "/portfolio" : "/en/work";
                                             : ""
                                     }`}
                                 >
-                                    {project.metric}
+                                    {isPt ? project.metricPt : project.metricEn}
                                 </span>
                                 <span
                                     class={`metric-label ${
@@ -89,13 +105,10 @@ const viewAllHref = lang === "pt" ? "/portfolio" : "/en/work";
                                             : ""
                                     }`}
                                 >
-                                    {project.metricLabel}
+                                    {isPt
+                                        ? project.metricLabelPt
+                                        : project.metricLabelEn}
                                 </span>
-                                {project.metricSublabel && (
-                                    <span class="metric-sublabel">
-                                        {project.metricSublabel}
-                                    </span>
-                                )}
                             </div>
 
                             <a href={project.internalLink} class="btn-project">
@@ -483,6 +496,12 @@ const viewAllHref = lang === "pt" ? "/portfolio" : "/en/work";
         color: #38bdf8;
     }
 
+    .portfolio-row[data-title="Algo Atelier"] .metric-value {
+        background: none;
+        -webkit-text-fill-color: #38bdf8;
+        color: #38bdf8;
+    }
+
     .metric-label {
         font-size: 1rem;
         color: rgba(255, 255, 255, 0.6);
@@ -579,7 +598,7 @@ const viewAllHref = lang === "pt" ? "/portfolio" : "/en/work";
         }
 
         .metric-value {
-            font-size: clamp(2.5rem, 12vw, 3.5rem);
+            font-size: clamp(1.4rem, 8vw, 2.2rem);
         }
 
         .desktop-only {
