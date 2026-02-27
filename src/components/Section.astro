@@ -30,7 +30,7 @@ const { id, className, title, subtitle, dark = false } = Astro.props;
   }
 
   .section-dark {
-    background-color: #080808;
+    background-color: transparent;
   }
 
   .section-header {
@@ -55,10 +55,13 @@ const { id, className, title, subtitle, dark = false } = Astro.props;
 
   @media (max-width: 768px) {
     .section {
-      padding: 4rem 0;
+      padding: 5rem 0;
+    }
+    .section-header {
+      margin-bottom: 3rem;
     }
     .section-header h2 {
-      font-size: 2rem;
+      font-size: clamp(1.8rem, 8vw, 2.5rem);
     }
   }
 </style>

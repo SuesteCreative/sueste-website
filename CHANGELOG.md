@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v2.1] - 2026-02-27
+### Fixed
+- **Mobile Background Cohesion**: Made body background transparent to reveal global animated blobs across all sections, eliminating abrupt black cuts on the landing page.
+- **Responsive Typography**: Applied `clamp()` to all major headings (Portfolio projects, Testimonials, Bento cards) ensuring long titles fit perfectly on mobile screens.
+- **Process Carousel**: Transformed the "Our Process" section into a native horizontal carousel with `scroll-snap` for mobile users.
+- **Layout Consistency**: Standardized section padding and transparent backgrounds for Services, Portfolio, and CTA sections.
+
+
 ## [v2] - 2026-02-26
 ### Added
 - **Services Page Overhaul**: Implemented large background numbers (01-04) with parallax, blue gradient blobs for depth, and premium neon hover effects.

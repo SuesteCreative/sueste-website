@@ -246,11 +246,12 @@ const processData = [
         line-height: 1.5;
     }
 
-    /* Mobile Fallback - stack them instead of horizontal scroll */
+    /* Mobile Carousel - replace stack with horizontal swipe */
     @media (max-width: 1024px) {
         .process-horizontal-container {
             flex-direction: column;
             padding: 4rem 0;
+            overflow: hidden;
         }
 
         .process-sticky-left,
@@ -260,29 +261,60 @@ const processData = [
 
         .process-sticky-left {
             padding-right: 0;
-            margin-bottom: 4rem;
+            margin-bottom: 2rem;
+            padding: 0 1.5rem;
         }
 
         .sticky-content {
             position: static;
         }
 
+        .process-scroll-right {
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            padding: 1rem 1.5rem 2rem;
+            scrollbar-width: none; /* Hide scrollbar Firefox */
+        }
+
+        .process-scroll-right::-webkit-scrollbar {
+            display: none; /* Hide scrollbar Chrome/Safari */
+        }
+
         .horizontal-scroll-track {
-            flex-direction: column;
-            width: 100%;
-            padding-right: 0;
-            gap: 2rem;
+            flex-direction: row;
+            width: max-content;
+            padding-right: 1.5rem;
+            gap: 1.25rem;
         }
 
         .process-panel {
-            width: 100%;
-            height: auto;
+            width: calc(100vw - 4rem);
+            min-height: auto;
+            max-width: 400px;
             padding: 2.5rem;
+            scroll-snap-align: center;
+            flex-shrink: 0;
         }
 
         .step-num {
             margin-bottom: 1rem;
-            font-size: 4rem;
+            font-size: 3.5rem;
+        }
+
+        .panel-content h3 {
+            font-size: 1.75rem;
+        }
+
+        .panel-content p {
+            font-size: 1rem;
+        }
+
+        .icon-container {
+            width: 4.5rem;
+            height: 4.5rem;
+            padding: 1rem;
         }
     }
 </style>
