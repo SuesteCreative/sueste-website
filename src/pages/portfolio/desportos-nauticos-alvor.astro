@@ -45,23 +45,27 @@ import Section from "../../components/Section.astro";
             />
         </div>
 
-        <div
-            class="project-text-block mt-16"
-            data-reveal
-            class="reveal-delay-1"
-        >
-            <h2>A Solução</h2>
-            <p>
-                Desenvolvemos um <strong>E-commerce de Serviços</strong> focado na
-                conversão. O novo portal integra um calendário dinâmico de disponibilidade,
-                gateways de pagamento (Stripe/Multibanco) e um painel de controlo
-                completo para a equipa da Desportos Náuticos.
-            </p>
-            <ul>
-                <li>Reserva em 3 passos com seleção dinâmica de horários.</li>
-                <li>Layout mobile-first para reservas "on-the-go" na praia.</li>
-                <li>Automação de emails de confirmação e lembretes por SMS.</li>
-            </ul>
+        <div class="solution-section" data-reveal>
+            <div class="project-text-block solution-content">
+                <h2>A Solução</h2>
+                <p>
+                    Desenvolvemos um <strong>E-commerce de Serviços</strong> focado
+                    na conversão. O novo portal integra um calendário dinâmico de
+                    disponibilidade, gateways de pagamento (Stripe/Multibanco) e um
+                    painel de controlo completo para a equipa da Desportos Náuticos.
+                </p>
+                <ul>
+                    <li>
+                        Reserva em 3 passos com seleção dinâmica de horários.
+                    </li>
+                    <li>
+                        Layout mobile-first para reservas "on-the-go" na praia.
+                    </li>
+                    <li>
+                        Automação de emails de confirmação e lembretes por SMS.
+                    </li>
+                </ul>
+            </div>
         </div>
 
         <div class="project-full-media mt-24" data-reveal>
@@ -100,6 +104,17 @@ import Section from "../../components/Section.astro";
         display: flex;
         flex-direction: column;
         gap: 1.5rem;
+    }
+
+    /* Wrap Solution text to match video width */
+    .solution-section {
+        grid-column: 1 / -1;
+        width: 100%;
+        margin-top: 4rem;
+    }
+
+    .solution-content {
+        max-width: 100%; /* Matches the video since they are both grid-column 1 / -1 */
     }
 
     .project-text-block h2 {
@@ -150,10 +165,12 @@ import Section from "../../components/Section.astro";
         font-weight: bold;
     }
 
-    .project-media img {
+    .project-media img,
+    .project-full-media video {
         width: 100%;
         height: auto;
         object-fit: cover;
+        border-radius: 24px; /* Matches bento card corner radius */
         transition: transform 0.8s ease;
     }
 
@@ -172,7 +189,7 @@ import Section from "../../components/Section.astro";
         }
 
         .project-media-left {
-            order: -1; /* Move images up on mobile depending on logic */
+            order: -1;
             margin-top: 0;
         }
     }
