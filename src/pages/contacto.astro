@@ -34,11 +34,7 @@ import Section from "../components/Section.astro";
           </div>
         </div>
 
-        <div
-          class="contact-form-wrapper glass"
-          data-reveal
-          class="reveal-delay-1"
-        >
+        <div class="contact-form-wrapper glass reveal-delay-1" data-reveal>
           <form class="contact-form">
             <div class="form-group">
               <label for="name">Nome</label>
@@ -80,28 +76,90 @@ import Section from "../components/Section.astro";
       subtitle="Algumas das dúvidas mais comuns dos nossos clientes."
       dark
     >
-      <div class="faq-grid">
+      <div class="faq-container">
         <div class="faq-item glass" data-reveal>
-          <h3>Quanto tempo demora um projeto?</h3>
-          <p>
-            Depende da complexidade. Um website institucional médio demora entre
-            3 a 6 semanas, enquanto um e-commerce ou sistema customizado pode
-            levar 2 a 4 meses.
-          </p>
+          <button class="faq-trigger" aria-expanded="false">
+            <h3>Quanto tempo demora um projeto?</h3>
+            <div class="faq-icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                ><polyline points="6 9 12 15 18 9"></polyline></svg
+              >
+            </div>
+          </button>
+          <div class="faq-content">
+            <div class="faq-content-inner">
+              <p>
+                Depende da complexidade. Um website institucional médio demora
+                entre 3 a 6 semanas, enquanto um e-commerce ou sistema
+                customizado pode levar 2 a 4 meses.
+              </p>
+            </div>
+          </div>
         </div>
-        <div class="faq-item glass" data-reveal class="reveal-delay-1">
-          <h3>Trabalham com clientes internacionais?</h3>
-          <p>
-            Sim! Embora estejamos em Lagos, Portugal, trabalhamos com clientes
-            de todo o mundo de forma 100% remota e eficiente.
-          </p>
+
+        <div class="faq-item glass reveal-delay-1" data-reveal>
+          <button class="faq-trigger" aria-expanded="false">
+            <h3>Trabalham com clientes internacionais?</h3>
+            <div class="faq-icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                ><polyline points="6 9 12 15 18 9"></polyline></svg
+              >
+            </div>
+          </button>
+          <div class="faq-content">
+            <div class="faq-content-inner">
+              <p>
+                Sim! Embora estejamos em Lagos, Portugal, trabalhamos com
+                clientes de todo o mundo de forma 100% remota e eficiente.
+              </p>
+            </div>
+          </div>
         </div>
-        <div class="faq-item glass" data-reveal class="reveal-delay-2">
-          <h3>Como funciona o processo de pagamento?</h3>
-          <p>
-            Normalmente dividimos o pagamento em 3 fases: adjudicação (50%),
-            após aprovação do design (25%) e antes do lançamento (25%).
-          </p>
+
+        <div class="faq-item glass reveal-delay-2" data-reveal>
+          <button class="faq-trigger" aria-expanded="false">
+            <h3>Como funciona o processo de pagamento?</h3>
+            <div class="faq-icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                ><polyline points="6 9 12 15 18 9"></polyline></svg
+              >
+            </div>
+          </button>
+          <div class="faq-content">
+            <div class="faq-content-inner">
+              <p>
+                Normalmente dividimos o pagamento em 3 fases: adjudicação (50%),
+                após aprovação do design (25%) e antes do lançamento (25%).
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </Section>
@@ -197,6 +255,105 @@ import Section from "../components/Section.astro";
     cursor: pointer;
   }
 
+  .faq-container {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .faq-item {
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .faq-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .faq-item.active {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--color-accent);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+
+  .faq-trigger {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    color: white;
+  }
+
+  .faq-trigger h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    transition: color 0.3s ease;
+  }
+
+  .faq-item:hover .faq-trigger h3 {
+    color: var(--color-accent);
+  }
+
+  .faq-icon {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    flex-shrink: 0;
+  }
+
+  .faq-icon svg {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .faq-item.active .faq-icon {
+    background: var(--color-accent);
+  }
+
+  .faq-item.active .faq-icon svg {
+    transform: rotate(180deg);
+  }
+
+  .faq-content {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .faq-item.active .faq-content {
+    grid-template-rows: 1fr;
+  }
+
+  .faq-content-inner {
+    overflow: hidden;
+  }
+
+  .faq-content p {
+    padding: 0 2rem 2rem 2rem;
+    margin: 0;
+    opacity: 0.7;
+    line-height: 1.7;
+    font-size: 1.05rem;
+  }
+
   @media (max-width: 768px) {
     .contact-grid {
       grid-template-columns: 1fr;
@@ -205,5 +362,49 @@ import Section from "../components/Section.astro";
     .contact-form-wrapper {
       padding: 2rem;
     }
+    .faq-trigger {
+      padding: 1.5rem;
+    }
+    .faq-trigger h3 {
+      font-size: 1.1rem;
+    }
+    .faq-content p {
+      padding: 0 1.5rem 1.5rem 1.5rem;
+    }
   }
 </style>
+
+<script>
+  function setupAccordion() {
+    const items = document.querySelectorAll(".faq-item");
+
+    items.forEach((item) => {
+      const trigger = item.querySelector(".faq-trigger");
+      if (!trigger) return;
+
+      trigger.addEventListener("click", () => {
+        const isOpen = item.classList.contains("active");
+
+        // Close all other items
+        items.forEach((otherItem) => {
+          if (otherItem !== item) {
+            otherItem.classList.remove("active");
+            otherItem
+              .querySelector(".faq-trigger")
+              ?.setAttribute("aria-expanded", "false");
+          }
+        });
+
+        // Toggle current item
+        item.classList.toggle("active");
+        trigger.setAttribute("aria-expanded", (!isOpen).toString());
+      });
+    });
+  }
+
+  // Initialize
+  setupAccordion();
+
+  // Handle Astro view transitions
+  document.addEventListener("astro:after-swap", setupAccordion);
+</script>
