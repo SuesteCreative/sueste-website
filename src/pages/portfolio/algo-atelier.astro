@@ -22,7 +22,7 @@ import Section from "../../components/Section.astro";
             <img
                 src="/images/portfolio/algoatelier-mockup.png"
                 alt="Algo Atelier Mockup"
-                class="rounded-xl glass-panel p-2"
+                class="rounded-xl w-full"
             />
         </div>
 
@@ -42,26 +42,35 @@ import Section from "../../components/Section.astro";
             </p>
         </div>
 
-        <div class="project-full-media mt-24 project-text-block" data-reveal>
-            <h2>SEO como Alavanca</h2>
-            <p>
-                Mais do que um portfólio visual, desenhámos a estrutura de
-                conteúdos para dominar as pesquisas locais e internacionais por
-                arquitetura de luxo. A otimização semântica e a velocidade de
-                resposta permitiram alcançar um score de 98% em SEO.
-            </p>
+        <div class="solution-section" data-reveal>
+            <div class="project-text-block solution-content">
+                <h2>SEO como Alavanca</h2>
+                <p>
+                    Mais do que um portfólio visual, desenhámos a estrutura de
+                    conteúdos para dominar as pesquisas locais e internacionais
+                    por arquitetura de luxo. A otimização semântica e a
+                    velocidade de resposta permitiram alcançar um score de 98%
+                    em SEO.
+                </p>
+            </div>
         </div>
 
-        <div
-            class="project-media project-media-right"
-            style="grid-column: 1 / -1; margin-top: 2rem;"
-            data-reveal
-        >
-            <img
-                src="/images/portfolio/algoatelier-full.png"
-                alt="Algo Atelier Desktop View"
-                class="rounded-2xl glass-panel p-2 w-full"
-            />
+        <div class="project-full-media mt-24" data-reveal>
+            <video
+                autoplay
+                loop
+                muted
+                playsinline
+                class="w-full"
+                style="padding: 0.5rem;"
+            >
+                <source
+                    src="/media/algo-atelier-presentation.webm"
+                    type="video/webm"
+                />
+                <!-- MP4 Fallback will be added when available -->
+                O seu navegador não suporta este vídeo.
+            </video>
         </div>
     </div>
 </ProjectLayout>
@@ -79,6 +88,17 @@ import Section from "../../components/Section.astro";
         display: flex;
         flex-direction: column;
         gap: 1.5rem;
+    }
+
+    /* Wrap text to match video width */
+    .solution-section {
+        grid-column: 1 / -1;
+        width: 100%;
+        margin-top: 4rem;
+    }
+
+    .solution-content {
+        max-width: 100%;
     }
 
     .project-text-block h2 {
@@ -107,10 +127,13 @@ import Section from "../../components/Section.astro";
         color: rgba(255, 255, 255, 0.7);
     }
 
-    .project-media img {
+    .project-media img,
+    .project-full-media video,
+    .project-full-media img {
         width: 100%;
         height: auto;
         object-fit: cover;
+        border-radius: 24px; /* Matches bento card corner radius */
         transition: transform 0.8s ease;
     }
 
@@ -129,7 +152,7 @@ import Section from "../../components/Section.astro";
         }
 
         .project-media-left {
-            order: 1;
+            order: -1;
         }
     }
 </style>
