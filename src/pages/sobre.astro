@@ -54,7 +54,7 @@ import Section from "../components/Section.astro";
             pixel e linha de código.
           </p>
         </div>
-        <div class="value-card glass" data-reveal class="reveal-delay-1">
+        <div class="value-card glass reveal-delay-1" data-reveal>
           <div class="value-icon">💡</div>
           <h3>Inovação</h3>
           <p>
@@ -62,7 +62,7 @@ import Section from "../components/Section.astro";
             criativas e eficazes.
           </p>
         </div>
-        <div class="value-card glass" data-reveal class="reveal-delay-2">
+        <div class="value-card glass reveal-delay-2" data-reveal>
           <div class="value-icon">🤝</div>
           <h3>Proximidade</h3>
           <p>
@@ -124,6 +124,78 @@ import Section from "../components/Section.astro";
     .stats {
       gap: 2rem;
       flex-direction: column;
+    }
+  }
+
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .value-card {
+    padding: 3rem;
+    border-radius: 30px;
+    transition: all 0.4s cubic-bezier(0.2, 1, 0.3, 1);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .value-card:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--color-accent);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  }
+
+  .value-icon {
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 18px;
+    transition: all 0.4s cubic-bezier(0.2, 1, 0.3, 1);
+  }
+
+  .value-card:hover .value-icon {
+    background: var(--color-accent);
+    transform: scale(1.1) rotate(5deg);
+    color: white;
+  }
+
+  .value-card h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #fff;
+  }
+
+  .value-card p {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    opacity: 0.7;
+    margin: 0;
+  }
+
+  .cta-center {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+
+  .inline-block {
+    display: inline-block;
+  }
+
+  @media (max-width: 768px) {
+    .value-card {
+      padding: 2rem;
+    }
+    .values-grid {
+      grid-template-columns: 1fr;
     }
   }
 </style>
