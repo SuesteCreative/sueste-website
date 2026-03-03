@@ -23,7 +23,7 @@ const projects: Project[] = [
         metricEn: "E-commerce",
         metricLabelPt: "Reservas Online",
         metricLabelEn: "Online Bookings",
-        image: "/images/portfolio/desportos.jpg",
+        image: "/images/portfolio/desportos-full.png",
         size: "small",
         link: "https://desportosnauticosalvor.com/",
         internalLink: "/portfolio/desportos-nauticos-alvor",
@@ -37,7 +37,7 @@ const projects: Project[] = [
         metricEn: "Dynamic Site",
         metricLabelPt: "Custom Backoffice",
         metricLabelEn: "Custom Backoffice",
-        image: "/images/portfolio/mental8works.jpg",
+        image: "/images/portfolio/mental8works-full.png",
         size: "small",
         link: "https://www.mental8works.pt/",
         internalLink: "/portfolio/mental8works",
@@ -51,7 +51,7 @@ const projects: Project[] = [
         metricEn: "Static Site",
         metricLabelPt: "98% SEO Score",
         metricLabelEn: "98% SEO Score",
-        image: "/images/portfolio/algoatelier.jpg",
+        image: "/images/portfolio/algoatelier-full.png",
         size: "large",
         link: "https://algoatelier.pt/",
         internalLink: "/portfolio/algo-atelier",
@@ -622,7 +622,7 @@ const viewAllHref = isPt ? "/portfolio" : "/en/work";
 
         mockupContainers.forEach((container) => {
             const img = container.querySelector(
-                ".mockup-img"
+                ".mockup-img",
             ) as HTMLImageElement;
             if (!img) return;
 
