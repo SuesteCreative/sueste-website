@@ -55,22 +55,21 @@ import Section from "../../components/Section.astro";
             </div>
         </div>
 
-        <div class="project-full-media mt-24" data-reveal>
-            <video
-                autoplay
-                loop
-                muted
-                playsinline
-                class="w-full"
-                style="padding: 0.5rem;"
-            >
-                <source
-                    src="/media/algo-atelier-presentation.webm"
-                    type="video/webm"
-                />
-                <!-- MP4 Fallback will be added when available -->
-                O seu navegador não suporta este vídeo.
-            </video>
+        <div class="project-full-media mt-24 flex-center" data-reveal>
+            <!-- Moving iPhone Mockup -->
+            <div class="mockup-iphone-wrapper">
+                <div class="iphone-frame">
+                    <div class="iphone-notch"></div>
+                    <div class="iphone-screen">
+                        <img
+                            src="/media/algo-atelier-mobile-presentation.webp"
+                            alt="Algo Atelier Mobile Walkthrough"
+                            class="mockup-video-img"
+                        />
+                    </div>
+                </div>
+                <div class="mockup-shadow"></div>
+            </div>
         </div>
     </div>
 </ProjectLayout>
@@ -127,13 +126,91 @@ import Section from "../../components/Section.astro";
         color: rgba(255, 255, 255, 0.7);
     }
 
+    .flex-center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Premium iPhone Mockup Styles */
+    .mockup-iphone-wrapper {
+        position: relative;
+        width: 100%;
+        max-width: 380px;
+        margin: 0 auto;
+        padding: 2rem 0;
+        perspective: 1000px;
+    }
+
+    .iphone-frame {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 9 / 19.5;
+        background: #1a1a1a;
+        border: 12px solid #333;
+        border-radius: 48px;
+        overflow: hidden;
+        box-shadow:
+            0 25px 50px -12px rgba(0, 0, 0, 0.5),
+            inset 0 0 10px rgba(0, 0, 0, 0.8);
+        z-index: 2;
+        transform: rotateY(-5deg) rotateX(5deg);
+        transition: transform 0.5s ease;
+    }
+
+    .mockup-iphone-wrapper:hover .iphone-frame {
+        transform: rotateY(0deg) rotateX(0deg);
+    }
+
+    .iphone-notch {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 40%;
+        height: 30px;
+        background: #1a1a1a;
+        border-radius: 0 0 20px 20px;
+        z-index: 10;
+        box-shadow: inset 0 -2px 5px rgba(0, 0, 0, 0.5);
+    }
+
+    .iphone-screen {
+        width: 100%;
+        height: 100%;
+        background: #000;
+        position: relative;
+    }
+
+    .mockup-video-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .mockup-shadow {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        height: 20px;
+        background: radial-gradient(
+            ellipse at center,
+            rgba(0, 0, 0, 0.6) 0%,
+            transparent 70%
+        );
+        filter: blur(10px);
+        z-index: 1;
+    }
+
     .project-media img,
     .project-full-media video,
     .project-full-media img {
         width: 100%;
         height: auto;
         object-fit: cover;
-        border-radius: 24px; /* Matches bento card corner radius */
+        border-radius: 24px;
         transition: transform 0.8s ease;
     }
 
@@ -153,6 +230,10 @@ import Section from "../../components/Section.astro";
 
         .project-media-left {
             order: -1;
+        }
+
+        .mockup-iphone-wrapper {
+            max-width: 280px;
         }
     }
 </style>
