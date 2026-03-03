@@ -23,7 +23,7 @@ const projects: Project[] = [
         metricEn: "E-commerce",
         metricLabelPt: "Reservas Online",
         metricLabelEn: "Online Bookings",
-        image: "/images/portfolio/desportos-full.png",
+        image: "/images/portfolio/desportos-mockup.png",
         size: "small",
         link: "https://desportosnauticosalvor.com/",
         internalLink: "/portfolio/desportos-nauticos-alvor",
@@ -37,7 +37,7 @@ const projects: Project[] = [
         metricEn: "Dynamic Site",
         metricLabelPt: "Custom Backoffice",
         metricLabelEn: "Custom Backoffice",
-        image: "/images/portfolio/mental8works-full.png",
+        image: "/images/portfolio/mental8works-mockup.png",
         size: "small",
         link: "https://www.mental8works.pt/",
         internalLink: "/portfolio/mental8works",
@@ -51,7 +51,7 @@ const projects: Project[] = [
         metricEn: "Static Site",
         metricLabelPt: "98% SEO Score",
         metricLabelEn: "98% SEO Score",
-        image: "/images/portfolio/algoatelier-full.png",
+        image: "/images/portfolio/algoatelier-mockup.png",
         size: "large",
         link: "https://algoatelier.pt/",
         internalLink: "/portfolio/algo-atelier",
@@ -795,13 +795,11 @@ const viewAllHref = isPt ? "/portfolio" : "/en/work";
 
             let animationId: number | null = null;
             let currentTranslateY = 0;
-            const scrollSpeed = 1.8; // Adjusted speed for better control
+            const scrollSpeed = 2.4; // Restored original speed
 
             function getScrollParams() {
                 const containerHeight = container.clientHeight;
-                const imgRect = img.getBoundingClientRect();
-                const imageHeight =
-                    (imgRect.width / img.naturalWidth) * img.naturalHeight;
+                const imageHeight = img.getBoundingClientRect().height;
                 const maxTranslate = containerHeight - imageHeight;
                 return { maxTranslate, containerHeight, imageHeight };
             }
