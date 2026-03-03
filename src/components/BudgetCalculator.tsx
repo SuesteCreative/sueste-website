@@ -4,6 +4,17 @@ import { Check, Info, Trash2, Send, Square, CheckSquare, ChevronDown } from 'luc
 import pricingData from '../data/pricing.json';
 import './BudgetCalculator.css';
 
+// GA4 helper
+const trackEvent = (action: string, category: string, label: string, value?: number) => {
+    if (typeof window !== 'undefined' && (window as any).gtag) {
+        (window as any).gtag('event', action, {
+            event_category: category,
+            event_label: label,
+            value: value
+        });
+    }
+};
+
 // Animated Counter Hook
 function useCountUp(endValue: number, duration: number = 800) {
     const [count, setCount] = useState(endValue);
@@ -205,6 +216,8 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
         setSelections(prev => {
             const newSel = { ...prev };
             if (newSel[serviceId]) {
+                // Track deselection
+                trackEvent('service_deselected', 'BudgetCalculator', serviceId);
                 delete newSel[serviceId];
             } else {
                 let svc: any = null;
@@ -222,6 +235,8 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                 } else {
                     newSel[serviceId] = { option: svc.options?.[0]?.id };
                 }
+                // Track selection
+                trackEvent('service_selected', 'BudgetCalculator', serviceId);
             }
             return newSel;
         });
@@ -235,10 +250,14 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
     };
 
     const toggleAddon = (addonId: string) => {
-        setAddons(prev => ({
-            ...prev,
-            [addonId]: !prev[addonId]
-        }));
+        setAddons(prev => {
+            const newState = !prev[addonId];
+            trackEvent(newState ? 'addon_selected' : 'addon_deselected', 'BudgetCalculator', addonId);
+            return {
+                ...prev,
+                [addonId]: newState
+            };
+        });
     };
 
     const clearBudget = () => {
@@ -280,10 +299,14 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
 
             const result = await response.json();
             if (result.success) {
+                // Track successful submission
+                trackEvent('quote_submitted', 'BudgetCalculator', 'success', marginBase);
                 setStatus({ type: 'success', msg: lang === 'pt' ? 'Pedido enviado com sucesso!' : 'Request sent successfully!' });
                 clearBudget();
                 setFormState({ name: '', email: '', company: '', deadline: '', message: '', honey: '' });
             } else {
+                // Track failure
+                trackEvent('quote_submit_failure', 'BudgetCalculator', result.error || 'unknown');
                 setStatus({ type: 'error', msg: result.error || (lang === 'pt' ? 'Erro ao enviar. Tente novamente.' : 'Error sending. Try again.') });
             }
         } catch (error) {

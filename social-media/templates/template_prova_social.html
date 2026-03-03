@@ -4,11 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="base.css">
     <title>Template Prova Social</title>
 </head>
 
 <body class="template-prova-social">
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
     <div class="canvas">
         <div class="header">
             <div class="logo-container">
@@ -21,8 +26,10 @@
         </div>
 
         <div class="content">
-            <div class="hook" style="position: relative;">{{hook}}</div>
-            <div class="subtitle">{{subtitle}}</div>
+            <div class="content-card">
+                <div class="hook" style="position: relative;">{{hook}}</div>
+                <div class="subtitle">{{subtitle}}</div>
+            </div>
         </div>
 
         <div class="footer">

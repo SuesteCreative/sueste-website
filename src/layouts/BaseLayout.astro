@@ -51,6 +51,27 @@ const lang = propLang || getLangFromUrl(Astro.url);
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap"
       rel="stylesheet"
     />
+
+    <!-- SEO: JSON-LD Schema -->
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "CreativeBusiness",
+        name: "Sueste Creative Agency",
+        alternateName: "Sueste",
+        url: "https://sueste.art",
+        logo: "https://sueste.art/images/favicon.png",
+        description: description,
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Portugal",
+          addressCountry: "PT",
+        },
+        sameAs: ["https://www.instagram.com/sueste.creative/"],
+      })}
+    ></script>
   </head>
   <body>
     <div class="bg-blob-container">

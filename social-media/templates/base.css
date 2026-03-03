@@ -1,10 +1,12 @@
 :root {
-    --color-bg: #0a0a0a;
+    --color-bg: #030408;
     --color-text: #ffffff;
     --color-accent-start: #38bdf8;
     --color-accent-end: #2563eb;
-    --color-muted: rgba(255, 255, 255, 0.6);
-    --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    --color-glass-bg: rgba(255, 255, 255, 0.03);
+    --color-glass-border: rgba(255, 255, 255, 0.08);
+    --color-muted: rgba(255, 255, 255, 0.5);
+    --font-family: 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
 }
 
 * {
@@ -27,18 +29,39 @@ body {
     justify-content: center;
     align-items: center;
     position: relative;
+    -webkit-font-smoothing: antialiased;
 }
 
 body::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.2) 100%);
+    inset: 0;
+    background: linear-gradient(180deg, rgba(3, 4, 8, 0.2) 0%, rgba(3, 4, 8, 0.8) 100%);
     z-index: 1;
     pointer-events: none;
+}
+
+/* Background Blobs */
+.bg-blob {
+    position: absolute;
+    width: 800px;
+    height: 800px;
+    border-radius: 50%;
+    filter: blur(140px);
+    z-index: 0;
+    opacity: 0.25;
+}
+
+.blob-1 {
+    top: -200px;
+    right: -200px;
+    background: radial-gradient(circle, var(--color-accent-start) 0%, transparent 70%);
+}
+
+.blob-2 {
+    bottom: -200px;
+    left: -200px;
+    background: radial-gradient(circle, var(--color-accent-end) 0%, transparent 70%);
 }
 
 .canvas {
@@ -81,6 +104,28 @@ body.video-format {
     flex-direction: column;
     justify-content: center;
     gap: 40px;
+}
+
+.content-card {
+    background: var(--color-glass-bg);
+    border: 1px solid var(--color-glass-border);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    padding: 60px;
+    border-radius: 40px;
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.content-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
 }
 
 .hook {

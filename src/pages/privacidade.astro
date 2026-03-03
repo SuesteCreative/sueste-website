@@ -1,0 +1,103 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import Section from "../components/Section.astro";
+
+const title = "Política de Privacidade";
+const lastUpdated = "3 de Março de 2026";
+---
+
+<BaseLayout
+    title={title}
+    description="A nossa política de privacidade e proteção de dados."
+>
+    <Navbar />
+    <main class="legal-page">
+        <Section title={title} subtitle={`Última atualização: ${lastUpdated}`}>
+            <div class="legal-content glass p-8 md:p-12 rounded-3xl">
+                <h3>1. Introdução</h3>
+                <p>
+                    A Sueste Creative valoriza a sua privacidade. Esta Política
+                    de Privacidade explica como recolhemos, utilizamos e
+                    protegemos as suas informações pessoais quando utiliza o
+                    nosso website.
+                </p>
+
+                <h3>2. Informações que Recolhemos</h3>
+                <p>
+                    Recolhemos informações que nos fornece diretamente, como
+                    quando preenche o nosso formulário de contacto ou solicita
+                    um orçamento. Isto pode incluir o seu nome, endereço de
+                    e-mail e quaisquer outras informações que optar por
+                    fornecer.
+                </p>
+
+                <h3>3. Uso das Informações</h3>
+                <p>Utilizamos os seus dados para:</p>
+                <ul>
+                    <li>Responder aos seus pedidos de informação;</li>
+                    <li>Fornecer os serviços solicitados;</li>
+                    <li>
+                        Enviar comunicações relacionadas com os nossos serviços,
+                        caso tenha dado o seu consentimento.
+                    </li>
+                </ul>
+
+                <h3>4. Proteção de Dados</h3>
+                <p>
+                    Implementamos medidas de segurança técnicas e
+                    organizacionais para proteger os seus dados contra acesso
+                    não autorizado, perda ou alteração.
+                </p>
+
+                <h3>5. Cookies</h3>
+                <p>
+                    O nosso website utiliza cookies para melhorar a experiência
+                    do utilizador e analisar o tráfego. Pode configurar o seu
+                    navegador para recusar cookies.
+                </p>
+
+                <h3>6. Seus Direitos</h3>
+                <p>
+                    Tem o direito de aceder, retificar ou solicitar a eliminação
+                    dos seus dados pessoais. Para exercer estes direitos,
+                    contacte-nos através do e-mail: geral@sueste-creative.pt.
+                </p>
+
+                <h3>7. Alterações a esta Política</h3>
+                <p>
+                    Reservamos o direito de atualizar esta política
+                    periodicamente. Recomendamos que consulte esta página
+                    regularmente.
+                </p>
+            </div>
+        </Section>
+    </main>
+    <Footer />
+</BaseLayout>
+
+<style>
+    .legal-page {
+        padding-top: 80px;
+    }
+    .legal-content h3 {
+        font-size: 1.5rem;
+        margin: 2rem 0 1rem;
+        color: var(--color-accent);
+    }
+    .legal-content p {
+        margin-bottom: 1rem;
+        opacity: 0.8;
+        line-height: 1.8;
+    }
+    .legal-content ul {
+        margin-bottom: 1.5rem;
+        padding-left: 1.5rem;
+        opacity: 0.8;
+    }
+    .legal-content li {
+        margin-bottom: 0.5rem;
+        list-style-type: disc;
+    }
+</style>

@@ -86,7 +86,49 @@ import Section from "../components/Section.astro";
         </a>
       </div>
     </Section>
+
+    <Section
+      title="O Nosso Método"
+      subtitle="Como transformamos ideias em produtos de excelência."
+      dark
+    >
+      <div class="process-steps">
+        <div class="step" data-reveal>
+          <div class="step-number">01</div>
+          <h3>Descoberta</h3>
+          <p>
+            Imergimos no seu negócio para entender os seus objetivos, audiência
+            e desafios reais.
+          </p>
+        </div>
+        <div class="step" data-reveal class="reveal-delay-1">
+          <div class="step-number">02</div>
+          <h3>Estratégia & Design</h3>
+          <p>
+            Criamos uma solução visual e funcional única, focada na experiência
+            do utilizador.
+          </p>
+        </div>
+        <div class="step" data-reveal class="reveal-delay-2">
+          <div class="step-number">03</div>
+          <h3>Desenvolvimento</h3>
+          <p>
+            Transformamos o design em código de alta performance, utilizando
+            tecnologias de ponta.
+          </p>
+        </div>
+        <div class="step" data-reveal class="reveal-delay-3">
+          <div class="step-number">04</div>
+          <h3>Lançamento & Suporte</h3>
+          <p>
+            Preparamos tudo para o sucesso e acompanhamos o crescimento contínuo
+            do seu projeto.
+          </p>
+        </div>
+      </div>
+    </Section>
   </main>
+
   <Footer />
 </BaseLayout>
 
@@ -141,9 +183,49 @@ import Section from "../components/Section.astro";
     line-height: 1.6;
   }
 
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 3rem;
+    margin-top: 3rem;
+  }
+
+  .step {
+    position: relative;
+    padding-top: 2rem;
+  }
+
+  .step-number {
+    font-size: 3.5rem;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 1.5rem;
+    opacity: 0.15;
+    background: linear-gradient(135deg, white 0%, var(--color-accent) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .step h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: white;
+  }
+
+  .step p {
+    font-size: 1rem;
+    opacity: 0.6;
+    line-height: 1.6;
+  }
+
   @media (max-width: 768px) {
     .portfolio-grid {
       grid-template-columns: 1fr;
+    }
+    .process-steps {
+      grid-template-columns: 1fr;
+      gap: 4rem;
     }
   }
 </style>
