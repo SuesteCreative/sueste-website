@@ -270,18 +270,47 @@ const viewAllHref = isPt ? "/portfolio" : "/en/work";
         position: relative;
     }
 
-    /* Ambient blob behind mockups */
+    /* Ambient blobs behind mockups */
     .row-mockup-container::before {
         content: "";
         position: absolute;
-        width: 80%;
-        height: 80%;
-        background: radial-gradient(
-            circle at center,
-            rgba(37, 99, 235, 0.25) 0%,
-            transparent 70%
-        );
+        width: 140%;
+        height: 140%;
+        background:
+            radial-gradient(
+                circle at 30% 30%,
+                rgba(56, 189, 248, 0.45) 0%,
+                transparent 60%
+            ),
+            radial-gradient(
+                circle at 70% 70%,
+                rgba(37, 99, 235, 0.35) 0%,
+                transparent 60%
+            ),
+            radial-gradient(
+                circle at 50% 50%,
+                rgba(168, 85, 247, 0.25) 0%,
+                transparent 70%
+            );
+        filter: blur(60px);
         z-index: -1;
+        animation: pulse-blob 12s ease-in-out infinite alternate;
+        opacity: 0.8;
+    }
+
+    @keyframes pulse-blob {
+        0% {
+            transform: scale(1) translate(0, 0);
+            opacity: 0.5;
+        }
+        50% {
+            transform: scale(1.1) translate(20px, -20px);
+            opacity: 0.8;
+        }
+        100% {
+            transform: scale(1.05) translate(-10px, 15px);
+            opacity: 0.6;
+        }
     }
 
     /* Mockups Base */
@@ -317,7 +346,7 @@ const viewAllHref = isPt ? "/portfolio" : "/en/work";
             inset 0 0 0 1px rgba(255, 255, 255, 0.1);
     }
 
-    /* Screen Glare Overlay */
+    /* Screen Glare Overlay - Now on top of interaction but non-blocking */
     .macbook-screen::after {
         content: "";
         position: absolute;
@@ -327,12 +356,14 @@ const viewAllHref = isPt ? "/portfolio" : "/en/work";
         height: 100%;
         background: linear-gradient(
             135deg,
-            rgba(255, 255, 255, 0.05) 0%,
-            transparent 50%,
+            rgba(255, 255, 255, 0.1) 0%,
+            transparent 40%,
+            rgba(255, 255, 255, 0.05) 50%,
+            transparent 60%,
             rgba(255, 255, 255, 0.02) 100%
         );
         pointer-events: none;
-        z-index: 5; /* Behind container and notch but on top of image background if any */
+        z-index: 15; /* On top of scroll container (z-index 10) */
     }
 
     .macbook-base {
@@ -457,17 +488,17 @@ const viewAllHref = isPt ? "/portfolio" : "/en/work";
     .ipad-screen::after {
         content: "";
         position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
         background: linear-gradient(
-            35deg,
-            rgba(255, 255, 255, 0.03) 0%,
+            135deg,
+            rgba(255, 255, 255, 0.08) 0%,
             transparent 50%
         );
         pointer-events: none;
-        z-index: 5;
+        z-index: 15;
     }
 
     /* iPad Buttons */
@@ -764,11 +795,13 @@ const viewAllHref = isPt ? "/portfolio" : "/en/work";
 
             let animationId: number | null = null;
             let currentTranslateY = 0;
-            const scrollSpeed = 2.4; // Doubled speed (pixels per frame)
+            const scrollSpeed = 1.8; // Adjusted speed for better control
 
             function getScrollParams() {
                 const containerHeight = container.clientHeight;
-                const imageHeight = img.getBoundingClientRect().height;
+                const imgRect = img.getBoundingClientRect();
+                const imageHeight =
+                    (imgRect.width / img.naturalWidth) * img.naturalHeight;
                 const maxTranslate = containerHeight - imageHeight;
                 return { maxTranslate, containerHeight, imageHeight };
             }
