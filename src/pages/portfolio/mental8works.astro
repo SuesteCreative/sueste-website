@@ -34,48 +34,51 @@ import Section from "../../components/Section.astro";
         </div>
 
         <div
-            class="project-media project-media-right"
+            class="project-media project-media-right reveal-delay-1"
             data-reveal
-            class="reveal-delay-1"
         >
             <img
                 src="/images/portfolio/mental8works-mockup.png"
                 alt="Mental8Works Mockup"
-                class="rounded-xl glass-panel p-2"
+                class="rounded-xl w-full"
             />
         </div>
 
-        <div class="project-media project-media-left mt-16" data-reveal>
-            <img
-                src="/images/portfolio/mental8works-full.png"
-                alt="Mental8Works Interface"
-                class="rounded-xl glass-panel p-2"
-            />
+        <div class="solution-section" data-reveal>
+            <div class="project-text-block solution-content">
+                <h2>A Solução</h2>
+                <p>
+                    Projetámos um <strong>Backoffice Customizado</strong> que serve
+                    de centro nevrálgico para a operação. Focámo-nos em arquitetura
+                    de dados escalável e um design de dashboard intuitivo que prioriza
+                    a leitura de indicadores de bem-estar.
+                </p>
+                <ul>
+                    <li>Gestão automatizada de sessões e pagamentos.</li>
+                    <li>
+                        Módulo de Business Intelligence para relatórios em tempo
+                        real.
+                    </li>
+                    <li>
+                        Infraestrutura redundante com foco em segurança de dados
+                        (RGPD).
+                    </li>
+                </ul>
+            </div>
         </div>
 
         <div
-            class="project-text-block mt-16"
+            class="project-full-media mt-24"
             data-reveal
-            class="reveal-delay-1"
+            style="display: flex; justify-content: center;"
         >
-            <h2>A Solução</h2>
-            <p>
-                Projetámos um <strong>Backoffice Customizado</strong> que serve de
-                centro nevrálgico para a operação. Focámo-nos em arquitetura de dados
-                escalável e um design de dashboard intuitivo que prioriza a leitura
-                de indicadores de bem-estar.
-            </p>
-            <ul>
-                <li>Gestão automatizada de sessões e pagamentos.</li>
-                <li>
-                    Módulo de Business Intelligence para relatórios em tempo
-                    real.
-                </li>
-                <li>
-                    Infraestrutura redundante com foco em segurança de dados
-                    (RGPD).
-                </li>
-            </ul>
+            <div style="max-width: 1000px; width: 100%;">
+                <img
+                    src="/images/portfolio/mental8works-iphone-mockup.png"
+                    alt="Mental8Works Appointments iPhone Mockup"
+                    class="w-full"
+                />
+            </div>
         </div>
     </div>
 </ProjectLayout>
@@ -93,6 +96,17 @@ import Section from "../../components/Section.astro";
         display: flex;
         flex-direction: column;
         gap: 1.5rem;
+    }
+
+    /* Wrap text to match media width */
+    .solution-section {
+        grid-column: 1 / -1;
+        width: 100%;
+        margin-top: 4rem;
+    }
+
+    .solution-content {
+        max-width: 100%;
     }
 
     .project-text-block h2 {
@@ -143,10 +157,12 @@ import Section from "../../components/Section.astro";
         font-weight: bold;
     }
 
-    .project-media img {
+    .project-media img,
+    .project-full-media img {
         width: 100%;
         height: auto;
         object-fit: cover;
+        border-radius: 24px;
         transition: transform 0.8s ease;
     }
 
@@ -154,10 +170,18 @@ import Section from "../../components/Section.astro";
         transform: scale(1.02);
     }
 
+    .project-full-media {
+        grid-column: 1 / -1;
+    }
+
     @media (max-width: 900px) {
         .project-content-grid {
             grid-template-columns: 1fr;
             gap: 3rem;
+        }
+
+        .project-media-left {
+            order: -1;
         }
     }
 </style>
