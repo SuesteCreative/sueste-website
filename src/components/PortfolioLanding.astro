@@ -268,6 +268,7 @@ const viewAllHref = isPt ? "/portfolio" : "/en/work";
         justify-content: center;
         align-items: center;
         position: relative;
+        perspective: 2000px; /* Enable 3D perspective */
     }
 
     /* Ambient blobs behind mockups */
@@ -317,11 +318,21 @@ const viewAllHref = isPt ? "/portfolio" : "/en/work";
     .inline-mockup {
         position: relative;
         z-index: 10;
-        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        transform-style: preserve-3d;
+    }
+
+    /* 3D Tilt based on row side */
+    .row-left .inline-mockup {
+        transform: rotateY(-15deg) rotateX(5deg) rotateZ(-1deg);
+    }
+    .row-right .inline-mockup {
+        transform: rotateY(15deg) rotateX(5deg) rotateZ(1deg);
     }
 
     .portfolio-row:hover .inline-mockup {
-        transform: translateY(-10px) scale(1.02);
+        transform: translateY(-20px) rotateY(0deg) rotateX(0deg) rotateZ(0deg)
+            scale(1.05);
     }
 
     /* Macbook Mockup */
@@ -341,7 +352,20 @@ const viewAllHref = isPt ? "/portfolio" : "/en/work";
         border-bottom: 12px solid #1a1a1a;
         overflow: hidden;
         position: relative;
-        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        box-shadow:
+            0 30px 60px rgba(0, 0, 0, 0.5),
+            0 10px 20px rgba(0, 0, 0, 0.3);
+        transform: translateZ(20px);
+    }
+    /* Side highlighting for 3D feel */
+    .macbook-screen::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: inherit;
+        pointer-events: none;
+        z-index: 5;
     }
     .macbook-base {
         width: 100%;
@@ -412,6 +436,7 @@ const viewAllHref = isPt ? "/portfolio" : "/en/work";
     .mockup-ipad {
         width: 60%;
         max-width: 450px;
+        animation: float-device 6s ease-in-out infinite;
     }
     .ipad-screen {
         width: 100%;
@@ -421,23 +446,109 @@ const viewAllHref = isPt ? "/portfolio" : "/en/work";
         border: 14px solid #1a1a1a;
         position: relative;
         overflow: hidden;
-        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        box-shadow:
+            0 40px 80px rgba(0, 0, 0, 0.6),
+            0 15px 30px rgba(0, 0, 0, 0.4);
+        transform: translateZ(30px);
+    }
+    .ipad-screen::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 200%;
+        height: 100%;
+        background: linear-gradient(
+            115deg,
+            transparent 0%,
+            transparent 40%,
+            rgba(255, 255, 255, 0.05) 45%,
+            rgba(255, 255, 255, 0.1) 50%,
+            rgba(255, 255, 255, 0.05) 55%,
+            transparent 60%
+        );
+        pointer-events: none;
+        transform: translateX(-100%);
+        transition: transform 1s ease;
+    }
+    .portfolio-row:hover .ipad-screen::after {
+        transform: translateX(0);
+    }
+
+    @keyframes float-device {
+        0%,
+        100% {
+            transform: translateY(0) rotateY(var(--rot-y, -15deg)) rotateX(5deg);
+        }
+        50% {
+            transform: translateY(-15px) rotateY(var(--rot-y, -15deg))
+                rotateX(7deg);
+        }
+    }
+    .row-right .mockup-ipad {
+        --rot-y: 15deg;
+    }
+    .row-left .mockup-ipad {
+        --rot-y: -15deg;
     }
 
     /* iPhone Mockup */
     .mockup-iphone {
         width: 45%;
         max-width: 320px;
+        animation: float-device-iphone 5s ease-in-out infinite;
     }
     .iphone-screen {
         width: 100%;
         aspect-ratio: 9 / 19.5;
         background: #000;
         border-radius: 36px;
-        border: 10px solid #1a1a1a;
+        border: 10px solid #111;
         position: relative;
         overflow: hidden;
-        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        box-shadow:
+            0 50px 100px rgba(0, 0, 0, 0.7),
+            0 20px 40px rgba(0, 0, 0, 0.5);
+        transform: translateZ(40px);
+    }
+    .iphone-screen::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 200%;
+        height: 100%;
+        background: linear-gradient(
+            115deg,
+            transparent 0%,
+            transparent 45%,
+            rgba(255, 255, 255, 0.1) 50%,
+            transparent 55%
+        );
+        pointer-events: none;
+        transform: translateX(-100%);
+        transition: transform 1.2s ease;
+    }
+    .portfolio-row:hover .iphone-screen::after {
+        transform: translateX(0);
+    }
+
+    @keyframes float-device-iphone {
+        0%,
+        100% {
+            transform: translateY(0) rotateY(var(--rot-y, -15deg))
+                rotateX(10deg);
+        }
+        50% {
+            transform: translateY(-20px) rotateY(var(--rot-y, -15deg))
+                rotateX(12deg);
+        }
+    }
+    .row-right .mockup-iphone {
+        --rot-y: 15deg;
+    }
+    .row-left .mockup-iphone {
+        --rot-y: -15deg;
     }
     .iphone-notch {
         position: absolute;
