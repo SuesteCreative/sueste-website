@@ -614,7 +614,7 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                                             <span className="addon-price">
                                                 {addon.on_request
                                                     ? t.onRequest
-                                                    : (addon.price > 0 ? `+${addon.price}€` : t.included)}
+                                                    : (addon.price > 0 ? `+${addon.price}€${addon.is_monthly ? ' / mês' : ''}` : t.included)}
                                             </span>
                                         </div>
                                     </div>

@@ -70,6 +70,26 @@
                             "type": "starting_at"
                         }
                     ]
+                },
+                {
+                    "id": "crm",
+                    "name_pt": "CRM Personalizado",
+                    "name_en": "Custom CRM",
+                    "options": [
+                        {
+                            "id": "crm_no_int",
+                            "name_pt": "Sem Integrações",
+                            "name_en": "No Integrations",
+                            "price": 1500
+                        },
+                        {
+                            "id": "crm_with_int",
+                            "name_pt": "Com Integrações",
+                            "name_en": "With Integrations",
+                            "price": 3000,
+                            "type": "starting_at"
+                        }
+                    ]
                 }
             ]
         },
@@ -163,10 +183,10 @@
         },
         {
             "id": "addon_content",
-            "name_pt": "Produção de conteúdos",
-            "name_en": "Content production",
-            "price": 0,
-            "on_request": true
+            "name_pt": "Blog + SEO (4 x posts/mês)",
+            "name_en": "Blog + SEO (4 x posts/month)",
+            "price": 150,
+            "is_monthly": true
         },
         {
             "id": "addon_integrations",
