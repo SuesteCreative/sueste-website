@@ -21,7 +21,7 @@ const partner = {
         photo: {
             title: "Photography (w/ editing)",
             packs: [
-                { name: "Pack 15", price: "45€", frames: "15 framings" },
+                { name: "Pack 15", price: "45€", frames: "Up to 90m²" },
                 { name: "Pack 25", price: "65€", frames: "Up to 120m²" },
                 { name: "Pack 35", price: "90€", frames: "Up to 200m²" },
                 { name: "Pack 50", price: "115€", frames: "+250 m²" },
@@ -158,11 +158,21 @@ const partner = {
 
         <Section id="terms" title="Terms & Conditions" dark>
             <div class="terms-grid">
-                <div class="term-card" data-reveal>
+                <div class="term-card grid-span-2" data-reveal>
                     <h4>Travel</h4>
                     <p>
-                        Free within a 10km radius of Cascais. 0.50€/km for
-                        additional distances.
+                        Free within a 15km radius of Point 0 (photographer's
+                        residence). Beyond 15km, the fee is <strong
+                            >0.30€/km</strong
+                        > (calculated for both ways).
+                    </p>
+                    <p
+                        style="font-size: 0.85rem; margin-top: 0.5rem; opacity: 0.7;"
+                    >
+                        *Outside the Faro district: 0.30€/km + tolls (calculated
+                        via Via Verde simulator). In case of cancellation
+                        without notice after travel has started, the fee applies
+                        even within the 15km radius.
                     </p>
                 </div>
                 <div class="term-card" data-reveal>
@@ -373,9 +383,23 @@ const partner = {
     }
 
     .term-card {
-        padding: 2rem;
+        padding: 2.25rem;
         background: rgba(255, 255, 255, 0.02);
         border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.04);
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .grid-span-2 {
+        grid-column: span 2;
+    }
+
+    @media (max-width: 768px) {
+        .grid-span-2 {
+            grid-column: span 1;
+        }
     }
 
     .term-card h4 {
