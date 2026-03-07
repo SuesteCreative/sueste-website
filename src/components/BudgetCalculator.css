@@ -670,15 +670,39 @@
 }
 
 .partner-logo-calc {
-    height: 48px;
-    /* Bigger logo as requested */
+    height: 32px;
+    /* A bit smaller to fit better in the header line */
     width: auto;
-    opacity: 0.8;
+    opacity: 0.9;
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     cursor: pointer;
-    background: #fff;
-    padding: 6px;
-    border-radius: 8px;
+    background: transparent !important;
+    padding: 0 !important;
+    border-radius: 0;
+    filter: brightness(0) invert(1);
+    /* Force it to be white */
+}
+
+/* Specific disclaimer inside the service card */
+.partner-card-disclaimer {
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    margin-top: 0.5rem;
+    padding-top: 1rem;
+    text-align: right;
+}
+
+.partner-card-disclaimer p {
+    font-size: 0.8rem;
+    color: #71717a;
+    font-style: italic;
+    margin: 0;
+}
+
+.partner-card-disclaimer a {
+    color: #38bdf8;
+    text-decoration: underline;
+    font-style: normal;
+    font-weight: 600;
 }
 
 @media (max-width: 768px) {

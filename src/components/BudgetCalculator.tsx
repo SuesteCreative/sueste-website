@@ -381,6 +381,16 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                             >
                                 <div className="sub-services-wrapper">
                                     {service.sub_services.map((sub: any, subIdx: number) => renderServiceCard(sub, subIdx, true))}
+                                    {service.is_partner && (
+                                        <div className="partner-card-disclaimer">
+                                            <p>
+                                                {lang === 'pt' ? '*Taxas extra podem-se aplicar. ' : '*Extra taxes may apply. '}
+                                                <a href={lang === 'pt' ? `/parcerias/${service.partner_slug}` : `/en/partners/${service.partner_slug}`}>
+                                                    {lang === 'pt' ? 'Ver condições' : 'View terms'}
+                                                </a>
+                                            </p>
+                                        </div>
+                                    )}
                                 </div>
                             </motion.div>
                         )}
