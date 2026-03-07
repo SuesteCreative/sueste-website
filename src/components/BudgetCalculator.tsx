@@ -67,7 +67,7 @@ interface FormState {
 const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
     const [selections, setSelections] = useState<SelectionsState>({});
     const [addons, setAddons] = useState<AddonsState>({});
-    const [droneHours, setDroneHours] = useState(1);
+    const [audiovisualHours, setAudiovisualHours] = useState(1);
     const [expandedGroups, setExpandedGroups] = useState<{ [key: string]: boolean }>({});
     const [formState, setFormState] = useState<FormState>({ name: '', email: '', company: '', deadline: '', message: '', honey: '' });
     const [status, setStatus] = useState({ type: '', msg: '' });
@@ -145,12 +145,12 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
     useEffect(() => {
         const savedSelections = localStorage.getItem('budgetSelections');
         const savedAddons = localStorage.getItem('budgetAddons');
-        const savedHours = localStorage.getItem('budgetDroneHours');
+        const savedHours = localStorage.getItem('budgetAudiovisualHours');
         const savedGroups = localStorage.getItem('budgetExpandedGroups');
 
         if (savedSelections) setSelections(JSON.parse(savedSelections));
         if (savedAddons) setAddons(JSON.parse(savedAddons));
-        if (savedHours) setDroneHours(parseInt(savedHours, 10));
+        if (savedHours) setAudiovisualHours(parseInt(savedHours, 10));
         if (savedGroups) setExpandedGroups(JSON.parse(savedGroups));
     }, []);
 
@@ -158,9 +158,9 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
     useEffect(() => {
         localStorage.setItem('budgetSelections', JSON.stringify(selections));
         localStorage.setItem('budgetAddons', JSON.stringify(addons));
-        localStorage.setItem('budgetDroneHours', droneHours.toString());
+        localStorage.setItem('budgetAudiovisualHours', audiovisualHours.toString());
         localStorage.setItem('budgetExpandedGroups', JSON.stringify(expandedGroups));
-    }, [selections, addons, droneHours, expandedGroups]);
+    }, [selections, addons, audiovisualHours, expandedGroups]);
 
     const calculateEstimation = () => {
         let baseSum = 0;
@@ -176,19 +176,10 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
 
         function checkItem(service: any) {
             if (selections[service.id]) {
-                if (service.id === 'drone') {
-                    baseSum += (service.hourly_rate || 0) * droneHours;
-                    const optId = selections[service.id].option;
-                    if (optId) {
-                        const opt = service.options.find((o: any) => o.id === optId);
-                        if (opt) baseSum += opt.price;
-                    }
-                } else {
-                    const opt = service.options.find((o: any) => o.id === selections[service.id].option);
-                    if (opt) {
-                        baseSum += opt.price;
-                        if (opt.type === 'starting_at') hasStartingAt = true;
-                    }
+                const opt = service.options.find((o: any) => o.id === selections[service.id].option);
+                if (opt) {
+                    baseSum += opt.price;
+                    if (opt.type === 'starting_at') hasStartingAt = true;
                 }
             }
         }
@@ -230,11 +221,7 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                 });
 
                 if (!svc) return newSel;
-                if (svc.id === 'drone') {
-                    newSel[serviceId] = { isSelected: true, option: null };
-                } else {
-                    newSel[serviceId] = { option: svc.options?.[0]?.id };
-                }
+                newSel[serviceId] = { option: svc.options?.[0]?.id };
                 // Track selection
                 trackEvent('service_selected', 'BudgetCalculator', serviceId);
             }
@@ -263,7 +250,7 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
     const clearBudget = () => {
         setSelections({});
         setAddons({});
-        setDroneHours(1);
+        setAudiovisualHours(1);
         setStatus({ type: '', msg: '' });
     };
 
@@ -290,7 +277,7 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                     ...formState,
                     selections,
                     addons,
-                    droneHours,
+                    audiovisualHours,
                     totalEstimated: marginBase,
                     hasStartingAt,
                     lang
@@ -408,6 +395,16 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                         </div>
                         <h3 className="service-title">{lang === 'pt' ? service.name_pt : service.name_en}</h3>
                     </div>
+                    {service.is_partner && service.partner_logo && (
+                        <a
+                            href={lang === 'pt' ? `/parcerias/${service.partner_slug}` : `/en/partners/${service.partner_slug}`}
+                            className="partner-logo-container"
+                            onClick={(e) => e.stopPropagation()}
+                            title={lang === 'pt' ? 'Ver parceiro' : 'View partner'}
+                        >
+                            <img src={service.partner_logo} alt="Partner Logo" className="partner-logo-calc" />
+                        </a>
+                    )}
                     {service.is_monthly && <span className="service-badge">{t.monthlyNote}</span>}
                 </div>
 
@@ -420,85 +417,33 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                             exit={{ height: 0, opacity: 0 }}
                             transition={{ duration: 0.3 }}
                         >
-                            {service.id === 'drone' ? (
-                                <div className="drone-config">
-                                    <div className="option-row drone-option-row">
-                                        <label className="option-label">
-                                            {t.hours} <span className="drone-hourly-note">({service.hourly_rate}€ {t.hourly})</span>
-                                        </label>
-                                        <div className="drone-actions">
-                                            <span className="drone-total-neon">+{service.hourly_rate * droneHours}€</span>
-                                            <div className="number-input">
-                                                <button type="button" onClick={() => setDroneHours(Math.max(1, droneHours - 1))}>-</button>
-                                                <input
-                                                    type="number"
-                                                    min="1"
-                                                    value={droneHours}
-                                                    onChange={(e) => setDroneHours(parseInt(e.target.value) || 1)}
-                                                />
-                                                <button type="button" onClick={() => setDroneHours(droneHours + 1)}>+</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="options-list">
+                            <div className="options-list">
+                                {service.options.map((opt: any) => {
+                                    const isOptActive = selections[service.id].option === opt.id;
+                                    const priceText = opt.type === 'starting_at' ? `${t.startingAt} +${opt.price}€` : `+${opt.price}€`;
+
+                                    return (
                                         <div
-                                            className={`sub-option ${!selections[service.id].option ? 'active' : ''}`}
-                                            onClick={() => updateOption(service.id, null)}
+                                            key={opt.id}
+                                            className={`sub-option ${isOptActive ? 'active' : ''}`}
+                                            onClick={() => updateOption(service.id, opt.id)}
                                         >
                                             <div className="sub-opt-info">
-                                                <span className="sub-opt-name">Sem edição</span>
+                                                <span className="sub-opt-name">{lang === 'pt' ? opt.name_pt : opt.name_en}</span>
+                                                {(opt.range_pt || opt.range_en) && (
+                                                    <span className="sub-opt-range">
+                                                        {lang === 'pt' ? opt.range_pt : opt.range_en}
+                                                    </span>
+                                                )}
                                             </div>
                                             <div className="sub-opt-price-wrapper">
-                                                <span className="sub-opt-price">0€</span>
-                                                {!selections[service.id].option && <Check size={16} className="active-check" />}
+                                                <span className="sub-opt-price">{priceText}</span>
+                                                {isOptActive && <Check size={16} className="active-check" />}
                                             </div>
                                         </div>
-                                        {service.options.map((opt: any) => (
-                                            <div
-                                                key={opt.id}
-                                                className={`sub-option ${selections[service.id].option === opt.id ? 'active' : ''}`}
-                                                onClick={() => updateOption(service.id, opt.id)}
-                                            >
-                                                <div className="sub-opt-info">
-                                                    <span className="sub-opt-name">{lang === 'pt' ? opt.name_pt : opt.name_en}</span>
-                                                </div>
-                                                <div className="sub-opt-price-wrapper">
-                                                    <span className="sub-opt-price">{opt.price > 0 ? `+${opt.price}€` : '0€'}</span>
-                                                    {selections[service.id].option === opt.id && <Check size={16} className="active-check" />}
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            ) : (
-                                <div className="options-list">
-                                    {service.options.map((opt: any) => {
-                                        const isOptActive = selections[service.id].option === opt.id;
-                                        const priceText = opt.type === 'starting_at' ? `${t.startingAt} +${opt.price}€` : `+${opt.price}€`;
-
-                                        return (
-                                            <div
-                                                key={opt.id}
-                                                className={`sub-option ${isOptActive ? 'active' : ''}`}
-                                                onClick={() => updateOption(service.id, opt.id)}
-                                            >
-                                                <div className="sub-opt-info">
-                                                    <span className="sub-opt-name">{lang === 'pt' ? opt.name_pt : opt.name_en}</span>
-                                                    {(opt.range_pt || opt.range_en) && (
-                                                        <span className="sub-opt-range">
-                                                            {lang === 'pt' ? opt.range_pt : opt.range_en}
-                                                        </span>
-                                                    )}
-                                                </div>
-                                                <div className="sub-opt-price-wrapper">
-                                                    <span className="sub-opt-price">{priceText}</span>
-                                                    {isOptActive && <Check size={16} className="active-check" />}
-                                                </div>
-                                            </div>
-                                        );
-                                    })}
-                                </div>
-                            )}
+                                    );
+                                })}
+                            </div>
                         </motion.div>
                     )}
                 </AnimatePresence>
@@ -621,6 +566,12 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                                 );
                             })}
                         </div>
+                        <p className="extra-taxes-note">
+                            {lang === 'pt' ? '*Taxas extra podem-se aplicar. ' : '*Extra taxes may apply. '}
+                            <a href={lang === 'pt' ? "/parcerias/nadine-campos" : "/en/partners/nadine-campos"}>
+                                {lang === 'pt' ? 'Ver condições do parceiro' : 'View partner terms'}
+                            </a>
+                        </p>
                     </div>
                 </motion.div>
 

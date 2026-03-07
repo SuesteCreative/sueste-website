@@ -638,6 +638,55 @@
     }
 }
 
+.partner-logo-container {
+    margin-left: 1.5rem;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.partner-logo-calc {
+    height: 24px;
+    width: auto;
+    opacity: 0.6;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    filter: brightness(0) invert(1);
+    /* Ensure it's white if it's a black SVG */
+}
+
+@media (max-width: 768px) {
+    .partner-logo-calc {
+        height: 20px;
+    }
+}
+
+.partner-logo-calc:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.extra-taxes-note {
+    font-size: 0.85rem;
+    color: #71717a;
+    margin-top: 2rem;
+    font-style: italic;
+    text-align: right;
+}
+
+.extra-taxes-note a {
+    color: #38bdf8;
+    text-decoration: underline;
+    font-style: normal;
+    font-weight: 600;
+    margin-left: 0.25rem;
+}
+
+.extra-taxes-note a:hover {
+    color: #fff;
+    text-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+}
+
 .section-title {
     font-size: 1.5rem;
     color: #fff;

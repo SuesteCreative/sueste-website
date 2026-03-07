@@ -5,15 +5,17 @@ import Footer from "../../../components/Footer.astro";
 import Section from "../../../components/Section.astro";
 
 const partner = {
-    name: "Nádine Campos photography & film production",
+    name: "Nádine Campos",
+    tagline: "photography & film production",
     logo: "/images/partners/logo-nadine-campos.jpeg",
-    bio: "Nádine Campos is a renowned photographer and film producer, recognized for her ability to capture the essence of every moment through an artistic and technical lens. With years of experience in the industry, Nádine specializes in productions that tell powerful visual stories, from product photography to commercial short films.",
+    bio: "Nádine Campos is a renowned photographer and film producer, recognized for her ability to capture the essence of every moment through an artistic and technical lens. With years of experience in the industry, Nádine specializes in productions that tell powerful visual stories, from real estate and product photography to commercial short films.",
     howWeWork:
         "Sueste Creative and Nádine Campos join forces to offer integrated visual solutions. While Sueste focuses on digital strategy and design, Nádine brings the magic of reality-based imagery, ensuring that visual content is world-class, elevating our clients' brand perception.",
     images: [
-        "https://images.unsplash.com/photo-1492691523567-6170e2415964?auto=format&fit=crop&q=80&w=800",
-        "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=800",
-        "https://images.unsplash.com/photo-1473186578172-c141e679805a?auto=format&fit=crop&q=80&w=800",
+        "https://images.unsplash.com/photo-1554048612-b6a482bc67e5?auto=format&fit=crop&q=80&w=1200",
+        "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=1200",
+        "https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&q=80&w=1200",
+        "https://images.unsplash.com/photo-1473186578172-c141e679805a?auto=format&fit=crop&q=80&w=1200",
     ],
 };
 ---
@@ -35,7 +37,10 @@ const partner = {
                         class="partner-logo"
                     />
                 </div>
-                <h1 class="reveal-text" data-reveal>{partner.name}</h1>
+                <h1 class="reveal-text" data-reveal>
+                    <span class="partner-name-hero">{partner.name}</span>
+                    <span class="partner-tagline-hero">{partner.tagline}</span>
+                </h1>
                 <div class="hero-line"></div>
             </div>
         </header>
@@ -48,7 +53,7 @@ const partner = {
                 <div class="bio-image" data-reveal class="reveal-delay-1">
                     <img
                         src={partner.images[0]}
-                        alt="Nádine Campos in action"
+                        alt="Professional photographer in action"
                     />
                 </div>
             </div>
@@ -82,15 +87,42 @@ const partner = {
             </div>
         </Section>
 
+        <Section id="terms" title="Terms & Conditions" dark>
+            <div class="terms-grid">
+                <div class="term-card" data-reveal>
+                    <h4>Travel</h4>
+                    <p>
+                        Free within a 10km radius of Cascais. 0.50€/km for
+                        additional distances.
+                    </p>
+                </div>
+                <div class="term-card" data-reveal class="reveal-delay-1">
+                    <h4>Revisions</h4>
+                    <p>
+                        1 free revision included. Extra changes quoted at
+                        15.00€/hour.
+                    </p>
+                </div>
+                <div class="term-card" data-reveal class="reveal-delay-2">
+                    <h4>Loyalty</h4>
+                    <p>
+                        10% discount automatically applied on your 5th
+                        appointment.
+                    </p>
+                </div>
+                <div class="term-card" data-reveal class="reveal-delay-3">
+                    <h4>Deadlines & Archive</h4>
+                    <p>Fast file delivery. Guaranteed storage for 6 months.</p>
+                </div>
+            </div>
+        </Section>
+
         <Section id="cta" className="final-cta">
             <div class="cta-inner text-center">
-                <h2>Interested in this collaboration?</h2>
-                <p>
-                    Contact us to discuss how we can elevate your project
-                    together.
-                </p>
+                <h2>Ready to elevate your project?</h2>
+                <p>Request a custom quote for your next visual project.</p>
                 <div style="margin-top: 3rem;">
-                    <a href="/en/contact" class="btn-cta">Talk to the Team</a>
+                    <a href="/en/quote" class="btn-cta">Request Quote</a>
                 </div>
             </div>
         </Section>
@@ -129,17 +161,31 @@ const partner = {
     }
 
     .partner-hero h1 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .partner-name-hero {
         font-size: clamp(2.5rem, 6vw, 4rem);
         font-weight: 800;
         line-height: 1.1;
-        margin-bottom: 2rem;
+    }
+
+    .partner-tagline-hero {
+        font-size: clamp(1.1rem, 2vw, 1.5rem);
+        font-weight: 300;
+        font-style: italic;
+        color: #a1a1aa;
+        letter-spacing: 0.1em;
     }
 
     .hero-line {
         width: 60px;
         height: 4px;
         background: #38bdf8;
-        margin: 0 auto;
+        margin: 2rem auto 0;
         border-radius: 2px;
     }
 
@@ -194,15 +240,53 @@ const partner = {
 
     .gallery-grid {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(3, 1fr);
         gap: 2rem;
     }
 
     .gallery-item img {
         width: 100%;
-        aspect-ratio: 16/9;
+        aspect-ratio: 4/5;
         object-fit: cover;
         border-radius: 20px;
+        transition: transform 0.5s ease;
+    }
+
+    .gallery-item:hover img {
+        transform: scale(1.05);
+    }
+
+    .terms-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+    }
+
+    .term-card {
+        padding: 2.5rem;
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 24px;
+        transition: background 0.3s ease;
+    }
+
+    .term-card:hover {
+        background: rgba(255, 255, 255, 0.04);
+    }
+
+    .term-card h4 {
+        color: #38bdf8;
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .term-card p {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        color: #a1a1aa;
     }
 
     .btn-cta {
@@ -222,10 +306,21 @@ const partner = {
         box-shadow: 0 10px 30px rgba(56, 189, 248, 0.4);
     }
 
+    @media (max-width: 991px) {
+        .gallery-grid {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+
     @media (max-width: 768px) {
         .bio-container,
-        .gallery-grid {
+        .gallery-grid,
+        .terms-grid {
             grid-template-columns: 1fr;
+        }
+
+        .partner-hero {
+            min-height: 40vh;
         }
     }
 </style>
