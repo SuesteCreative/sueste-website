@@ -6,12 +6,13 @@ import Section from "../components/Section.astro";
 
 const partners = [
     {
-        name: "Nádine Campos photography & film production",
+        name: "Nádine Campos",
+        subtitle: "photography & film production",
         slug: "nadine-campos",
         category: "Fotografia & Vídeo",
         description:
             "Captando a essência de cada momento através de uma lente artística e técnica.",
-        image: "https://images.unsplash.com/photo-1492691523567-6170e2415964?auto=format&fit=crop&q=80&w=800",
+        image: "https://images.unsplash.com/photo-1542038784456-1ea8e935640e?auto=format&fit=crop&q=80&w=1200",
     },
 ];
 ---
@@ -42,7 +43,16 @@ const partners = [
                             </div>
                             <div class="card-info">
                                 <span>{partner.category}</span>
-                                <h3>{partner.name}</h3>
+                                <h3 class="partner-title">
+                                    <span class="main-name">
+                                        {partner.name}
+                                    </span>
+                                    {partner.subtitle && (
+                                        <span class="sub-name">
+                                            {partner.subtitle}
+                                        </span>
+                                    )}
+                                </h3>
                                 <p>{partner.description}</p>
                             </div>
                         </a>
@@ -74,11 +84,27 @@ const partners = [
                     </p>
                 </div>
                 <div class="benefit" data-reveal class="reveal-delay-2">
+                    <div class="benefit-icon">🏆</div>
                     <h3>Qualidade Superior</h3>
                     <p>
                         Padrões de exigência elevados em todas as frentes de
                         produção.
                     </p>
+                </div>
+            </div>
+        </Section>
+
+        <Section id="cta" className="final-cta-partners">
+            <div class="cta-inner text-center">
+                <h2>Também queres colaborar?</h2>
+                <p>
+                    Estamos sempre à procura de novos talentos e empresas que
+                    partilhem a nossa visão.
+                </p>
+                <div style="margin-top: 3rem;">
+                    <a href="/contacto" class="btn-cta-partners"
+                        >Quero Ser Parceiro</a
+                    >
                 </div>
             </div>
         </Section>
@@ -94,8 +120,10 @@ const partners = [
 
     .partners-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-        gap: 3rem;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3.5rem;
+        max-width: 1200px;
+        margin: 0 auto;
     }
 
     .partner-card {
@@ -106,15 +134,18 @@ const partners = [
         border: 1px solid rgba(255, 255, 255, 0.05);
         text-decoration: none;
         color: inherit;
+        display: flex;
+        flex-direction: column;
     }
 
     .partner-card:hover {
         transform: translateY(-15px) scale(1.02);
-        border-color: var(--color-accent);
+        border-color: #38bdf8;
     }
 
     .card-image {
-        height: 300px;
+        aspect-ratio: 1 / 1;
+        width: 100%;
         background: linear-gradient(45deg, #111, #222);
         position: relative;
     }
@@ -140,14 +171,31 @@ const partners = [
         text-transform: uppercase;
         letter-spacing: 2px;
         color: #38bdf8;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.75rem;
         display: block;
+        font-weight: 700;
     }
 
-    .card-info h3 {
-        font-size: 1.75rem;
+    .partner-title {
+        display: flex;
+        flex-direction: column;
         margin-bottom: 1rem;
+    }
+
+    .main-name {
+        font-size: 2rem;
+        font-weight: 800;
         color: #fff;
+        line-height: 1.2;
+    }
+
+    .sub-name {
+        font-size: 1rem;
+        font-weight: 300;
+        color: #a1a1aa;
+        letter-spacing: 0.05em;
+        font-style: italic;
+        margin-top: 0.25rem;
     }
 
     .card-info p {
@@ -159,36 +207,87 @@ const partners = [
 
     .benefits-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 4rem;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 3rem;
         margin-top: 3rem;
     }
 
     .benefit {
         text-align: center;
+        background: rgba(255, 255, 255, 0.02);
+        padding: 4rem 2rem;
+        border-radius: 32px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        transition: all 0.4s ease;
+    }
+
+    .benefit:hover {
+        transform: translateY(-10px);
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(255, 255, 255, 0.1);
     }
 
     .benefit-icon {
-        font-size: 3rem;
+        font-size: 3.5rem;
         margin-bottom: 1.5rem;
         display: block;
     }
 
     .benefit h3 {
-        font-size: 1.5rem;
+        font-size: 1.6rem;
         margin-bottom: 1rem;
         color: white;
     }
 
     .benefit p {
-        font-size: 1rem;
+        font-size: 1.05rem;
         opacity: 0.6;
         line-height: 1.6;
     }
 
-    @media (max-width: 768px) {
+    .cta-inner {
+        padding: 8rem 0;
+    }
+
+    .final-cta-partners h2 {
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        font-weight: 800;
+        margin-bottom: 1.5rem;
+    }
+
+    .btn-cta-partners {
+        display: inline-flex;
+        align-items: center;
+        padding: 1.25rem 3.5rem;
+        background: #fff;
+        color: #000;
+        border-radius: 100px;
+        font-weight: 700;
+        text-decoration: none;
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        font-size: 1.1rem;
+    }
+
+    .btn-cta-partners:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 40px rgba(56, 189, 248, 0.4);
+        background: #38bdf8;
+        color: #fff;
+    }
+
+    @media (max-width: 991px) {
+        .benefits-grid {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
         .partners-grid {
             grid-template-columns: 1fr;
+            max-width: 500px;
+        }
+
+        .card-image {
+            aspect-ratio: 16 / 9;
         }
     }
 </style>

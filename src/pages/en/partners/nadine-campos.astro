@@ -6,7 +6,7 @@ import Section from "../../../components/Section.astro";
 
 const partner = {
     name: "Nádine Campos photography & film production",
-    logo: "/images/partners/nadine-campos-logo.png",
+    logo: "/images/partners/logo-nadine-campos.jpeg",
     bio: "Nádine Campos is a renowned photographer and film producer, recognized for her ability to capture the essence of every moment through an artistic and technical lens. With years of experience in the industry, Nádine specializes in productions that tell powerful visual stories, from product photography to commercial short films.",
     howWeWork:
         "Sueste Creative and Nádine Campos join forces to offer integrated visual solutions. While Sueste focuses on digital strategy and design, Nádine brings the magic of reality-based imagery, ensuring that visual content is world-class, elevating our clients' brand perception.",
@@ -89,7 +89,9 @@ const partner = {
                     Contact us to discuss how we can elevate your project
                     together.
                 </p>
-                <a href="/en/contact" class="btn-cta">Talk to the Team</a>
+                <div style="margin-top: 3rem;">
+                    <a href="/en/contact" class="btn-cta">Talk to the Team</a>
+                </div>
             </div>
         </Section>
     </main>
@@ -116,13 +118,14 @@ const partner = {
     }
 
     .logo-reveal {
-        margin-bottom: 2rem;
+        margin-bottom: 3rem;
     }
 
     .partner-logo {
-        height: 120px;
+        height: 180px;
         width: auto;
-        filter: brightness(1.2);
+        filter: brightness(1.1);
+        border-radius: 20px;
     }
 
     .partner-hero h1 {
@@ -212,7 +215,6 @@ const partner = {
         font-weight: 700;
         text-decoration: none;
         transition: all 0.3s ease;
-        margin-top: 2rem;
     }
 
     .btn-cta:hover {

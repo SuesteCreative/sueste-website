@@ -6,7 +6,7 @@ import Section from "../../components/Section.astro";
 
 const partner = {
     name: "Nádine Campos photography & film production",
-    logo: "/images/partners/nadine-campos-logo.png",
+    logo: "/images/partners/logo-nadine-campos.jpeg",
     bio: "Nádine Campos é uma fotógrafa e produtora cinematográfica de renome, reconhecida pela sua capacidade de captar a essência de cada momento através de uma lente artística e técnica. Com anos de experiência no setor, Nádine especializa-se em produções que contam histórias visuais poderosas, desde fotografia de produto a curtas metragens comerciais.",
     howWeWork:
         "A Sueste Creative e a Nádine Campos unem forças para oferecer soluções visuais integradas. Enquanto a Sueste foca na estratégia digital e design, a Nádine traz a magia da imagem real, garantindo que o conteúdo visual seja de classe mundial, elevando a percepção de marca dos nossos clientes.",
@@ -85,7 +85,9 @@ const partner = {
                     Contacte-nos para discutir como podemos elevar o seu projeto
                     juntos.
                 </p>
-                <a href="/contacto" class="btn-cta">Falar com a Equipa</a>
+                <div style="margin-top: 3rem;">
+                    <a href="/contacto" class="btn-cta">Falar com a Equipa</a>
+                </div>
             </div>
         </Section>
     </main>
@@ -112,13 +114,14 @@ const partner = {
     }
 
     .logo-reveal {
-        margin-bottom: 2rem;
+        margin-bottom: 3rem;
     }
 
     .partner-logo {
-        height: 120px;
+        height: 180px;
         width: auto;
-        filter: brightness(1.2);
+        filter: brightness(1.1);
+        border-radius: 20px;
     }
 
     .partner-hero h1 {
@@ -208,7 +211,6 @@ const partner = {
         font-weight: 700;
         text-decoration: none;
         transition: all 0.3s ease;
-        margin-top: 2rem;
     }
 
     .btn-cta:hover {
