@@ -34,7 +34,12 @@ const partner = {
                         class="partner-logo"
                     />
                 </div>
-                <h1 class="reveal-text" data-reveal>{partner.name}</h1>
+                <h1 class="reveal-text" data-reveal>
+                    <span class="partner-name-hero">Nádine Campos</span>
+                    <span class="partner-tagline-hero"
+                        >photography & film production</span
+                    >
+                </h1>
                 <div class="hero-line"></div>
             </div>
         </header>
@@ -45,7 +50,10 @@ const partner = {
                     <p>{partner.bio}</p>
                 </div>
                 <div class="bio-image" data-reveal class="reveal-delay-1">
-                    <img src={partner.images[0]} alt="Nádine Campos em ação" />
+                    <img
+                        src="https://images.unsplash.com/photo-1554048612-b6a482bc67e5?auto=format&fit=crop&q=80&w=1200"
+                        alt="Fotógrafa profissional em ação"
+                    />
                 </div>
             </div>
         </Section>
@@ -80,13 +88,13 @@ const partner = {
 
         <Section id="cta" className="final-cta">
             <div class="cta-inner text-center">
-                <h2>Interessado nesta colaboração?</h2>
+                <h2>Pronto para elevar o seu projeto?</h2>
                 <p>
-                    Contacte-nos para discutir como podemos elevar o seu projeto
-                    juntos.
+                    Solicite um orçamento personalizado para o seu próximo
+                    projeto visual.
                 </p>
                 <div style="margin-top: 3rem;">
-                    <a href="/contacto" class="btn-cta">Falar com a Equipa</a>
+                    <a href="/orcamento" class="btn-cta">Pedir Orçamento</a>
                 </div>
             </div>
         </Section>
@@ -125,10 +133,24 @@ const partner = {
     }
 
     .partner-hero h1 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .partner-name-hero {
         font-size: clamp(2.5rem, 6vw, 4rem);
         font-weight: 800;
         line-height: 1.1;
-        margin-bottom: 2rem;
+    }
+
+    .partner-tagline-hero {
+        font-size: clamp(1.1rem, 2vw, 1.5rem);
+        font-weight: 300;
+        font-style: italic;
+        color: #a1a1aa;
+        letter-spacing: 0.1em;
     }
 
     .hero-line {

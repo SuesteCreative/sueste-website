@@ -12,7 +12,7 @@ const partners = [
         category: "Fotografia & Vídeo",
         description:
             "Captando a essência de cada momento através de uma lente artística e técnica.",
-        image: "https://images.unsplash.com/photo-1542038784456-1ea8e935640e?auto=format&fit=crop&q=80&w=1200",
+        logo: "/images/partners/logo-nadine-campos.jpeg",
     },
 ];
 ---
@@ -35,10 +35,12 @@ const partners = [
                             class="partner-card glass"
                             data-reveal
                         >
-                            <div
-                                class="card-image"
-                                style={`background-image: url('${partner.image}'); background-size: cover; background-position: center;`}
-                            >
+                            <div class="card-image">
+                                <img
+                                    src={partner.logo}
+                                    alt={partner.name}
+                                    class="partner-card-logo"
+                                />
                                 <div class="card-overlay" />
                             </div>
                             <div class="card-info">
@@ -146,8 +148,19 @@ const partners = [
     .card-image {
         aspect-ratio: 1 / 1;
         width: 100%;
-        background: linear-gradient(45deg, #111, #222);
+        background: #000;
         position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+    }
+
+    .partner-card-logo {
+        max-width: 80%;
+        max-height: 80%;
+        object-fit: contain;
+        filter: brightness(1.1);
     }
 
     .card-overlay {
@@ -192,7 +205,7 @@ const partners = [
     .sub-name {
         font-size: 1rem;
         font-weight: 300;
-        color: #a1a1aa;
+        color: #fff;
         letter-spacing: 0.05em;
         font-style: italic;
         margin-top: 0.25rem;
