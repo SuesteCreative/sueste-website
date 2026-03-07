@@ -72,6 +72,7 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
     const [formState, setFormState] = useState<FormState>({ name: '', email: '', company: '', deadline: '', message: '', honey: '' });
     const [status, setStatus] = useState({ type: '', msg: '' });
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [hasReelsExtra, setHasReelsExtra] = useState(false);
 
     const [isStickyMobile, setIsStickyMobile] = useState(false);
     const [isMergedWithForm, setIsMergedWithForm] = useState(false);
@@ -184,6 +185,10 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
             }
         }
 
+        if (hasReelsExtra) {
+            baseSum += 50;
+        }
+
         // Global Addons
         pricingData.global_addons.forEach((addon: any) => {
             if (addons[addon.id]) {
@@ -251,6 +256,7 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
         setSelections({});
         setAddons({});
         setAudiovisualHours(1);
+        setHasReelsExtra(false);
         setStatus({ type: '', msg: '' });
     };
 
@@ -472,6 +478,26 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                                     );
                                 })}
                             </div>
+
+                            {service.id === 'video_production' && (
+                                <div className="service-extra-toggle">
+                                    <div className="extra-kicker">Extra</div>
+                                    <div
+                                        className={`extra-checkbox-wrapper ${hasReelsExtra ? 'active' : ''}`}
+                                        onClick={() => setHasReelsExtra(!hasReelsExtra)}
+                                    >
+                                        <div className={`checkbox-custom tiny ${hasReelsExtra ? 'checked' : ''}`}>
+                                            {hasReelsExtra && <Check size={12} strokeWidth={4} />}
+                                        </div>
+                                        <div className="extra-info">
+                                            <span className="extra-name">
+                                                {lang === 'pt' ? 'Vídeo Reels (30 a 45 seg)' : 'Video Reels (30 to 45 sec)'}
+                                            </span>
+                                            <span className="extra-price">+50€</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
                         </motion.div>
                     )}
                 </AnimatePresence>

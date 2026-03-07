@@ -178,12 +178,6 @@
                             "name_pt": "Vídeo c/ Drone (2 min)",
                             "name_en": "Video w/ Drone (2 min)",
                             "price": 180
-                        },
-                        {
-                            "id": "video_reels",
-                            "name_pt": "Vídeo Reels (Extra 30 a 45 seg)",
-                            "name_en": "Video Reels (Extra 30 to 45 sec)",
-                            "price": 50
                         }
                     ]
                 }
