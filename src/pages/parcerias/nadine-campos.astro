@@ -12,11 +12,46 @@ const partner = {
     howWeWork:
         "A Sueste Creative e a Nádine Campos unem forças para oferecer soluções visuais integradas. Enquanto a Sueste foca na estratégia digital e design, a Nádine traz a magia da imagem real, garantindo que o conteúdo visual seja de classe mundial, elevando a percepção de marca dos nossos clientes.",
     images: [
-        "https://images.unsplash.com/photo-1554048612-b6a482bc67e5?auto=format&fit=crop&q=80&w=1200",
-        "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=1200",
-        "https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&q=80&w=1200",
-        "https://images.unsplash.com/photo-1473186578172-c141e679805a?auto=format&fit=crop&q=80&w=1200",
+        "https://images.unsplash.com/photo-1542038784456-1ea8e935640e?auto=format&fit=crop&q=80&w=1200", // Photographer
+        "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=1200", // Modern House
+        "https://images.unsplash.com/photo-1473186578172-c141e679805a?auto=format&fit=crop&q=80&w=1200", // Interior Design
+        "https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&q=80&w=1200", // Drone View
     ],
+    pricing: {
+        photo: {
+            title: "Fotografia (c/ edição)",
+            packs: [
+                { name: "Pack 15", price: "45€", frames: "15 enquadramentos" },
+                { name: "Pack 25", price: "65€", frames: "Até 120m²" },
+                { name: "Pack 35", price: "90€", frames: "Até 200m²" },
+                { name: "Pack 50", price: "115€", frames: "+250 m²" },
+            ],
+            addons: [
+                { name: "Enquadramento extra", price: "3,50€ / un" },
+                { name: "Retoque de imagem", price: "2,00€ a 25.00€" },
+                { name: "Virtual staging", price: "2.00€ a 25.00€" },
+                { name: "Retoque do céu", price: "5.00€" },
+            ],
+        },
+        video: {
+            title: "Vídeo (c/ edição)",
+            packs: [
+                { name: "Vídeo Standard", price: "120,00€", duration: "1 min" },
+                { name: "Vídeo c/ Drone", price: "180,00€", duration: "2 min" },
+                {
+                    name: "Vídeo Reels",
+                    price: "50,00€",
+                    duration: "Extra 30 a 45 seg",
+                },
+            ],
+            addons: [
+                { name: "Minuto extra", price: "15€" },
+                { name: "Títulos / Legendas", price: "2,00€ por layer" },
+                { name: "Animação de logótipo", price: "5,00€" },
+                { name: "Elementos gráficos", price: "2,00€ a 15,00€" },
+            ],
+        },
+    },
 };
 ---
 
@@ -49,16 +84,75 @@ const partner = {
                 <div class="bio-text" data-reveal>
                     <p>{partner.bio}</p>
                 </div>
-                <div class="bio-image" data-reveal class="reveal-delay-1">
-                    <img
-                        src={partner.images[0]}
-                        alt="Fotógrafa profissional em ação"
-                    />
+                <div class="bio-image" data-reveal>
+                    <img src={partner.images[0]} alt="Nádine Campos em ação" />
                 </div>
             </div>
         </Section>
 
-        <Section id="collaboration" title="Como Trabalhamos" dark>
+        <Section id="pricing" title="Serviços & Packs" dark>
+            <div class="pricing-tabs">
+                <div class="pricing-category">
+                    <h3>{partner.pricing.photo.title}</h3>
+                    <div class="packs-grid">
+                        {
+                            partner.pricing.photo.packs.map((pack) => (
+                                <div class="pack-item glass">
+                                    <span class="pack-name">{pack.name}</span>
+                                    <span class="pack-price">{pack.price}</span>
+                                    <span class="pack-detail">
+                                        {pack.frames}
+                                    </span>
+                                </div>
+                            ))
+                        }
+                    </div>
+                    <ul class="addons-list">
+                        {
+                            partner.pricing.photo.addons.map((addon) => (
+                                <li>
+                                    <span class="addon-name">{addon.name}</span>
+                                    <span class="addon-price">
+                                        +{addon.price}
+                                    </span>
+                                </li>
+                            ))
+                        }
+                    </ul>
+                </div>
+
+                <div class="pricing-category">
+                    <h3>{partner.pricing.video.title}</h3>
+                    <div class="packs-grid">
+                        {
+                            partner.pricing.video.packs.map((pack) => (
+                                <div class="pack-item glass highlight">
+                                    <span class="pack-name">{pack.name}</span>
+                                    <span class="pack-price">{pack.price}</span>
+                                    <span class="pack-detail">
+                                        {pack.duration}
+                                    </span>
+                                </div>
+                            ))
+                        }
+                    </div>
+                    <ul class="addons-list">
+                        {
+                            partner.pricing.video.addons.map((addon) => (
+                                <li>
+                                    <span class="addon-name">{addon.name}</span>
+                                    <span class="addon-price">
+                                        +{addon.price}
+                                    </span>
+                                </li>
+                            ))
+                        }
+                    </ul>
+                </div>
+            </div>
+        </Section>
+
+        <Section id="collaboration" title="Como Trabalhamos">
             <div class="collab-container">
                 <div class="collab-content" data-reveal>
                     <div class="collab-card glass">
@@ -67,22 +161,6 @@ const partner = {
                         <p>{partner.howWeWork}</p>
                     </div>
                 </div>
-            </div>
-        </Section>
-
-        <Section id="gallery" title="Portfólio em Destaque">
-            <div class="gallery-grid">
-                {
-                    partner.images.slice(1).map((img, idx) => (
-                        <div
-                            class="gallery-item"
-                            data-reveal
-                            class={`reveal-delay-${idx + 1}`}
-                        >
-                            <img src={img} alt={`Obra de ${partner.name}`} />
-                        </div>
-                    ))
-                }
             </div>
         </Section>
 
@@ -95,25 +173,25 @@ const partner = {
                         superiores.
                     </p>
                 </div>
-                <div class="term-card" data-reveal class="reveal-delay-1">
+                <div class="term-card" data-reveal>
                     <h4>Revisões</h4>
                     <p>
-                        1 revisão gratuita incluída. Alterações extra
-                        orçamentadas a 15,00€/hora.
+                        1 revisão gratuita incluída. Alterações técnicas
+                        orçamentadas separadamente.
                     </p>
                 </div>
-                <div class="term-card" data-reveal class="reveal-delay-2">
+                <div class="term-card" data-reveal>
                     <h4>Fidelidade</h4>
                     <p>
                         Desconto de 10% aplicado automaticamente na sua 5ª
                         marcação.
                     </p>
                 </div>
-                <div class="term-card" data-reveal class="reveal-delay-3">
-                    <h4>Prazos & Arquivo</h4>
+                <div class="term-card" data-reveal>
+                    <h4>Entrega</h4>
                     <p>
-                        Entrega rápida de ficheiros. Armazenamento garantido por
-                        6 meses.
+                        Ficheiros entregues em formato digital. Armazenamento
+                        garantido por 6 meses.
                     </p>
                 </div>
             </div>
@@ -123,8 +201,8 @@ const partner = {
             <div class="cta-inner text-center">
                 <h2>Pronto para elevar o seu projeto?</h2>
                 <p>
-                    Solicite um orçamento personalizado para o seu próximo
-                    projeto visual.
+                    Solicite um orçamento para combinar estes serviços com a
+                    nossa estratégia digital.
                 </p>
                 <div style="margin-top: 3rem;">
                     <a href="/orcamento" class="btn-cta">Pedir Orçamento</a>
@@ -142,44 +220,29 @@ const partner = {
     }
 
     .partner-hero {
-        min-height: 50vh;
+        min-height: 40vh;
         display: flex;
         align-items: center;
         justify-content: center;
         text-align: center;
-        background: radial-gradient(
-            circle at center,
-            rgba(56, 189, 248, 0.1) 0%,
-            transparent 70%
-        );
-    }
-
-    .logo-reveal {
-        margin-bottom: 3rem;
     }
 
     .partner-logo {
-        height: 180px;
+        height: 150px;
         width: auto;
-        filter: brightness(1.1);
         border-radius: 20px;
-    }
-
-    .partner-hero h1 {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 0.5rem;
+        margin-bottom: 2rem;
     }
 
     .partner-name-hero {
-        font-size: clamp(2.5rem, 6vw, 4rem);
+        display: block;
+        font-size: clamp(2.5rem, 5vw, 4rem);
         font-weight: 800;
-        line-height: 1.1;
+        margin-bottom: 0.5rem;
     }
 
     .partner-tagline-hero {
-        font-size: clamp(1.1rem, 2vw, 1.5rem);
+        font-size: 1.25rem;
         font-weight: 300;
         font-style: italic;
         color: #a1a1aa;
@@ -191,7 +254,6 @@ const partner = {
         height: 4px;
         background: #38bdf8;
         margin: 2rem auto 0;
-        border-radius: 2px;
     }
 
     .bio-container {
@@ -202,63 +264,102 @@ const partner = {
     }
 
     .bio-text p {
-        font-size: 1.25rem;
+        font-size: 1.2rem;
         line-height: 1.8;
         color: #a1a1aa;
-        font-weight: 300;
     }
 
     .bio-image img {
-        border-radius: 30px;
+        border-radius: 24px;
         width: 100%;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
     }
 
-    .collab-container {
-        max-width: 800px;
-        margin: 0 auto;
+    .pricing-tabs {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
     }
 
-    .collab-card {
-        padding: 4rem;
-        border-radius: 40px;
-        text-align: center;
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(255, 255, 255, 0.05);
+    .pricing-category h3 {
+        font-size: 1.8rem;
+        margin-bottom: 2rem;
+        color: #fff;
+        border-bottom: 2px solid rgba(56, 189, 248, 0.3);
+        padding-bottom: 0.5rem;
+        display: inline-block;
     }
 
-    .collab-icon {
-        font-size: 4rem;
+    .packs-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 1.5rem;
         margin-bottom: 2rem;
     }
 
-    .collab-card h3 {
-        font-size: 2rem;
-        margin-bottom: 1.5rem;
-    }
-
-    .collab-card p {
-        font-size: 1.25rem;
-        line-height: 1.7;
-        color: #a1a1aa;
-    }
-
-    .gallery-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 2rem;
-    }
-
-    .gallery-item img {
-        width: 100%;
-        aspect-ratio: 4/5;
-        object-fit: cover;
+    .pack-item {
+        padding: 1.5rem;
         border-radius: 20px;
-        transition: transform 0.5s ease;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.05);
     }
 
-    .gallery-item:hover img {
-        transform: scale(1.05);
+    .pack-item.highlight {
+        border-color: rgba(56, 189, 248, 0.3);
+        background: rgba(56, 189, 248, 0.02);
+    }
+
+    .pack-name {
+        font-weight: 700;
+        font-size: 1.1rem;
+    }
+
+    .pack-price {
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: #38bdf8;
+    }
+
+    .pack-detail {
+        font-size: 0.8rem;
+        color: #71717a;
+    }
+
+    .addons-list {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .addons-list li {
+        display: flex;
+        justify-content: space-between;
+        padding: 1rem;
+        background: rgba(255, 255, 255, 0.02);
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .addon-name {
+        font-weight: 500;
+    }
+
+    .addon-price {
+        color: #38bdf8;
+        font-weight: 700;
+    }
+
+    .collab-card {
+        padding: 3rem;
+        border-radius: 32px;
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto;
     }
 
     .terms-grid {
@@ -268,64 +369,35 @@ const partner = {
     }
 
     .term-card {
-        padding: 2.5rem;
+        padding: 2rem;
         background: rgba(255, 255, 255, 0.02);
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        border-radius: 24px;
-        transition: background 0.3s ease;
-    }
-
-    .term-card:hover {
-        background: rgba(255, 255, 255, 0.04);
+        border-radius: 20px;
     }
 
     .term-card h4 {
         color: #38bdf8;
-        font-size: 1.2rem;
         margin-bottom: 1rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-
-    .term-card p {
-        font-size: 0.95rem;
-        line-height: 1.6;
-        color: #a1a1aa;
     }
 
     .btn-cta {
-        display: inline-flex;
-        align-items: center;
+        display: inline-block;
         padding: 1.25rem 3rem;
         background: #fff;
         color: #000;
         border-radius: 100px;
         font-weight: 700;
         text-decoration: none;
-        transition: all 0.3s ease;
+        transition: transform 0.3s ease;
     }
 
     .btn-cta:hover {
         transform: scale(1.05);
-        box-shadow: 0 10px 30px rgba(56, 189, 248, 0.4);
     }
 
     @media (max-width: 991px) {
-        .gallery-grid {
-            grid-template-columns: 1fr 1fr;
-        }
-    }
-
-    @media (max-width: 768px) {
-        .bio-container,
-        .gallery-grid,
-        .terms-grid {
+        .pricing-tabs,
+        .bio-container {
             grid-template-columns: 1fr;
-        }
-
-        .partner-hero {
-            min-height: 40vh;
         }
     }
 </style>

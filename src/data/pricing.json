@@ -133,31 +133,31 @@
             "sub_services": [
                 {
                     "id": "photo_pack",
-                    "name_pt": "Pack Fotografia (Imóveis)",
-                    "name_en": "Photo Pack (Real Estate)",
+                    "name_pt": "Fotografia (Com Edição)",
+                    "name_en": "Photography (With Editing)",
                     "options": [
                         {
                             "id": "photo_15",
-                            "name_pt": "15 Fotos",
-                            "name_en": "15 Photos",
-                            "price": 40
+                            "name_pt": "Pack 15 Fotos (15 enquadramentos)",
+                            "name_en": "Pack 15 Photos (15 framings)",
+                            "price": 45
                         },
                         {
                             "id": "photo_25",
-                            "name_pt": "25 Fotos (Até 120m²)",
-                            "name_en": "25 Photos (Up to 120m²)",
+                            "name_pt": "Pack 25 Fotos (Até 120m²)",
+                            "name_en": "Pack 25 Photos (Up to 120m²)",
                             "price": 65
                         },
                         {
                             "id": "photo_35",
-                            "name_pt": "35 Fotos (Até 200m²)",
-                            "name_en": "35 Photos (Up to 200m²)",
+                            "name_pt": "Pack 35 Fotos (Até 200m²)",
+                            "name_en": "Pack 35 Photos (Up to 200m²)",
                             "price": 90
                         },
                         {
                             "id": "photo_50",
-                            "name_pt": "50 Fotos (+250m²)",
-                            "name_en": "50 Photos (+250m²)",
+                            "name_pt": "Pack 50 Fotos (+250m²)",
+                            "name_en": "Pack 50 Photos (+250m²)",
                             "price": 115
                         }
                     ]
@@ -169,40 +169,21 @@
                     "options": [
                         {
                             "id": "video_standard",
-                            "name_pt": "Vídeo Standard (1-2 min)",
-                            "name_en": "Standard Video (1-2 min)",
-                            "price": 65
+                            "name_pt": "Vídeo Standard (1 min)",
+                            "name_en": "Standard Video (1 min)",
+                            "price": 120
                         },
                         {
                             "id": "video_drone",
-                            "name_pt": "Vídeo com Drone",
-                            "name_en": "Video with Drone",
-                            "price": 120
-                        }
-                    ]
-                },
-                {
-                    "id": "drone_standalone",
-                    "name_pt": "Drone (Standalone)",
-                    "name_en": "Drone (Standalone)",
-                    "options": [
-                        {
-                            "id": "drone_photo_5",
-                            "name_pt": "Fotos Aéreas (Pack 5)",
-                            "name_en": "Aerial Photos (5 Pack)",
-                            "price": 35
+                            "name_pt": "Vídeo c/ Drone (2 min)",
+                            "name_en": "Video w/ Drone (2 min)",
+                            "price": 180
                         },
                         {
-                            "id": "drone_photo_10",
-                            "name_pt": "Fotos Aéreas (Pack 10)",
-                            "name_en": "Aerial Photos (10 Pack)",
-                            "price": 65
-                        },
-                        {
-                            "id": "drone_video_60",
-                            "name_pt": "Vídeo Aéreo (60s)",
-                            "name_en": "Aerial Video (60s)",
-                            "price": 75
+                            "id": "video_reels",
+                            "name_pt": "Vídeo Reels (Extra 30 a 45 seg)",
+                            "name_en": "Video Reels (Extra 30 to 45 sec)",
+                            "price": 50
                         }
                     ]
                 }
@@ -261,49 +242,6 @@
             "name_en": "External integrations",
             "price": 0,
             "on_request": true
-        },
-        {
-            "id": "addon_nadine_reels",
-            "name_pt": "Vídeo Reels (Vertical 30-45s) *",
-            "name_en": "Video Reels (Vertical 30-45s) *",
-            "price": 35,
-            "is_partner": true,
-            "partner_slug": "nadine-campos"
-        },
-        {
-            "id": "addon_nadine_edit",
-            "name_pt": "Remoção/Edição de Objetos *",
-            "name_en": "Object Removal/Editing *",
-            "price": 2,
-            "type": "starting_at",
-            "is_partner": true,
-            "partner_slug": "nadine-campos"
-        },
-        {
-            "id": "addon_nadine_sky",
-            "name_pt": "Substituição de Céu *",
-            "name_en": "Sky Replacement *",
-            "price": 5,
-            "is_partner": true,
-            "partner_slug": "nadine-campos"
-        },
-        {
-            "id": "addon_nadine_staging",
-            "name_pt": "Virtual Staging *",
-            "name_en": "Virtual Staging *",
-            "price": 15,
-            "type": "starting_at",
-            "is_partner": true,
-            "partner_slug": "nadine-campos"
-        },
-        {
-            "id": "addon_nadine_titles",
-            "name_pt": "Títulos e Legendas *",
-            "name_en": "Titles and Subtitles *",
-            "price": 2,
-            "type": "starting_at",
-            "is_partner": true,
-            "partner_slug": "nadine-campos"
         }
     ]
 }

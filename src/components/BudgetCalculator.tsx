@@ -347,6 +347,16 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                         <div className="service-header-left">
                             <h3 className="service-title">{lang === 'pt' ? service.name_pt : service.name_en}</h3>
                         </div>
+                        {service.is_partner && service.partner_logo && (
+                            <a
+                                href={lang === 'pt' ? `/parcerias/${service.partner_slug}` : `/en/partners/${service.partner_slug}`}
+                                className="partner-logo-container"
+                                onClick={(e) => e.stopPropagation()}
+                                title={lang === 'pt' ? 'Ver parceiro' : 'View partner'}
+                            >
+                                <img src={service.partner_logo} alt="Partner Logo" className="partner-logo-calc" />
+                            </a>
+                        )}
                         <div className="group-indicator">
                             <ChevronDown size={20} className={`chevron-icon ${isGroupOpen ? 'open' : ''}`} />
                         </div>
