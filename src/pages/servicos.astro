@@ -1,4 +1,4 @@
----
+﻿---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
@@ -104,7 +104,7 @@ import Footer from "../components/Footer.astro";
                 icon: "📊",
               },
             ],
-            img: "https://images.unsplash.com/photo-1611162618071-b39a2b05523e?auto=format&fit=crop&q=80&w=1600",
+            img: "https://images.unsplash.com/photo-1616469829581-73993eb86b02?auto=format&fit=crop&q=80&w=1600",
           },
           {
             id: "video",
@@ -391,6 +391,8 @@ import Footer from "../components/Footer.astro";
     border-radius: 20px;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
     gap: 1.5rem;
     border: 1px solid rgba(255, 255, 255, 0.1);
     background: rgba(
@@ -679,17 +681,7 @@ import Footer from "../components/Footer.astro";
       },
     });
 
-    // Bento Stagger re-added - removing opacity to ensure absolute visibility
-    gsap.from(bentoItems, {
-      y: 40,
-      stagger: 0.1,
-      duration: 1,
-      ease: "power4.out",
-      scrollTrigger: {
-        trigger: section,
-        start: "top 85%",
-      },
-    });
+    // Bento Stagger removido para manter cards estáticos
   });
 
   // Final CTA Reveal
