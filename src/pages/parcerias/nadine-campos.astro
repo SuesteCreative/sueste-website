@@ -152,18 +152,6 @@ const partner = {
             </div>
         </Section>
 
-        <Section id="collaboration" title="Como Trabalhamos">
-            <div class="collab-container">
-                <div class="collab-content" data-reveal>
-                    <div class="collab-card glass">
-                        <div class="collab-icon">⚡</div>
-                        <h3>Sinergia Estratégica</h3>
-                        <p>{partner.howWeWork}</p>
-                    </div>
-                </div>
-            </div>
-        </Section>
-
         <Section id="terms" title="Termos & Condições" dark>
             <div class="terms-grid">
                 <div class="term-card" data-reveal>
@@ -197,6 +185,18 @@ const partner = {
             </div>
         </Section>
 
+        <Section id="collaboration" title="Como Trabalhamos">
+            <div class="collab-container">
+                <div class="collab-content" data-reveal>
+                    <div class="collab-card glass">
+                        <div class="collab-icon">⚡</div>
+                        <h3>Sinergia Estratégica</h3>
+                        <p>{partner.howWeWork}</p>
+                    </div>
+                </div>
+            </div>
+        </Section>
+
         <Section id="cta" className="final-cta">
             <div class="cta-inner text-center">
                 <h2>Pronto para elevar o seu projeto?</h2>
@@ -216,7 +216,7 @@ const partner = {
 
 <style>
     .partner-detail-page {
-        padding-top: 100px;
+        padding-top: 140px;
     }
 
     .partner-hero {
@@ -292,8 +292,8 @@ const partner = {
 
     .packs-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-        gap: 1.5rem;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
         margin-bottom: 2rem;
     }
 

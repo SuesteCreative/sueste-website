@@ -345,17 +345,25 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                         onKeyDown={(e) => { if (e.key === 'Enter') toggleGroup(service.id) }}
                     >
                         <div className="service-header-left">
-                            <h3 className="service-title">{lang === 'pt' ? service.name_pt : service.name_en}</h3>
+                            <h3 className="service-title">
+                                {lang === 'pt' ? service.name_pt : service.name_en}
+                                {service.has_extra_taxes && <span className="partner-asterisk">*</span>}
+                            </h3>
                         </div>
                         {service.is_partner && service.partner_logo && (
-                            <a
-                                href={lang === 'pt' ? `/parcerias/${service.partner_slug}` : `/en/partners/${service.partner_slug}`}
-                                className="partner-logo-container"
-                                onClick={(e) => e.stopPropagation()}
-                                title={lang === 'pt' ? 'Ver parceiro' : 'View partner'}
-                            >
-                                <img src={service.partner_logo} alt="Partner Logo" className="partner-logo-calc" />
-                            </a>
+                            <div className="partner-branding-calc">
+                                <span className="partner-prefix-text">
+                                    {lang === 'pt' ? 'Parceria com' : 'Partnering with'}
+                                </span>
+                                <a
+                                    href={lang === 'pt' ? `/parcerias/${service.partner_slug}` : `/en/partners/${service.partner_slug}`}
+                                    className="partner-logo-container"
+                                    onClick={(e) => e.stopPropagation()}
+                                    title={lang === 'pt' ? 'Ver condições do parceiro' : 'View partner terms'}
+                                >
+                                    <img src={service.partner_logo} alt="Partner Logo" className="partner-logo-calc" />
+                                </a>
+                            </div>
                         )}
                         <div className="group-indicator">
                             <ChevronDown size={20} className={`chevron-icon ${isGroupOpen ? 'open' : ''}`} />
@@ -576,12 +584,6 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                                 );
                             })}
                         </div>
-                        <p className="extra-taxes-note">
-                            {lang === 'pt' ? '*Taxas extra podem-se aplicar. ' : '*Extra taxes may apply. '}
-                            <a href={lang === 'pt' ? "/parcerias/nadine-campos" : "/en/partners/nadine-campos"}>
-                                {lang === 'pt' ? 'Ver condições do parceiro' : 'View partner terms'}
-                            </a>
-                        </p>
                     </div>
                 </motion.div>
 
