@@ -1,0 +1,9 @@
+const fs = require('fs');
+const file = 'c:/Users/pedro/OneDrive/Github/Sueste/src/pages/servicos.astro';
+let d = fs.readFileSync(file, 'utf8');
+d = d.replace('Astro / React / Next.js', 'Astro, React, Next.js');
+d = d.replace('Captação com Drone FPV', 'Captação com Drone');
+d = d.replace('Imersivo & Envolvente', 'Edição profissional (Movie-like)');
+d = d.replace('.bento-item {\\r\\n    padding: 2rem;\\r\\n    border-radius: 20px;\\r\\n    display: flex;\\r\\n    flex-direction: column;\\r\\n    gap: 1.5rem;', '.bento-item {\\r\\n    padding: 2rem;\\r\\n    border-radius: 20px;\\r\\n    display: flex;\\r\\n    flex-direction: column;\\r\\n    justify-content: space-between;\\r\\n    height: 100%;\\r\\n    gap: 1.5rem;');
+d = d.replace('.bento-item {\\n    padding: 2rem;\\n    border-radius: 20px;\\n    display: flex;\\n    flex-direction: column;\\n    gap: 1.5rem;', '.bento-item {\\n    padding: 2rem;\\n    border-radius: 20px;\\n    display: flex;\\n    flex-direction: column;\\n    justify-content: space-between;\\n    height: 100%;\\n    gap: 1.5rem;');
+fs.writeFileSync(file, d);

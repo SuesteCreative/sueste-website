@@ -1,0 +1,194 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import Section from "../components/Section.astro";
+
+const partners = [
+    {
+        name: "Nádine Campos photography & film production",
+        slug: "nadine-campos",
+        category: "Fotografia & Vídeo",
+        description:
+            "Captando a essência de cada momento através de uma lente artística e técnica.",
+        image: "https://images.unsplash.com/photo-1492691523567-6170e2415964?auto=format&fit=crop&q=80&w=800",
+    },
+];
+---
+
+<BaseLayout
+    title="Parcerias"
+    description="Conheça os parceiros que colaboram com a Sueste Creative."
+>
+    <Navbar />
+    <main class="parcerias-page">
+        <Section
+            title="As Nossas Parcerias"
+            subtitle="Colaboramos com os melhores talentos para entregar excelência em cada projeto."
+        >
+            <div class="partners-grid">
+                {
+                    partners.map((partner) => (
+                        <a
+                            href={`/parcerias/${partner.slug}`}
+                            class="partner-card glass"
+                            data-reveal
+                        >
+                            <div
+                                class="card-image"
+                                style={`background-image: url('${partner.image}'); background-size: cover; background-position: center;`}
+                            >
+                                <div class="card-overlay" />
+                            </div>
+                            <div class="card-info">
+                                <span>{partner.category}</span>
+                                <h3>{partner.name}</h3>
+                                <p>{partner.description}</p>
+                            </div>
+                        </a>
+                    ))
+                }
+            </div>
+        </Section>
+
+        <Section
+            title="Porquê Parcerias?"
+            subtitle="A força da colaboração estratégica."
+            dark
+        >
+            <div class="benefits-grid">
+                <div class="benefit" data-reveal>
+                    <div class="benefit-icon">🤝</div>
+                    <h3>Sinergia Criativa</h3>
+                    <p>
+                        Unimos diferentes visões para criar algo maior do que a
+                        soma das partes.
+                    </p>
+                </div>
+                <div class="benefit" data-reveal class="reveal-delay-1">
+                    <div class="benefit-icon">✨</div>
+                    <h3>Especialização</h3>
+                    <p>
+                        Trabalhamos com especialistas focados no que fazem de
+                        melhor.
+                    </p>
+                </div>
+                <div class="benefit" data-reveal class="reveal-delay-2">
+                    <h3>Qualidade Superior</h3>
+                    <p>
+                        Padrões de exigência elevados em todas as frentes de
+                        produção.
+                    </p>
+                </div>
+            </div>
+        </Section>
+    </main>
+
+    <Footer />
+</BaseLayout>
+
+<style>
+    .parcerias-page {
+        padding-top: 80px;
+    }
+
+    .partners-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: 3rem;
+    }
+
+    .partner-card {
+        border-radius: 30px;
+        overflow: hidden;
+        transition: transform 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .partner-card:hover {
+        transform: translateY(-15px) scale(1.02);
+        border-color: var(--color-accent);
+    }
+
+    .card-image {
+        height: 300px;
+        background: linear-gradient(45deg, #111, #222);
+        position: relative;
+    }
+
+    .card-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .partner-card:hover .card-overlay {
+        opacity: 1;
+    }
+
+    .card-info {
+        padding: 2.5rem;
+    }
+
+    .card-info span {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: #38bdf8;
+        margin-bottom: 0.5rem;
+        display: block;
+    }
+
+    .card-info h3 {
+        font-size: 1.75rem;
+        margin-bottom: 1rem;
+        color: #fff;
+    }
+
+    .card-info p {
+        opacity: 0.6;
+        font-size: 1rem;
+        line-height: 1.6;
+        color: #a1a1aa;
+    }
+
+    .benefits-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 4rem;
+        margin-top: 3rem;
+    }
+
+    .benefit {
+        text-align: center;
+    }
+
+    .benefit-icon {
+        font-size: 3rem;
+        margin-bottom: 1.5rem;
+        display: block;
+    }
+
+    .benefit h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color: white;
+    }
+
+    .benefit p {
+        font-size: 1rem;
+        opacity: 0.6;
+        line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+        .partners-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>

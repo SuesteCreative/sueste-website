@@ -1,0 +1,225 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import Section from "../../components/Section.astro";
+
+const partner = {
+    name: "Nádine Campos photography & film production",
+    logo: "/images/partners/nadine-campos-logo.png",
+    bio: "Nádine Campos é uma fotógrafa e produtora cinematográfica de renome, reconhecida pela sua capacidade de captar a essência de cada momento através de uma lente artística e técnica. Com anos de experiência no setor, Nádine especializa-se em produções que contam histórias visuais poderosas, desde fotografia de produto a curtas metragens comerciais.",
+    howWeWork:
+        "A Sueste Creative e a Nádine Campos unem forças para oferecer soluções visuais integradas. Enquanto a Sueste foca na estratégia digital e design, a Nádine traz a magia da imagem real, garantindo que o conteúdo visual seja de classe mundial, elevando a percepção de marca dos nossos clientes.",
+    images: [
+        "https://images.unsplash.com/photo-1492691523567-6170e2415964?auto=format&fit=crop&q=80&w=800",
+        "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=800",
+        "https://images.unsplash.com/photo-1473186578172-c141e679805a?auto=format&fit=crop&q=80&w=800",
+    ],
+};
+---
+
+<BaseLayout
+    title={partner.name}
+    description={`Saiba mais sobre a nossa parceria com ${partner.name}.`}
+>
+    <Navbar />
+
+    <main class="partner-detail-page">
+        <header class="partner-hero">
+            <div class="container hero-inner">
+                <div class="logo-reveal" data-reveal>
+                    <img
+                        src={partner.logo}
+                        alt={partner.name}
+                        class="partner-logo"
+                    />
+                </div>
+                <h1 class="reveal-text" data-reveal>{partner.name}</h1>
+                <div class="hero-line"></div>
+            </div>
+        </header>
+
+        <Section id="bio" title="Sobre a Artista">
+            <div class="bio-container grid">
+                <div class="bio-text" data-reveal>
+                    <p>{partner.bio}</p>
+                </div>
+                <div class="bio-image" data-reveal class="reveal-delay-1">
+                    <img src={partner.images[0]} alt="Nádine Campos em ação" />
+                </div>
+            </div>
+        </Section>
+
+        <Section id="collaboration" title="Como Trabalhamos" dark>
+            <div class="collab-container">
+                <div class="collab-content" data-reveal>
+                    <div class="collab-card glass">
+                        <div class="collab-icon">⚡</div>
+                        <h3>Sinergia Estratégica</h3>
+                        <p>{partner.howWeWork}</p>
+                    </div>
+                </div>
+            </div>
+        </Section>
+
+        <Section id="gallery" title="Portfólio em Destaque">
+            <div class="gallery-grid">
+                {
+                    partner.images.slice(1).map((img, idx) => (
+                        <div
+                            class="gallery-item"
+                            data-reveal
+                            class={`reveal-delay-${idx + 1}`}
+                        >
+                            <img src={img} alt={`Obra de ${partner.name}`} />
+                        </div>
+                    ))
+                }
+            </div>
+        </Section>
+
+        <Section id="cta" className="final-cta">
+            <div class="cta-inner text-center">
+                <h2>Interessado nesta colaboração?</h2>
+                <p>
+                    Contacte-nos para discutir como podemos elevar o seu projeto
+                    juntos.
+                </p>
+                <a href="/contacto" class="btn-cta">Falar com a Equipa</a>
+            </div>
+        </Section>
+    </main>
+
+    <Footer />
+</BaseLayout>
+
+<style>
+    .partner-detail-page {
+        padding-top: 100px;
+    }
+
+    .partner-hero {
+        min-height: 50vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        background: radial-gradient(
+            circle at center,
+            rgba(56, 189, 248, 0.1) 0%,
+            transparent 70%
+        );
+    }
+
+    .logo-reveal {
+        margin-bottom: 2rem;
+    }
+
+    .partner-logo {
+        height: 120px;
+        width: auto;
+        filter: brightness(1.2);
+    }
+
+    .partner-hero h1 {
+        font-size: clamp(2.5rem, 6vw, 4rem);
+        font-weight: 800;
+        line-height: 1.1;
+        margin-bottom: 2rem;
+    }
+
+    .hero-line {
+        width: 60px;
+        height: 4px;
+        background: #38bdf8;
+        margin: 0 auto;
+        border-radius: 2px;
+    }
+
+    .bio-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+    }
+
+    .bio-text p {
+        font-size: 1.25rem;
+        line-height: 1.8;
+        color: #a1a1aa;
+        font-weight: 300;
+    }
+
+    .bio-image img {
+        border-radius: 30px;
+        width: 100%;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .collab-container {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .collab-card {
+        padding: 4rem;
+        border-radius: 40px;
+        text-align: center;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .collab-icon {
+        font-size: 4rem;
+        margin-bottom: 2rem;
+    }
+
+    .collab-card h3 {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .collab-card p {
+        font-size: 1.25rem;
+        line-height: 1.7;
+        color: #a1a1aa;
+    }
+
+    .gallery-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+    }
+
+    .gallery-item img {
+        width: 100%;
+        aspect-ratio: 16/9;
+        object-fit: cover;
+        border-radius: 20px;
+    }
+
+    .btn-cta {
+        display: inline-flex;
+        align-items: center;
+        padding: 1.25rem 3rem;
+        background: #fff;
+        color: #000;
+        border-radius: 100px;
+        font-weight: 700;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        margin-top: 2rem;
+    }
+
+    .btn-cta:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 30px rgba(56, 189, 248, 0.4);
+    }
+
+    @media (max-width: 768px) {
+        .bio-container,
+        .gallery-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>

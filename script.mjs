@@ -1,0 +1,10 @@
+import fs from 'fs';
+const file = 'c:/Users/pedro/OneDrive/Github/Sueste/src/pages/servicos.astro';
+let d = fs.readFileSync(file, 'utf8');
+d = d.replace('photo-1611162618071-b39a2b05523e', 'photo-1611162616475-46b635cb6868');
+const search =     // Bento Stagger re-added - removing opacity to ensure absolute visibility\r\n    gsap.from(bentoItems, {\r\n      y: 40,\r\n      stagger: 0.1,\r\n      duration: 1,\r\n      ease: "power4.out",\r\n      scrollTrigger: {\r\n        trigger: section,\r\n        start: "top 85%",\r\n      },\r\n    });;
+const search2 =     // Bento Stagger re-added - removing opacity to ensure absolute visibility\n    gsap.from(bentoItems, {\n      y: 40,\n      stagger: 0.1,\n      duration: 1,\n      ease: "power4.out",\n      scrollTrigger: {\n        trigger: section,\n        start: "top 85%",\n      },\n    });;
+d = d.replace(search, '    // Bento animations disabled so cards are perfectly equidistant');
+d = d.replace(search2, '    // Bento animations disabled so cards are perfectly equidistant');
+fs.writeFileSync(file, d);
+console.log('done');
