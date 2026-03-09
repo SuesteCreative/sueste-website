@@ -121,14 +121,17 @@ const partners = [
     }
 
     .partners-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        display: flex;
+        flex-wrap: wrap;
         gap: 2.5rem;
         max-width: 1000px;
         margin: 0 auto;
+        justify-content: center;
     }
 
     .partner-card {
+        flex: 1 1 400px;
+        max-width: 500px;
         border-radius: 30px;
         overflow: hidden;
         transition: transform 0.5s cubic-bezier(0.2, 1, 0.3, 1);

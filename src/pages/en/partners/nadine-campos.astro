@@ -129,8 +129,10 @@ const partner = {
                     <h3>{partner.pricing.video.title}</h3>
                     <div class="packs-grid">
                         {
-                            partner.pricing.video.packs.map((pack) => (
-                                <div class="pack-item glass highlight">
+                            partner.pricing.video.packs.map((pack, idx) => (
+                                <div
+                                    class={`pack-item glass highlight ${idx === 2 ? "span-full" : ""}`}
+                                >
                                     <span class="pack-name">{pack.name}</span>
                                     <span class="pack-price">{pack.price}</span>
                                     <span class="pack-detail">
@@ -158,42 +160,32 @@ const partner = {
 
         <Section id="terms" title="Terms & Conditions" dark>
             <div class="terms-grid">
-                <div class="term-card grid-span-2" data-reveal>
+                <div class="term-card" data-reveal>
                     <h4>Travel</h4>
                     <p>
-                        Free within a 15km radius of Point 0 (photographer's
-                        residence). Beyond 15km, the fee is <strong
-                            >0.30€/km</strong
-                        > (calculated for both ways).
-                    </p>
-                    <p
-                        style="font-size: 0.85rem; margin-top: 0.5rem; opacity: 0.7;"
-                    >
-                        *Outside the Faro district: 0.30€/km + tolls (calculated
-                        via Via Verde simulator). In case of cancellation
-                        without notice after travel has started, the fee applies
-                        even within the 15km radius.
+                        Free within 15km. Beyond this limit, a 0.30€/km fee
+                        (round trip) and applicable tolls apply.
                     </p>
                 </div>
                 <div class="term-card" data-reveal>
                     <h4>Revisions</h4>
                     <p>
-                        1 free revision included. Technical changes quoted
+                        1 free revision included. Extra technical changes quoted
                         separately.
                     </p>
                 </div>
                 <div class="term-card" data-reveal>
                     <h4>Loyalty</h4>
                     <p>
-                        10% discount automatically applied on your 5th
-                        appointment.
+                        Special 10% discount automatically applied starting from
+                        your 5th appointment with us.
                     </p>
                 </div>
                 <div class="term-card" data-reveal>
                     <h4>Delivery</h4>
                     <p>
-                        Digital format delivery. Guaranteed storage for 6
-                        months.
+                        Files delivered in digital format with guaranteed
+                        storage for 6 months.
                     </p>
                 </div>
             </div>
@@ -392,12 +384,12 @@ const partner = {
         justify-content: flex-start;
     }
 
-    .grid-span-2 {
+    .span-full {
         grid-column: span 2;
     }
 
     @media (max-width: 768px) {
-        .grid-span-2 {
+        .span-full {
             grid-column: span 1;
         }
     }

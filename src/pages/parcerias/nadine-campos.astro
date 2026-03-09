@@ -125,8 +125,10 @@ const partner = {
                     <h3>{partner.pricing.video.title}</h3>
                     <div class="packs-grid">
                         {
-                            partner.pricing.video.packs.map((pack) => (
-                                <div class="pack-item glass highlight">
+                            partner.pricing.video.packs.map((pack, idx) => (
+                                <div
+                                    class={`pack-item glass highlight ${idx === 2 ? "span-full" : ""}`}
+                                >
                                     <span class="pack-name">{pack.name}</span>
                                     <span class="pack-price">{pack.price}</span>
                                     <span class="pack-detail">
@@ -154,41 +156,31 @@ const partner = {
 
         <Section id="terms" title="Termos & Condições" dark>
             <div class="terms-grid">
-                <div class="term-card grid-span-2" data-reveal>
+                <div class="term-card" data-reveal>
                     <h4>Deslocação</h4>
                     <p>
-                        Gratuita num raio de 15km a partir do Ponto 0 (local de
-                        residência da fotógrafa). Além dos 15km, a taxa é de <strong
-                            >0,30€/km</strong
-                        > (contas de ida e volta).
-                    </p>
-                    <p
-                        style="font-size: 0.85rem; margin-top: 0.5rem; opacity: 0.7;"
-                    >
-                        *Fora do distrito de Faro: 0,30€/km + acréscimo de
-                        portagens (calculado via simulador Via Verde). Em caso
-                        de cancelamento sem aviso prévio após deslocação já
-                        iniciada, a taxa aplica-se mesmo dentro do raio de 15km.
+                        Gratuita num raio de 15km. Após esse limite, taxa de
+                        0,30€/km (ida e volta) e portagens aplicáveis.
                     </p>
                 </div>
                 <div class="term-card" data-reveal>
                     <h4>Revisões</h4>
                     <p>
-                        1 revisão gratuita incluída. Alterações técnicas
+                        1 revisão gratuita incluída. Alterações técnicas extra
                         orçamentadas separadamente.
                     </p>
                 </div>
                 <div class="term-card" data-reveal>
                     <h4>Fidelidade</h4>
                     <p>
-                        Desconto de 10% aplicado automaticamente na sua 5ª
-                        marcação.
+                        Desconto de 10% aplicado automaticamente a partir da sua
+                        5ª marcação connosco.
                     </p>
                 </div>
                 <div class="term-card" data-reveal>
                     <h4>Entrega</h4>
                     <p>
-                        Ficheiros entregues em formato digital. Armazenamento
+                        Ficheiros entregues em formato digital com armazenamento
                         garantido por 6 meses.
                     </p>
                 </div>
@@ -388,12 +380,12 @@ const partner = {
         justify-content: flex-start;
     }
 
-    .grid-span-2 {
+    .span-full {
         grid-column: span 2;
     }
 
     @media (max-width: 768px) {
-        .grid-span-2 {
+        .span-full {
             grid-column: span 1;
         }
     }
