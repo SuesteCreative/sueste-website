@@ -15,6 +15,7 @@ interface Project {
     altEn: string;
     hoverPt: string;
     hoverEn: string;
+    deviceType: string;
 }
 
 const projects: Project[] = [
@@ -34,6 +35,7 @@ const projects: Project[] = [
         altEn: "Desportos Náuticos de Alvor website mockup",
         hoverPt: "Explorar Website",
         hoverEn: "Explore Website",
+        deviceType: "ipad",
     },
     {
         title: "Mental8Works",
@@ -51,6 +53,7 @@ const projects: Project[] = [
         altEn: "Mental8Works platform mockup",
         hoverPt: "Ver Plataforma",
         hoverEn: "View Platform",
+        deviceType: "macbook",
     },
     {
         title: "Algo Atelier",
@@ -68,6 +71,7 @@ const projects: Project[] = [
         altEn: "Algo Atelier portfolio mockup",
         hoverPt: "Ver Portfólio",
         hoverEn: "View Portfolio",
+        deviceType: "iphone",
     },
 ];
 
@@ -143,7 +147,10 @@ const viewAllHref = isPt ? "/portfolio" : "/en/work";
                         </div>
 
                         <div class="row-mockup-container">
-                            <div class="portfolio-image-wrapper">
+                            <a
+                                href={project.internalLink}
+                                class={`portfolio-image-wrapper wrapper-${project.deviceType}`}
+                            >
                                 <div class="hover-badge">
                                     {isPt ? project.hoverPt : project.hoverEn}
                                 </div>
@@ -153,7 +160,7 @@ const viewAllHref = isPt ? "/portfolio" : "/en/work";
                                     alt={isPt ? project.altPt : project.altEn}
                                     loading="lazy"
                                 />
-                            </div>
+                            </a>
                         </div>
                     </div>
                 );
@@ -223,10 +230,23 @@ const viewAllHref = isPt ? "/portfolio" : "/en/work";
     .portfolio-image-wrapper {
         position: relative;
         width: 100%;
-        max-width: 800px;
         border-radius: 20px;
-        overflow: visible; /* To let badges float outside if needed */
+        overflow: visible;
         transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        text-decoration: none;
+        display: block;
+    }
+
+    .wrapper-macbook {
+        max-width: 700px;
+    }
+
+    .wrapper-ipad {
+        max-width: 400px; /* Smaller iPad */
+    }
+
+    .wrapper-iphone {
+        max-width: 250px; /* Way smaller iPhone */
     }
 
     .portfolio-img {
@@ -234,16 +254,11 @@ const viewAllHref = isPt ? "/portfolio" : "/en/work";
         height: auto;
         display: block;
         border-radius: 20px;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         transition: all 0.6s ease;
     }
 
     .portfolio-row:hover .portfolio-image-wrapper {
         transform: translateY(-10px) scale(1.02);
-    }
-
-    .portfolio-row:hover .portfolio-img {
-        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
     }
 
     .hover-badge {
@@ -383,7 +398,8 @@ const viewAllHref = isPt ? "/portfolio" : "/en/work";
         }
 
         .portfolio-image-wrapper {
-            max-width: 100%;
+            max-width: 90%;
+            margin: 0 auto;
         }
 
         .metric-value {
