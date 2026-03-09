@@ -12,6 +12,10 @@ interface Project {
     link: string;
     internalLink: string;
     deviceType: "macbook" | "ipad" | "iphone";
+    altPt: string;
+    altEn: string;
+    hoverPt: string;
+    hoverEn: string;
 }
 
 const projects: Project[] = [
@@ -23,11 +27,15 @@ const projects: Project[] = [
         metricEn: "E-commerce",
         metricLabelPt: "Reservas Online",
         metricLabelEn: "Online Bookings",
-        image: "/images/portfolio/desportos-mobile.png",
+        image: "/images/LandingPage/landing-dna-mockup.webp",
         size: "small",
         link: "https://desportosnauticosalvor.com/",
         internalLink: "/portfolio/desportos-nauticos-alvor",
         deviceType: "ipad",
+        altPt: "Website da Desportos Náuticos de Alvor exibido num iPad",
+        altEn: "Desportos Náuticos de Alvor website displayed on an iPad",
+        hoverPt: "Explorar Website",
+        hoverEn: "Explore Website",
     },
     {
         title: "Mental8Works",
@@ -37,11 +45,15 @@ const projects: Project[] = [
         metricEn: "Dynamic Site",
         metricLabelPt: "Custom Backoffice",
         metricLabelEn: "Custom Backoffice",
-        image: "/images/portfolio/mental8works-mobile.png",
+        image: "/images/LandingPage/landing-mental8works-mockup.webp",
         size: "small",
         link: "https://www.mental8works.pt/",
         internalLink: "/portfolio/mental8works",
-        deviceType: "iphone",
+        deviceType: "macbook",
+        altPt: "Plataforma Mental8Works num MacBook",
+        altEn: "Mental8Works platform on a MacBook",
+        hoverPt: "Ver Plataforma",
+        hoverEn: "View Platform",
     },
     {
         title: "Algo Atelier",
@@ -51,11 +63,15 @@ const projects: Project[] = [
         metricEn: "Static Site",
         metricLabelPt: "98% SEO Score",
         metricLabelEn: "98% SEO Score",
-        image: "/images/portfolio/algoatelier-mobile.png",
+        image: "/images/LandingPage/landing-algo-mockup.webp",
         size: "large",
         link: "https://algoatelier.pt/",
         internalLink: "/portfolio/algo-atelier",
         deviceType: "iphone",
+        altPt: "Website Algo Atelier no iPhone",
+        altEn: "Algo Atelier website on iPhone",
+        hoverPt: "Ver Portfólio",
+        hoverEn: "View Portfolio",
     },
 ];
 
@@ -134,10 +150,12 @@ const viewAllHref = isPt ? "/portfolio" : "/en/work";
                             {project.deviceType === "macbook" && (
                                 <div class="mockup-macbook inline-mockup">
                                     <div class="hover-badge desktop-only">
-                                        Hover me
+                                        {isPt
+                                            ? project.hoverPt
+                                            : project.hoverEn}
                                     </div>
                                     <div class="hover-badge mobile-only">
-                                        Tap me
+                                        {isPt ? "Tocar" : "Tap"}
                                     </div>
                                     <div class="macbook-screen">
                                         <div
@@ -147,7 +165,16 @@ const viewAllHref = isPt ? "/portfolio" : "/en/work";
                                             <img
                                                 src={project.image}
                                                 class="mockup-img"
-                                                alt={project.title}
+                                                alt={
+                                                    isPt
+                                                        ? project.altPt
+                                                        : project.altEn
+                                                }
+                                                title={
+                                                    isPt
+                                                        ? project.hoverPt
+                                                        : project.hoverEn
+                                                }
                                                 loading="lazy"
                                             />
                                         </div>
@@ -160,10 +187,12 @@ const viewAllHref = isPt ? "/portfolio" : "/en/work";
                             {project.deviceType === "iphone" && (
                                 <div class="mockup-iphone inline-mockup">
                                     <div class="hover-badge desktop-only">
-                                        Hover me
+                                        {isPt
+                                            ? project.hoverPt
+                                            : project.hoverEn}
                                     </div>
                                     <div class="hover-badge mobile-only">
-                                        Tap me
+                                        {isPt ? "Tocar" : "Tap"}
                                     </div>
                                     <div class="iphone-notch" />
                                     <div class="iphone-screen">
@@ -174,7 +203,16 @@ const viewAllHref = isPt ? "/portfolio" : "/en/work";
                                             <img
                                                 src={project.image}
                                                 class="mockup-img"
-                                                alt={project.title}
+                                                alt={
+                                                    isPt
+                                                        ? project.altPt
+                                                        : project.altEn
+                                                }
+                                                title={
+                                                    isPt
+                                                        ? project.hoverPt
+                                                        : project.hoverEn
+                                                }
                                                 loading="lazy"
                                             />
                                         </div>
@@ -184,10 +222,12 @@ const viewAllHref = isPt ? "/portfolio" : "/en/work";
                             {project.deviceType === "ipad" && (
                                 <div class="mockup-ipad inline-mockup">
                                     <div class="hover-badge desktop-only">
-                                        Hover me
+                                        {isPt
+                                            ? project.hoverPt
+                                            : project.hoverEn}
                                     </div>
                                     <div class="hover-badge mobile-only">
-                                        Tap me
+                                        {isPt ? "Tocar" : "Tap"}
                                     </div>
                                     <div class="ipad-screen">
                                         <div
@@ -197,7 +237,16 @@ const viewAllHref = isPt ? "/portfolio" : "/en/work";
                                             <img
                                                 src={project.image}
                                                 class="mockup-img"
-                                                alt={project.title}
+                                                alt={
+                                                    isPt
+                                                        ? project.altPt
+                                                        : project.altEn
+                                                }
+                                                title={
+                                                    isPt
+                                                        ? project.hoverPt
+                                                        : project.hoverEn
+                                                }
                                                 loading="lazy"
                                             />
                                         </div>
