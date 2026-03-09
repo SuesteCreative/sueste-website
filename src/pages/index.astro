@@ -23,7 +23,7 @@ const t = useTranslations(lang);
     <HeroScrollSequence>
       <div class="hero-content container">
         <div class="hero-content-anim">
-          <h1 set:html={t("hero.headline")}></h1>
+          <h1 set:html={t("hero.headline")} />
           <HeroPills />
           <div
             style="display: flex; gap: 1rem; justify-content: center; margin-top: 2.5rem; flex-wrap: wrap;"
@@ -64,7 +64,6 @@ const t = useTranslations(lang);
       title="Portfólio"
       subtitle="Projetos reais com resultados reais. Criatividade guiada por dados."
       className="portfolio-section-v2"
-      data-reveal
     >
       <div class="portfolio-bg-blob"></div>
       <PortfolioLanding />

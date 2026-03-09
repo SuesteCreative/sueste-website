@@ -91,10 +91,9 @@ const viewAllHref = isPt ? "/portfolio" : "/en/work";
                         class={`portfolio-row ${
                             isEven ? "row-left" : "row-right"
                         }`}
-                        data-reveal
-                        data-title={project.title}
+                        data-project-row
                     >
-                        <div class="row-content">
+                        <div class="row-content" data-animate-left>
                             <div class="card-header">
                                 <span class="category">
                                     {isPt
@@ -149,7 +148,7 @@ const viewAllHref = isPt ? "/portfolio" : "/en/work";
                             </a>
                         </div>
 
-                        <div class="row-mockup-container">
+                        <div class="row-mockup-container" data-animate-right>
                             <a
                                 href={project.internalLink}
                                 class={`portfolio-image-wrapper wrapper-${project.deviceType}`}
@@ -170,6 +169,7 @@ const viewAllHref = isPt ? "/portfolio" : "/en/work";
                             href={project.internalLink}
                             class="btn-project mobile-only"
                             style="margin-top: 2rem;"
+                            data-animate-left
                         >
                             {lang === "pt" ? "Ver Projeto" : "View Project"}
                             <svg
@@ -267,11 +267,11 @@ const viewAllHref = isPt ? "/portfolio" : "/en/work";
     }
 
     .wrapper-ipad {
-        max-width: 400px; /* Smaller iPad */
+        max-width: 400px;
     }
 
     .wrapper-iphone {
-        max-width: 350px; /* Capped width as requested */
+        max-width: 350px;
     }
 
     .portfolio-img {
@@ -406,8 +406,21 @@ const viewAllHref = isPt ? "/portfolio" : "/en/work";
         transform: translateY(-2px);
     }
 
-    .mobile-only {
-        display: none !important;
+    /* Animation initial states */
+    [data-animate-left] {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+
+    [data-animate-right] {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+
+    /* Target the header of the parent section */
+    :global(#portfolio .section-header) {
+        opacity: 0;
+        transform: translateY(30px);
     }
 
     @media (max-width: 1024px) {
@@ -446,5 +459,111 @@ const viewAllHref = isPt ? "/portfolio" : "/en/work";
         .desktop-only {
             display: none !important;
         }
+
+        /* Mobile animations: slide from bottom instead? Or keep from sides? User asked from sides. */
+        /* Let's keep from sides but maybe smaller offset */
+        [data-animate-left],
+        [data-animate-right] {
+            transform: translateY(30px); /* Better for mobile to slide up */
+        }
+    }
+
+    .desktop-only {
+        display: inline-flex;
+    }
+
+    .mobile-only {
+        display: none !important;
     }
 </style>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    function initPortfolioAnimations() {
+        // 1. Animate Section Header (Fade in)
+        const portfolioSection = document.querySelector("#portfolio");
+        if (portfolioSection) {
+            const header = portfolioSection.querySelector(".section-header");
+            if (header) {
+                gsap.fromTo(
+                    header,
+                    { opacity: 0, y: 30 },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        duration: 1.2,
+                        ease: "power3.out",
+                        scrollTrigger: {
+                            trigger: header,
+                            start: "top 85%",
+                        },
+                    },
+                );
+            }
+        }
+
+        // 2. Animate Project Rows
+        const rows = document.querySelectorAll("[data-project-row]");
+
+        rows.forEach((row) => {
+            const leftCol = row.querySelector("[data-animate-left]");
+            const rightCol = row.querySelector("[data-animate-right]");
+            const mobileBtn = row.querySelector(
+                ".mobile-only[data-animate-left]",
+            );
+
+            const isMobile = window.innerWidth <= 1024;
+
+            if (isMobile) {
+                // Mobile: Slide up
+                gsap.to([leftCol, rightCol, mobileBtn], {
+                    opacity: 1,
+                    y: 0,
+                    x: 0,
+                    duration: 1,
+                    stagger: 0.2,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: row,
+                        start: "top 80%",
+                    },
+                });
+            } else {
+                // Desktop: Specific directionality
+                if (leftCol) {
+                    gsap.to(leftCol, {
+                        opacity: 1,
+                        x: 0,
+                        duration: 1.2,
+                        ease: "power3.out",
+                        scrollTrigger: {
+                            trigger: row,
+                            start: "top 75%",
+                        },
+                    });
+                }
+
+                if (rightCol) {
+                    gsap.to(rightCol, {
+                        opacity: 1,
+                        x: 0,
+                        duration: 1.2,
+                        ease: "power3.out",
+                        scrollTrigger: {
+                            trigger: row,
+                            start: "top 75%",
+                        },
+                    });
+                }
+            }
+        });
+    }
+
+    // Run on load and on Astro view transitions
+    initPortfolioAnimations();
+    document.addEventListener("astro:after-swap", initPortfolioAnimations);
+</script>
