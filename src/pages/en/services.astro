@@ -208,8 +208,8 @@ import Footer from "../../components/Footer.astro";
     display: flex;
     align-items: center;
     position: relative;
-    overflow: hidden;
     padding-top: 120px;
+    /* Removed overflow: hidden to allow blobs to blend */
   }
 
   .hero-inner {
@@ -264,9 +264,8 @@ import Footer from "../../components/Footer.astro";
   /* SERVICE SECTIONS */
   .service-section {
     padding: 12rem 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     position: relative;
-    overflow: hidden;
+    /* Removed border-bottom and overflow: hidden for a seamless look */
   }
 
   .bg-number {
@@ -295,11 +294,12 @@ import Footer from "../../components/Footer.astro";
     height: 45vw;
     background: radial-gradient(
       circle,
-      rgba(56, 189, 248, 0.2) 0%,
+      rgba(56, 189, 248, 0.15) 0%,
       transparent 70%
     );
     filter: blur(80px);
     z-index: -1;
+    opacity: 0.8;
   }
 
   .reverse .bg-number {
@@ -388,14 +388,11 @@ import Footer from "../../components/Footer.astro";
     border-radius: 20px;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
     gap: 1.5rem;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(
-      15,
-      15,
-      15,
-      1
-    ); /* Solid dark background to prevent bleed-through */
+    background: rgba(15, 15, 15, 0.6);
     backdrop-filter: blur(10px);
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     position: relative;
@@ -404,12 +401,7 @@ import Footer from "../../components/Footer.astro";
 
   .bento-item:hover {
     border-color: #38bdf8;
-    background: rgba(
-      56,
-      189,
-      248,
-      0.08
-    ); /* slightly more visible blue on hover */
+    background: rgba(56, 189, 248, 0.08);
     transform: translateY(-5px);
     box-shadow: 0 0 30px rgba(56, 189, 248, 0.3);
   }
@@ -422,9 +414,12 @@ import Footer from "../../components/Footer.astro";
     border-radius: 20px;
     padding: 1px;
     background: linear-gradient(135deg, transparent, #38bdf8, transparent);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box,
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
       linear-gradient(#fff 0 0);
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     opacity: 0;
@@ -469,11 +464,8 @@ import Footer from "../../components/Footer.astro";
   /* FINAL CTA */
   .services-final-cta {
     padding: 10rem 0;
-    background: linear-gradient(
-      to bottom,
-      transparent,
-      rgba(56, 189, 248, 0.05)
-    );
+    background: transparent;
+    position: relative;
   }
 
   .text-center {
@@ -598,7 +590,7 @@ import Footer from "../../components/Footer.astro";
       duration: 1.2,
       ease: "power4.out",
     },
-    "-=1"
+    "-=1",
   );
 
   // Floating blobs
@@ -624,8 +616,6 @@ import Footer from "../../components/Footer.astro";
   sections.forEach((section) => {
     const img = section.querySelector(".reveal-image");
     const overlay = section.querySelector(".parallax-overlay");
-    const content = section.querySelector(".service-content");
-    const bentoItems = section.querySelectorAll(".bento-item");
     const icon = section.querySelector(".service-icon-container");
     const bgNumber = section.querySelector(".bg-number");
 
@@ -673,18 +663,6 @@ import Footer from "../../components/Footer.astro";
       scrollTrigger: {
         trigger: section,
         start: "top 80%",
-      },
-    });
-
-    // Bento Stagger re-added - removing opacity to ensure absolute visibility
-    gsap.from(bentoItems, {
-      y: 40,
-      stagger: 0.1,
-      duration: 1,
-      ease: "power4.out",
-      scrollTrigger: {
-        trigger: section,
-        start: "top 85%",
       },
     });
   });
