@@ -11,7 +11,6 @@ interface Project {
     size: "small" | "large";
     link: string;
     internalLink: string;
-    deviceType: "macbook" | "ipad" | "iphone";
     altPt: string;
     altEn: string;
     hoverPt: string;
@@ -31,9 +30,8 @@ const projects: Project[] = [
         size: "small",
         link: "https://desportosnauticosalvor.com/",
         internalLink: "/portfolio/desportos-nauticos-alvor",
-        deviceType: "ipad",
-        altPt: "Website da Desportos Náuticos de Alvor exibido num iPad",
-        altEn: "Desportos Náuticos de Alvor website displayed on an iPad",
+        altPt: "Mockup do website Desportos Náuticos de Alvor",
+        altEn: "Desportos Náuticos de Alvor website mockup",
         hoverPt: "Explorar Website",
         hoverEn: "Explore Website",
     },
@@ -49,9 +47,8 @@ const projects: Project[] = [
         size: "small",
         link: "https://www.mental8works.pt/",
         internalLink: "/portfolio/mental8works",
-        deviceType: "macbook",
-        altPt: "Plataforma Mental8Works num MacBook",
-        altEn: "Mental8Works platform on a MacBook",
+        altPt: "Plataforma Mental8Works mockup",
+        altEn: "Mental8Works platform mockup",
         hoverPt: "Ver Plataforma",
         hoverEn: "View Platform",
     },
@@ -67,9 +64,8 @@ const projects: Project[] = [
         size: "large",
         link: "https://algoatelier.pt/",
         internalLink: "/portfolio/algo-atelier",
-        deviceType: "iphone",
-        altPt: "Website Algo Atelier no iPhone",
-        altEn: "Algo Atelier website on iPhone",
+        altPt: "Portfólio Algo Atelier mockup",
+        altEn: "Algo Atelier portfolio mockup",
         hoverPt: "Ver Portfólio",
         hoverEn: "View Portfolio",
     },
@@ -147,112 +143,17 @@ const viewAllHref = isPt ? "/portfolio" : "/en/work";
                         </div>
 
                         <div class="row-mockup-container">
-                            {project.deviceType === "macbook" && (
-                                <div class="mockup-macbook inline-mockup">
-                                    <div class="hover-badge desktop-only">
-                                        {isPt
-                                            ? project.hoverPt
-                                            : project.hoverEn}
-                                    </div>
-                                    <div class="hover-badge mobile-only">
-                                        {isPt ? "Tocar" : "Tap"}
-                                    </div>
-                                    <div class="macbook-screen">
-                                        <div
-                                            class="mockup-scroll-container"
-                                            data-mockup
-                                        >
-                                            <img
-                                                src={project.image}
-                                                class="mockup-img"
-                                                alt={
-                                                    isPt
-                                                        ? project.altPt
-                                                        : project.altEn
-                                                }
-                                                title={
-                                                    isPt
-                                                        ? project.hoverPt
-                                                        : project.hoverEn
-                                                }
-                                                loading="lazy"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div class="macbook-base">
-                                        <div class="macbook-notch" />
-                                    </div>
+                            <div class="portfolio-image-wrapper">
+                                <div class="hover-badge">
+                                    {isPt ? project.hoverPt : project.hoverEn}
                                 </div>
-                            )}
-                            {project.deviceType === "iphone" && (
-                                <div class="mockup-iphone inline-mockup">
-                                    <div class="hover-badge desktop-only">
-                                        {isPt
-                                            ? project.hoverPt
-                                            : project.hoverEn}
-                                    </div>
-                                    <div class="hover-badge mobile-only">
-                                        {isPt ? "Tocar" : "Tap"}
-                                    </div>
-                                    <div class="iphone-notch" />
-                                    <div class="iphone-screen">
-                                        <div
-                                            class="mockup-scroll-container"
-                                            data-mockup
-                                        >
-                                            <img
-                                                src={project.image}
-                                                class="mockup-img"
-                                                alt={
-                                                    isPt
-                                                        ? project.altPt
-                                                        : project.altEn
-                                                }
-                                                title={
-                                                    isPt
-                                                        ? project.hoverPt
-                                                        : project.hoverEn
-                                                }
-                                                loading="lazy"
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                            )}
-                            {project.deviceType === "ipad" && (
-                                <div class="mockup-ipad inline-mockup">
-                                    <div class="hover-badge desktop-only">
-                                        {isPt
-                                            ? project.hoverPt
-                                            : project.hoverEn}
-                                    </div>
-                                    <div class="hover-badge mobile-only">
-                                        {isPt ? "Tocar" : "Tap"}
-                                    </div>
-                                    <div class="ipad-screen">
-                                        <div
-                                            class="mockup-scroll-container"
-                                            data-mockup
-                                        >
-                                            <img
-                                                src={project.image}
-                                                class="mockup-img"
-                                                alt={
-                                                    isPt
-                                                        ? project.altPt
-                                                        : project.altEn
-                                                }
-                                                title={
-                                                    isPt
-                                                        ? project.hoverPt
-                                                        : project.hoverEn
-                                                }
-                                                loading="lazy"
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                            )}
+                                <img
+                                    src={project.image}
+                                    class="portfolio-img"
+                                    alt={isPt ? project.altPt : project.altEn}
+                                    loading="lazy"
+                                />
+                            </div>
                         </div>
                     </div>
                 );
@@ -289,7 +190,7 @@ const viewAllHref = isPt ? "/portfolio" : "/en/work";
     .portfolio-list {
         display: flex;
         flex-direction: column;
-        gap: 8rem; /* Large gap between projects */
+        gap: 8rem;
     }
 
     .portfolio-row {
@@ -317,332 +218,58 @@ const viewAllHref = isPt ? "/portfolio" : "/en/work";
         justify-content: center;
         align-items: center;
         position: relative;
-        perspective: 2000px; /* Enable 3D perspective */
     }
 
-    /* Ambient blobs behind mockups */
-    .row-mockup-container::before {
-        content: "";
-        position: absolute;
-        width: 140%;
-        height: 140%;
-        background:
-            radial-gradient(
-                circle at 30% 30%,
-                rgba(56, 189, 248, 0.45) 0%,
-                transparent 60%
-            ),
-            radial-gradient(
-                circle at 70% 70%,
-                rgba(37, 99, 235, 0.35) 0%,
-                transparent 60%
-            ),
-            radial-gradient(
-                circle at 50% 50%,
-                rgba(168, 85, 247, 0.25) 0%,
-                transparent 70%
-            );
-        filter: blur(60px);
-        z-index: -1;
-        animation: pulse-blob 12s ease-in-out infinite alternate;
-        opacity: 0.8;
-    }
-
-    @keyframes pulse-blob {
-        0% {
-            transform: scale(1) translate(0, 0);
-            opacity: 0.5;
-        }
-        50% {
-            transform: scale(1.1) translate(20px, -20px);
-            opacity: 0.8;
-        }
-        100% {
-            transform: scale(1.05) translate(-10px, 15px);
-            opacity: 0.6;
-        }
-    }
-
-    /* Mockups Base */
-    .inline-mockup {
+    .portfolio-image-wrapper {
         position: relative;
-        z-index: 10;
-        transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        transform-style: preserve-3d;
-    }
-
-    /* 3D Tilt based on row side */
-    .row-left .inline-mockup {
-        transform: rotateY(-15deg) rotateX(5deg) rotateZ(-1deg);
-    }
-    .row-right .inline-mockup {
-        transform: rotateY(15deg) rotateX(5deg) rotateZ(1deg);
-    }
-
-    .portfolio-row:hover .inline-mockup {
-        transform: translateY(-20px) rotateY(0deg) rotateX(0deg) rotateZ(0deg)
-            scale(1.05);
-    }
-
-    /* Macbook Mockup */
-    .mockup-macbook {
         width: 100%;
-        max-width: 700px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    .macbook-screen {
-        width: 100%;
-        aspect-ratio: 16 / 10;
-        background: #000;
-        border-radius: 12px 12px 0 0;
-        border: 8px solid #1a1a1a;
-        border-bottom: 12px solid #1a1a1a;
-        overflow: hidden;
-        position: relative;
-        box-shadow:
-            0 30px 60px rgba(0, 0, 0, 0.5),
-            0 10px 20px rgba(0, 0, 0, 0.3);
-        transform: translateZ(20px);
-    }
-    /* Side highlighting for 3D feel */
-    .macbook-screen::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: inherit;
-        pointer-events: none;
-        z-index: 5;
-    }
-    .macbook-base {
-        width: 100%;
-        height: 12px;
-        background: #2a2a2a;
-        border-radius: 0 0 12px 12px;
-        position: relative;
-        display: flex;
-        justify-content: center;
-        box-shadow: inset 0 -2px 5px rgba(0, 0, 0, 0.5);
+        max-width: 800px;
+        border-radius: 20px;
+        overflow: visible; /* To let badges float outside if needed */
+        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    @media (min-width: 1025px) {
-        .macbook-base {
-            width: 120%;
-            border-radius: 0 0 16px 16px;
-        }
+    .portfolio-img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        transition: all 0.6s ease;
     }
-    .macbook-notch {
-        width: 15%;
-        height: 4px;
-        background: #111;
-        border-radius: 0 0 4px 4px;
-        position: absolute; /* Fix notch placement */
-        top: 0;
+
+    .portfolio-row:hover .portfolio-image-wrapper {
+        transform: translateY(-10px) scale(1.02);
+    }
+
+    .portfolio-row:hover .portfolio-img {
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
     }
 
     .hover-badge {
         position: absolute;
         top: -20px;
         right: 0;
-        color: #38bdf8;
-        padding: 0.5rem;
-        font-size: 0.7rem;
+        background: rgba(56, 189, 248, 0.9);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 50px;
+        font-size: 0.75rem;
         font-weight: 700;
         text-transform: uppercase;
-        letter-spacing: 2px;
-        z-index: 20;
-        pointer-events: none;
-        animation: float-badge 3s ease-in-out infinite;
-    }
-
-    .wrinkles {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        transform: scale(2.5);
-        opacity: 0.6;
-    }
-
-    @keyframes float-badge {
-        0%,
-        100% {
-            transform: translateY(0) rotate(10deg);
-        }
-        50% {
-            transform: translateY(-8px) rotate(12deg);
-        }
-    }
-
-    .cursor-icon {
-        font-size: 1rem;
-        margin-left: 0.25rem;
-    }
-
-    /* iPad Mockup */
-    .mockup-ipad {
-        width: 60%;
-        max-width: 450px;
-        animation: float-device 6s ease-in-out infinite;
-    }
-    .ipad-screen {
-        width: 100%;
-        aspect-ratio: 3 / 4;
-        background: #000;
-        border-radius: 24px;
-        border: 14px solid #1a1a1a;
-        position: relative;
-        overflow: hidden;
-        box-shadow:
-            0 40px 80px rgba(0, 0, 0, 0.6),
-            0 15px 30px rgba(0, 0, 0, 0.4);
-        transform: translateZ(30px);
-    }
-    .ipad-screen::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 200%;
-        height: 100%;
-        background: linear-gradient(
-            115deg,
-            transparent 0%,
-            transparent 40%,
-            rgba(255, 255, 255, 0.05) 45%,
-            rgba(255, 255, 255, 0.1) 50%,
-            rgba(255, 255, 255, 0.05) 55%,
-            transparent 60%
-        );
-        pointer-events: none;
-        transform: translateX(-100%);
-        transition: transform 1s ease;
-    }
-    .portfolio-row:hover .ipad-screen::after {
-        transform: translateX(0);
-    }
-
-    @keyframes float-device {
-        0%,
-        100% {
-            transform: translateY(0) rotateY(var(--rot-y, -15deg)) rotateX(5deg);
-        }
-        50% {
-            transform: translateY(-15px) rotateY(var(--rot-y, -15deg))
-                rotateX(7deg);
-        }
-    }
-    .row-right .mockup-ipad {
-        --rot-y: 15deg;
-    }
-    .row-left .mockup-ipad {
-        --rot-y: -15deg;
-    }
-
-    /* iPhone Mockup */
-    .mockup-iphone {
-        width: 45%;
-        max-width: 320px;
-        animation: float-device-iphone 5s ease-in-out infinite;
-    }
-    .iphone-screen {
-        width: 100%;
-        aspect-ratio: 9 / 19.5;
-        background: #000;
-        border-radius: 36px;
-        border: 10px solid #111;
-        position: relative;
-        overflow: hidden;
-        box-shadow:
-            0 50px 100px rgba(0, 0, 0, 0.7),
-            0 20px 40px rgba(0, 0, 0, 0.5);
-        transform: translateZ(40px);
-    }
-    .iphone-screen::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 200%;
-        height: 100%;
-        background: linear-gradient(
-            115deg,
-            transparent 0%,
-            transparent 45%,
-            rgba(255, 255, 255, 0.1) 50%,
-            transparent 55%
-        );
-        pointer-events: none;
-        transform: translateX(-100%);
-        transition: transform 1.2s ease;
-    }
-    .portfolio-row:hover .iphone-screen::after {
-        transform: translateX(0);
-    }
-
-    @keyframes float-device-iphone {
-        0%,
-        100% {
-            transform: translateY(0) rotateY(var(--rot-y, -15deg))
-                rotateX(10deg);
-        }
-        50% {
-            transform: translateY(-20px) rotateY(var(--rot-y, -15deg))
-                rotateX(12deg);
-        }
-    }
-    .row-right .mockup-iphone {
-        --rot-y: 15deg;
-    }
-    .row-left .mockup-iphone {
-        --rot-y: -15deg;
-    }
-    .iphone-notch {
-        position: absolute;
-        top: 10px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 35%;
-        height: 25px;
-        background: #1a1a1a;
-        border-radius: 0 0 16px 16px;
+        letter-spacing: 1px;
         z-index: 10;
+        opacity: 0;
+        transform: translateY(10px);
+        transition: all 0.4s ease;
+        pointer-events: none;
+        box-shadow: 0 10px 20px rgba(56, 189, 248, 0.3);
+        backdrop-filter: blur(5px);
     }
 
-    .mockup-scroll-container {
-        width: 100%;
-        height: 100%;
-        position: relative;
-        overflow: hidden;
-        cursor: pointer;
-    }
-
-    .mockup-img {
-        width: 100%;
-        height: auto;
-        position: absolute;
-        top: 0;
-        left: 0;
-        transition: transform 15s linear;
+    .portfolio-row:hover .hover-badge {
+        opacity: 1;
         transform: translateY(0);
-        will-change: transform;
-    }
-
-    /* Desktop Hover Behavior */
-    @media (min-width: 1025px) {
-        .portfolio-row:hover .mockup-img {
-            transform: translateY(
-                calc(-100% + 100%)
-            ); /* Fallback logic handled by JS for precise calc */
-        }
-    }
-
-    /* Mobile Auto-scrolling state */
-    .mockup-scroll-container.is-autoscrolling .mockup-img {
-        /* Animation handled by JS for smooth looping */
-        transition: none;
     }
 
     .category {
@@ -677,15 +304,10 @@ const viewAllHref = isPt ? "/portfolio" : "/en/work";
         background-clip: text;
         -webkit-text-fill-color: transparent;
         letter-spacing: -2px;
-        padding-bottom: 0.1em; /* Prevent clipping */
-    }
-    .metric-value.text-blue {
-        background: none;
-        -webkit-text-fill-color: #38bdf8;
-        color: #38bdf8;
+        padding-bottom: 0.1em;
     }
 
-    .portfolio-row[data-title="Algo Atelier"] .metric-value {
+    .metric-value.text-blue {
         background: none;
         -webkit-text-fill-color: #38bdf8;
         color: #38bdf8;
@@ -696,23 +318,6 @@ const viewAllHref = isPt ? "/portfolio" : "/en/work";
         color: rgba(255, 255, 255, 0.6);
         font-weight: 500;
         margin-top: 0.25rem;
-    }
-    .metric-label.text-white {
-        color: #fff;
-        opacity: 1;
-    }
-
-    .metric-sublabel {
-        font-size: 0.85rem;
-        color: rgba(255, 255, 255, 0.4);
-        font-weight: 400;
-        margin-top: 0.1rem;
-    }
-
-    .card-bottom {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-end;
     }
 
     .btn-project {
@@ -777,133 +382,16 @@ const viewAllHref = isPt ? "/portfolio" : "/en/work";
             width: 100%;
         }
 
-        .mockup-ipad {
-            width: 90%;
-            max-width: 400px;
-        }
-        .mockup-iphone {
-            width: 75%;
-            max-width: 280px;
+        .portfolio-image-wrapper {
+            max-width: 100%;
         }
 
         .metric-value {
             font-size: clamp(1.4rem, 8vw, 2.2rem);
         }
 
-        .desktop-only {
-            display: none !important;
-        }
-        .mobile-only {
-            display: block !important;
-        }
-    }
-
-    @media (min-width: 1025px) {
-        .mobile-only {
-            display: none !important;
+        .hover-badge {
+            display: none;
         }
     }
 </style>
-
-<script>
-    function setupMockups() {
-        const mockupContainers = document.querySelectorAll("[data-mockup]");
-
-        mockupContainers.forEach((container) => {
-            const img = container.querySelector(
-                ".mockup-img",
-            ) as HTMLImageElement;
-            if (!img) return;
-
-            let animationId: number | null = null;
-            let currentTranslateY = 0;
-            const scrollSpeed = 2.4; // Doubled speed (pixels per frame)
-
-            function getScrollParams() {
-                const containerHeight = container.clientHeight;
-                const imageHeight = img.getBoundingClientRect().height;
-                const maxTranslate = containerHeight - imageHeight;
-                return { maxTranslate, containerHeight, imageHeight };
-            }
-
-            // Handle hover for desktop
-            container.addEventListener("mouseenter", () => {
-                if (window.innerWidth > 1024) {
-                    const { maxTranslate } = getScrollParams();
-                    if (maxTranslate >= 0) return;
-
-                    const duration = Math.abs(maxTranslate) / 200; // 200px per second (doubled speed)
-                    img.style.transition = `transform ${duration}s linear`;
-                    img.style.transform = `translateY(${maxTranslate}px)`;
-                }
-            });
-
-            container.addEventListener("mouseleave", () => {
-                if (window.innerWidth > 1024) {
-                    img.style.transition = "transform 2s ease-in-out";
-                    img.style.transform = "translateY(0)";
-                }
-            });
-
-            // Handle tap for mobile
-            container.addEventListener("click", (e) => {
-                if (window.innerWidth <= 1024) {
-                    e.preventDefault();
-                    const isAutoscrolling =
-                        container.classList.toggle("is-autoscrolling");
-
-                    if (isAutoscrolling) {
-                        startAutoScroll();
-                    } else {
-                        stopAutoScroll();
-                    }
-                }
-            });
-
-            function startAutoScroll() {
-                const { maxTranslate } = getScrollParams();
-                if (maxTranslate >= 0) return;
-
-                function step() {
-                    if (!container.classList.contains("is-autoscrolling"))
-                        return;
-
-                    currentTranslateY -= scrollSpeed;
-                    if (currentTranslateY <= maxTranslate) {
-                        currentTranslateY = 0; // Loop back
-                    }
-
-                    img.style.transform = `translateY(${currentTranslateY}px)`;
-                    animationId = requestAnimationFrame(step);
-                }
-
-                img.style.transition = "none";
-                animationId = requestAnimationFrame(step);
-            }
-
-            function stopAutoScroll() {
-                if (animationId) {
-                    cancelAnimationFrame(animationId);
-                    animationId = null;
-                }
-                img.style.transition = "transform 0.5s ease-out";
-                // Optionally reset or stay put? We stay put and let user tap again.
-            }
-
-            // Ensure we handle image loading
-            if (!img.complete) {
-                img.addEventListener("load", () => {
-                    // Force a recalculation if needed
-                });
-            }
-        });
-    }
-
-    // Initialize after DOM and Astro transitions
-    if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", setupMockups);
-    } else {
-        setupMockups();
-    }
-    document.addEventListener("astro:after-swap", setupMockups);
-</script>
