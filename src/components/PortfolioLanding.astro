@@ -406,6 +406,10 @@ const viewAllHref = isPt ? "/portfolio" : "/en/work";
         transform: translateY(-2px);
     }
 
+    .mobile-only {
+        display: none !important;
+    }
+
     @media (max-width: 1024px) {
         .portfolio-row,
         .portfolio-row.row-right {
@@ -433,6 +437,14 @@ const viewAllHref = isPt ? "/portfolio" : "/en/work";
 
         .hover-badge {
             display: none;
+        }
+
+        .mobile-only {
+            display: inline-flex !important;
+        }
+
+        .desktop-only {
+            display: none !important;
         }
     }
 </style>
