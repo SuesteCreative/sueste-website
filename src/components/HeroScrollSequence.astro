@@ -5,7 +5,13 @@
 <div class="hero-scroll-container">
   <div class="sticky-pin">
     <canvas id="hero-canvas"></canvas>
-    <div class="mobile-hero-bg"></div>
+    <img
+      src="/images/hero-video/sueste-hero-animation001.webp"
+      class="mobile-hero-bg"
+      alt=""
+      fetchpriority="high"
+      decoding="async"
+    />
     <div class="hero-gradient-overlay"></div>
     <div class="hero-overlay">
       <!-- Local decorative blobs for better visibility -->
@@ -118,9 +124,10 @@
       display: block;
       position: absolute;
       inset: 0;
-      background-image: url('/images/hero-video/sueste-hero-animation001.webp');
-      background-size: cover;
-      background-position: center;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
       z-index: 1;
     }
   }
