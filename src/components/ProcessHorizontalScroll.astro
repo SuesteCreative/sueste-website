@@ -167,7 +167,7 @@ const processData = [
         gap: 3rem;
         width: max-content; /* Force it to be as wide as all panels */
         /* Padding right to allow the last item to reach the center */
-        padding-right: 50vw;
+        padding-right: 3rem;
     }
 
     .process-panel {
@@ -374,12 +374,13 @@ const processData = [
 
             ScrollTrigger.create({
                 trigger: container,
-                start: "top 20%",
-                end: () => `+=${getScrollAmount() * -1}`, // scroll distance equals the physical slide distance
+                start: "top top",
+                end: () => `+=${getScrollAmount() * -1}`,
                 animation: tween,
                 pin: true,
-                scrub: 1, // smooth dragging effect
-                invalidateOnRefresh: true, // Recalculate if window resizes
+                anticipatePin: 1,
+                scrub: 1,
+                invalidateOnRefresh: true,
             });
         });
     });
