@@ -16,7 +16,13 @@ const lang = "en"; // Keeping 'en' as the CTA text and overall context is Englis
 const t = useTranslations(lang);
 ---
 
-<BaseLayout title="Home" description={t("hero.subheadline")} lang="en">
+<BaseLayout
+  title="Home"
+  description="Sueste Creative — web design, development and content production agency in the Algarve. We transform brands into dominant digital presences."
+  lang="en"
+  hreflangPt="https://sueste-creative.pt/"
+  hreflangEn="https://sueste-creative.pt/en/"
+>
   <Navbar isLandingPage={true} />
 
   <main>

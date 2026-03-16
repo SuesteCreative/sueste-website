@@ -6,12 +6,16 @@ interface Props {
   title: string;
   description?: string;
   lang?: string;
+  hreflangPt?: string;
+  hreflangEn?: string;
 }
 
 const {
   title,
   description = "Sueste Creative - Creative Agency",
   lang: propLang,
+  hreflangPt,
+  hreflangEn,
 } = Astro.props;
 const lang = propLang || getLangFromUrl(Astro.url);
 const canonicalURL = new URL(Astro.url.pathname, "https://sueste-creative.pt");
@@ -35,10 +39,14 @@ const canonicalURL = new URL(Astro.url.pathname, "https://sueste-creative.pt");
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/png" href="/images/favicon.png" />
+    <link rel="apple-touch-icon" href="/images/favicon.png" />
     <meta name="generator" content={Astro.generator} />
     <title>{title} | Sueste Creative</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
+    {hreflangPt && <link rel="alternate" hreflang="pt" href={hreflangPt} />}
+    {hreflangEn && <link rel="alternate" hreflang="en" href={hreflangEn} />}
+    {hreflangPt && <link rel="alternate" hreflang="x-default" href={hreflangPt} />}
 
     <!-- Open Graph -->
     <meta property="og:title" content={`${title} | Sueste Creative`} />
@@ -55,13 +63,21 @@ const canonicalURL = new URL(Astro.url.pathname, "https://sueste-creative.pt");
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content="https://sueste-creative.pt/images/logo-white-hor.webp" />
 
-    <!-- Fonts -->
+    <!-- Fonts: non-render-blocking -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap"
       rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
     />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
 
     <!-- SEO: JSON-LD Schema -->
     <script
