@@ -14,6 +14,7 @@ const {
   lang: propLang,
 } = Astro.props;
 const lang = propLang || getLangFromUrl(Astro.url);
+const canonicalURL = new URL(Astro.url.pathname, "https://sueste-creative.pt");
 ---
 
 <!DOCTYPE html>
@@ -37,12 +38,22 @@ const lang = propLang || getLangFromUrl(Astro.url);
     <meta name="generator" content={Astro.generator} />
     <title>{title} | Sueste Creative</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
 
     <!-- Open Graph -->
-    <meta property="og:title" content={title} />
+    <meta property="og:title" content={`${title} | Sueste Creative`} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={Astro.url} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content="https://sueste-creative.pt/images/logo-white-hor.webp" />
+    <meta property="og:locale" content={lang === "en" ? "en_GB" : "pt_PT"} />
+    <meta property="og:site_name" content="Sueste Creative" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={`${title} | Sueste Creative`} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="https://sueste-creative.pt/images/logo-white-hor.webp" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -58,15 +69,15 @@ const lang = propLang || getLangFromUrl(Astro.url);
       is:inline
       set:html={JSON.stringify({
         "@context": "https://schema.org",
-        "@type": "CreativeBusiness",
-        name: "Sueste Creative Agency",
-        alternateName: "Sueste",
-        url: "https://sueste.art",
-        logo: "https://sueste.art/images/favicon.png",
+        "@type": "ProfessionalService",
+        name: "Sueste Creative",
+        alternateName: "Sueste Creative Agency",
+        url: "https://sueste-creative.pt",
+        logo: "https://sueste-creative.pt/images/logo-white-hor.webp",
         description: description,
         address: {
           "@type": "PostalAddress",
-          addressLocality: "Portugal",
+          addressLocality: "Algarve",
           addressCountry: "PT",
         },
         sameAs: ["https://www.instagram.com/sueste.creative/"],
