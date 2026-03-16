@@ -8,6 +8,7 @@ interface Props {
   lang?: string;
   hreflangPt?: string;
   hreflangEn?: string;
+  preloadImage?: string;
 }
 
 const {
@@ -16,6 +17,7 @@ const {
   lang: propLang,
   hreflangPt,
   hreflangEn,
+  preloadImage,
 } = Astro.props;
 const lang = propLang || getLangFromUrl(Astro.url);
 const canonicalURL = new URL(Astro.url.pathname, "https://sueste-creative.pt");
@@ -44,6 +46,7 @@ const canonicalURL = new URL(Astro.url.pathname, "https://sueste-creative.pt");
     <title>{title} | Sueste Creative</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
+    {preloadImage && <link rel="preload" as="image" href={preloadImage} fetchpriority="high" />}
     {hreflangPt && <link rel="alternate" hreflang="pt" href={hreflangPt} />}
     {hreflangEn && <link rel="alternate" hreflang="en" href={hreflangEn} />}
     {hreflangPt && <link rel="alternate" hreflang="x-default" href={hreflangPt} />}

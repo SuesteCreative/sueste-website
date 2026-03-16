@@ -5,6 +5,7 @@
 <div class="hero-scroll-container">
   <div class="sticky-pin">
     <canvas id="hero-canvas"></canvas>
+    <div class="mobile-hero-bg"></div>
     <div class="hero-gradient-overlay"></div>
     <div class="hero-overlay">
       <!-- Local decorative blobs for better visibility -->
@@ -100,6 +101,29 @@
       height: 100vh;
     }
   }
+
+  /* Mobile: static hero, no scroll sequence */
+  .mobile-hero-bg {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .hero-scroll-container {
+      height: 100vh;
+    }
+    #hero-canvas {
+      display: none;
+    }
+    .mobile-hero-bg {
+      display: block;
+      position: absolute;
+      inset: 0;
+      background-image: url('/images/hero-video/sueste-hero-animation001.webp');
+      background-size: cover;
+      background-position: center;
+      z-index: 1;
+    }
+  }
 </style>
 
 <script>
@@ -108,80 +132,77 @@
 
   gsap.registerPlugin(ScrollTrigger);
 
-  // Define total frames generated
-  const frameCount = 500;
-  const currentFrame = (index: number) =>
-    `/images/hero-video/sueste-hero-animation${(index + 1)
-      .toString()
-      .padStart(3, "0")}.webp`;
+  const isDesktop = window.matchMedia("(min-width: 769px)").matches;
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  const canvas = document.getElementById("hero-canvas") as HTMLCanvasElement;
+  if (!isDesktop || reducedMotion) {
+    // Mobile / reduced motion: make hero text immediately visible, no animation
+    const heroContentAnim = document.querySelector(".hero-content-anim") as HTMLElement;
+    if (heroContentAnim) {
+      heroContentAnim.style.opacity = "1";
+      heroContentAnim.style.transform = "none";
+      heroContentAnim.style.filter = "none";
+    }
+  } else {
+    // Desktop only: run full canvas scroll animation
+    const frameCount = 500;
+    const currentFrame = (index: number) =>
+      `/images/hero-video/sueste-hero-animation${(index + 1)
+        .toString()
+        .padStart(3, "0")}.webp`;
 
-  if (
-    canvas &&
-    !window.matchMedia("(prefers-reduced-motion: reduce)").matches
-  ) {
+    const canvas = document.getElementById("hero-canvas") as HTMLCanvasElement;
     const context = canvas.getContext("2d");
 
-    // Set internal resolution of the canvas (e.g. 1920x1080)
     canvas.width = 1920;
     canvas.height = 1080;
 
-    const images: HTMLImageElement[] = [];
-    const imageSeq = {
-      frame: 0,
+    const images: (HTMLImageElement | null)[] = new Array(frameCount).fill(null);
+    const imageSeq = { frame: 0 };
+
+    // Load frame 0 immediately (LCP)
+    const firstImg = new Image();
+    firstImg.src = currentFrame(0);
+    firstImg.onload = () => {
+      images[0] = firstImg;
+      render();
     };
+    images[0] = firstImg;
 
-    // Preload all frames
-    for (let i = 0; i < frameCount; i++) {
-      const img = new Image();
-      img.src = currentFrame(i);
-      images.push(img);
+    // Progressive load: remaining frames via requestIdleCallback
+    let nextToLoad = 1;
+    function loadNextBatch() {
+      const batchSize = 10;
+      const end = Math.min(nextToLoad + batchSize, frameCount);
+      for (let i = nextToLoad; i < end; i++) {
+        const img = new Image();
+        img.src = currentFrame(i);
+        images[i] = img;
+      }
+      nextToLoad = end;
+      if (nextToLoad < frameCount) {
+        requestIdleCallback(loadNextBatch);
+      }
     }
+    requestIdleCallback(loadNextBatch);
 
-    // Render the very first frame quickly once loaded
-    images[0].onload = render;
-
-    // The hero content fading logic
+    // Hero text animation
     const heroContentAnim = document.querySelector(".hero-content-anim");
+    gsap.set(heroContentAnim, { opacity: 0, y: 80, scale: 0.9, filter: "blur(10px)" });
 
-    // Start completely hidden
-    gsap.set(heroContentAnim, {
-      opacity: 0,
-      y: 80,
-      scale: 0.9,
-      filter: "blur(10px)",
-    });
-
-    // Animate Hero Text revealing natively ON SCROLL, then hiding
     gsap
       .timeline({
         scrollTrigger: {
           trigger: ".hero-scroll-container",
-          start: "top top", // Starts animating right as you scroll down from top
-          end: "bottom bottom", // Sync this with the full video timeline length
-          scrub: 1, // Smooth scrub
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 1,
         },
       })
-      .to(heroContentAnim, {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        filter: "blur(0px)",
-        duration: 0.15,
-        ease: "power2.out",
-      }) // Reveal during early scroll
-      .to(heroContentAnim, { opacity: 1, duration: 0.65 }) // Hold for a much longer time
-      .to(heroContentAnim, {
-        opacity: 0,
-        y: -150,
-        scale: 1.05,
-        filter: "blur(15px)",
-        duration: 0.2,
-        ease: "power2.in",
-      }); // Fade out towards the end of the scroll sequence
+      .to(heroContentAnim, { opacity: 1, y: 0, scale: 1, filter: "blur(0px)", duration: 0.15, ease: "power2.out" })
+      .to(heroContentAnim, { opacity: 1, duration: 0.65 })
+      .to(heroContentAnim, { opacity: 0, y: -150, scale: 1.05, filter: "blur(15px)", duration: 0.2, ease: "power2.in" });
 
-    // Create the ScrollTrigger tied to the timeline (the video)
     gsap.to(imageSeq, {
       frame: frameCount - 1,
       snap: "frame",
@@ -190,36 +211,23 @@
         trigger: ".hero-scroll-container",
         start: "top top",
         end: "bottom bottom",
-        scrub: 1.5, // 1.5 seconds smoothing (inertia)
+        scrub: 1.5,
       },
       onUpdate: render,
     });
 
     function render() {
-      if (!images[imageSeq.frame]) return;
+      const img = images[imageSeq.frame];
+      if (!img || !img.complete || !img.naturalWidth) return;
 
-      // Calculate aspect ratios to maintain "cover" effect
-      const hRatio = canvas.width / images[imageSeq.frame].width;
-      const vRatio = canvas.height / images[imageSeq.frame].height;
+      const hRatio = canvas.width / img.width;
+      const vRatio = canvas.height / img.height;
       const ratio = Math.max(hRatio, vRatio);
-
-      const centerShift_x =
-        (canvas.width - images[imageSeq.frame].width * ratio) / 2;
-      const centerShift_y =
-        (canvas.height - images[imageSeq.frame].height * ratio) / 2;
+      const centerShift_x = (canvas.width - img.width * ratio) / 2;
+      const centerShift_y = (canvas.height - img.height * ratio) / 2;
 
       context?.clearRect(0, 0, canvas.width, canvas.height);
-      context?.drawImage(
-        images[imageSeq.frame],
-        0,
-        0,
-        images[imageSeq.frame].width,
-        images[imageSeq.frame].height,
-        centerShift_x,
-        centerShift_y,
-        images[imageSeq.frame].width * ratio,
-        images[imageSeq.frame].height * ratio,
-      );
+      context?.drawImage(img, 0, 0, img.width, img.height, centerShift_x, centerShift_y, img.width * ratio, img.height * ratio);
     }
   }
 </script>
