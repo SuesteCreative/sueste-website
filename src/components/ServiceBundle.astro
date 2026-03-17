@@ -216,6 +216,7 @@ const cssLefts = xs.map(x => `${(x / 1100 * 100).toFixed(2)}%`);
     width: 100%;
     height: 420px;
     margin-bottom: 3rem;
+    user-select: none;
   }
 
   .bundle-svg {
@@ -251,7 +252,7 @@ const cssLefts = xs.map(x => `${(x / 1100 * 100).toFixed(2)}%`);
     border: 1px solid rgba(255,255,255,0.06);
     border-radius: 16px;
     backdrop-filter: blur(20px);
-    cursor: pointer;
+    cursor: grab;
     text-align: left;
     overflow: hidden;
     z-index: 20;
@@ -302,6 +303,14 @@ const cssLefts = xs.map(x => `${(x / 1100 * 100).toFixed(2)}%`);
   }
 
   .svc-node:hover { transform: translate(-50%, -50%) scale(1.05); }
+
+  .svc-node.is-dragging {
+    cursor: grabbing !important;
+    box-shadow: 0 20px 50px -8px var(--accent), 0 0 80px -20px var(--accent) !important;
+    border-color: var(--accent) !important;
+    opacity: 0.92;
+    scale: 1.06;
+  }
 
   .node-accent-line {
     position: absolute;
@@ -387,6 +396,7 @@ const cssLefts = xs.map(x => `${(x / 1100 * 100).toFixed(2)}%`);
     color: #52525b;
     background: transparent;
     transition: all 0.35s ease;
+    cursor: pointer;
   }
 
   .bpill.active {
@@ -491,37 +501,47 @@ const cssLefts = xs.map(x => `${(x / 1100 * 100).toFixed(2)}%`);
 </style>
 
 <script>
-  const SVC_ORDER = ['web', 'crm', 'graphic', 'drone', 'social'];
+  const SVC_INIT = ['web', 'crm', 'graphic', 'drone', 'social'];
+  // CSS left% for each slot — mirrors xs=[110,310,550,790,990] / 1100 * 100
+  const SLOT_PCT = [10, 28.18, 50, 71.82, 90];
 
-  let active = [true, true, true, true, true];
+  let svcOrder = [...SVC_INIT];
+  let activeMap: Record<string, boolean> = Object.fromEntries(SVC_INIT.map(s => [s, true]));
 
-  function getActivePairs(): Array<[number, number]> {
-    const activeIdx = active.map((a, i) => a ? i : -1).filter(i => i >= 0);
-    const pairs: Array<[number, number]> = [];
-    for (let k = 0; k < activeIdx.length - 1; k++) {
-      pairs.push([activeIdx[k], activeIdx[k + 1]]);
-    }
+  // ── Drag state ──────────────────────────────────────────────────────────────
+  let drag: {
+    svc: string; el: HTMLElement;
+    stageW: number; startX: number; origLeft: number;
+    tempOrder: string[]; moved: boolean;
+  } | null = null;
+
+  // ── Helpers ─────────────────────────────────────────────────────────────────
+  function getCard(svc: string) {
+    return document.querySelector<HTMLElement>(`.svc-node[data-svc="${svc}"]`);
+  }
+
+  function getActivePairs() {
+    const ai = svcOrder.map((s, i) => activeMap[s] ? i : -1).filter(i => i >= 0);
+    const pairs: [number, number][] = [];
+    for (let k = 0; k < ai.length - 1; k++) pairs.push([ai[k], ai[k + 1]]);
     return pairs;
   }
 
   function applyConnections() {
-    const visibleKeys = new Set(getActivePairs().map(([i, j]) => `${i}-${j}`));
-
+    const vis = new Set(getActivePairs().map(([i, j]) => `${i}-${j}`));
     document.querySelectorAll<SVGPathElement>('.conn-line, .conn-glow').forEach(el => {
       const key = el.dataset.conn!;
       const len = (el as any)._len as number;
       if (!len) return;
-      el.style.strokeDashoffset = visibleKeys.has(key) ? '0' : String(len);
+      el.style.strokeDashoffset = vis.has(key) ? '0' : String(len);
     });
-
     document.querySelectorAll<SVGElement>('.conn-particle').forEach(el => {
-      const key = el.dataset.conn!;
-      el.style.opacity = visibleKeys.has(key) ? '1' : '0';
+      el.style.opacity = vis.has(el.dataset.conn!) ? '1' : '0';
     });
-
-    document.querySelectorAll<SVGElement>('.node-dot-svg').forEach(el => {
-      const idx = parseInt(el.dataset.idx!);
-      el.style.opacity = active[idx] ? '0.7' : '0.15';
+    // SVG slot dots opacity mirrors which slot's service is active
+    svcOrder.forEach((svc, slot) => {
+      const dot = document.querySelector<SVGElement>(`.node-dot-svg[data-idx="${slot}"]`);
+      if (dot) dot.style.opacity = activeMap[svc] ? '0.7' : '0.15';
     });
   }
 
@@ -538,53 +558,172 @@ const cssLefts = xs.map(x => `${(x / 1100 * 100).toFixed(2)}%`);
   }
 
   function updateCta() {
-    const activeSvcs = SVC_ORDER.filter((_, i) => active[i]);
+    const bundle = svcOrder.filter(s => activeMap[s]).join(',');
     const isEn = document.documentElement.lang === 'en';
-    const base = isEn ? '/en/quote' : '/orcamento';
-    const href = `${base}?bundle=${activeSvcs.join(',')}`;
-    document.querySelectorAll<HTMLAnchorElement>('.bundle-cta-btn').forEach(btn => {
-      btn.href = href;
+    const href = `${isEn ? '/en/quote' : '/orcamento'}?bundle=${bundle}`;
+    document.querySelectorAll<HTMLAnchorElement>('.bundle-cta-btn').forEach(btn => btn.href = href);
+  }
+
+  function applySlotPositions(skipSvc?: string) {
+    svcOrder.forEach((svc, slot) => {
+      if (svc === skipSvc) return;
+      const el = getCard(svc);
+      if (!el) return;
+      el.style.left = `${SLOT_PCT[slot]}%`;
     });
   }
 
+  // ── Toggle ───────────────────────────────────────────────────────────────────
   function toggleSvc(svc: string) {
-    const idx = SVC_ORDER.indexOf(svc);
-    if (idx === -1) return;
-    const nowActive = !active[idx];
-    if (!nowActive && active.filter(Boolean).length <= 1) return;
-
-    active[idx] = nowActive;
+    const cnt = Object.values(activeMap).filter(Boolean).length;
+    if (activeMap[svc] && cnt <= 1) return;
+    activeMap[svc] = !activeMap[svc];
+    const now = activeMap[svc];
 
     document.querySelectorAll<HTMLElement>(`.svc-node[data-svc="${svc}"], .msvc-row[data-svc="${svc}"]`)
-      .forEach(el => {
-        el.classList.toggle('active', nowActive);
-        el.setAttribute('aria-pressed', String(nowActive));
-      });
+      .forEach(el => { el.classList.toggle('active', now); el.setAttribute('aria-pressed', String(now)); });
 
-    const activeCount = active.filter(Boolean).length;
+    const newCnt = Object.values(activeMap).filter(Boolean).length;
     document.querySelectorAll<HTMLElement>('.svc-node').forEach(el => {
-      el.classList.toggle('solo', activeCount === 1 && el.classList.contains('active'));
+      el.classList.toggle('solo', newCnt === 1 && !!activeMap[el.dataset.svc!]);
     });
-
     document.querySelectorAll<HTMLElement>('.bpill[data-svc]').forEach(el => {
-      if (el.dataset.svc === svc) el.classList.toggle('active', nowActive);
+      if (el.dataset.svc === svc) el.classList.toggle('active', now);
     });
 
     applyConnections();
     updateCta();
   }
 
-  function init() {
-    active = [true, true, true, true, true];
-    initPaths();
+  // ── Drag logic ───────────────────────────────────────────────────────────────
+  function onDragStart(clientX: number, card: HTMLElement) {
+    const stage = document.getElementById('bundle-stage');
+    if (!stage) return;
+    const svc = card.dataset.svc!;
+    const slot = svcOrder.indexOf(svc);
+    drag = {
+      svc, el: card,
+      stageW: stage.getBoundingClientRect().width,
+      startX: clientX,
+      origLeft: SLOT_PCT[slot],
+      tempOrder: [...svcOrder],
+      moved: false,
+    };
+    card.style.transition = 'none';
+    card.style.zIndex = '30';
+  }
+
+  function onDragMove(clientX: number) {
+    if (!drag) return;
+    const dx = clientX - drag.startX;
+    if (!drag.moved && Math.abs(dx) < 5) return;
+
+    if (!drag.moved) {
+      drag.moved = true;
+      drag.el.classList.add('is-dragging');
+      document.body.style.cursor = 'grabbing';
+    }
+
+    const newLeft = drag.origLeft + (dx / drag.stageW) * 100;
+    drag.el.style.left = `${newLeft}%`;
+
+    // Snap target: nearest slot by distance
+    let nearSlot = 0, minDist = Infinity;
+    SLOT_PCT.forEach((pct, i) => {
+      const d = Math.abs(newLeft - pct);
+      if (d < minDist) { minDist = d; nearSlot = i; }
+    });
+
+    const curSlot = drag.tempOrder.indexOf(drag.svc);
+    if (nearSlot !== curSlot) {
+      drag.tempOrder.splice(curSlot, 1);
+      drag.tempOrder.splice(nearSlot, 0, drag.svc);
+      // Slide other cards to their new slots
+      drag.tempOrder.forEach((svc, slot) => {
+        if (svc === drag!.svc) return;
+        const el = getCard(svc);
+        if (!el) return;
+        el.style.transition = 'left 0.22s cubic-bezier(0.34, 1.56, 0.64, 1)';
+        el.style.left = `${SLOT_PCT[slot]}%`;
+      });
+    }
+  }
+
+  function onDragEnd() {
+    if (!drag) return;
+    const { svc, el, tempOrder, moved } = drag;
+    drag = null;
+    document.body.style.cursor = '';
+    el.classList.remove('is-dragging');
+
+    if (!moved) {
+      // Treated as a click — toggle
+      el.style.transition = '';
+      el.style.zIndex = '';
+      toggleSvc(svc);
+      return;
+    }
+
+    // Commit new order and snap card to final slot
+    svcOrder = [...tempOrder];
+    const finalSlot = svcOrder.indexOf(svc);
+    el.style.transition = 'left 0.22s cubic-bezier(0.34, 1.56, 0.64, 1)';
+    el.style.left = `${SLOT_PCT[finalSlot]}%`;
+    el.style.zIndex = '';
+
+    applyConnections();
     updateCta();
 
-    document.querySelectorAll<HTMLElement>('.svc-node, .msvc-row').forEach(node => {
-      const fresh = node.cloneNode(true) as HTMLElement;
-      node.parentNode?.replaceChild(fresh, node);
+    setTimeout(() => {
+      document.querySelectorAll<HTMLElement>('.svc-node').forEach(c => { c.style.transition = ''; });
+    }, 250);
+  }
+
+  // Global listeners (defined outside init so references are stable for remove)
+  function _onMouseMove(e: MouseEvent) { onDragMove(e.clientX); }
+  function _onMouseUp() { onDragEnd(); }
+
+  // ── Init ─────────────────────────────────────────────────────────────────────
+  function init() {
+    svcOrder = [...SVC_INIT];
+    activeMap = Object.fromEntries(SVC_INIT.map(s => [s, true]));
+    initPaths();
+    applySlotPositions();
+    updateCta();
+
+    // Re-register global drag listeners (clean up any previous)
+    document.removeEventListener('mousemove', _onMouseMove);
+    document.removeEventListener('mouseup', _onMouseUp);
+    document.addEventListener('mousemove', _onMouseMove);
+    document.addEventListener('mouseup', _onMouseUp);
+
+    // Desktop node cards: drag (mousedown) + touch
+    document.querySelectorAll<HTMLElement>('.svc-node').forEach(card => {
+      const fresh = card.cloneNode(true) as HTMLElement;
+      card.parentNode?.replaceChild(fresh, card);
+
+      fresh.addEventListener('mousedown', e => {
+        e.preventDefault(); // prevent text-selection drag
+        onDragStart(e.clientX, fresh);
+      });
+      fresh.addEventListener('touchstart', e => {
+        onDragStart(e.touches[0].clientX, fresh);
+      }, { passive: true });
+      fresh.addEventListener('touchmove', e => {
+        e.preventDefault();
+        onDragMove(e.touches[0].clientX);
+      }, { passive: false });
+      fresh.addEventListener('touchend', onDragEnd);
+    });
+
+    // Mobile rows: click-only toggle
+    document.querySelectorAll<HTMLElement>('.msvc-row').forEach(row => {
+      const fresh = row.cloneNode(true) as HTMLElement;
+      row.parentNode?.replaceChild(fresh, row);
       fresh.addEventListener('click', () => toggleSvc(fresh.dataset.svc!));
     });
 
+    // Pills: click-only toggle
     document.querySelectorAll<HTMLElement>('.bpill').forEach(pill => {
       const fresh = pill.cloneNode(true) as HTMLElement;
       pill.parentNode?.replaceChild(fresh, pill);
