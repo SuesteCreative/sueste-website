@@ -134,8 +134,10 @@ const processData = [
     }
 
     .sticky-content {
-        position: sticky;
-        top: 30vh; /* Sticks a third of the way down the screen */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 100%;
     }
 
     .process-title {
@@ -355,21 +357,18 @@ const processData = [
                 "#process-track"
             ) as HTMLElement;
 
-            // Calculate how far the track needs to slide left
-            // It's the full width of the track minus the width of its viewing container
-            const getScrollAmount = () =>
-                -(
-                    track.scrollWidth -
-                    (
-                        container.querySelector(
-                            ".process-scroll-right"
-                        ) as HTMLElement
-                    ).offsetWidth
-                );
+            // Calculate how far the track needs to slide left.
+            // Subtract padding-right so there's no dead scroll after the last card.
+            const scrollRight = container.querySelector(".process-scroll-right") as HTMLElement;
+            const getScrollAmount = () => {
+                const trackPad = parseFloat(getComputedStyle(track).paddingRight) || 0;
+                return -(track.scrollWidth - trackPad - scrollRight.offsetWidth);
+            };
 
             const tween = gsap.to(track, {
                 x: getScrollAmount,
                 ease: "none",
+                overwrite: "auto",
             });
 
             ScrollTrigger.create({
@@ -378,7 +377,6 @@ const processData = [
                 end: () => `+=${getScrollAmount() * -1}`,
                 animation: tween,
                 pin: true,
-                anticipatePin: 1,
                 scrub: 1,
                 invalidateOnRefresh: true,
             });
