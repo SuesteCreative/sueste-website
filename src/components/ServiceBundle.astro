@@ -281,6 +281,20 @@ const cssLefts = xs.map(x => `${(x / 1100 * 100).toFixed(2)}%`);
 
   .svc-node.active::before { opacity: 1; }
 
+  /* Solo state: last remaining active node */
+  .svc-node.solo {
+    border-color: var(--accent) !important;
+    box-shadow: 0 0 40px -4px var(--accent), 0 0 80px -20px var(--accent) !important;
+    animation: solo-pulse 2s ease-in-out infinite;
+  }
+
+  .svc-node.solo::before { opacity: 1; background: radial-gradient(circle at 40% 40%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 65%) !important; }
+
+  @keyframes solo-pulse {
+    0%, 100% { box-shadow: 0 0 40px -4px var(--accent), 0 0 80px -20px var(--accent); }
+    50%       { box-shadow: 0 0 55px 2px var(--accent), 0 0 100px -10px var(--accent); }
+  }
+
   .svc-node:not(.active) {
     opacity: 0.28;
     border-color: rgba(255,255,255,0.04);
@@ -541,8 +555,8 @@ const cssLefts = xs.map(x => `${(x / 1100 * 100).toFixed(2)}%`);
         const wasActive = fresh.classList.contains('active');
         const nowActive = !wasActive;
 
-        // Always keep at least 2 active (1 connection minimum)
-        if (!nowActive && active.filter(Boolean).length <= 2) return;
+        // Always keep at least 1 active
+        if (!nowActive && active.filter(Boolean).length <= 1) return;
 
         active[idx] = nowActive;
 
@@ -552,6 +566,12 @@ const cssLefts = xs.map(x => `${(x / 1100 * 100).toFixed(2)}%`);
             el.classList.toggle('active', nowActive);
             el.setAttribute('aria-pressed', String(nowActive));
           });
+
+        // Solo highlight: if only 1 active, add .solo to it
+        const activeCount = active.filter(Boolean).length;
+        document.querySelectorAll<HTMLElement>('.svc-node').forEach(el => {
+          el.classList.toggle('solo', activeCount === 1 && el.classList.contains('active'));
+        });
 
         // Toggle footer pill
         const pill = document.querySelector<HTMLElement>(`.bpill[data-svc="${svc}"]`);
