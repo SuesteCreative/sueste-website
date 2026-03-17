@@ -155,6 +155,39 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
         if (savedGroups) setExpandedGroups(JSON.parse(savedGroups));
     }, []);
 
+    // Load from URL ?bundle= param — takes priority over localStorage
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        const bundle = params.get('bundle');
+        if (!bundle) return;
+
+        const BUNDLE_MAP: Record<string, { serviceId: string; optionId: string; group?: string }> = {
+            web:     { serviceId: 'website',      optionId: 'web_medium',    group: 'web_development' },
+            crm:     { serviceId: 'crm',          optionId: 'crm_no_int',    group: 'web_development' },
+            graphic: { serviceId: 'branding',     optionId: 'brand_book'                              },
+            drone:   { serviceId: 'photo_pack',   optionId: 'photo_15',      group: 'audiovisual'     },
+            social:  { serviceId: 'social_media', optionId: 'social_medium'                           },
+        };
+
+        const keys = bundle.split(',').map(k => k.trim()).filter(k => BUNDLE_MAP[k]);
+        if (keys.length === 0) return;
+
+        const newSelections: SelectionsState = {};
+        const newGroups: { [key: string]: boolean } = {};
+        keys.forEach(key => {
+            const m = BUNDLE_MAP[key];
+            newSelections[m.serviceId] = { option: m.optionId };
+            if (m.group) newGroups[m.group] = true;
+        });
+
+        setSelections(newSelections);
+        setExpandedGroups(newGroups);
+
+        const url = new URL(window.location.href);
+        url.searchParams.delete('bundle');
+        history.replaceState(null, '', url.toString());
+    }, []);
+
     // Save to local storage
     useEffect(() => {
         localStorage.setItem('budgetSelections', JSON.stringify(selections));

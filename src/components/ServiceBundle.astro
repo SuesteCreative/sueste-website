@@ -43,7 +43,7 @@ const cssLefts = xs.map(x => `${(x / 1100 * 100).toFixed(2)}%`);
 
     <div class="bundle-header" data-reveal>
       <span class="bundle-eyebrow">{pt ? "Pacote Sueste" : "Sueste Bundle"}</span>
-      <h2>{pt ? "O Seu Ecossistema Digital" : "Your Digital Ecosystem"}</h2>
+      <h2>{pt ? "Ecossistema Digital" : "Digital Ecosystem"}</h2>
       <p>
         {pt
           ? "Cada serviço faz parte de uma cadeia. Desative um — os restantes reconectam-se automaticamente."
@@ -491,11 +491,11 @@ const cssLefts = xs.map(x => `${(x / 1100 * 100).toFixed(2)}%`);
 </style>
 
 <script>
-  // Which (i,j) pairs are currently visible
+  const SVC_ORDER = ['web', 'crm', 'graphic', 'drone', 'social'];
+
   let active = [true, true, true, true, true];
 
   function getActivePairs(): Array<[number, number]> {
-    // Find consecutive pairs in the active list
     const activeIdx = active.map((a, i) => a ? i : -1).filter(i => i >= 0);
     const pairs: Array<[number, number]> = [];
     for (let k = 0; k < activeIdx.length - 1; k++) {
@@ -519,7 +519,6 @@ const cssLefts = xs.map(x => `${(x / 1100 * 100).toFixed(2)}%`);
       el.style.opacity = visibleKeys.has(key) ? '1' : '0';
     });
 
-    // Dim the SVG node dots of inactive nodes
     document.querySelectorAll<SVGElement>('.node-dot-svg').forEach(el => {
       const idx = parseInt(el.dataset.idx!);
       el.style.opacity = active[idx] ? '0.7' : '0.15';
@@ -527,58 +526,69 @@ const cssLefts = xs.map(x => `${(x / 1100 * 100).toFixed(2)}%`);
   }
 
   function initPaths() {
-    // Measure each path's total length and cache it, then start hidden
     document.querySelectorAll<SVGPathElement>('.conn-line, .conn-glow').forEach(el => {
       try {
         const len = el.getTotalLength();
         (el as any)._len = len;
         el.style.strokeDasharray = String(len);
-        el.style.strokeDashoffset = String(len); // start all hidden
+        el.style.strokeDashoffset = String(len);
       } catch (_) {}
     });
-
-    // Then reveal initial state (all active = adjacent pairs only)
     requestAnimationFrame(() => applyConnections());
+  }
+
+  function updateCta() {
+    const activeSvcs = SVC_ORDER.filter((_, i) => active[i]);
+    const isEn = document.documentElement.lang === 'en';
+    const base = isEn ? '/en/quote' : '/orcamento';
+    const href = `${base}?bundle=${activeSvcs.join(',')}`;
+    document.querySelectorAll<HTMLAnchorElement>('.bundle-cta-btn').forEach(btn => {
+      btn.href = href;
+    });
+  }
+
+  function toggleSvc(svc: string) {
+    const idx = SVC_ORDER.indexOf(svc);
+    if (idx === -1) return;
+    const nowActive = !active[idx];
+    if (!nowActive && active.filter(Boolean).length <= 1) return;
+
+    active[idx] = nowActive;
+
+    document.querySelectorAll<HTMLElement>(`.svc-node[data-svc="${svc}"], .msvc-row[data-svc="${svc}"]`)
+      .forEach(el => {
+        el.classList.toggle('active', nowActive);
+        el.setAttribute('aria-pressed', String(nowActive));
+      });
+
+    const activeCount = active.filter(Boolean).length;
+    document.querySelectorAll<HTMLElement>('.svc-node').forEach(el => {
+      el.classList.toggle('solo', activeCount === 1 && el.classList.contains('active'));
+    });
+
+    document.querySelectorAll<HTMLElement>('.bpill[data-svc]').forEach(el => {
+      if (el.dataset.svc === svc) el.classList.toggle('active', nowActive);
+    });
+
+    applyConnections();
+    updateCta();
   }
 
   function init() {
     active = [true, true, true, true, true];
     initPaths();
+    updateCta();
 
     document.querySelectorAll<HTMLElement>('.svc-node, .msvc-row').forEach(node => {
       const fresh = node.cloneNode(true) as HTMLElement;
       node.parentNode?.replaceChild(fresh, node);
+      fresh.addEventListener('click', () => toggleSvc(fresh.dataset.svc!));
+    });
 
-      fresh.addEventListener('click', () => {
-        const idx = parseInt((fresh as HTMLElement).dataset.idx ?? '0');
-        const svc = fresh.dataset.svc!;
-        const wasActive = fresh.classList.contains('active');
-        const nowActive = !wasActive;
-
-        // Always keep at least 1 active
-        if (!nowActive && active.filter(Boolean).length <= 1) return;
-
-        active[idx] = nowActive;
-
-        // Toggle node UI
-        document.querySelectorAll<HTMLElement>(`.svc-node[data-svc="${svc}"], .msvc-row[data-svc="${svc}"]`)
-          .forEach(el => {
-            el.classList.toggle('active', nowActive);
-            el.setAttribute('aria-pressed', String(nowActive));
-          });
-
-        // Solo highlight: if only 1 active, add .solo to it
-        const activeCount = active.filter(Boolean).length;
-        document.querySelectorAll<HTMLElement>('.svc-node').forEach(el => {
-          el.classList.toggle('solo', activeCount === 1 && el.classList.contains('active'));
-        });
-
-        // Toggle footer pill
-        const pill = document.querySelector<HTMLElement>(`.bpill[data-svc="${svc}"]`);
-        if (pill) pill.classList.toggle('active', nowActive);
-
-        applyConnections();
-      });
+    document.querySelectorAll<HTMLElement>('.bpill').forEach(pill => {
+      const fresh = pill.cloneNode(true) as HTMLElement;
+      pill.parentNode?.replaceChild(fresh, pill);
+      fresh.addEventListener('click', () => toggleSvc(fresh.dataset.svc!));
     });
   }
 
