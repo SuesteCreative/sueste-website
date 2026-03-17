@@ -1,0 +1,627 @@
+---
+const { lang = "pt" } = Astro.props;
+const pt = lang === "pt";
+
+// Pentagon layout: 5 nodes equidistant (~220px) from center (550, 300)
+// Angles starting top (-90°), clockwise every 72°
+// All line lengths ≈ 220 → use dasharray: 225
+const services = [
+  {
+    svc: "web",
+    name: "Website",
+    accent: "#38bdf8",
+    svgX: 550, svgY: 80,       // top
+    cssLeft: "50%", cssTop: "13.3%",
+    icon: `<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>`,
+  },
+  {
+    svc: "crm",
+    name: "CRM & Backoffice",
+    accent: "#22d3ee",
+    svgX: 759, svgY: 232,      // top-right
+    cssLeft: "69%", cssTop: "38.7%",
+    icon: `<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>`,
+  },
+  {
+    svc: "social",
+    name: "Social Media",
+    accent: "#a78bfa",
+    svgX: 679, svgY: 478,      // bottom-right
+    cssLeft: "61.7%", cssTop: "79.7%",
+    icon: `<path d="M18 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/><path d="M6 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/><path d="M18 22a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/><line x1="15.18" y1="5.73" x2="8.82" y2="9.27"/><line x1="8.82" y1="14.73" x2="15.18" y2="18.27"/>`,
+  },
+  {
+    svc: "drone",
+    name: "Foto & Drone",
+    accent: "#fbbf24",
+    svgX: 421, svgY: 478,      // bottom-left
+    cssLeft: "38.3%", cssTop: "79.7%",
+    icon: `<path d="M12 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"/><path d="M7 4l-3 3"/><path d="M17 4l3 3"/><path d="M7 20l-3 -3"/><path d="M17 20l3 -3"/><path d="M4 7m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"/><path d="M20 7m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"/><path d="M4 17m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"/><path d="M20 17m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"/>`,
+  },
+  {
+    svc: "graphic",
+    name: "Graphic Design",
+    accent: "#fb923c",
+    svgX: 341, svgY: 232,      // top-left
+    cssLeft: "31%", cssTop: "38.7%",
+    icon: `<path d="m12 19 7-7 3 3-7 7-3-3z"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="m2 2 5 5"/><circle cx="11" cy="11" r="2"/>`,
+  },
+];
+
+const LINE_LEN = 225;
+---
+
+<section class="bundle-section" id="bundle">
+  <div class="container">
+
+    <div class="bundle-header" data-reveal>
+      <span class="bundle-eyebrow">{pt ? "Pacote Sueste" : "Sueste Bundle"}</span>
+      <h2>{pt ? "O Seu Ecossistema Digital" : "Your Digital Ecosystem"}</h2>
+      <p>
+        {pt
+          ? "Cada serviço foi criado para trabalhar com os outros. Ative ou desative qualquer um — o ecossistema adapta-se."
+          : "Every service was built to work with the others. Toggle any — watch the ecosystem adapt."}
+      </p>
+    </div>
+
+    <!-- Desktop: SVG + node visualization -->
+    <div class="bundle-stage" id="bundle-stage">
+
+      <svg class="bundle-svg" viewBox="0 0 1100 600" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <defs>
+          <radialGradient id="hub-grad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.15"/>
+            <stop offset="100%" stop-color="#38bdf8" stop-opacity="0"/>
+          </radialGradient>
+          <filter id="pglow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="2.5" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+
+        <!-- Glow halos (thick, low opacity) -->
+        {services.map(s => (
+          <path
+            class="line-glow"
+            data-svc={s.svc}
+            d={`M ${s.svgX} ${s.svgY} L 550 300`}
+            stroke={s.accent}
+            stroke-width="9"
+            fill="none"
+            stroke-dasharray={LINE_LEN}
+            stroke-dashoffset="0"
+          />
+        ))}
+
+        <!-- Crisp lines -->
+        {services.map(s => (
+          <path
+            id={`svg-line-${s.svc}`}
+            class="conn-line"
+            data-svc={s.svc}
+            d={`M ${s.svgX} ${s.svgY} L 550 300`}
+            stroke={s.accent}
+            stroke-width="1.2"
+            fill="none"
+            stroke-dasharray={LINE_LEN}
+            stroke-dashoffset="0"
+          />
+        ))}
+
+        <!-- Dashed tick overlay -->
+        {services.map(s => (
+          <path
+            class="conn-tick"
+            data-svc={s.svc}
+            d={`M ${s.svgX} ${s.svgY} L 550 300`}
+            stroke={s.accent}
+            stroke-width="1"
+            fill="none"
+            stroke-dasharray="2 28"
+            stroke-dashoffset="0"
+            opacity="0.22"
+          />
+        ))}
+
+        <!-- Particles: 2 per line staggered -->
+        {services.map((s, i) => [
+          <circle class="svg-particle" data-svc={s.svc} r="3.5" fill={s.accent} filter="url(#pglow)">
+            <animateMotion dur={`${2.0 + i * 0.2}s`} repeatCount="indefinite" begin={`${-i * 0.35}s`}>
+              <mpath href={`#svg-line-${s.svc}`}/>
+            </animateMotion>
+          </circle>,
+          <circle class="svg-particle" data-svc={s.svc} r="2" fill={s.accent} opacity="0.5">
+            <animateMotion dur={`${2.0 + i * 0.2}s`} repeatCount="indefinite" begin={`${-(i * 0.35 + 1.1)}s`}>
+              <mpath href={`#svg-line-${s.svc}`}/>
+            </animateMotion>
+          </circle>
+        ])}
+
+        <!-- Hub background -->
+        <circle cx="550" cy="300" r="80" fill="url(#hub-grad)"/>
+        <circle id="hub-ring-main" cx="550" cy="300" r="52" fill="rgba(8,12,24,0.9)" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+        <circle class="hub-ring-spin" cx="550" cy="300" r="62" fill="none" stroke="rgba(56,189,248,0.15)" stroke-width="1" stroke-dasharray="5 12"/>
+      </svg>
+
+      <!-- Center hub HTML -->
+      <div class="hub-node" id="hub-node">
+        <span class="hub-count" id="hub-count">5</span>
+        <span class="hub-label">{pt ? "Serviços" : "Services"}</span>
+      </div>
+
+      <!-- Service nodes -->
+      {services.map(s => (
+        <button
+          class="svc-node active"
+          data-svc={s.svc}
+          aria-pressed="true"
+          style={`left:${s.cssLeft};top:${s.cssTop};--accent:${s.accent}`}
+        >
+          <span class="node-accent-line"></span>
+          <span class="node-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" set:html={s.icon}/>
+          </span>
+          <span class="node-name">{s.name}</span>
+          <span class="node-toggle-pill"><span class="toggle-thumb"></span></span>
+        </button>
+      ))}
+    </div>
+
+    <!-- Pills + CTA -->
+    <div class="bundle-footer" data-reveal>
+      <div class="bundle-pills" id="bundle-pills">
+        {services.map(s => (
+          <span class="bpill active" data-svc={s.svc} style={`--c:${s.accent}`}>{s.name}</span>
+        ))}
+      </div>
+      <a href={pt ? "/orcamento" : "/en/quote"} class="bundle-cta-btn">
+        {pt ? "Pedir Orçamento Personalizado" : "Request Custom Quote"}
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+      </a>
+    </div>
+
+    <!-- Mobile: vertical toggle list -->
+    <div class="bundle-mobile">
+      <div class="mobile-list">
+        {services.map(s => (
+          <button class="msvc-row active" data-svc={s.svc} style={`--c:${s.accent}`}>
+            <span class="msvc-dot"></span>
+            <span class="msvc-name">{s.name}</span>
+            <span class="msvc-pill"><span class="mpill-thumb"></span></span>
+          </button>
+        ))}
+      </div>
+      <a href={pt ? "/orcamento" : "/en/quote"} class="bundle-cta-btn" style="margin-top:2rem;align-self:flex-start">
+        {pt ? "Pedir Orçamento" : "Request Quote"}
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .bundle-section {
+    padding: 8rem 0;
+    position: relative;
+  }
+
+  /* ── HEADER ─────────────────────────────────────── */
+  .bundle-header {
+    max-width: 620px;
+    margin-bottom: 5rem;
+  }
+
+  .bundle-eyebrow {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    background: rgba(56,189,248,0.07);
+    border: 1px solid rgba(56,189,248,0.2);
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #38bdf8;
+    margin-bottom: 1.5rem;
+  }
+
+  .bundle-header h2 {
+    font-size: clamp(2.4rem, 4vw, 3.6rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #fff 0%, #a1a1aa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .bundle-header p {
+    font-size: 1.1rem;
+    color: #71717a;
+    line-height: 1.65;
+  }
+
+  /* ── STAGE ──────────────────────────────────────── */
+  .bundle-stage {
+    position: relative;
+    width: 100%;
+    height: 580px;
+    margin-bottom: 3rem;
+  }
+
+  .bundle-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  .conn-line,
+  .line-glow,
+  .conn-tick {
+    transition: stroke-dashoffset 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.4s ease;
+  }
+
+  .line-glow { opacity: 0.07; }
+  .conn-line { opacity: 0.65; }
+  .conn-tick { transition: opacity 0.4s ease; }
+
+  .svg-particle { transition: opacity 0.35s ease; }
+
+  .hub-ring-spin {
+    transform-origin: 550px 300px;
+    animation: ring-spin 22s linear infinite;
+  }
+
+  @keyframes ring-spin { to { transform: rotate(360deg); } }
+
+  /* ── HUB ────────────────────────────────────────── */
+  .hub-node {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  .hub-count {
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .hub-label {
+    font-size: 0.68rem;
+    color: #52525b;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  /* ── SERVICE NODES ──────────────────────────────── */
+  .svc-node {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: 155px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 1rem 1.1rem 0.9rem;
+    background: rgba(8, 10, 20, 0.88);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px;
+    backdrop-filter: blur(18px);
+    cursor: pointer;
+    text-align: left;
+    overflow: hidden;
+    z-index: 20;
+    transition:
+      border-color 0.35s ease,
+      box-shadow 0.35s ease,
+      opacity 0.35s ease,
+      transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .svc-node::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    background: radial-gradient(circle at 30% 30%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+  }
+
+  .svc-node.active {
+    border-color: color-mix(in srgb, var(--accent) 38%, transparent);
+    box-shadow: 0 0 22px -6px var(--accent), inset 0 1px 0 rgba(255,255,255,0.04);
+  }
+
+  .svc-node.active::before { opacity: 1; }
+
+  .svc-node:not(.active) {
+    opacity: 0.3;
+    box-shadow: none;
+    border-color: rgba(255,255,255,0.04);
+  }
+
+  .svc-node:hover { transform: translate(-50%, -50%) scale(1.05); }
+
+  .node-accent-line {
+    position: absolute;
+    left: 0; top: 18%; bottom: 18%;
+    width: 2px;
+    border-radius: 2px;
+    background: var(--accent);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
+
+  .svc-node.active .node-accent-line { opacity: 1; }
+
+  .node-icon {
+    width: 26px;
+    height: 26px;
+    color: var(--accent);
+    transition: color 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  .svc-node:not(.active) .node-icon { color: #3f3f46; }
+
+  .node-name {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.3;
+    transition: color 0.35s ease;
+  }
+
+  .svc-node:not(.active) .node-name { color: #3f3f46; }
+
+  .node-toggle-pill {
+    align-self: flex-end;
+    width: 28px;
+    height: 15px;
+    border-radius: 99px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.08);
+    position: relative;
+    flex-shrink: 0;
+    transition: background 0.3s ease, border-color 0.3s ease;
+  }
+
+  .svc-node.active .node-toggle-pill {
+    background: color-mix(in srgb, var(--accent) 28%, transparent);
+    border-color: var(--accent);
+  }
+
+  .toggle-thumb {
+    position: absolute;
+    top: 2px; left: 2px;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: #3f3f46;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.25s ease;
+  }
+
+  .svc-node.active .toggle-thumb {
+    transform: translateX(13px);
+    background: var(--accent);
+  }
+
+  /* ── FOOTER ─────────────────────────────────────── */
+  .bundle-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .bundle-pills {
+    display: flex;
+    gap: 0.55rem;
+    flex-wrap: wrap;
+  }
+
+  .bpill {
+    padding: 0.3rem 0.8rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border: 1px solid rgba(255,255,255,0.07);
+    color: #52525b;
+    background: transparent;
+    transition: all 0.35s ease;
+  }
+
+  .bpill.active {
+    border-color: color-mix(in srgb, var(--c) 40%, transparent);
+    color: var(--c);
+    background: color-mix(in srgb, var(--c) 8%, transparent);
+  }
+
+  .bundle-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.85rem 2rem;
+    border-radius: 50px;
+    background: linear-gradient(135deg, #38bdf8 0%, #2563eb 100%);
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .bundle-cta-btn:hover { opacity: 0.88; transform: translateY(-2px); }
+
+  /* ── MOBILE ─────────────────────────────────────── */
+  .bundle-mobile { display: none; }
+
+  @media (max-width: 1024px) {
+    .bundle-stage  { display: none; }
+    .bundle-footer { display: none; }
+    .bundle-mobile { display: flex; flex-direction: column; }
+  }
+
+  .mobile-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+
+  .msvc-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    border-radius: 14px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.06);
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.3s ease;
+  }
+
+  .msvc-row.active {
+    border-color: color-mix(in srgb, var(--c) 35%, transparent);
+    background: color-mix(in srgb, var(--c) 5%, transparent);
+  }
+
+  .msvc-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: #3f3f46;
+    flex-shrink: 0;
+    transition: background 0.3s ease;
+  }
+
+  .msvc-row.active .msvc-dot { background: var(--c); }
+
+  .msvc-name {
+    flex: 1;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #52525b;
+    transition: color 0.3s ease;
+  }
+
+  .msvc-row.active .msvc-name { color: #fff; }
+
+  .msvc-pill {
+    width: 36px; height: 20px;
+    border-radius: 99px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    position: relative;
+    flex-shrink: 0;
+    transition: background 0.3s ease, border-color 0.3s ease;
+  }
+
+  .msvc-row.active .msvc-pill {
+    background: color-mix(in srgb, var(--c) 25%, transparent);
+    border-color: var(--c);
+  }
+
+  .mpill-thumb {
+    position: absolute;
+    top: 3px; left: 3px;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: #3f3f46;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.25s ease;
+  }
+
+  .msvc-row.active .mpill-thumb {
+    transform: translateX(16px);
+    background: var(--c);
+  }
+</style>
+
+<script>
+  const DASH = 225;
+
+  function toggle(svc: string, active: boolean) {
+    // Lines + glows
+    document.querySelectorAll<SVGPathElement>(
+      `[data-svc="${svc}"].conn-line, [data-svc="${svc}"].line-glow, [data-svc="${svc}"].conn-tick`
+    ).forEach(el => {
+      el.style.strokeDashoffset = active ? "0" : String(DASH);
+    });
+    // Particles
+    document.querySelectorAll<SVGElement>(`.svg-particle[data-svc="${svc}"]`)
+      .forEach(el => { el.style.opacity = active ? "" : "0"; });
+    // Nodes (desktop + mobile)
+    document.querySelectorAll<HTMLElement>(
+      `.svc-node[data-svc="${svc}"], .msvc-row[data-svc="${svc}"]`
+    ).forEach(el => {
+      el.classList.toggle("active", active);
+      el.setAttribute("aria-pressed", String(active));
+    });
+    // Footer pill
+    const pill = document.querySelector<HTMLElement>(`.bpill[data-svc="${svc}"]`);
+    if (pill) pill.classList.toggle("active", active);
+  }
+
+  function refreshHub() {
+    const count = document.querySelectorAll(".svc-node.active").length;
+    const countEl = document.getElementById("hub-count");
+    const ring = document.getElementById("hub-ring-main");
+
+    if (countEl) {
+      countEl.style.transform = "scale(1.5)";
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        if (countEl) countEl.style.transform = "";
+      }));
+      countEl.textContent = String(count);
+    }
+
+    if (ring) {
+      ring.style.stroke = count >= 4
+        ? "rgba(56,189,248,0.3)"
+        : "rgba(255,255,255,0.07)";
+    }
+  }
+
+  function init() {
+    document.querySelectorAll<HTMLElement>(".svc-node, .msvc-row").forEach(node => {
+      const fresh = node.cloneNode(true) as HTMLElement;
+      node.parentNode?.replaceChild(fresh, node);
+
+      fresh.addEventListener("click", () => {
+        const svc = fresh.dataset.svc!;
+        const wasActive = fresh.classList.contains("active");
+        const nowActive = !wasActive;
+
+        // Always keep at least 1 active
+        const activeCount = document.querySelectorAll(".svc-node.active").length;
+        if (!nowActive && activeCount <= 1) return;
+
+        toggle(svc, nowActive);
+        refreshHub();
+      });
+    });
+  }
+
+  init();
+  document.addEventListener("astro:after-swap", init);
+</script>
