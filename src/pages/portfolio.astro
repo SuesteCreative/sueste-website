@@ -18,6 +18,7 @@ import Section from "../components/Section.astro";
       subtitle="Uma seleção de projetos onde a criatividade encontra a estratégia."
     >
       <div class="p-grid">
+
         <a href="/portfolio/desportos-nauticos-alvor" class="pcard pc-1" style="--accent:#38bdf8">
           <img class="pcard-bg" src="/images/portfolio/desportos-mockup.png" alt="Mockup website Desportos Náuticos de Alvor" loading="lazy" />
           <div class="pcard-gradient"></div>
@@ -65,6 +66,7 @@ import Section from "../components/Section.astro";
           </div>
           <span class="pcard-tag">Custom CRM</span>
         </a>
+
       </div>
     </Section>
 
@@ -77,34 +79,22 @@ import Section from "../components/Section.astro";
         <div class="step" data-reveal>
           <div class="step-number">01</div>
           <h3>Descoberta</h3>
-          <p>
-            Imersão profunda no seu negócio para entender objetivos, audiência e
-            desafios reais.
-          </p>
+          <p>Imersão profunda no seu negócio para entender objetivos, audiência e desafios reais.</p>
         </div>
         <div class="step reveal-delay-1" data-reveal>
           <div class="step-number">02</div>
           <h3>Estratégia & Design</h3>
-          <p>
-            Planeamento estratégico e design focado na experiência intuitiva do
-            utilizador.
-          </p>
+          <p>Planeamento estratégico e design focado na experiência intuitiva do utilizador.</p>
         </div>
         <div class="step reveal-delay-2" data-reveal>
           <div class="step-number">03</div>
           <h3>Desenvolvimento</h3>
-          <p>
-            Desenvolvimento de código de alta performance com as tecnologias
-            mais recentes.
-          </p>
+          <p>Desenvolvimento de código de alta performance com as tecnologias mais recentes.</p>
         </div>
         <div class="step reveal-delay-3" data-reveal>
           <div class="step-number">04</div>
           <h3>Lançamento & Apoio</h3>
-          <p>
-            Entrega otimizada com suporte contínuo focado no crescimento do seu
-            projeto.
-          </p>
+          <p>Entrega otimizada com suporte contínuo focado no crescimento do seu projeto.</p>
         </div>
       </div>
     </Section>
@@ -118,52 +108,134 @@ import Section from "../components/Section.astro";
     padding-top: 80px;
   }
 
-  .portfolio-grid {
+  /* ── BENTO GRID ─────────────────────────────────────────────────── */
+  .p-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 3rem;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 500px 500px;
+    gap: 1.25rem;
+    margin-top: 3rem;
   }
 
-  .portfolio-card {
-    border-radius: 30px;
-    overflow: hidden;
-    transition: transform 0.5s cubic-bezier(0.2, 1, 0.3, 1);
-  }
+  .pc-1 { grid-column: 1 / 4; }
+  .pc-2 { grid-column: 4 / 6; }
+  .pc-3 { grid-column: 1 / 3; }
+  .pc-4 { grid-column: 3 / 6; }
 
-  .portfolio-card:hover {
-    transform: translateY(-15px) scale(1.02);
-  }
-
-  .card-image {
-    height: 300px;
-    background: linear-gradient(45deg, #111, #222);
+  /* ── CARD ───────────────────────────────────────────────────────── */
+  .pcard {
     position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    display: block;
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    transition: border-color 0.4s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .card-info {
-    padding: 2.5rem;
+  .pcard:hover {
+    border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px -15px color-mix(in srgb, var(--accent) 30%, transparent);
   }
 
-  .card-info span {
-    font-size: 0.75rem;
+  .pcard-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .pcard:hover .pcard-bg {
+    transform: scale(1.05);
+  }
+
+  .pcard-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(5, 5, 12, 0.96) 0%,
+      rgba(5, 5, 12, 0.55) 40%,
+      rgba(5, 5, 12, 0.1) 70%,
+      transparent 100%
+    );
+  }
+
+  .pcard-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 2rem 2rem 2.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .pcard-cat {
+    font-size: 0.65rem;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 2px;
-    color: var(--color-accent);
-    margin-bottom: 0.5rem;
+    letter-spacing: 0.14em;
+    color: var(--accent);
     display: block;
   }
 
-  .card-info h3 {
-    font-size: 1.75rem;
-    margin-bottom: 1rem;
+  .pcard-title {
+    font-size: clamp(1.25rem, 2.5vw, 1.85rem);
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.15;
+    margin: 0;
+    letter-spacing: -0.02em;
   }
 
-  .card-info p {
-    opacity: 0.6;
-    font-size: 1rem;
-    line-height: 1.6;
+  .pcard-desc {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.55;
+    margin: 0.2rem 0 0;
   }
 
+  .pcard-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 0.6rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--accent);
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .pcard:hover .pcard-cta {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .pcard-tag {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: 50px;
+    background: color-mix(in srgb, var(--accent) 12%, rgba(0, 0, 0, 0.5));
+    border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+    color: var(--accent);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    backdrop-filter: blur(10px);
+    z-index: 2;
+  }
+
+  /* ── PROCESS ────────────────────────────────────────────────────── */
   .process-steps {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -200,13 +272,52 @@ import Section from "../components/Section.astro";
     line-height: 1.6;
   }
 
-  @media (max-width: 768px) {
-    .portfolio-grid {
-      grid-template-columns: 1fr;
+  /* ── RESPONSIVE ─────────────────────────────────────────────────── */
+  @media (max-width: 1024px) {
+    .p-grid {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: repeat(2, 420px);
     }
-    .process-steps {
+    .pc-1 { grid-column: 1 / 2; }
+    .pc-2 { grid-column: 2 / 3; }
+    .pc-3 { grid-column: 1 / 2; }
+    .pc-4 { grid-column: 2 / 3; }
+  }
+
+  @media (max-width: 640px) {
+    .p-grid {
       grid-template-columns: 1fr;
-      gap: 4rem;
+      grid-template-rows: repeat(4, 360px);
+      gap: 1rem;
     }
+    .pc-1, .pc-2, .pc-3, .pc-4 { grid-column: 1 / 2; }
+    .pcard-cta { opacity: 1; transform: none; }
+    .process-steps { grid-template-columns: 1fr; gap: 4rem; }
   }
 </style>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  function init() {
+    document.querySelectorAll(".pcard").forEach((card, i) => {
+      gsap.fromTo(
+        card,
+        { opacity: 0, y: 40, scale: 0.97 },
+        {
+          opacity: 1, y: 0, scale: 1,
+          duration: 0.9,
+          ease: "power3.out",
+          delay: (i % 2) * 0.1,
+          scrollTrigger: { trigger: card, start: "top 88%" },
+        }
+      );
+    });
+  }
+
+  init();
+  document.addEventListener("astro:after-swap", init);
+</script>
