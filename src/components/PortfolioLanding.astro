@@ -84,7 +84,6 @@ const viewAllHref = isPt ? "/portfolio" : "/en/work";
                     target="_blank"
                     rel="noopener noreferrer"
                     class={`pcard pcard-${idx + 1}`}
-                    data-reveal
                     style={`--accent: ${project.accent};`}
                     aria-label={isPt ? project.altPt : project.altEn}
                 >
@@ -127,7 +126,7 @@ const viewAllHref = isPt ? "/portfolio" : "/en/work";
         }
     </div>
 
-    <div class="portfolio-footer" data-reveal>
+    <div class="portfolio-footer">
         <a href={viewAllHref} class="btn-view-all">
             {viewAllLabel}
             <svg
