@@ -17,72 +17,53 @@ import Section from "../components/Section.astro";
       title="O Nosso Trabalho"
       subtitle="Uma seleção de projetos onde a criatividade encontra a estratégia."
     >
-      <div class="portfolio-grid">
-        <a
-          href="/portfolio/desportos-nauticos-alvor"
-          class="portfolio-card glass"
-          data-reveal
-        >
-          <div
-            class="card-image"
-            style="background-image: url('/images/portfolio/desportos-mockup.png'); background-size: cover; background-position: center top;"
-          >
-            <div class="card-overlay"></div>
+      <div class="p-grid">
+        <a href="/portfolio/desportos-nauticos-alvor" class="pcard pc-1" style="--accent:#38bdf8">
+          <img class="pcard-bg" src="/images/portfolio/desportos-mockup.png" alt="Mockup website Desportos Náuticos de Alvor" loading="lazy" />
+          <div class="pcard-gradient"></div>
+          <div class="pcard-content">
+            <span class="pcard-cat">E-Commerce & Merch</span>
+            <h3 class="pcard-title">Desportos Náuticos de Alvor</h3>
+            <p class="pcard-desc">Sistema de reservas online e gestão de inventário para a maior escola de desportos náuticos do Algarve.</p>
+            <span class="pcard-cta">Ver Projeto <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
           </div>
-          <div class="card-info">
-            <span>E-Commerce & Merch</span>
-            <h3>Desportos Náuticos de Alvor</h3>
-            <p>
-              Sistema de reservas online e gestão de inventário para a maior
-              escola de desportos náuticos do Algarve.
-            </p>
-          </div>
+          <span class="pcard-tag">Website</span>
         </a>
 
-        <a
-          href="/portfolio/mental8works"
-          class="portfolio-card glass reveal-delay-2"
-          data-reveal
-        >
-          <div
-            class="card-image"
-            style="background-image: url('/images/portfolio/mental8works-mockup.png'); background-size: cover; background-position: center top;"
-          >
-            <div class="card-overlay"></div>
+        <a href="/portfolio/mental8works" class="pcard pc-2" style="--accent:#a78bfa">
+          <img class="pcard-bg" src="/images/portfolio/mental8works-mockup.png" alt="Plataforma Mental8Works mockup" loading="lazy" />
+          <div class="pcard-gradient"></div>
+          <div class="pcard-content">
+            <span class="pcard-cat">Sys & Backoffice</span>
+            <h3 class="pcard-title">Mental8Works</h3>
+            <p class="pcard-desc">Plataforma de gestão de saúde mental corporativa com backoffice customizado e análise de dados em tempo real.</p>
+            <span class="pcard-cta">Ver Projeto <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
           </div>
-          <div class="card-info">
-            <span>Sys & Backoffice</span>
-            <h3>Mental8Works</h3>
-            <p>
-              Plataforma de gestão de saúde mental corporativa com backoffice
-              customizado e análise de dados em tempo real.
-            </p>
-          </div>
+          <span class="pcard-tag">Platform</span>
         </a>
 
-        <a
-          href="/portfolio/algo-atelier"
-          class="portfolio-card glass reveal-delay-3"
-          data-reveal
-          style="grid-column: 1 / -1;"
-        >
-          <div
-            class="card-image"
-            style="background-image: url('/images/portfolio/algoatelier-mockup.png'); background-size: cover; background-position: center top; height: 400px;"
-          >
-            <div class="card-overlay"></div>
+        <a href="/portfolio/algo-atelier" class="pcard pc-3" style="--accent:#fbbf24">
+          <img class="pcard-bg" src="/images/portfolio/algoatelier-mockup.png" alt="Portfólio Algo Atelier mockup" loading="lazy" />
+          <div class="pcard-gradient"></div>
+          <div class="pcard-content">
+            <span class="pcard-cat">Architecture & SEO</span>
+            <h3 class="pcard-title">Algo Atelier</h3>
+            <p class="pcard-desc">Presença digital de alta performance para um atelier de arquitetura, focada em estética minimalista e SEO técnico.</p>
+            <span class="pcard-cta">Ver Projeto <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
           </div>
-          <div
-            class="card-info"
-            style="display: flex; flex-direction: column; justify-content: flex-end; position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%);"
-          >
-            <span>Architecture & SEO</span>
-            <h3>Algo Atelier</h3>
-            <p>
-              Presença digital de alta performance para um atelier de
-              arquitetura, focada em estética minimalista e SEO técnico.
-            </p>
+          <span class="pcard-tag">98% SEO</span>
+        </a>
+
+        <a href="/portfolio/desportos-nauticos-alvor" class="pcard pc-4" style="--accent:#22d3ee">
+          <img class="pcard-bg" src="/images/portfolio/desportos-full.png" alt="Sistema CRM Desportos Náuticos de Alvor" loading="lazy" />
+          <div class="pcard-gradient"></div>
+          <div class="pcard-content">
+            <span class="pcard-cat">CRM & Backoffice</span>
+            <h3 class="pcard-title">DNA — CRM & Backoffice</h3>
+            <p class="pcard-desc">Sistema de gestão interna com CRM personalizado, controlo de stocks e dashboards de performance em tempo real.</p>
+            <span class="pcard-cta">Ver Projeto <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
           </div>
+          <span class="pcard-tag">Custom CRM</span>
         </a>
       </div>
     </Section>

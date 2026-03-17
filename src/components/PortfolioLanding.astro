@@ -3,14 +3,19 @@ interface Project {
     title: string;
     categoryPt: string;
     categoryEn: string;
-    descPt: string;
-    descEn: string;
-    tag: string;
+    metricPt: string;
+    metricEn: string;
+    metricLabelPt: string;
+    metricLabelEn: string;
     image: string;
+    size: "small" | "large";
     link: string;
+    internalLink: string;
     altPt: string;
     altEn: string;
-    accent: string;
+    hoverPt: string;
+    hoverEn: string;
+    deviceType: string;
 }
 
 const projects: Project[] = [
@@ -18,54 +23,55 @@ const projects: Project[] = [
         title: "Desportos Náuticos de Alvor",
         categoryPt: "E-Commerce & Merch",
         categoryEn: "E-Commerce & Merch",
-        descPt: "Sistema de reservas online e gestão de inventário para a maior escola de desportos náuticos do Algarve.",
-        descEn: "Online booking system and inventory management for the largest water sports school in the Algarve.",
-        tag: "Website",
+        metricPt: "E-commerce",
+        metricEn: "E-commerce",
+        metricLabelPt: "Reservas Online",
+        metricLabelEn: "Online Bookings",
         image: "/images/LandingPage/landing-dna-mockup.webp",
+        size: "small",
         link: "https://desportosnauticosalvor.com/",
-        altPt: "Mockup website Desportos Náuticos de Alvor",
+        internalLink: "https://desportosnauticosalvor.com/",
+        altPt: "Mockup do website Desportos Náuticos de Alvor",
         altEn: "Desportos Náuticos de Alvor website mockup",
-        accent: "#38bdf8",
+        hoverPt: "Explorar Website",
+        hoverEn: "Explore Website",
+        deviceType: "ipad",
     },
     {
         title: "Mental8Works",
         categoryPt: "Sys & Backoffice",
         categoryEn: "Sys & Backoffice",
-        descPt: "Plataforma de gestão de saúde mental corporativa com backoffice customizado e análise de dados em tempo real.",
-        descEn: "Corporate mental health management platform with custom backoffice and real-time data analysis.",
-        tag: "Platform",
+        metricPt: "Site Dinâmico",
+        metricEn: "Dynamic Site",
+        metricLabelPt: "Custom Backoffice",
+        metricLabelEn: "Custom Backoffice",
         image: "/images/LandingPage/landing-mental8works-mockup.webp",
+        size: "small",
         link: "https://www.mental8works.pt/",
+        internalLink: "https://www.mental8works.pt/",
         altPt: "Plataforma Mental8Works mockup",
         altEn: "Mental8Works platform mockup",
-        accent: "#a78bfa",
+        hoverPt: "Ver Plataforma",
+        hoverEn: "View Platform",
+        deviceType: "macbook",
     },
     {
         title: "Algo Atelier",
-        categoryPt: "Architecture & SEO",
-        categoryEn: "Architecture & SEO",
-        descPt: "Presença digital de alta performance para um atelier de arquitetura, focada em estética minimalista e SEO técnico.",
-        descEn: "High-performance digital presence for an architecture studio, focused on minimalist aesthetics and technical SEO.",
-        tag: "98% SEO",
+        categoryPt: "Arquitetura",
+        categoryEn: "Architecture",
+        metricPt: "Site Optimizado",
+        metricEn: "Optimized Site",
+        metricLabelPt: "98% SEO Score",
+        metricLabelEn: "98% SEO Score",
         image: "/images/LandingPage/landing-algo-mockup.webp",
+        size: "large",
         link: "https://algoatelier.pt/",
+        internalLink: "https://algoatelier.pt/",
         altPt: "Portfólio Algo Atelier mockup",
         altEn: "Algo Atelier portfolio mockup",
-        accent: "#fbbf24",
-    },
-    {
-        title: "DNA — CRM & Backoffice",
-        categoryPt: "CRM & Backoffice",
-        categoryEn: "CRM & Backoffice",
-        descPt: "Sistema de gestão interna com CRM personalizado, controlo de stocks e dashboards de performance em tempo real.",
-        descEn: "Internal management system with custom CRM, stock control, and real-time performance dashboards.",
-        tag: "Custom CRM",
-        // TODO: replace with dedicated CRM screenshot when available
-        image: "/images/LandingPage/landing-dna-mockup.webp",
-        link: "https://desportosnauticosalvor.com/",
-        altPt: "Sistema CRM Desportos Náuticos de Alvor",
-        altEn: "Desportos Náuticos de Alvor CRM system",
-        accent: "#22d3ee",
+        hoverPt: "Ver Portfólio",
+        hoverEn: "View Portfolio",
+        deviceType: "iphone",
     },
 ];
 
@@ -76,63 +82,124 @@ const viewAllHref = isPt ? "/portfolio" : "/en/work";
 ---
 
 <div class="portfolio-showcase-container">
-    <div class="portfolio-grid">
+    <div class="portfolio-list">
         {
-            projects.map((project, idx) => (
-                <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class={`pcard pcard-${idx + 1}`}
-                    style={`--accent: ${project.accent};`}
-                    aria-label={isPt ? project.altPt : project.altEn}
-                >
-                    <img
-                        class="pcard-bg"
-                        src={project.image}
-                        alt={isPt ? project.altPt : project.altEn}
-                        loading="lazy"
-                    />
-                    <div class="pcard-gradient" />
-                    <div class="pcard-content">
-                        <span class="pcard-cat">
-                            {isPt ? project.categoryPt : project.categoryEn}
-                        </span>
-                        <h3 class="pcard-title">{project.title}</h3>
-                        <p class="pcard-desc">
-                            {isPt ? project.descPt : project.descEn}
-                        </p>
-                        <span class="pcard-cta">
-                            {isPt ? "Ver Projeto" : "View Project"}
+            projects.map((project, idx) => {
+                const isEven = idx % 2 === 0;
+                return (
+                    <div
+                        class={`portfolio-row ${
+                            isEven ? "row-left" : "row-right"
+                        }`}
+                        data-project-row
+                    >
+                        <div class="row-content" data-animate-left>
+                            <div class="card-header">
+                                <span class="category">
+                                    {isPt
+                                        ? project.categoryPt
+                                        : project.categoryEn}
+                                </span>
+                                <h3>{project.title}</h3>
+                            </div>
+
+                            <div class="analytics-box">
+                                <span
+                                    class={`metric-value ${
+                                        project.title === "Algo Atelier"
+                                            ? "text-blue"
+                                            : ""
+                                    }`}
+                                >
+                                    {isPt ? project.metricPt : project.metricEn}
+                                </span>
+                                <span
+                                    class={`metric-label ${
+                                        project.title === "Algo Atelier"
+                                            ? "text-white"
+                                            : ""
+                                    }`}
+                                >
+                                    {isPt
+                                        ? project.metricLabelPt
+                                        : project.metricLabelEn}
+                                </span>
+                            </div>
+
+                            <a
+                                href={project.internalLink}
+                                class="btn-project desktop-only"
+                            >
+                                {lang === "pt" ? "Ver Projeto" : "View Project"}
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="16"
+                                    height="16"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                >
+                                    <line x1="5" y1="12" x2="19" y2="12" />
+                                    <polyline points="12 5 19 12 12 19" />
+                                </svg>
+                            </a>
+                        </div>
+
+                        <div class="row-mockup-container" data-animate-right>
+                            <a
+                                href={project.internalLink}
+                                class={`portfolio-image-wrapper wrapper-${project.deviceType}`}
+                            >
+                                <div class="hover-badge">
+                                    {isPt ? project.hoverPt : project.hoverEn}
+                                </div>
+                                <img
+                                    src={project.image}
+                                    class="portfolio-img"
+                                    alt={isPt ? project.altPt : project.altEn}
+                                    loading="lazy"
+                                />
+                            </a>
+                        </div>
+
+                        <a
+                            href={project.internalLink}
+                            class="btn-project mobile-only"
+                            style="margin-top: 2rem;"
+                            data-animate-left
+                        >
+                            {lang === "pt" ? "Ver Projeto" : "View Project"}
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
-                                width="14"
-                                height="14"
+                                width="16"
+                                height="16"
                                 viewBox="0 0 24 24"
                                 fill="none"
                                 stroke="currentColor"
-                                stroke-width="2.5"
+                                stroke-width="2"
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
                             >
-                                <line x1="7" y1="17" x2="17" y2="7" />
-                                <polyline points="7 7 17 7 17 17" />
+                                <line x1="5" y1="12" x2="19" y2="12" />
+                                <polyline points="12 5 19 12 12 19" />
                             </svg>
-                        </span>
+                        </a>
                     </div>
-                    <span class="pcard-tag">{project.tag}</span>
-                </a>
-            ))
+                );
+            })
         }
     </div>
 
-    <div class="portfolio-footer">
-        <a href={viewAllHref} class="btn-view-all">
+    <div class="portfolio-footer" data-reveal>
+        <a href={viewAllHref} class="btn-outline">
             {viewAllLabel}
             <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="18"
-                height="18"
+                width="20"
+                height="20"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -149,164 +216,179 @@ const viewAllHref = isPt ? "/portfolio" : "/en/work";
 <style>
     .portfolio-showcase-container {
         width: 100%;
-        margin-top: 3rem;
+        margin-top: 4rem;
     }
 
-    /* ── BENTO GRID ─────────────────────────────────────────────────────── */
-    .portfolio-grid {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        grid-template-rows: 500px 500px;
-        gap: 1.25rem;
-    }
-
-    /* Row 1: DNA large-left, Mental small-right */
-    .pcard-1 { grid-column: 1 / 4; }
-    .pcard-2 { grid-column: 4 / 6; }
-
-    /* Row 2: Algo small-left, CRM large-right */
-    .pcard-3 { grid-column: 1 / 3; }
-    .pcard-4 { grid-column: 3 / 6; }
-
-    /* ── CARD BASE ──────────────────────────────────────────────────────── */
-    .pcard {
-        position: relative;
-        border-radius: 24px;
-        overflow: hidden;
-        display: block;
-        text-decoration: none;
-        border: 1px solid rgba(255, 255, 255, 0.06);
-        transition: border-color 0.4s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-        will-change: transform;
-    }
-
-    .pcard:hover {
-        border-color: color-mix(in srgb, var(--accent) 40%, transparent);
-        transform: translateY(-6px);
-        box-shadow: 0 20px 60px -15px color-mix(in srgb, var(--accent) 30%, transparent);
-    }
-
-    /* ── IMAGE ──────────────────────────────────────────────────────────── */
-    .pcard-bg {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center top;
-        transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .pcard:hover .pcard-bg {
-        transform: scale(1.05);
-    }
-
-    /* ── GRADIENT OVERLAY ───────────────────────────────────────────────── */
-    .pcard-gradient {
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-            to top,
-            rgba(5, 5, 12, 0.96) 0%,
-            rgba(5, 5, 12, 0.65) 35%,
-            rgba(5, 5, 12, 0.15) 65%,
-            transparent 100%
-        );
-        transition: background 0.4s ease;
-    }
-
-    .pcard:hover .pcard-gradient {
-        background: linear-gradient(
-            to top,
-            rgba(5, 5, 12, 0.98) 0%,
-            rgba(5, 5, 12, 0.75) 40%,
-            rgba(5, 5, 12, 0.2) 70%,
-            transparent 100%
-        );
-    }
-
-    /* ── CONTENT ────────────────────────────────────────────────────────── */
-    .pcard-content {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        padding: 2rem 2rem 2.25rem;
+    .portfolio-list {
         display: flex;
         flex-direction: column;
-        gap: 0.5rem;
+        gap: 8rem;
     }
 
-    .pcard-cat {
-        font-size: 0.65rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.14em;
-        color: var(--accent);
+    .portfolio-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 4rem;
+    }
+
+    .portfolio-row.row-right {
+        flex-direction: row-reverse;
+    }
+
+    .row-content {
+        flex: 1;
+        max-width: 450px;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .row-mockup-container {
+        flex: 1.5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+    }
+
+    .portfolio-image-wrapper {
+        position: relative;
+        width: 100%;
+        border-radius: 20px;
+        overflow: visible;
+        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        text-decoration: none;
         display: block;
     }
 
-    .pcard-title {
-        font-size: clamp(1.25rem, 2.5vw, 1.75rem);
-        font-weight: 800;
-        color: #fff;
-        line-height: 1.15;
-        margin: 0;
-        letter-spacing: -0.02em;
+    .wrapper-macbook {
+        max-width: 700px;
     }
 
-    .pcard-desc {
-        font-size: 0.9rem;
-        color: rgba(255, 255, 255, 0.6);
-        line-height: 1.55;
-        margin: 0.25rem 0 0;
-        max-width: 95%;
+    .wrapper-ipad {
+        max-width: 400px;
     }
 
-    .pcard-cta {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.4rem;
-        margin-top: 0.75rem;
-        font-size: 0.8rem;
+    .wrapper-iphone {
+        max-width: 350px;
+    }
+
+    .portfolio-img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 20px;
+        transition: all 0.6s ease;
+    }
+
+    .portfolio-row:hover .portfolio-image-wrapper {
+        transform: translateY(-10px) scale(1.02);
+    }
+
+    .hover-badge {
+        position: absolute;
+        top: -20px;
+        right: 0;
+        background: rgba(56, 189, 248, 0.9);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 50px;
+        font-size: 0.75rem;
         font-weight: 700;
-        color: var(--accent);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        z-index: 10;
         opacity: 0;
-        transform: translateY(8px);
-        transition: opacity 0.35s ease, transform 0.35s ease;
+        transform: translateY(10px);
+        transition: all 0.4s ease;
+        pointer-events: none;
+        box-shadow: 0 10px 20px rgba(56, 189, 248, 0.3);
+        backdrop-filter: blur(5px);
     }
 
-    .pcard:hover .pcard-cta {
+    .portfolio-row:hover .hover-badge {
         opacity: 1;
         transform: translateY(0);
     }
 
-    /* ── TAG BADGE (top-right) ──────────────────────────────────────────── */
-    .pcard-tag {
-        position: absolute;
-        top: 1.25rem;
-        right: 1.25rem;
-        padding: 0.3rem 0.75rem;
-        border-radius: 50px;
-        background: color-mix(in srgb, var(--accent) 12%, rgba(0,0,0,0.5));
-        border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
-        color: var(--accent);
+    .category {
         font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: #38bdf8;
         font-weight: 700;
-        letter-spacing: 0.06em;
-        backdrop-filter: blur(10px);
-        z-index: 2;
+        margin-bottom: 0.5rem;
+        display: block;
     }
 
-    /* ── FOOTER ─────────────────────────────────────────────────────────── */
+    .card-header h3 {
+        font-size: clamp(1.8rem, 7vw, 3.5rem);
+        font-weight: 800;
+        color: #fff;
+        margin: 0;
+        line-height: 1.1;
+    }
+
+    .analytics-box {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .metric-value {
+        font-size: clamp(2rem, 8vw, 3.2rem);
+        font-weight: 900;
+        line-height: 1.1;
+        background: linear-gradient(135deg, #38bdf8 0%, #2563eb 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        letter-spacing: -2px;
+        padding-bottom: 0.1em;
+    }
+
+    .metric-value.text-blue {
+        background: none;
+        -webkit-text-fill-color: #38bdf8;
+        color: #38bdf8;
+    }
+
+    .metric-label {
+        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.6);
+        font-weight: 500;
+        margin-top: 0.25rem;
+    }
+
+    .btn-project {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.6rem 1.2rem;
+        border-radius: 50px;
+        background: rgba(255, 255, 255, 0.1);
+        color: #fff;
+        font-size: 0.85rem;
+        font-weight: 600;
+        width: fit-content;
+        backdrop-filter: blur(10px);
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+
+    .btn-project:hover {
+        background: rgba(56, 189, 248, 0.8);
+        transform: translateY(-2px);
+    }
+
     .portfolio-footer {
-        margin-top: 3rem;
+        margin-top: 4rem;
         display: flex;
         justify-content: center;
     }
 
-    .btn-view-all {
-        display: inline-flex;
+    .btn-outline {
+        display: flex;
         align-items: center;
         gap: 0.75rem;
         padding: 1rem 2.5rem;
@@ -316,37 +398,82 @@ const viewAllHref = isPt ? "/portfolio" : "/en/work";
         font-weight: 600;
         transition: all 0.3s ease;
         background: rgba(255, 255, 255, 0.02);
-        text-decoration: none;
     }
 
-    .btn-view-all:hover {
+    .btn-outline:hover {
         background: rgba(255, 255, 255, 0.05);
         border-color: #38bdf8;
         transform: translateY(-2px);
     }
 
-    /* ── RESPONSIVE ─────────────────────────────────────────────────────── */
-    @media (max-width: 1024px) {
-        .portfolio-grid {
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: repeat(2, 420px);
-        }
-        .pcard-1 { grid-column: 1 / 2; }
-        .pcard-2 { grid-column: 2 / 3; }
-        .pcard-3 { grid-column: 1 / 2; }
-        .pcard-4 { grid-column: 2 / 3; }
+    /* Animation initial states */
+    [data-animate-left] {
+        opacity: 0;
+        transform: translateX(-100px);
     }
 
-    @media (max-width: 640px) {
-        .portfolio-grid {
-            grid-template-columns: 1fr;
-            grid-template-rows: repeat(4, 380px);
-            gap: 1rem;
-        }
-        .pcard-1, .pcard-2, .pcard-3, .pcard-4 { grid-column: 1 / 2; }
+    [data-animate-right] {
+        opacity: 0;
+        transform: translateX(100px);
+    }
 
-        .pcard-content { padding: 1.5rem 1.5rem 1.75rem; }
-        .pcard-cta { opacity: 1; transform: none; }
+    /* Target the header of the parent section */
+    :global(#portfolio .section-header) {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    @media (max-width: 1024px) {
+        .portfolio-row,
+        .portfolio-row.row-right {
+            flex-direction: column;
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .row-content {
+            align-items: center;
+        }
+
+        .row-mockup-container {
+            width: 100%;
+        }
+
+        .portfolio-image-wrapper {
+            max-width: 90%;
+            margin: 0 auto;
+        }
+
+        .metric-value {
+            font-size: clamp(1.4rem, 8vw, 2.2rem);
+        }
+
+        .hover-badge {
+            display: none;
+        }
+
+        .mobile-only {
+            display: inline-flex !important;
+        }
+
+        .desktop-only {
+            display: none !important;
+        }
+
+        /* Mobile animations: slide from bottom instead? Or keep from sides? User asked from sides. */
+        /* Let's keep from sides but maybe smaller offset */
+        [data-animate-left],
+        [data-animate-right] {
+            transform: translateY(30px); /* Better for mobile to slide up */
+        }
+    }
+
+    .desktop-only {
+        display: inline-flex;
+    }
+
+    .mobile-only {
+        display: none !important;
     }
 </style>
 
@@ -357,28 +484,86 @@ const viewAllHref = isPt ? "/portfolio" : "/en/work";
     gsap.registerPlugin(ScrollTrigger);
 
     function initPortfolioAnimations() {
-        const cards = document.querySelectorAll(".pcard");
+        // 1. Animate Section Header (Fade in)
+        const portfolioSection = document.querySelector("#portfolio");
+        if (portfolioSection) {
+            const header = portfolioSection.querySelector(".section-header");
+            if (header) {
+                gsap.fromTo(
+                    header,
+                    { opacity: 0, y: 30 },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        duration: 1.2,
+                        ease: "power3.out",
+                        scrollTrigger: {
+                            trigger: header,
+                            start: "top 85%",
+                        },
+                    },
+                );
+            }
+        }
 
-        cards.forEach((card, i) => {
-            gsap.fromTo(
-                card,
-                { opacity: 0, y: 40, scale: 0.97 },
-                {
+        // 2. Animate Project Rows
+        const rows = document.querySelectorAll("[data-project-row]");
+
+        rows.forEach((row) => {
+            const leftCol = row.querySelector("[data-animate-left]");
+            const rightCol = row.querySelector("[data-animate-right]");
+            const mobileBtn = row.querySelector(
+                ".mobile-only[data-animate-left]",
+            );
+
+            const isMobile = window.innerWidth <= 1024;
+
+            if (isMobile) {
+                // Mobile: Slide up
+                gsap.to([leftCol, rightCol, mobileBtn], {
                     opacity: 1,
                     y: 0,
-                    scale: 1,
-                    duration: 0.9,
+                    x: 0,
+                    duration: 1,
+                    stagger: 0.2,
                     ease: "power3.out",
-                    delay: (i % 2) * 0.12,
                     scrollTrigger: {
-                        trigger: card,
-                        start: "top 85%",
+                        trigger: row,
+                        start: "top 80%",
                     },
-                },
-            );
+                });
+            } else {
+                // Desktop: Specific directionality
+                if (leftCol) {
+                    gsap.to(leftCol, {
+                        opacity: 1,
+                        x: 0,
+                        duration: 1.2,
+                        ease: "power3.out",
+                        scrollTrigger: {
+                            trigger: row,
+                            start: "top 75%",
+                        },
+                    });
+                }
+
+                if (rightCol) {
+                    gsap.to(rightCol, {
+                        opacity: 1,
+                        x: 0,
+                        duration: 1.2,
+                        ease: "power3.out",
+                        scrollTrigger: {
+                            trigger: row,
+                            start: "top 75%",
+                        },
+                    });
+                }
+            }
         });
     }
 
+    // Run on load and on Astro view transitions
     initPortfolioAnimations();
     document.addEventListener("astro:after-swap", initPortfolioAnimations);
 </script>
