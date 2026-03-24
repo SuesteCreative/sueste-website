@@ -1,0 +1,142 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import { getLangFromUrl } from "../utils/i18n";
+
+const lang = getLangFromUrl(Astro.url);
+const isEn = lang === "en";
+---
+
+<BaseLayout
+  title={isEn ? "Page Not Found" : "Página Não Encontrada"}
+  description={isEn
+    ? "The page you're looking for doesn't exist."
+    : "A página que procura não existe."}
+  lang={lang}
+>
+  <Navbar />
+  <main class="error-page">
+    <div class="container">
+      <div class="error-content" data-reveal>
+        <div class="error-badge">404</div>
+        <h1 class="error-title">
+          {isEn ? "Lost at sea." : "Perdido no mar."}
+        </h1>
+        <p class="error-sub">
+          {
+            isEn
+              ? "This page drifted away. It might have been moved, renamed, or never existed."
+              : "Esta página derivou. Pode ter sido movida, renomeada ou nunca ter existido."
+          }
+        </p>
+        <div class="error-actions">
+          <a href={isEn ? "/en/" : "/"} class="btn-primary">
+            {isEn ? "Back to Home" : "Voltar ao Início"}
+          </a>
+          <a
+            href={isEn ? "/en/contact" : "/contacto"}
+            class="btn-ghost"
+          >
+            {isEn ? "Contact Us" : "Fale Connosco"}
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .error-page {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    padding-top: 80px;
+  }
+
+  .error-content {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 6rem 0;
+  }
+
+  .error-badge {
+    font-size: clamp(6rem, 20vw, 12rem);
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    line-height: 1;
+    background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 2rem;
+  }
+
+  .error-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    color: #fff;
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+  }
+
+  .error-sub {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.55);
+    line-height: 1.75;
+    margin-bottom: 3rem;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .error-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 2rem;
+    background: var(--color-accent-dark);
+    color: #fff;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+  }
+
+  .btn-primary:hover {
+    background: #0060d0;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(0, 112, 243, 0.35);
+  }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.8);
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+  }
+
+  .btn-ghost:hover {
+    border-color: rgba(255, 255, 255, 0.4);
+    color: #fff;
+    transform: translateY(-2px);
+  }
+</style>

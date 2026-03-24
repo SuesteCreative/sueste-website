@@ -1,0 +1,100 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import Section from "../../components/Section.astro";
+
+const title = "Privacy Policy";
+const lastUpdated = "3 March 2026";
+---
+
+<BaseLayout
+  title={title}
+  description="Our privacy policy and data protection practices."
+  lang="en"
+  hreflangPt="https://sueste-creative.pt/privacidade"
+  hreflangEn="https://sueste-creative.pt/en/privacy"
+>
+  <Navbar />
+  <main class="legal-page">
+    <Section title={title} subtitle={`Last updated: ${lastUpdated}`}>
+      <div class="legal-content glass p-8 md:p-12 rounded-3xl">
+        <h3>1. Introduction</h3>
+        <p>
+          Sueste Creative values your privacy. This Privacy Policy explains how
+          we collect, use, and protect your personal information when you use
+          our website.
+        </p>
+
+        <h3>2. Information We Collect</h3>
+        <p>
+          We collect information you provide directly, such as when you fill in
+          our contact form or request a quote. This may include your name,
+          email address, and any other information you choose to provide.
+        </p>
+
+        <h3>3. How We Use Your Information</h3>
+        <p>We use your data to:</p>
+        <ul>
+          <li>Respond to your enquiries;</li>
+          <li>Provide the requested services;</li>
+          <li>
+            Send communications related to our services, where you have given
+            your consent.
+          </li>
+        </ul>
+
+        <h3>4. Data Protection</h3>
+        <p>
+          We implement technical and organisational security measures to
+          protect your data against unauthorised access, loss, or alteration.
+        </p>
+
+        <h3>5. Cookies</h3>
+        <p>
+          Our website uses cookies to improve user experience and analyse
+          traffic. You can configure your browser to refuse cookies.
+        </p>
+
+        <h3>6. Your Rights</h3>
+        <p>
+          You have the right to access, rectify, or request the deletion of
+          your personal data. To exercise these rights, please contact us at:
+          geral@sueste-creative.pt.
+        </p>
+
+        <h3>7. Changes to This Policy</h3>
+        <p>
+          We reserve the right to update this policy periodically. We recommend
+          you check this page regularly.
+        </p>
+      </div>
+    </Section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .legal-page {
+    padding-top: 80px;
+  }
+  .legal-content h3 {
+    font-size: 1.5rem;
+    margin: 2rem 0 1rem;
+    color: var(--color-accent);
+  }
+  .legal-content p {
+    margin-bottom: 1rem;
+    opacity: 0.8;
+    line-height: 1.8;
+  }
+  .legal-content ul {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+    opacity: 0.8;
+  }
+  .legal-content li {
+    margin-bottom: 0.5rem;
+    list-style-type: disc;
+  }
+</style>

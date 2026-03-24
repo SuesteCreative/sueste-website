@@ -51,12 +51,16 @@ const canonicalURL = new URL(Astro.url.pathname, "https://sueste-creative.pt");
     {hreflangEn && <link rel="alternate" hreflang="en" href={hreflangEn} />}
     {hreflangPt && <link rel="alternate" hreflang="x-default" href={hreflangPt} />}
 
-    <!-- Open Graph -->
+    <meta name="author" content="Sueste Creative" />
+
+    <!-- Open Graph (Facebook, Instagram, TikTok, LinkedIn, WhatsApp) -->
     <meta property="og:title" content={`${title} | Sueste Creative`} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:image" content="https://sueste-creative.pt/images/logo-white-hor.webp" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:locale" content={lang === "en" ? "en_GB" : "pt_PT"} />
     <meta property="og:site_name" content="Sueste Creative" />
 
@@ -91,7 +95,11 @@ const canonicalURL = new URL(Astro.url.pathname, "https://sueste-creative.pt");
           addressLocality: "Algarve",
           addressCountry: "PT",
         },
-        sameAs: ["https://www.instagram.com/sueste.creative/"],
+        sameAs: [
+          "https://www.instagram.com/sueste.agency/",
+          "https://www.facebook.com/sueste.agency",
+          "https://linkedin.com/company/sueste-creative",
+        ],
       })}
     ></script>
   </head>

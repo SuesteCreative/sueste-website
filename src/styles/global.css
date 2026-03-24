@@ -5,7 +5,8 @@ html {
 :root {
   --color-bg: #050505;
   --color-text: #ffffff;
-  --color-accent: #0070f3;
+  --color-accent: #38bdf8;
+  --color-accent-dark: #0070f3;
   --font-main: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
@@ -160,5 +161,18 @@ a {
   .bg-blob-2 {
     width: 80vw;
     height: 80vw;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .bg-blob,
+  .bg-blob-2 {
+    animation: none;
   }
 }

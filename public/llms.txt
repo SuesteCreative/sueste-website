@@ -1,0 +1,45 @@
+# Sueste Creative
+
+> Sueste Creative is a creative agency based in the Algarve, Portugal. We specialize in web design, brand identity, and digital strategy for hospitality, tourism, lifestyle, and local businesses that want to grow. Our team combines design, technology, and strategy to build high-performance digital presences that convert visitors into clients.
+
+## About
+
+Sueste Creative was founded in the Algarve by Pedro, a full-stack developer and digital strategist. The agency takes its name from the "Sueste" — the southeastern wind direction — a nautical term that reflects the coastal and adventurous spirit of the Algarve region. We work with brands across Portugal and internationally, with a strong focus on the Algarve market.
+
+## Services
+
+- Web Design & Development (Astro, React, Cloudflare Edge, performance-first)
+- Brand Identity & Visual Systems (logo, typography, color systems)
+- Social Media Strategy & Content Production
+- Photography & Video Production (including aerial drone footage)
+- Print & Packaging Design
+- Back-office & Custom Platform Development
+- Technical SEO & Performance Optimization
+
+## Portfolio
+
+- **Algo Atelier** — luxury fashion brand identity and web presence (/portfolio/algo-atelier)
+- **Mental8Works** — mental health coaching platform design and development (/portfolio/mental8works)
+- **Desportos Náuticos Alvor** — watersports activity brand identity and website (/portfolio/desportos-nauticos-alvor)
+
+## Partners
+
+- Nadine Campos — creative partnership collaboration (/parcerias/nadine-campos)
+
+## Technology
+
+We build with modern, performance-optimized technology: Astro 5, React 19, Cloudflare Workers (edge rendering), GSAP animations, Lenis smooth scroll. Our sites consistently score 95+ on Google Lighthouse.
+
+## Location & Contact
+
+- Website: https://sueste-creative.pt
+- Instagram: https://www.instagram.com/sueste.agency/
+- Facebook: https://www.facebook.com/sueste.agency
+- LinkedIn: https://linkedin.com/company/sueste-creative
+- Phone: +351 965 494 727
+- Email: info@sueste-creative.pt
+- Location: Algarve, Portugal (serving clients nationally and internationally)
+
+## Languages
+
+This website is available in Portuguese (default) and English (/en/).

@@ -140,7 +140,7 @@ const { isLandingPage = false } = Astro.props;
     left: 0;
     width: 0;
     height: 2px;
-    background: #38bdf8;
+    background: var(--color-accent);
     transition: width 0.3s ease;
   }
 
@@ -150,7 +150,7 @@ const { isLandingPage = false } = Astro.props;
   }
 
   .btn-primary-nav {
-    background: linear-gradient(135deg, #38bdf8 0%, #2563eb 100%);
+    background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
     color: white !important;
     padding: 0.6rem 1.5rem;
     border-radius: 50px;
@@ -164,7 +164,7 @@ const { isLandingPage = false } = Astro.props;
 
   .btn-primary-nav:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(56, 189, 248, 0.4);
+    box-shadow: 0 8px 25px rgba(56, 189, 248, 0.35);
   }
 
   /* Language Toggle Switch */
@@ -194,7 +194,7 @@ const { isLandingPage = false } = Astro.props;
   }
 
   .lang-toggle-track:hover {
-    border-color: rgba(56, 189, 248, 0.4);
+    border-color: var(--color-accent);
     background: rgba(255, 255, 255, 0.08);
   }
 
@@ -317,7 +317,7 @@ const { isLandingPage = false } = Astro.props;
     font-size: 1.75rem;
     font-weight: 800;
     text-decoration: none;
-    background: linear-gradient(135deg, #38bdf8 0%, #2563eb 100%);
+    background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -370,7 +370,7 @@ const { isLandingPage = false } = Astro.props;
 
   .mobile-nav-list a:hover,
   .mobile-nav-list a.active {
-    color: #38bdf8;
+    color: var(--color-accent);
     padding-left: 8px;
   }
 

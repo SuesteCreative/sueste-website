@@ -1,0 +1,88 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import Section from "../../components/Section.astro";
+
+const title = "Terms of Service";
+const lastUpdated = "3 March 2026";
+---
+
+<BaseLayout
+  title={title}
+  description="Terms of use for the Sueste Creative website."
+  lang="en"
+  hreflangPt="https://sueste-creative.pt/termos"
+  hreflangEn="https://sueste-creative.pt/en/terms"
+>
+  <Navbar />
+  <main class="legal-page">
+    <Section title={title} subtitle={`Last updated: ${lastUpdated}`}>
+      <div class="legal-content glass p-8 md:p-12 rounded-3xl">
+        <h3>1. Acceptance of Terms</h3>
+        <p>
+          By accessing and using this website, you agree to be bound by these
+          Terms of Service and to comply with all applicable laws and
+          regulations.
+        </p>
+
+        <h3>2. Intellectual Property</h3>
+        <p>
+          All content on this website, including text, images, logos, and
+          design, is the property of Sueste Creative or is used with
+          permission, and is protected by copyright law.
+        </p>
+
+        <h3>3. Use of the Website</h3>
+        <p>
+          Use of this website is permitted only for lawful purposes. Any use
+          that could damage, disable, or overload our infrastructure is
+          prohibited.
+        </p>
+
+        <h3>4. Limitation of Liability</h3>
+        <p>
+          Sueste Creative shall not be liable for any direct, indirect, or
+          consequential damages resulting from the use of, or inability to
+          use, this website.
+        </p>
+
+        <h3>5. Third-Party Links</h3>
+        <p>
+          Our website may contain links to third-party websites. We have no
+          control over the content or privacy practices of those sites.
+        </p>
+
+        <h3>6. Governing Law</h3>
+        <p>
+          These terms are governed by and interpreted in accordance with the
+          laws of Portugal. Any disputes shall be submitted to the exclusive
+          jurisdiction of the Portuguese courts.
+        </p>
+
+        <h3>7. Contact</h3>
+        <p>
+          If you have any questions about these Terms of Service, please
+          contact us at: geral@sueste-creative.pt.
+        </p>
+      </div>
+    </Section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .legal-page {
+    padding-top: 80px;
+  }
+  .legal-content h3 {
+    font-size: 1.5rem;
+    margin: 2rem 0 1rem;
+    color: var(--color-accent);
+  }
+  .legal-content p {
+    margin-bottom: 1rem;
+    opacity: 0.8;
+    line-height: 1.8;
+  }
+</style>

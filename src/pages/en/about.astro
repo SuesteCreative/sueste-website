@@ -2,65 +2,787 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.astro';
-import Section from '../../components/Section.astro';
+
 ---
 
 <BaseLayout
-  title="About Us"
+  title="About Us | Sueste Creative — Web & Design Agency in the Algarve"
   description="We are Sueste Creative, a creative agency in the Algarve specializing in web design, development and strategic digital content for brands that want to grow."
   lang="en"
   hreflangPt="https://sueste-creative.pt/sobre"
   hreflangEn="https://sueste-creative.pt/en/about"
 >
   <Navbar />
-  <main class="sub-page">
-    <Section title="About Sueste Creative" subtitle="We are an agency focused on real results through creativity." data-reveal>
-      <div class="content">
-        <p class="reveal-delay-1" data-reveal>Sueste Creative was born from a passion for bridging design, technology, and visual storytelling. We specialize in helping brands stand out in an increasingly digital and visual market.</p>
-        <p class="reveal-delay-2" data-reveal>From high-performance website development to cinematic drone footage, our approach is always strategic and detail-oriented.</p>
-        <div class="stats reveal-delay-3" data-reveal>
-          <div class="stat-item">
-            <span class="stat-num">50+</span>
-            <span class="stat-label">Projects Completed</span>
+  <main class="about-page">
+
+    <!-- ── HERO ──────────────────────────────────────────────────── -->
+    <section class="s-hero">
+      <div class="container">
+        <div class="hero-pill" data-reveal>
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          Algarve, Portugal
+        </div>
+        <h1 class="hero-title" data-reveal>
+          We build digital<br />
+          <span class="grad">that grows</span><br />
+          your business.
+        </h1>
+        <p class="hero-sub" data-reveal>
+          We are a creative agency based in the Algarve. We unite design,
+          technology, and strategy to build digital presences that convert
+          visitors into clients.
+        </p>
+        <div class="hero-actions" data-reveal>
+          <a href="/en/work" class="btn-primary">See Our Work</a>
+          <a href="/en/contact" class="btn-ghost">Get in Touch</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── STORY + STATS ─────────────────────────────────────────── -->
+    <section class="s-story">
+      <div class="container story-grid">
+        <div class="story-text">
+          <span class="eyebrow" data-reveal>Our Story</span>
+          <h2 data-reveal>Born from a passion for detail.</h2>
+          <p data-reveal>
+            Sueste Creative was born from the conviction that brands in the
+            Algarve and Portugal deserve world-class digital presence. We
+            brought together design, technology, and strategy into a single
+            team — focused on delivering projects that not only look good but
+            work.
+          </p>
+          <p data-reveal>
+            From high-performance web development to custom back-office
+            platforms and aerial drone footage, every project is treated as a
+            long-term partnership, with a focus on real client results.
+          </p>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card" data-reveal>
+            <div class="stat-top">
+              <span class="stat-num" data-count="50">0</span>
+              <span class="stat-suffix">+</span>
+            </div>
+            <span class="stat-label">Projects delivered</span>
           </div>
-          <div class="stat-item">
-            <span class="stat-num">4 Years</span>
-            <span class="stat-label">Of Experience</span>
+          <div class="stat-card" data-reveal>
+            <div class="stat-top">
+              <span class="stat-num" data-count="4">0</span>
+            </div>
+            <span class="stat-label">Years of experience</span>
+          </div>
+          <div class="stat-card" data-reveal>
+            <div class="stat-top">
+              <span class="stat-num" data-count="100">0</span>
+              <span class="stat-suffix">%</span>
+            </div>
+            <span class="stat-label">Satisfaction rate</span>
+          </div>
+          <div class="stat-card stat-card--accent" data-reveal>
+            <div class="stat-top">
+              <span class="stat-num">∞</span>
+            </div>
+            <span class="stat-label">Commitment</span>
           </div>
         </div>
       </div>
-    </Section>
+    </section>
+
+    <!-- ── FOUNDER ──────────────────────────────────────────────── -->
+    <section class="s-founder">
+      <div class="container founder-grid">
+        <div class="founder-image-wrapper" data-reveal>
+          <img src="/professional_setup.png" alt="Pedro - Sueste Creative Founder" class="founder-img" loading="lazy" />
+          <div class="founder-badge">Founder & Lead Dev</div>
+        </div>
+        <div class="founder-text">
+          <span class="eyebrow" data-reveal>The Face of Sueste</span>
+          <h2 data-reveal>Committed to excellence in every detail.</h2>
+          <p data-reveal>
+            My vision for Sueste Creative has always been clear: to create
+            digital solutions that are not just aesthetically stunning, but are
+            real growth engines for our clients.
+          </p>
+          <p data-reveal>
+            With a focus on performance, technical SEO, and user-centric
+            design, I personally lead the strategy for each project to ensure
+            we deliver the impact we promise.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── VALUES ────────────────────────────────────────────────── -->
+    <section class="s-values">
+      <div class="container">
+        <div class="sec-header" data-reveal>
+          <span class="eyebrow">Our Values</span>
+          <h2>What drives us in every project.</h2>
+          <p>Three principles that guide every decision, from the first draft to the final launch.</p>
+        </div>
+        <div class="values-grid">
+
+          <div class="vcard" data-reveal>
+            <div class="vcard-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+            </div>
+            <h3>Excellence</h3>
+            <p>We don't accept "good enough". Every pixel, every line of code, and every deadline is treated with the same rigour we apply to our own projects.</p>
+          </div>
+
+          <div class="vcard reveal-delay-1" data-reveal>
+            <div class="vcard-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="8" x2="12" y2="12"/>
+                <line x1="12" y1="16" x2="12.01" y2="16"/>
+              </svg>
+            </div>
+            <h3>Innovation</h3>
+            <p>We constantly explore the latest technologies — Astro, Edge computing, AI — to ensure your product is always one step ahead of the competition.</p>
+          </div>
+
+          <div class="vcard reveal-delay-2" data-reveal>
+            <div class="vcard-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <h3>Partnership</h3>
+            <p>We work side by side with every client. We listen, question, and deeply understand the business before writing a single line of code.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── WHY US ─────────────────────────────────────────────────── -->
+    <section class="s-why">
+      <div class="container">
+        <div class="sec-header" data-reveal>
+          <span class="eyebrow">Why Sueste</span>
+          <h2>What sets us apart.</h2>
+        </div>
+        <div class="why-list">
+          <div class="why-item" data-reveal>
+            <span class="why-num">01</span>
+            <div>
+              <h3>Measurable results</h3>
+              <p>Every project starts with defined KPIs — speed, conversion, SEO position. We deliver real reports, not just beautiful designs.</p>
+            </div>
+          </div>
+          <div class="why-item reveal-delay-1" data-reveal>
+            <span class="why-num">02</span>
+            <div>
+              <h3>Clear communication</h3>
+              <p>No unnecessary technical jargon. We keep clients informed at every stage, with realistic timelines and fast responses.</p>
+            </div>
+          </div>
+          <div class="why-item reveal-delay-2" data-reveal>
+            <span class="why-num">03</span>
+            <div>
+              <h3>Top-tier technology</h3>
+              <p>Sites built with Astro + Cloudflare Edge, with Lighthouse scores 95+. Performance isn't optional — it's the starting point.</p>
+            </div>
+          </div>
+          <div class="why-item reveal-delay-3" data-reveal>
+            <span class="why-num">04</span>
+            <div>
+              <h3>Ongoing support</h3>
+              <p>The relationship doesn't end at launch. We support the project's evolution with technical assistance, updates, and new features.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CTA ────────────────────────────────────────────────────── -->
+    <section class="s-cta">
+      <div class="container">
+        <div class="cta-box" data-reveal>
+          <span class="eyebrow">Next Step</span>
+          <h2>Ready to start?</h2>
+          <p>Let's turn your vision into a digital presence that generates real results. No commitment — the first conversation is always free.</p>
+          <div class="cta-actions">
+            <a href="/en/contact" class="btn-primary">Book a Meeting</a>
+            <a href="/en/work" class="btn-ghost">View Our Work</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
   <Footer />
 </BaseLayout>
 
 <style>
-  .sub-page { padding-top: 80px; }
-  .content p { margin-bottom: 2rem; font-size: 1.25rem; opacity: 0.8; max-width: 800px; line-height: 1.8; }
-  
-  .stats {
+  .about-page {
+    padding-top: 80px;
+  }
+
+  /* ── SHARED UTILITIES ──────────────────────────────────────────── */
+  .eyebrow {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--color-accent);
+    margin-bottom: 1rem;
+  }
+
+  .sec-header {
+    max-width: 640px;
+    margin-bottom: 5rem;
+  }
+
+  .sec-header h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: #fff;
+    margin-bottom: 1rem;
+    line-height: 1.15;
+  }
+
+  .sec-header p {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.7;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 2rem;
+    background: var(--color-accent-dark);
+    color: #fff;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+  }
+
+  .btn-primary:hover {
+    background: #0060d0;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(0,112,243,0.35);
+  }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 2rem;
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.8);
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+  }
+
+  .btn-ghost:hover {
+    border-color: rgba(255,255,255,0.4);
+    color: #fff;
+    transform: translateY(-2px);
+  }
+
+  /* ── HERO ──────────────────────────────────────────────────────── */
+  .s-hero {
+    padding: 7rem 0 6rem;
+  }
+
+  .hero-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 1rem;
+    border-radius: 50px;
+    background: rgba(0, 112, 243, 0.12);
+    border: 1px solid rgba(0, 112, 243, 0.25);
+    color: var(--color-accent);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-title {
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: #fff;
+    margin-bottom: 2rem;
+    max-width: 820px;
+  }
+
+  .hero-title .grad {
+    background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .hero-sub {
+    font-size: clamp(1.05rem, 2vw, 1.25rem);
+    color: rgba(255,255,255,0.6);
+    max-width: 620px;
+    line-height: 1.75;
+    margin-bottom: 3rem;
+  }
+
+  .hero-actions {
     display: flex;
-    gap: 4rem;
-    margin-top: 4rem;
-    padding-top: 4rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  /* ── STORY ─────────────────────────────────────────────────────── */
+  .s-story {
+    padding: 8rem 0;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .story-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .story-text h2 {
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: #fff;
+    margin-bottom: 2rem;
+    line-height: 1.2;
+  }
+
+  .story-text p {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .stat-card {
+    padding: 2rem;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    transition: border-color 0.3s ease;
+  }
+
+  .stat-card:hover {
+    border-color: rgba(0, 112, 243, 0.3);
+  }
+
+  .stat-card--accent {
+    background: rgba(0, 112, 243, 0.06);
+    border-color: rgba(0, 112, 243, 0.2);
+  }
+
+  .stat-top {
+    display: flex;
+    align-items: baseline;
+    gap: 0.15rem;
+    margin-bottom: 0.5rem;
   }
 
   .stat-num {
-    display: block;
     font-size: 3rem;
-    font-weight: 800;
-    color: var(--color-accent);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    background: linear-gradient(135deg, #fff 0%, var(--color-accent) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1;
+  }
+
+  .stat-suffix {
+    font-size: 1.8rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, #fff 0%, var(--color-accent) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
   .stat-label {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.45);
+    font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    opacity: 0.6;
+    letter-spacing: 0.08em;
   }
 
-  @media (max-width: 768px) {
-    .stats { gap: 2rem; flex-direction: column; }
+  /* ── FOUNDER ─────────────────────────────────────────────────── */
+  .s-founder {
+    padding: 8rem 0;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, transparent 100%);
+  }
+
+  .founder-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .founder-image-wrapper {
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 40px 100px -20px rgba(0,0,0,0.5);
+  }
+
+  .founder-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.6s ease;
+  }
+
+  .founder-image-wrapper:hover .founder-img {
+    transform: scale(1.02);
+  }
+
+  .founder-badge {
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+    background: rgba(0, 112, 243, 0.9);
+    backdrop-filter: blur(10px);
+    color: #fff;
+    padding: 0.6rem 1.2rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .founder-text h2 {
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: #fff;
+    margin-bottom: 2rem;
+    line-height: 1.2;
+  }
+
+  .founder-text p {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+
+  /* ── VALUES ─────────────────────────────────────────────────────── */
+  .s-values {
+    padding: 8rem 0;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .vcard {
+    padding: 3rem 2.5rem;
+    border-radius: 24px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.06);
+    transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .vcard::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0, 112, 243, 0.05) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .vcard:hover {
+    border-color: rgba(0, 112, 243, 0.3);
+    transform: translateY(-8px);
+    box-shadow: 0 24px 60px -16px rgba(0, 112, 243, 0.2);
+  }
+
+  .vcard:hover::before {
+    opacity: 1;
+  }
+
+  .vcard-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 16px;
+    background: rgba(0, 112, 243, 0.1);
+    border: 1px solid rgba(0, 112, 243, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-accent);
+    margin-bottom: 1.75rem;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .vcard:hover .vcard-icon {
+    background: var(--color-accent-dark);
+    border-color: var(--color-accent-dark);
+    color: #fff;
+    transform: scale(1.08) rotate(4deg);
+  }
+
+  .vcard h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 1rem;
+  }
+
+  .vcard p {
+    font-size: 0.98rem;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  /* ── WHY US ─────────────────────────────────────────────────────── */
+  .s-why {
+    padding: 8rem 0;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .why-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 24px;
+    overflow: hidden;
+  }
+
+  .why-item {
+    display: flex;
+    gap: 2rem;
+    padding: 3rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    border-right: 1px solid rgba(255,255,255,0.06);
+    transition: background 0.3s ease;
+  }
+
+  .why-item:nth-child(even) {
+    border-right: none;
+  }
+
+  .why-item:nth-last-child(-n+2) {
+    border-bottom: none;
+  }
+
+  .why-item:hover {
+    background: rgba(255,255,255,0.02);
+  }
+
+  .why-num {
+    font-size: 3rem;
+    font-weight: 900;
+    line-height: 1;
+    color: rgba(0, 112, 243, 0.2);
+    flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+    transition: color 0.3s ease;
+  }
+
+  .why-item:hover .why-num {
+    color: rgba(0, 112, 243, 0.4);
+  }
+
+  .why-item h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.75rem;
+  }
+
+  .why-item p {
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  /* ── CTA ────────────────────────────────────────────────────────── */
+  .s-cta {
+    padding: 8rem 0 10rem;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .cta-box {
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .cta-box h2 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    color: #fff;
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+  }
+
+  .cta-box p {
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.75;
+    margin-bottom: 3rem;
+  }
+
+  .cta-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* ── RESPONSIVE ─────────────────────────────────────────────────── */
+  @media (max-width: 1024px) {
+    .story-grid {
+      grid-template-columns: 1fr;
+      gap: 4rem;
+    }
+
+    .founder-grid {
+      grid-template-columns: 1fr;
+      gap: 4rem;
+    }
+
+    .values-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .why-list {
+      grid-template-columns: 1fr;
+    }
+
+    .why-item {
+      border-right: none;
+    }
+
+    .why-item:nth-last-child(-n+2) {
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .why-item:last-child {
+      border-bottom: none;
+    }
+
+    .s-founder { padding: 5rem 0; }
+  }
+
+  @media (max-width: 640px) {
+    .s-hero { padding: 4rem 0 5rem; }
+    .s-story, .s-values, .s-why, .s-cta { padding: 5rem 0; }
+
+    .stats-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .stat-card { padding: 1.5rem; }
+    .stat-num { font-size: 2.2rem; }
+
+    .vcard { padding: 2rem 1.75rem; }
+
+    .why-item { gap: 1.25rem; padding: 2rem; }
+    .why-num { font-size: 2.2rem; }
+
+    .hero-title { font-size: clamp(2.4rem, 10vw, 3.5rem); }
   }
 </style>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  function init() {
+    // Staggered hero entrance
+    const heroEls = document.querySelectorAll(".s-hero [data-reveal]");
+    heroEls.forEach((el, i) => {
+      gsap.fromTo(
+        el,
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 1, ease: "power3.out", delay: i * 0.12 }
+      );
+    });
+
+    // Scroll-triggered sections
+    document.querySelectorAll(".s-story [data-reveal], .s-founder [data-reveal], .s-values [data-reveal], .s-why [data-reveal], .s-cta [data-reveal]").forEach((el) => {
+      gsap.fromTo(
+        el,
+        { opacity: 0, y: 40 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.9,
+          ease: "power3.out",
+          scrollTrigger: { trigger: el, start: "top 88%" },
+        }
+      );
+    });
+
+    // Count-up for stats
+    document.querySelectorAll(".stat-num[data-count]").forEach((el) => {
+      const htmlEl = el as HTMLElement;
+      const target = parseInt(htmlEl.dataset.count || "0");
+      const proxy = { val: 0 };
+      ScrollTrigger.create({
+        trigger: el,
+        start: "top 85%",
+        once: true,
+        onEnter: () => {
+          gsap.to(proxy, {
+            val: target,
+            duration: 1.8,
+            ease: "power2.out",
+            onUpdate: () => { htmlEl.textContent = Math.round(proxy.val).toString(); },
+          });
+        }
+      });
+    });
+  }
+
+  init();
+  document.addEventListener("astro:after-swap", init);
+</script>
