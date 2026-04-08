@@ -28,8 +28,8 @@ import Section from '../../components/Section.astro';
           <div class="info-item">
              <h4>Social Media</h4>
              <div class="social-links">
-               <a href="#">Instagram</a>
-               <a href="#">LinkedIn</a>
+               <a href="https://www.instagram.com/sueste.agency/" target="_blank" rel="noopener noreferrer">Instagram</a>
+               <a href="https://linkedin.com/company/sueste-creative" target="_blank" rel="noopener noreferrer">LinkedIn</a>
              </div>
           </div>
         </div>
@@ -54,6 +54,38 @@ import Section from '../../components/Section.astro';
       </div>
     </Section>
   </main>
+
+  <script type="application/ld+json" is:inline>{JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How long does a project take?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It depends on complexity. An average institutional website takes 3 to 6 weeks, while an e-commerce or custom system can take 2 to 4 months."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you work with international clients?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes! Although we are based in Lagos, Portugal, we work with clients from around the world 100% remotely and efficiently."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does the payment process work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We typically split payment into 3 phases: on agreement (50%), after design approval (25%), and before launch (25%)."
+        }
+      }
+    ]
+  })}</script>
+
   <Footer />
 </BaseLayout>
 

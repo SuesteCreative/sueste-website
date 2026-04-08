@@ -10,6 +10,7 @@ interface Props {
   hreflangEn?: string;
   preloadImage?: string;
   ogImage?: string;
+  noindex?: boolean;
 }
 
 const {
@@ -20,6 +21,7 @@ const {
   hreflangEn,
   preloadImage,
   ogImage = "https://sueste-creative.pt/images/logo-white-hor.webp",
+  noindex = false,
 } = Astro.props;
 const lang = propLang || getLangFromUrl(Astro.url);
 const canonicalURL = new URL(Astro.url.pathname, "https://sueste-creative.pt");
@@ -29,7 +31,7 @@ const canonicalURL = new URL(Astro.url.pathname, "https://sueste-creative.pt");
 <html lang={lang}>
   <head>
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RE740MRY5Y"
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-RE740MRY5Y"
     ></script>
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
@@ -42,6 +44,7 @@ const canonicalURL = new URL(Astro.url.pathname, "https://sueste-creative.pt");
     </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
     <link rel="icon" type="image/png" href="/images/favicon.png" />
     <link rel="apple-touch-icon" href="/images/favicon.png" />
     <meta name="generator" content={Astro.generator} />
@@ -54,6 +57,7 @@ const canonicalURL = new URL(Astro.url.pathname, "https://sueste-creative.pt");
     {hreflangPt && <link rel="alternate" hreflang="x-default" href={hreflangPt} />}
 
     <meta name="author" content="Sueste Creative" />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
 
     <!-- Open Graph (Facebook, Instagram, TikTok, LinkedIn, WhatsApp) -->
     <meta property="og:title" content={`${title} | Sueste Creative`} />
@@ -86,17 +90,25 @@ const canonicalURL = new URL(Astro.url.pathname, "https://sueste-creative.pt");
       is:inline
       set:html={JSON.stringify({
         "@context": "https://schema.org",
-        "@type": "ProfessionalService",
+        "@type": ["LocalBusiness", "ProfessionalService"],
         name: "Sueste Creative",
         alternateName: "Sueste Creative Agency",
         url: "https://sueste-creative.pt",
         logo: "https://sueste-creative.pt/images/logo-white-hor.webp",
+        image: "https://sueste-creative.pt/images/logo-white-hor.webp",
         description: description,
+        telephone: "+351965494727",
+        email: "geral@sueste-creative.pt",
         address: {
           "@type": "PostalAddress",
-          addressLocality: "Algarve",
+          addressLocality: "Lagos",
+          addressRegion: "Algarve",
           addressCountry: "PT",
         },
+        areaServed: [
+          { "@type": "AdministrativeArea", name: "Algarve" },
+          { "@type": "Country", name: "Portugal" },
+        ],
         sameAs: [
           "https://www.instagram.com/sueste.agency/",
           "https://www.facebook.com/sueste.agency",

@@ -167,6 +167,37 @@ import Section from "../components/Section.astro";
     </Section>
   </main>
 
+  <script type="application/ld+json" is:inline>{JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Quanto tempo demora um projeto?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Depende da complexidade. Um website institucional médio demora entre 3 a 6 semanas, enquanto um e-commerce ou sistema customizado pode levar 2 a 4 meses."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Trabalham com clientes internacionais?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sim! Embora estejamos em Lagos, Portugal, trabalhamos com clientes de todo o mundo de forma 100% remota e eficiente."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Como funciona o processo de pagamento?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Normalmente dividimos o pagamento em 3 fases: adjudicação (50%), após aprovação do design (25%) e antes do lançamento (25%)."
+        }
+      }
+    ]
+  })}</script>
+
   <Footer />
 </BaseLayout>
 

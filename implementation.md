@@ -50,12 +50,12 @@ Priority order based on SEO, trust, and conversion impact.
 - [x] Fix footer brand description — currently uses hero tagline instead of a real company description
 
 ### Medium
-- [ ] Improve thin meta descriptions for /privacidade, /termos and EN equivalents
-- [ ] Add FAQPage JSON-LD schema to /contacto and /en/contact — FAQ section exists but has no structured data
-- [ ] Upgrade BaseLayout JSON-LD — add LocalBusiness type, telephone, and serviceArea to improve local SEO signals
-- [ ] Add `<meta name="robots" content="noindex, nofollow">` to all /sucesso/* and /en/success/* confirmation pages
+- [x] Improve thin meta descriptions for /privacidade, /termos and EN equivalents
+- [x] Add FAQPage JSON-LD schema to /contacto and /en/contact — FAQ section exists but has no structured data
+- [x] Upgrade BaseLayout JSON-LD — add LocalBusiness type, telephone, and serviceArea to improve local SEO signals
+- [x] Add `<meta name="robots" content="noindex, nofollow">` to all /sucesso/* and /en/success/* confirmation pages
 - [ ] Add per-page ogImage to portfolio project pages for better social sharing
 
 ### Low
-- [ ] Add SVG favicon link to BaseLayout alongside PNG favicon
+- [x] Add SVG favicon link to BaseLayout alongside PNG favicon
 - [ ] Note: Partners page has only 1 partner — consider adding more for social proof
