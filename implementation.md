@@ -41,13 +41,13 @@ Priority order based on SEO, trust, and conversion impact.
 - [x] Fix footer location "Lisboa, Portugal" → "Algarve, Portugal" — contradicts all page content and JSON-LD schema, damages local SEO
 
 ### High
-- [ ] Fix Sobre/About page title — BaseLayout appends "| Sueste Creative" but title prop already contains "| Sueste Creative —", resulting in duplicate brand name in `<title>`
-- [ ] Improve all generic title tags with keywords + location (Home, Serviços, Portfólio, Contacto, Orçamento, Parcerias and EN equivalents)
-- [ ] Fix stat counters on /sobre and /en/about — initial HTML shows "0" so crawlers and no-JS users see "0+ projetos", "0 anos", "0% satisfação" — must have real values in HTML
-- [ ] Add ogImage prop to BaseLayout to allow per-page OG image override — currently all pages share the same logo image
-- [ ] Fix email inconsistency — footer uses `info@sueste-creative.pt`, everything else uses `geral@sueste-creative.pt`; unify to `geral@`
-- [ ] Fix TikTok footer link — points to generic `tiktok.com`, not a branded profile; remove until real profile exists
-- [ ] Fix footer brand description — currently uses hero tagline instead of a real company description
+- [x] Fix Sobre/About page title — BaseLayout appends "| Sueste Creative" but title prop already contains "| Sueste Creative —", resulting in duplicate brand name in `<title>`
+- [x] Improve all generic title tags with keywords + location (Home, Serviços, Portfólio, Contacto, Orçamento, Parcerias and EN equivalents)
+- [x] Fix stat counters on /sobre and /en/about — initial HTML shows "0" so crawlers and no-JS users see "0+ projetos", "0 anos", "0% satisfação" — must have real values in HTML
+- [x] Add ogImage prop to BaseLayout to allow per-page OG image override — currently all pages share the same logo image
+- [x] Fix email inconsistency — footer uses `info@sueste-creative.pt`, everything else uses `geral@sueste-creative.pt`; unify to `geral@`
+- [x] Fix TikTok footer link — points to generic `tiktok.com`, not a branded profile; remove until real profile exists
+- [x] Fix footer brand description — currently uses hero tagline instead of a real company description
 
 ### Medium
 - [ ] Improve thin meta descriptions for /privacidade, /termos and EN equivalents
