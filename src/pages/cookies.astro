@@ -1,0 +1,164 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import Section from "../components/Section.astro";
+
+const title = "Política de Cookies";
+const lastUpdated = "8 de Abril de 2026";
+---
+
+<BaseLayout
+    title={title}
+    description="Saiba como a Sueste Creative utiliza cookies no seu website, que tipos de cookies são utilizados e como pode gerir as suas preferências."
+    hreflangPt="https://sueste-creative.pt/cookies"
+    hreflangEn="https://sueste-creative.pt/en/cookies"
+>
+    <Navbar />
+    <main class="legal-page">
+        <Section title={title} subtitle={`Última atualização: ${lastUpdated}`}>
+            <div class="legal-content glass p-8 md:p-12 rounded-3xl">
+                <h3>1. O que são Cookies?</h3>
+                <p>
+                    Cookies são pequenos ficheiros de texto que são armazenados no seu
+                    dispositivo (computador, tablet ou telemóvel) quando visita um website.
+                    São amplamente utilizados para fazer os websites funcionarem de forma
+                    mais eficiente e fornecer informações aos proprietários do site.
+                </p>
+
+                <h3>2. Como Utilizamos os Cookies</h3>
+                <p>
+                    O website da Sueste Creative utiliza cookies para melhorar a sua
+                    experiência de navegação, analisar o tráfego do website e compreender
+                    de onde vêm os nossos visitantes. Utilizamos os seguintes tipos de
+                    cookies:
+                </p>
+
+                <h3>3. Tipos de Cookies Utilizados</h3>
+
+                <h4>3.1 Cookies Estritamente Necessários</h4>
+                <p>
+                    Estes cookies são essenciais para o funcionamento do website e não podem
+                    ser desativados nos nossos sistemas. Geralmente são definidos apenas em
+                    resposta a ações da sua parte, como preencher formulários ou definir
+                    preferências de privacidade. Pode configurar o seu navegador para bloquear
+                    estes cookies, mas algumas partes do website poderão não funcionar
+                    corretamente.
+                </p>
+
+                <h4>3.2 Cookies de Desempenho e Análise</h4>
+                <p>
+                    Utilizamos o Google Analytics (GA4) para recolher informações sobre
+                    como os visitantes utilizam o nosso website. Estes cookies recolhem
+                    dados de forma anónima e agregada, incluindo o número de visitantes,
+                    de onde vêm e quais as páginas que visitam. Estas informações
+                    ajudam-nos a melhorar o nosso website. Os dados são processados pelo
+                    Google LLC, de acordo com a sua política de privacidade.
+                </p>
+                <ul>
+                    <li><strong>_ga</strong> — Distingue utilizadores únicos. Expira em 2 anos.</li>
+                    <li><strong>_ga_*</strong> — Mantém o estado da sessão. Expira em 2 anos.</li>
+                    <li><strong>_gid</strong> — Distingue utilizadores. Expira em 24 horas.</li>
+                </ul>
+
+                <h4>3.3 Cookies de Preferências</h4>
+                <p>
+                    Estes cookies permitem ao website lembrar escolhas que fez (como o idioma
+                    preferido) e fornecer funcionalidades melhoradas e personalizadas.
+                </p>
+
+                <h3>4. Cookies de Terceiros</h3>
+                <p>
+                    Alguns cookies são colocados por serviços de terceiros que aparecem nas
+                    nossas páginas. Não controlamos estes cookies e recomendamos que consulte
+                    as políticas de privacidade relevantes:
+                </p>
+                <ul>
+                    <li><strong>Google Analytics</strong> — <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Política de Privacidade do Google</a></li>
+                    <li><strong>Google Fonts</strong> — Utilizado para tipografia; pode registar pedidos de fonte.</li>
+                </ul>
+
+                <h3>5. Como Gerir os Cookies</h3>
+                <p>
+                    Pode controlar e/ou eliminar cookies conforme desejar. Pode eliminar todos
+                    os cookies que já estão no seu computador e pode configurar a maioria dos
+                    navegadores para impedir que sejam colocados. No entanto, se o fizer,
+                    poderá ter de ajustar manualmente algumas preferências sempre que visitar
+                    um site.
+                </p>
+                <p>
+                    Para gerir os cookies no seu navegador, consulte as instruções
+                    específicas:
+                </p>
+                <ul>
+                    <li><a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener noreferrer">Google Chrome</a></li>
+                    <li><a href="https://support.mozilla.org/pt-PT/kb/cookies-informacao-que-os-websites-guardam-no-seu-computador" target="_blank" rel="noopener noreferrer">Mozilla Firefox</a></li>
+                    <li><a href="https://support.apple.com/pt-pt/guide/safari/sfri11471/mac" target="_blank" rel="noopener noreferrer">Apple Safari</a></li>
+                    <li><a href="https://support.microsoft.com/pt-pt/microsoft-edge/eliminar-cookies-no-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09" target="_blank" rel="noopener noreferrer">Microsoft Edge</a></li>
+                </ul>
+
+                <h3>6. Base Legal (RGPD)</h3>
+                <p>
+                    De acordo com o Regulamento Geral sobre a Proteção de Dados (RGPD) e a
+                    Lei n.º 41/2004, os cookies que não sejam estritamente necessários
+                    requerem o seu consentimento. Ao continuar a utilizar o nosso website,
+                    aceita a utilização de cookies conforme descrito nesta política.
+                </p>
+
+                <h3>7. Alterações a esta Política</h3>
+                <p>
+                    Podemos atualizar esta Política de Cookies periodicamente para refletir
+                    alterações nos cookies que utilizamos ou por outras razões operacionais,
+                    legais ou regulamentares. Recomendamos que visite esta página regularmente
+                    para se manter informado sobre a nossa utilização de cookies.
+                </p>
+
+                <h3>8. Contacto</h3>
+                <p>
+                    Se tiver questões sobre a nossa utilização de cookies, contacte-nos
+                    através de: <a href="mailto:geral@sueste-creative.pt">geral@sueste-creative.pt</a>
+                </p>
+            </div>
+        </Section>
+    </main>
+    <Footer />
+</BaseLayout>
+
+<style>
+    .legal-page {
+        padding-top: 80px;
+    }
+    .legal-content h3 {
+        font-size: 1.5rem;
+        margin: 2rem 0 1rem;
+        color: var(--color-accent);
+    }
+    .legal-content h4 {
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin: 1.5rem 0 0.75rem;
+        color: rgba(255,255,255,0.85);
+    }
+    .legal-content p {
+        margin-bottom: 1rem;
+        opacity: 0.8;
+        line-height: 1.8;
+    }
+    .legal-content ul {
+        margin-bottom: 1.5rem;
+        padding-left: 1.5rem;
+        opacity: 0.8;
+    }
+    .legal-content li {
+        margin-bottom: 0.5rem;
+        list-style-type: disc;
+    }
+    .legal-content a {
+        color: var(--color-accent);
+        text-decoration: underline;
+        opacity: 1;
+    }
+    .legal-content a:hover {
+        opacity: 0.8;
+    }
+</style>
