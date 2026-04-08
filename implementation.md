@@ -38,7 +38,7 @@ Priority order based on SEO, trust, and conversion impact.
 
 ### Critical
 - [x] Create /cookies and /en/cookies pages — footer links are broken (404), GDPR non-compliance
-- [ ] Fix footer location "Lisboa, Portugal" → "Algarve, Portugal" — contradicts all page content and JSON-LD schema, damages local SEO
+- [x] Fix footer location "Lisboa, Portugal" → "Algarve, Portugal" — contradicts all page content and JSON-LD schema, damages local SEO
 
 ### High
 - [ ] Fix Sobre/About page title — BaseLayout appends "| Sueste Creative" but title prop already contains "| Sueste Creative —", resulting in duplicate brand name in `<title>`
