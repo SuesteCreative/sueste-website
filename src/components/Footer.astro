@@ -340,4 +340,24 @@ const year = new Date().getFullYear();
       max-width: 100%;
     }
   }
+
+  @media (max-width: 768px) {
+    .footer {
+      padding: 5rem 0 3rem;
+    }
+
+    .footer-logo-img {
+      height: 72px;
+    }
+
+    .footer-grid {
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-nav-columns {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+  }
 </style>

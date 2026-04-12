@@ -343,6 +343,32 @@ const row1 = testimonials;
         .testimonials-section {
             padding: 4rem 0;
         }
+        .section-header {
+            margin-bottom: 3rem;
+        }
+        .marquee-row {
+            -webkit-mask-image: linear-gradient(
+                to right,
+                transparent,
+                black 8%,
+                black 92%,
+                transparent
+            );
+            mask-image: linear-gradient(
+                to right,
+                transparent,
+                black 8%,
+                black 92%,
+                transparent
+            );
+        }
+    }
+
+    @media (max-width: 480px) {
+        .testimonial-card {
+            width: 260px;
+            padding: 1.25rem;
+        }
     }
 </style>
 

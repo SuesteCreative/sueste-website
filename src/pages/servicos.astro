@@ -571,6 +571,28 @@ import Footer from "../components/Footer.astro";
       grid-template-columns: 1fr;
     }
   }
+
+  @media (max-width: 768px) {
+    .service-section {
+      padding: 6rem 0;
+    }
+
+    .services-final-cta {
+      padding: 6rem 0;
+    }
+
+    .bg-number {
+      font-size: 18rem;
+    }
+
+    .service-content h2 {
+      font-size: clamp(2rem, 8vw, 3rem);
+    }
+
+    .service-content p {
+      font-size: 1.05rem;
+    }
+  }
 </style>
 
 <script>
