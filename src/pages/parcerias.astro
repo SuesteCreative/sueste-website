@@ -151,7 +151,7 @@ const partners = [
     }
 
     .card-image {
-        aspect-ratio: 1 / 1;
+        aspect-ratio: 3 / 2;
         width: 100%;
         background: #000;
         position: relative;
@@ -201,22 +201,21 @@ const partners = [
     }
 
     .main-name {
-        font-size: 3.5rem;
-        font-weight: 900;
+        font-size: clamp(1.8rem, 3vw, 2.2rem);
+        font-weight: 800;
         color: #fff !important;
-        line-height: 1;
+        line-height: 1.1;
         text-transform: uppercase;
-        letter-spacing: -0.02em;
+        letter-spacing: -0.01em;
     }
 
     .sub-name {
-        font-size: 1.1rem;
-        font-weight: 400;
-        color: #fff !important;
-        letter-spacing: 0.1em;
+        font-size: 1rem;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.55) !important;
+        letter-spacing: 0.12em;
         text-transform: uppercase;
-        margin-top: 0.5rem;
-        opacity: 1;
+        margin-top: 0.4rem;
     }
 
     .card-info p {
@@ -268,6 +267,9 @@ const partners = [
 
     .cta-inner {
         padding: 8rem 0;
+        text-align: center;
+        max-width: 700px;
+        margin: 0 auto;
     }
 
     .final-cta-partners h2 {
@@ -308,7 +310,7 @@ const partners = [
         }
 
         .card-image {
-            aspect-ratio: 16 / 9;
+            aspect-ratio: 3 / 2;
         }
     }
 </style>
