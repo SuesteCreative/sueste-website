@@ -97,9 +97,7 @@ const title =
 const buttonLabel = lang === "pt" ? "Deixe a sua avaliação" : "Leave a review";
 const reviewUrl = "https://g.page/r/CV8IZzllbt3FEBM/review";
 
-// Split into two rows for the marquee
-const row1 = testimonials.slice(0, 4);
-const row2 = testimonials.slice(4, 8);
+const row1 = testimonials;
 ---
 
 <section class="testimonials-section" id="testimonials">
@@ -110,7 +108,6 @@ const row2 = testimonials.slice(4, 8);
     </div>
 
     <div class="testimonials-marquee-container">
-        <!-- Row 1: Left to Right -->
         <div class="marquee-row" id="row-1">
             <div class="marquee-content">
                 {
@@ -157,50 +154,6 @@ const row2 = testimonials.slice(4, 8);
             </div>
         </div>
 
-        <!-- Row 2: Right to Left -->
-        <div class="marquee-row" id="row-2">
-            <div class="marquee-content">
-                {
-                    [...row2, ...row2].map((item) => (
-                        <div class="testimonial-card glass">
-                            <div class="card-top">
-                                <div class="avatar">{item.initials}</div>
-                                <div class="meta">
-                                    <span class="name">{item.name}</span>
-                                    <span class="role">{item.role}</span>
-                                </div>
-                            </div>
-                            <p class="content">
-                                "
-                                {lang === "pt"
-                                    ? item.contentPt
-                                    : item.contentEn}
-                                "
-                            </p>
-                            <div class="stars">
-                                {Array.from({ length: 5 }).map((_, i) => (
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="16"
-                                        height="16"
-                                        viewBox="0 0 24 24"
-                                        fill={
-                                            i < Math.floor(item.stars)
-                                                ? "#38bdf8"
-                                                : "none"
-                                        }
-                                        stroke="#38bdf8"
-                                        stroke-width="2"
-                                    >
-                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                                    </svg>
-                                ))}
-                            </div>
-                        </div>
-                    ))
-                }
-            </div>
-        </div>
     </div>
 
     <div class="container marquee-footer" data-reveal>
@@ -256,7 +209,6 @@ const row2 = testimonials.slice(4, 8);
     .testimonials-marquee-container {
         display: flex;
         flex-direction: column;
-        gap: 2rem;
         padding: 2rem 0;
     }
 
@@ -399,29 +351,14 @@ const row2 = testimonials.slice(4, 8);
 
     function setupTestimonials() {
         const row1 = document.querySelector("#row-1 .marquee-content");
-        const row2 = document.querySelector("#row-2 .marquee-content");
 
         if (row1) {
             gsap.to(row1, {
                 xPercent: -50,
                 repeat: -1,
-                duration: 40,
+                duration: 60,
                 ease: "none",
             });
-        }
-
-        if (row2) {
-            // Start from -50% and move to 0 for reverse direction
-            gsap.fromTo(
-                row2,
-                { xPercent: -50 },
-                {
-                    xPercent: 0,
-                    repeat: -1,
-                    duration: 45,
-                    ease: "none",
-                },
-            );
         }
     }
 

@@ -40,22 +40,22 @@ const imageUrl = "/images/sueste-logo-creation.webp";
                 </div>
                 <div class="about-stats reveal-delay-3" data-reveal>
                     <div class="stat-item">
-                        <span class="stat-number">50+</span>
+                        <span class="stat-number" id="stat-wwa-projects">35</span>
                         <span class="stat-label"
                             >{
                                 lang === "pt"
-                                    ? "Projetos Lançados"
-                                    : "Projects Launched"
+                                    ? "Projetos Entregues"
+                                    : "Projects Delivered"
                             }</span
                         >
                     </div>
                     <div class="stat-item">
-                        <span class="stat-number">10+</span>
+                        <span class="stat-number" id="stat-wwa-years">7</span>
                         <span class="stat-label"
                             >{
                                 lang === "pt"
-                                    ? "Marcas Elevadas"
-                                    : "Brands Elevated"
+                                    ? "Anos de Experiência"
+                                    : "Years of Experience"
                             }</span
                         >
                     </div>
@@ -275,3 +275,29 @@ const imageUrl = "/images/sueste-logo-creation.webp";
         }
     }
 </style>
+
+<script>
+    function getProjectCount(): number {
+        const now = new Date();
+        const base = 35;
+        const nowMonth = now.getFullYear() * 12 + now.getMonth() + (now.getDate() >= 2 ? 1 : 0);
+        const baseMonthNum = 2026 * 12 + 3 + 1; // April 2026 after 2nd
+        return base + Math.max(0, nowMonth - baseMonthNum);
+    }
+
+    function getYearsExperience(): number {
+        const now = new Date();
+        const pastSept15 = now.getMonth() > 8 || (now.getMonth() === 8 && now.getDate() >= 15);
+        return pastSept15 ? now.getFullYear() - 2018 : now.getFullYear() - 2019;
+    }
+
+    function updateWhoWeAreStats() {
+        const projectsEl = document.getElementById("stat-wwa-projects");
+        const yearsEl = document.getElementById("stat-wwa-years");
+        if (projectsEl) projectsEl.textContent = String(getProjectCount());
+        if (yearsEl) yearsEl.textContent = String(getYearsExperience());
+    }
+
+    updateWhoWeAreStats();
+    document.addEventListener("astro:after-swap", updateWhoWeAreStats);
+</script>
