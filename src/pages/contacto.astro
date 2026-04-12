@@ -70,6 +70,12 @@ import Section from "../components/Section.astro";
                 placeholder="Como podemos ajudar?"
                 required></textarea>
             </div>
+            <div class="privacy-check">
+              <input type="checkbox" id="privacyConsent" required />
+              <label for="privacyConsent">
+                Li e aceito a <a href="/privacidade" target="_blank">Política de Privacidade</a>
+              </label>
+            </div>
             <div class="form-feedback" id="formFeedback" aria-live="polite"></div>
             <button type="submit" class="btn-submit" id="submitBtn">Enviar Mensagem</button>
           </form>
@@ -377,6 +383,34 @@ import Section from "../components/Section.astro";
 
   .form-feedback.error {
     color: #f87171;
+  }
+
+  .privacy-check {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .privacy-check input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    min-width: 18px;
+    margin-top: 2px;
+    accent-color: var(--color-accent-dark);
+    cursor: pointer;
+  }
+
+  .privacy-check label {
+    font-size: 0.875rem;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.5;
+    cursor: pointer;
+  }
+
+  .privacy-check label a {
+    color: var(--color-accent-dark);
+    text-decoration: underline;
   }
 
   .btn-submit {

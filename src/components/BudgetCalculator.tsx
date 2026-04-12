@@ -72,6 +72,7 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
     const [formState, setFormState] = useState<FormState>({ name: '', email: '', company: '', deadline: '', message: '', honey: '' });
     const [status, setStatus] = useState({ type: '', msg: '' });
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [privacyAccepted, setPrivacyAccepted] = useState(false);
     const [hasReelsExtra, setHasReelsExtra] = useState(false);
 
     const [isStickyMobile, setIsStickyMobile] = useState(false);
@@ -352,6 +353,9 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
         company: lang === 'pt' ? 'Empresa' : 'Company',
         deadline: lang === 'pt' ? 'Prazo (Ex: 1 mês)' : 'Deadline (e.g., 1 month)',
         msgOpt: lang === 'pt' ? 'Mensagem (Opcional)' : 'Message (Optional)',
+        privacyLabel: lang === 'pt' ? 'Li e aceito a ' : 'I have read and accept the ',
+        privacyLink: lang === 'pt' ? 'Política de Privacidade' : 'Privacy Policy',
+        privacyHref: lang === 'pt' ? '/privacidade' : '/en/privacy',
         send: lang === 'pt' ? 'Enviar pedido' : 'Send request',
         sending: lang === 'pt' ? 'A enviar...' : 'Sending...',
         monthlyNote: lang === 'pt' ? 'valores mensais' : 'monthly values',
@@ -752,7 +756,19 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                                 </motion.div>
                             )}
 
-                            <button type="submit" className="submit-btn" disabled={isSubmitting || marginBase === 0}>
+                            <div className="privacy-check">
+                                <input
+                                    type="checkbox"
+                                    id="privacyConsent"
+                                    checked={privacyAccepted}
+                                    onChange={e => setPrivacyAccepted(e.target.checked)}
+                                />
+                                <label htmlFor="privacyConsent">
+                                    {t.privacyLabel}<a href={t.privacyHref} target="_blank" rel="noopener noreferrer">{t.privacyLink}</a>
+                                </label>
+                            </div>
+
+                            <button type="submit" className="submit-btn" disabled={isSubmitting || marginBase === 0 || !privacyAccepted}>
                                 {isSubmitting ? (
                                     <span className="sending"><Spinner /> {t.sending}</span>
                                 ) : (
