@@ -1,6 +1,6 @@
 import { Resend } from 'resend';
 
-const BASE_URL = 'https://www.suestecreative.com';
+const BASE_URL = 'https://sueste-creative.pt';
 const LOGO_URL = `${BASE_URL}/images/logo-white-hor.webp`;
 const BRAND_COLOR = '#38bdf8';
 const DARK_BG = '#0f172a';
@@ -15,7 +15,7 @@ function getResend(): Resend | null {
 }
 
 function getTargetEmail(): string {
-    return import.meta.env.CONTACT_EMAIL || 'geral@suestecreative.com';
+    return import.meta.env.CONTACT_EMAIL || 'info@sueste-creative.pt';
 }
 
 // ── Shared HTML wrapper ───────────────────────────────────────────────────────
@@ -69,7 +69,7 @@ export async function sendContactNotification(data: {
 
     const html = emailShell(`
       <h2 style="margin:0 0 4px;font-size:22px;color:#1e293b;">Nova Mensagem de Contacto</h2>
-      <p style="margin:0 0 24px;font-size:14px;color:#64748b;">Recebida através do formulário em suestecreative.com</p>
+      <p style="margin:0 0 24px;font-size:14px;color:#64748b;">Recebida através do formulário em sueste-creative.pt</p>
 
       ${section('Remetente', `
         ${row('Nome', data.name)}
@@ -90,9 +90,9 @@ export async function sendContactNotification(data: {
     if (!resend) return { ok: true }; // dev mode — no-op
 
     const { error } = await resend.emails.send({
-        from: 'Sueste Website <website@suestecreative.com>',
+        from: 'Sueste Website <website@sueste-creative.pt>',
         to: [target],
-        reply_to: data.email,
+        replyTo: data.email,
         subject: `Nova mensagem de ${data.name}`,
         html,
     });
@@ -134,7 +134,7 @@ export async function sendQuoteNotification(data: {
 
     const html = emailShell(`
       <h2 style="margin:0 0 4px;font-size:22px;color:#1e293b;">Novo Pedido de Orçamento</h2>
-      <p style="margin:0 0 24px;font-size:14px;color:#64748b;">Submetido através da calculadora em suestecreative.com</p>
+      <p style="margin:0 0 24px;font-size:14px;color:#64748b;">Submetido através da calculadora em sueste-creative.pt</p>
 
       ${section('Cliente', `
         ${row('Nome', data.name)}
@@ -165,9 +165,9 @@ export async function sendQuoteNotification(data: {
     if (!resend) return { ok: true }; // dev mode — no-op
 
     const { error } = await resend.emails.send({
-        from: 'Sueste Website <website@suestecreative.com>',
+        from: 'Sueste Website <website@sueste-creative.pt>',
         to: [target],
-        reply_to: data.email,
+        replyTo: data.email,
         subject: `Pedido de orçamento: ${data.name} — ${priceLabel}`,
         html,
     });

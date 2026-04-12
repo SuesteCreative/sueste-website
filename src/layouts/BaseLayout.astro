@@ -21,7 +21,7 @@ const {
   hreflangPt,
   hreflangEn,
   preloadImage,
-  ogImage = "https://sueste-creative.pt/images/logo-white-hor.webp",
+  ogImage = "https://sueste-creative.pt/images/og-preview.jpg",
   noindex = false,
 } = Astro.props;
 const lang = propLang || getLangFromUrl(Astro.url);
@@ -41,6 +41,7 @@ const canonicalURL = new URL(Astro.url.pathname, "https://sueste-creative.pt");
     <title>{title} | Sueste Creative</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
     {preloadImage && <link rel="preload" as="image" href={preloadImage} fetchpriority="high" />}
     {hreflangPt && <link rel="alternate" hreflang="pt" href={hreflangPt} />}
     {hreflangEn && <link rel="alternate" hreflang="en" href={hreflangEn} />}
