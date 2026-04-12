@@ -69,6 +69,6 @@ Priority order based on SEO, trust, and conversion impact.
 - [x] cookies.astro "by continuing you accept" language — not valid GDPR consent; fix after banner implementation
 
 ### Medium
-- [ ] EN cookies page has geral@sueste-creative.pt — fix to info@
-- [ ] JSON-LD schema in BaseLayout has geral@ email — fix to info@
+- [x] EN cookies page has geral@sueste-creative.pt — fix to info@
+- [x] JSON-LD schema in BaseLayout has geral@ email — fix to info@
 - [ ] Marketing emails will have no unsubscribe mechanism — note: requires email marketing tool (Resend Broadcasts / Mailchimp)
