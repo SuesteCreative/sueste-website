@@ -5,7 +5,7 @@ import Footer from "../components/Footer.astro";
 import Section from "../components/Section.astro";
 
 const title = "Política de Privacidade";
-const lastUpdated = "3 de Março de 2026";
+const lastUpdated = "13 de Abril de 2026";
 ---
 
 <BaseLayout
@@ -16,61 +16,127 @@ const lastUpdated = "3 de Março de 2026";
     <main class="legal-page">
         <Section title={title} subtitle={`Última atualização: ${lastUpdated}`}>
             <div class="legal-content glass p-8 md:p-12 rounded-3xl">
-                <h3>1. Introdução</h3>
+
+                <h3>1. Responsável pelo Tratamento</h3>
                 <p>
-                    A Sueste Creative valoriza a sua privacidade. Esta Política
-                    de Privacidade explica como recolhemos, utilizamos e
-                    protegemos as suas informações pessoais quando utiliza o
-                    nosso website.
+                    O responsável pelo tratamento dos seus dados pessoais é a
+                    <strong>Sueste Creative</strong>, contactável através do
+                    endereço de e-mail: <a href="mailto:info@sueste-creative.pt">info@sueste-creative.pt</a>.
                 </p>
 
-                <h3>2. Informações que Recolhemos</h3>
-                <p>
-                    Recolhemos informações que nos fornece diretamente, como
-                    quando preenche o nosso formulário de contacto ou solicita
-                    um orçamento. Isto pode incluir o seu nome, endereço de
-                    e-mail e quaisquer outras informações que optar por
-                    fornecer.
-                </p>
-
-                <h3>3. Uso das Informações</h3>
-                <p>Utilizamos os seus dados para:</p>
+                <h3>2. Dados que Recolhemos</h3>
+                <p>Recolhemos os dados que nos fornece diretamente através dos nossos formulários:</p>
                 <ul>
-                    <li>Responder aos seus pedidos de informação;</li>
-                    <li>Fornecer os serviços solicitados;</li>
+                    <li><strong>Formulário de contacto:</strong> nome, endereço de e-mail e mensagem.</li>
+                    <li><strong>Calculadora de orçamento:</strong> nome, e-mail, empresa, prazo, serviços selecionados e notas adicionais.</li>
+                </ul>
+                <p>
+                    Recolhemos também dados de navegação de forma anónima e agregada através do
+                    Google Analytics (ver secção de Cookies).
+                </p>
+
+                <h3>3. Finalidade e Base Legal do Tratamento</h3>
+                <ul>
                     <li>
-                        Enviar comunicações relacionadas com os nossos serviços,
-                        caso tenha dado o seu consentimento.
+                        <strong>Responder a pedidos de informação e orçamentos</strong> — base legal:
+                        execução de diligências pré-contratuais (Art. 6.º, n.º 1, al. b) do RGPD).
+                    </li>
+                    <li>
+                        <strong>Prestação dos serviços contratados</strong> — base legal:
+                        execução de contrato (Art. 6.º, n.º 1, al. b) do RGPD).
+                    </li>
+                    <li>
+                        <strong>Envio de comunicações de marketing</strong> — base legal:
+                        consentimento (Art. 6.º, n.º 1, al. a) do RGPD). Pode retirar o
+                        consentimento a qualquer momento através do link de cancelamento presente
+                        em cada comunicação ou por e-mail para <a href="mailto:info@sueste-creative.pt">info@sueste-creative.pt</a>.
                     </li>
                 </ul>
 
-                <h3>4. Proteção de Dados</h3>
+                <h3>4. Prazo de Conservação</h3>
                 <p>
-                    Implementamos medidas de segurança técnicas e
-                    organizacionais para proteger os seus dados contra acesso
-                    não autorizado, perda ou alteração.
+                    Os dados submetidos através dos formulários de contacto e orçamento são
+                    conservados por um período máximo de <strong>2 anos</strong> a contar da
+                    data da última interação, salvo obrigação legal que imponha prazo diferente
+                    ou necessidade de conservação para a execução de um contrato em vigor.
                 </p>
 
-                <h3>5. Cookies</h3>
+                <h3>5. Subcontratantes e Transferências de Dados</h3>
                 <p>
-                    O nosso website utiliza cookies para melhorar a experiência
-                    do utilizador e analisar o tráfego. Pode configurar o seu
-                    navegador para recusar cookies.
+                    Recorremos a terceiros para a prestação de alguns serviços técnicos, que
+                    atuam como subcontratantes e tratam os seus dados apenas segundo as nossas
+                    instruções:
+                </p>
+                <ul>
+                    <li>
+                        <strong>Resend Inc.</strong> — envio de e-mails transacionais.
+                        Dados processados em servidores na UE (eu-west-1, Irlanda).
+                        <a href="https://resend.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">Política de Privacidade</a>.
+                    </li>
+                    <li>
+                        <strong>Cloudflare Inc.</strong> — alojamento e proteção do website.
+                        Pode transferir dados para fora da UE ao abrigo de cláusulas contratuais-tipo.
+                        <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer">Política de Privacidade</a>.
+                    </li>
+                    <li>
+                        <strong>Google LLC (Analytics)</strong> — análise de tráfego anónima.
+                        Dados processados nos EUA ao abrigo do EU-US Data Privacy Framework.
+                        <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Política de Privacidade</a>.
+                    </li>
+                </ul>
+                <p>
+                    Podemos igualmente partilhar dados necessários com parceiros colaboradores
+                    (como fotógrafos ou outros prestadores de serviços criativos) exclusivamente
+                    para a execução de projetos que o envolvam, mediante o seu conhecimento.
                 </p>
 
-                <h3>6. Seus Direitos</h3>
+                <h3>6. Os Seus Direitos</h3>
+                <p>Ao abrigo do RGPD, tem os seguintes direitos relativamente aos seus dados pessoais:</p>
+                <ul>
+                    <li><strong>Acesso</strong> — saber quais os dados que guardamos sobre si.</li>
+                    <li><strong>Retificação</strong> — corrigir dados incorretos ou incompletos.</li>
+                    <li><strong>Eliminação</strong> — solicitar o apagamento dos seus dados ("direito a ser esquecido").</li>
+                    <li><strong>Portabilidade</strong> — receber os seus dados num formato estruturado e legível por máquina.</li>
+                    <li><strong>Oposição</strong> — opor-se ao tratamento para fins de marketing direto.</li>
+                    <li><strong>Limitação</strong> — solicitar a suspensão temporária do tratamento.</li>
+                </ul>
                 <p>
-                    Tem o direito de aceder, retificar ou solicitar a eliminação
-                    dos seus dados pessoais. Para exercer estes direitos,
-                    contacte-nos através do e-mail: geral@sueste-creative.pt.
+                    Para exercer qualquer um destes direitos, contacte-nos por e-mail para
+                    <a href="mailto:info@sueste-creative.pt">info@sueste-creative.pt</a>.
+                    Responderemos no prazo de 30 dias.
+                </p>
+                <p>
+                    Tem também o direito de apresentar reclamação à autoridade de controlo
+                    competente em Portugal: <a href="https://www.cnpd.pt" target="_blank" rel="noopener noreferrer">Comissão Nacional de Proteção de Dados (CNPD)</a>.
                 </p>
 
-                <h3>7. Alterações a esta Política</h3>
+                <h3>7. Cookies</h3>
                 <p>
-                    Reservamos o direito de atualizar esta política
-                    periodicamente. Recomendamos que consulte esta página
-                    regularmente.
+                    O nosso website utiliza cookies. Para informação detalhada, consulte a
+                    nossa <a href="/cookies">Política de Cookies</a>.
                 </p>
+
+                <h3>8. Segurança</h3>
+                <p>
+                    Adotamos medidas técnicas e organizacionais adequadas para proteger os
+                    seus dados contra acesso não autorizado, perda, destruição ou divulgação,
+                    incluindo transmissão cifrada (HTTPS) e acesso restrito aos dados.
+                </p>
+
+                <h3>9. Alterações a esta Política</h3>
+                <p>
+                    Podemos atualizar esta política periodicamente. Em caso de alterações
+                    materiais, publicaremos a nova versão nesta página com a data de atualização
+                    revista. Recomendamos que consulte esta página regularmente.
+                </p>
+
+                <h3>10. Contacto</h3>
+                <p>
+                    Para qualquer questão relacionada com a proteção dos seus dados pessoais,
+                    contacte-nos através de:
+                    <a href="mailto:info@sueste-creative.pt">info@sueste-creative.pt</a>
+                </p>
+
             </div>
         </Section>
     </main>
@@ -99,5 +165,13 @@ const lastUpdated = "3 de Março de 2026";
     .legal-content li {
         margin-bottom: 0.5rem;
         list-style-type: disc;
+    }
+    .legal-content a {
+        color: var(--color-accent);
+        text-decoration: underline;
+        opacity: 1;
+    }
+    .legal-content a:hover {
+        opacity: 0.8;
     }
 </style>

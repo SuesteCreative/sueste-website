@@ -5,7 +5,7 @@ import Footer from "../../components/Footer.astro";
 import Section from "../../components/Section.astro";
 
 const title = "Privacy Policy";
-const lastUpdated = "3 March 2026";
+const lastUpdated = "13 April 2026";
 ---
 
 <BaseLayout
@@ -19,55 +19,127 @@ const lastUpdated = "3 March 2026";
   <main class="legal-page">
     <Section title={title} subtitle={`Last updated: ${lastUpdated}`}>
       <div class="legal-content glass p-8 md:p-12 rounded-3xl">
-        <h3>1. Introduction</h3>
+
+        <h3>1. Data Controller</h3>
         <p>
-          Sueste Creative values your privacy. This Privacy Policy explains how
-          we collect, use, and protect your personal information when you use
-          our website.
+          The data controller responsible for your personal data is
+          <strong>Sueste Creative</strong>, contactable at:
+          <a href="mailto:info@sueste-creative.pt">info@sueste-creative.pt</a>.
         </p>
 
-        <h3>2. Information We Collect</h3>
-        <p>
-          We collect information you provide directly, such as when you fill in
-          our contact form or request a quote. This may include your name,
-          email address, and any other information you choose to provide.
-        </p>
-
-        <h3>3. How We Use Your Information</h3>
-        <p>We use your data to:</p>
+        <h3>2. Data We Collect</h3>
+        <p>We collect data you provide directly through our forms:</p>
         <ul>
-          <li>Respond to your enquiries;</li>
-          <li>Provide the requested services;</li>
+          <li><strong>Contact form:</strong> name, email address and message.</li>
+          <li><strong>Quote calculator:</strong> name, email, company, deadline, selected services and additional notes.</li>
+        </ul>
+        <p>
+          We also collect anonymous, aggregated browsing data via Google Analytics
+          (see the Cookies section).
+        </p>
+
+        <h3>3. Purpose and Legal Basis for Processing</h3>
+        <ul>
           <li>
-            Send communications related to our services, where you have given
-            your consent.
+            <strong>Responding to enquiries and quotes</strong> — legal basis:
+            pre-contractual measures (Art. 6(1)(b) GDPR).
+          </li>
+          <li>
+            <strong>Providing contracted services</strong> — legal basis:
+            performance of a contract (Art. 6(1)(b) GDPR).
+          </li>
+          <li>
+            <strong>Sending marketing communications</strong> — legal basis:
+            consent (Art. 6(1)(a) GDPR). You may withdraw consent at any time
+            via the unsubscribe link in any communication or by emailing
+            <a href="mailto:info@sueste-creative.pt">info@sueste-creative.pt</a>.
           </li>
         </ul>
 
-        <h3>4. Data Protection</h3>
+        <h3>4. Retention Period</h3>
         <p>
-          We implement technical and organisational security measures to
-          protect your data against unauthorised access, loss, or alteration.
+          Data submitted through our contact and quote forms is retained for a
+          maximum of <strong>2 years</strong> from the date of last interaction,
+          unless a legal obligation or ongoing contract requires a different
+          retention period.
         </p>
 
-        <h3>5. Cookies</h3>
+        <h3>5. Sub-processors and Data Transfers</h3>
         <p>
-          Our website uses cookies to improve user experience and analyse
-          traffic. You can configure your browser to refuse cookies.
+          We use third-party service providers who act as sub-processors and
+          handle your data only according to our instructions:
+        </p>
+        <ul>
+          <li>
+            <strong>Resend Inc.</strong> — transactional email delivery.
+            Data processed in EU servers (eu-west-1, Ireland).
+            <a href="https://resend.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.
+          </li>
+          <li>
+            <strong>Cloudflare Inc.</strong> — website hosting and security.
+            May transfer data outside the EU under standard contractual clauses.
+            <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.
+          </li>
+          <li>
+            <strong>Google LLC (Analytics)</strong> — anonymous traffic analysis.
+            Data processed in the US under the EU-US Data Privacy Framework.
+            <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.
+          </li>
+        </ul>
+        <p>
+          We may also share necessary data with partner collaborators (such as
+          photographers or other creative service providers) solely for the
+          execution of projects that involve them, with your knowledge.
         </p>
 
         <h3>6. Your Rights</h3>
+        <p>Under GDPR, you have the following rights regarding your personal data:</p>
+        <ul>
+          <li><strong>Access</strong> — find out what data we hold about you.</li>
+          <li><strong>Rectification</strong> — correct inaccurate or incomplete data.</li>
+          <li><strong>Erasure</strong> — request deletion of your data ("right to be forgotten").</li>
+          <li><strong>Portability</strong> — receive your data in a structured, machine-readable format.</li>
+          <li><strong>Objection</strong> — object to processing for direct marketing purposes.</li>
+          <li><strong>Restriction</strong> — request temporary suspension of processing.</li>
+        </ul>
         <p>
-          You have the right to access, rectify, or request the deletion of
-          your personal data. To exercise these rights, please contact us at:
-          geral@sueste-creative.pt.
+          To exercise any of these rights, contact us at
+          <a href="mailto:info@sueste-creative.pt">info@sueste-creative.pt</a>.
+          We will respond within 30 days.
+        </p>
+        <p>
+          You also have the right to lodge a complaint with the Portuguese data
+          protection authority:
+          <a href="https://www.cnpd.pt" target="_blank" rel="noopener noreferrer">Comissão Nacional de Proteção de Dados (CNPD)</a>.
         </p>
 
-        <h3>7. Changes to This Policy</h3>
+        <h3>7. Cookies</h3>
         <p>
-          We reserve the right to update this policy periodically. We recommend
-          you check this page regularly.
+          Our website uses cookies. For detailed information, please see our
+          <a href="/en/cookies">Cookie Policy</a>.
         </p>
+
+        <h3>8. Security</h3>
+        <p>
+          We adopt appropriate technical and organisational measures to protect
+          your data against unauthorised access, loss, destruction or disclosure,
+          including encrypted transmission (HTTPS) and restricted data access.
+        </p>
+
+        <h3>9. Changes to This Policy</h3>
+        <p>
+          We may update this policy periodically. For material changes, we will
+          publish the new version on this page with a revised update date. We
+          recommend checking this page regularly.
+        </p>
+
+        <h3>10. Contact</h3>
+        <p>
+          For any questions regarding the protection of your personal data,
+          contact us at:
+          <a href="mailto:info@sueste-creative.pt">info@sueste-creative.pt</a>
+        </p>
+
       </div>
     </Section>
   </main>
@@ -96,5 +168,13 @@ const lastUpdated = "3 March 2026";
   .legal-content li {
     margin-bottom: 0.5rem;
     list-style-type: disc;
+  }
+  .legal-content a {
+    color: var(--color-accent);
+    text-decoration: underline;
+    opacity: 1;
+  }
+  .legal-content a:hover {
+    opacity: 0.8;
   }
 </style>
