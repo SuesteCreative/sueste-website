@@ -59,3 +59,16 @@ Priority order based on SEO, trust, and conversion impact.
 ### Low
 - [x] Add SVG favicon link to BaseLayout alongside PNG favicon
 - [ ] Note: Partners page has only 1 partner — consider adding more for social proof
+
+---
+
+## Audit — 2026-04-13
+
+### Critical
+- [x] GA4 fires on page load without cookie consent — ePrivacy + GDPR violation; build consent-gated banner that blocks GA4 until accepted
+- [x] cookies.astro "by continuing you accept" language — not valid GDPR consent; fix after banner implementation
+
+### Medium
+- [ ] EN cookies page has geral@sueste-creative.pt — fix to info@
+- [ ] JSON-LD schema in BaseLayout has geral@ email — fix to info@
+- [ ] Marketing emails will have no unsubscribe mechanism — note: requires email marketing tool (Resend Broadcasts / Mailchimp)

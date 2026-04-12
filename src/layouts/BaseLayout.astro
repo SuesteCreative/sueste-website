@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import { getLangFromUrl } from "../utils/i18n";
+import CookieBanner from "../components/CookieBanner.astro";
 
 interface Props {
   title: string;
@@ -30,18 +31,7 @@ const canonicalURL = new URL(Astro.url.pathname, "https://sueste-creative.pt");
 <!DOCTYPE html>
 <html lang={lang}>
   <head>
-    <!-- Google tag (gtag.js) -->
-    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-RE740MRY5Y"
-    ></script>
-    <script is:inline>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-
-      gtag("config", "G-RE740MRY5Y");
-    </script>
+    <!-- Google Analytics — loaded only after cookie consent (see CookieBanner) -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
@@ -123,6 +113,7 @@ const canonicalURL = new URL(Astro.url.pathname, "https://sueste-creative.pt");
       <div class="bg-blob-2"></div>
     </div>
     <slot />
+    <CookieBanner lang={lang} />
 
     <script>
       // Load and Initialize Lenis & GSAP interactions
