@@ -129,6 +129,8 @@ const viewAllHref = isPt ? "/portfolio" : "/en/work";
                             <a
                                 href={project.internalLink}
                                 class="btn-project desktop-only"
+                                target="_blank"
+                                rel="noopener noreferrer"
                             >
                                 {lang === "pt" ? "Ver Projeto" : "View Project"}
                                 <svg
@@ -152,6 +154,8 @@ const viewAllHref = isPt ? "/portfolio" : "/en/work";
                             <a
                                 href={project.internalLink}
                                 class={`portfolio-image-wrapper wrapper-${project.deviceType}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
                             >
                                 <div class="hover-badge">
                                     {isPt ? project.hoverPt : project.hoverEn}
@@ -170,6 +174,8 @@ const viewAllHref = isPt ? "/portfolio" : "/en/work";
                             class="btn-project mobile-only"
                             style="margin-top: 2rem;"
                             data-animate-left
+                            target="_blank"
+                            rel="noopener noreferrer"
                         >
                             {lang === "pt" ? "Ver Projeto" : "View Project"}
                             <svg
