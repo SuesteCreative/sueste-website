@@ -21,23 +21,26 @@ import Section from "../components/Section.astro";
         <div class="contact-info" data-reveal>
           <div class="info-item">
             <h4>E-mail</h4>
-            <p>geral@sueste-creative.pt</p>
+            <p><a href="mailto:info@sueste-creative.pt">info@sueste-creative.pt</a></p>
           </div>
           <div class="info-item">
             <h4>Localização</h4>
-            <p>Lagos, Portugal</p>
+            <p>Lisboa/Portimão, Portugal</p>
           </div>
           <div class="info-item">
             <h4>Redes Sociais</h4>
             <div class="social-links">
-              <a href="#">Instagram</a>
-              <a href="#">LinkedIn</a>
+              <a href="https://www.instagram.com/sueste.agency/" target="_blank" rel="noopener noreferrer">Instagram</a>
+              <a href="https://www.facebook.com/sueste.agency" target="_blank" rel="noopener noreferrer">Facebook</a>
+              <a href="https://linkedin.com/company/sueste-creative" target="_blank" rel="noopener noreferrer">LinkedIn</a>
             </div>
           </div>
         </div>
 
         <div class="contact-form-wrapper glass reveal-delay-1" data-reveal>
-          <form class="contact-form">
+          <form class="contact-form" id="contactForm" novalidate>
+            <!-- Honeypot -->
+            <input type="text" name="honey" style="display:none" tabindex="-1" autocomplete="off" />
             <div class="form-group">
               <label for="name">Nome</label>
               <input
@@ -67,7 +70,8 @@ import Section from "../components/Section.astro";
                 placeholder="Como podemos ajudar?"
                 required></textarea>
             </div>
-            <button type="submit" class="btn-primary">Enviar Mensagem</button>
+            <div class="form-feedback" id="formFeedback" aria-live="polite"></div>
+            <button type="submit" class="btn-submit" id="submitBtn">Enviar Mensagem</button>
           </form>
         </div>
       </div>
@@ -77,89 +81,117 @@ import Section from "../components/Section.astro";
       title="Perguntas Frequentes"
       subtitle="Algumas das dúvidas mais comuns dos nossos clientes."
       dark
+      centered
     >
       <div class="faq-container">
         <div class="faq-item glass" data-reveal>
           <button class="faq-trigger" aria-expanded="false">
             <h3>Quanto tempo demora um projeto?</h3>
             <div class="faq-icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                ><polyline points="6 9 12 15 18 9"></polyline></svg
-              >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </div>
           </button>
           <div class="faq-content">
             <div class="faq-content-inner">
-              <p>
-                Depende da complexidade. Um website institucional médio demora
-                entre 3 a 6 semanas, enquanto um e-commerce ou sistema
-                customizado pode levar 2 a 4 meses.
-              </p>
+              <p>Depende da complexidade. Um website institucional médio demora entre 3 a 6 semanas, enquanto um e-commerce ou sistema customizado pode levar 2 a 4 meses.</p>
             </div>
           </div>
         </div>
 
         <div class="faq-item glass reveal-delay-1" data-reveal>
           <button class="faq-trigger" aria-expanded="false">
-            <h3>Trabalham com clientes internacionais?</h3>
+            <h3>Qual o custo de um website profissional?</h3>
             <div class="faq-icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                ><polyline points="6 9 12 15 18 9"></polyline></svg
-              >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </div>
           </button>
           <div class="faq-content">
             <div class="faq-content-inner">
-              <p>
-                Sim! Embora estejamos em Lagos, Portugal, trabalhamos com
-                clientes de todo o mundo de forma 100% remota e eficiente.
-              </p>
+              <p>Cada projeto é único, por isso os preços variam conforme o âmbito e os requisitos. O nosso orçamento é sempre gratuito e personalizado. Use a nossa <a href="/orcamento">calculadora de orçamento</a> para ter uma estimativa inicial.</p>
             </div>
           </div>
         </div>
 
         <div class="faq-item glass reveal-delay-2" data-reveal>
           <button class="faq-trigger" aria-expanded="false">
-            <h3>Como funciona o processo de pagamento?</h3>
+            <h3>Trabalham com clientes internacionais?</h3>
             <div class="faq-icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                ><polyline points="6 9 12 15 18 9"></polyline></svg
-              >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </div>
           </button>
           <div class="faq-content">
             <div class="faq-content-inner">
-              <p>
-                Normalmente dividimos o pagamento em 3 fases: adjudicação (50%),
-                após aprovação do design (25%) e antes do lançamento (25%).
-              </p>
+              <p>Sim! Embora estejamos em Lisboa e Portimão, Portugal, trabalhamos com clientes de todo o mundo de forma 100% remota e eficiente.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item glass" data-reveal>
+          <button class="faq-trigger" aria-expanded="false">
+            <h3>Como funciona o processo de pagamento?</h3>
+            <div class="faq-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </div>
+          </button>
+          <div class="faq-content">
+            <div class="faq-content-inner">
+              <p>Normalmente dividimos o pagamento em 3 fases: adjudicação (50%), após aprovação do design (25%) e antes do lançamento (25%).</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item glass reveal-delay-1" data-reveal>
+          <button class="faq-trigger" aria-expanded="false">
+            <h3>Oferecem suporte e manutenção após o lançamento?</h3>
+            <div class="faq-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </div>
+          </button>
+          <div class="faq-content">
+            <div class="faq-content-inner">
+              <p>Sim. Oferecemos planos de manutenção mensal que incluem atualizações de segurança, backups regulares, monitorização de desempenho e suporte técnico prioritário.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item glass reveal-delay-2" data-reveal>
+          <button class="faq-trigger" aria-expanded="false">
+            <h3>O meu website vai aparecer no Google?</h3>
+            <div class="faq-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </div>
+          </button>
+          <div class="faq-content">
+            <div class="faq-content-inner">
+              <p>Todos os nossos projetos incluem SEO técnico de base: estrutura semântica, meta tags, velocidade de carregamento otimizada e dados estruturados. Para estratégias de SEO avançadas e criação de conteúdo, temos pacotes dedicados.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item glass" data-reveal>
+          <button class="faq-trigger" aria-expanded="false">
+            <h3>Posso gerir o conteúdo do meu website sozinho?</h3>
+            <div class="faq-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </div>
+          </button>
+          <div class="faq-content">
+            <div class="faq-content-inner">
+              <p>Sim. Dependendo do projeto, integramos sistemas de gestão de conteúdo (CMS) intuitivos que lhe permitem atualizar textos, imagens e produtos sem qualquer conhecimento técnico. Incluímos sempre formação básica de utilização.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item glass reveal-delay-1" data-reveal>
+          <button class="faq-trigger" aria-expanded="false">
+            <h3>Quais os serviços que a Sueste Creative oferece?</h3>
+            <div class="faq-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </div>
+          </button>
+          <div class="faq-content">
+            <div class="faq-content-inner">
+              <p>Oferecemos web design e desenvolvimento, criação de lojas online (e-commerce), branding e identidade visual, marketing digital, SEO e gestão de redes sociais. Conheça todos os nossos <a href="/servicos">serviços</a>.</p>
             </div>
           </div>
         </div>
@@ -181,10 +213,18 @@ import Section from "../components/Section.astro";
       },
       {
         "@type": "Question",
+        "name": "Qual o custo de um website profissional?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Cada projeto é único, por isso os preços variam conforme o âmbito e os requisitos. O orçamento é sempre gratuito e personalizado."
+        }
+      },
+      {
+        "@type": "Question",
         "name": "Trabalham com clientes internacionais?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Sim! Embora estejamos em Lagos, Portugal, trabalhamos com clientes de todo o mundo de forma 100% remota e eficiente."
+          "text": "Sim! Embora estejamos em Lisboa e Portimão, Portugal, trabalhamos com clientes de todo o mundo de forma 100% remota e eficiente."
         }
       },
       {
@@ -193,6 +233,38 @@ import Section from "../components/Section.astro";
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Normalmente dividimos o pagamento em 3 fases: adjudicação (50%), após aprovação do design (25%) e antes do lançamento (25%)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Oferecem suporte e manutenção após o lançamento?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sim. Oferecemos planos de manutenção mensal que incluem atualizações de segurança, backups regulares, monitorização de desempenho e suporte técnico prioritário."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "O meu website vai aparecer no Google?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Todos os nossos projetos incluem SEO técnico de base: estrutura semântica, meta tags, velocidade de carregamento otimizada e dados estruturados."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Posso gerir o conteúdo do meu website sozinho?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sim. Dependendo do projeto, integramos sistemas de gestão de conteúdo (CMS) intuitivos que lhe permitem atualizar textos, imagens e produtos sem qualquer conhecimento técnico."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Quais os serviços que a Sueste Creative oferece?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Oferecemos web design e desenvolvimento, criação de lojas online (e-commerce), branding e identidade visual, marketing digital, SEO e gestão de redes sociais."
         }
       }
     ]
@@ -230,8 +302,19 @@ import Section from "../components/Section.astro";
     opacity: 0.8;
   }
 
+  .info-item p a {
+    opacity: 0.8;
+    transition: color 0.3s;
+  }
+
+  .info-item p a:hover {
+    color: var(--color-accent);
+    opacity: 1;
+  }
+
   .social-links {
     display: flex;
+    flex-wrap: wrap;
     gap: 1.5rem;
     margin-top: 0.5rem;
   }
@@ -272,6 +355,7 @@ import Section from "../components/Section.astro";
     border-radius: 12px;
     color: white;
     font-family: inherit;
+    font-size: 1rem;
     transition: border-color 0.3s;
   }
 
@@ -281,11 +365,44 @@ import Section from "../components/Section.astro";
     border-color: var(--color-accent);
   }
 
-  .btn-primary {
+  .form-feedback {
+    min-height: 1.5rem;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+  }
+
+  .form-feedback.success {
+    color: #4ade80;
+  }
+
+  .form-feedback.error {
+    color: #f87171;
+  }
+
+  .btn-submit {
     width: 100%;
-    padding: 1rem;
+    padding: 1rem 2rem;
+    background: var(--color-accent-dark);
+    color: #fff;
     border: none;
+    border-radius: 50px;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 700;
     cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 0.02em;
+  }
+
+  .btn-submit:hover:not(:disabled) {
+    background: #0060d0;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(0, 112, 243, 0.35);
+  }
+
+  .btn-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
   }
 
   .faq-container {
@@ -387,20 +504,30 @@ import Section from "../components/Section.astro";
     font-size: 1.05rem;
   }
 
+  .faq-content p a {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
   @media (max-width: 768px) {
     .contact-grid {
       grid-template-columns: 1fr;
       gap: 3rem;
     }
+
     .contact-form-wrapper {
       padding: 2rem;
     }
+
     .faq-trigger {
       padding: 1.5rem;
     }
+
     .faq-trigger h3 {
       font-size: 1.1rem;
     }
+
     .faq-content p {
       padding: 0 1.5rem 1.5rem 1.5rem;
     }
@@ -408,6 +535,7 @@ import Section from "../components/Section.astro";
 </style>
 
 <script>
+  // ── FAQ Accordion ──────────────────────────────────────────
   function setupAccordion() {
     const items = document.querySelectorAll(".faq-item");
 
@@ -418,26 +546,73 @@ import Section from "../components/Section.astro";
       trigger.addEventListener("click", () => {
         const isOpen = item.classList.contains("active");
 
-        // Close all other items
         items.forEach((otherItem) => {
           if (otherItem !== item) {
             otherItem.classList.remove("active");
-            otherItem
-              .querySelector(".faq-trigger")
-              ?.setAttribute("aria-expanded", "false");
+            otherItem.querySelector(".faq-trigger")?.setAttribute("aria-expanded", "false");
           }
         });
 
-        // Toggle current item
         item.classList.toggle("active");
         trigger.setAttribute("aria-expanded", (!isOpen).toString());
       });
     });
   }
 
-  // Initialize
   setupAccordion();
-
-  // Handle Astro view transitions
   document.addEventListener("astro:after-swap", setupAccordion);
+
+  // ── Contact Form ───────────────────────────────────────────
+  function setupContactForm() {
+    const form = document.getElementById("contactForm") as HTMLFormElement | null;
+    const feedback = document.getElementById("formFeedback");
+    const submitBtn = document.getElementById("submitBtn") as HTMLButtonElement | null;
+
+    if (!form || !feedback || !submitBtn) return;
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "A enviar…";
+      feedback.className = "form-feedback";
+      feedback.textContent = "";
+
+      const formData = new FormData(form);
+      const data = {
+        honey: formData.get("honey"),
+        name: formData.get("name"),
+        email: formData.get("email"),
+        message: formData.get("message"),
+      };
+
+      try {
+        const res = await fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
+
+        const result = await res.json();
+
+        if (result.success) {
+          feedback.className = "form-feedback success";
+          feedback.textContent = "Mensagem enviada com sucesso! Respondemos em menos de 48 horas.";
+          form.reset();
+        } else {
+          feedback.className = "form-feedback error";
+          feedback.textContent = result.error || "Ocorreu um erro. Por favor tente novamente.";
+        }
+      } catch {
+        feedback.className = "form-feedback error";
+        feedback.textContent = "Ocorreu um erro de ligação. Por favor tente novamente.";
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Enviar Mensagem";
+      }
+    });
+  }
+
+  setupContactForm();
+  document.addEventListener("astro:after-swap", setupContactForm);
 </script>

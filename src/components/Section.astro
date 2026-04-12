@@ -5,12 +5,13 @@ interface Props {
   title?: string;
   subtitle?: string;
   dark?: boolean;
+  centered?: boolean;
 }
 
-const { id, className, title, subtitle, dark = false } = Astro.props;
+const { id, className, title, subtitle, dark = false, centered = false } = Astro.props;
 ---
 
-<section id={id} class:list={["section", { "section-dark": dark }, className]}>
+<section id={id} class:list={["section", { "section-dark": dark, "section-centered": centered }, className]}>
   <div class="container">
     {
       (title || subtitle) && (
@@ -37,6 +38,11 @@ const { id, className, title, subtitle, dark = false } = Astro.props;
     margin-bottom: 4rem;
     max-width: 600px;
     text-align: left;
+  }
+
+  .section-centered .section-header {
+    max-width: 100%;
+    text-align: center;
   }
 
   .section-header h2 {
