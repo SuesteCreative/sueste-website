@@ -1,0 +1,504 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import { getCollection, getEntry } from "astro:content";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+function formatDate(date: Date) {
+  return date.toLocaleDateString("pt-PT", { day: "numeric", month: "long", year: "numeric" });
+}
+
+// Related posts (other posts, max 2)
+const allPosts = await getCollection("blog");
+const related = allPosts
+  .filter((p) => p.slug !== post.slug)
+  .slice(0, 2);
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: post.data.title,
+  description: post.data.description,
+  image: post.data.image,
+  author: {
+    "@type": "Organization",
+    name: "Sueste Creative",
+    url: "https://sueste-creative.pt",
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "Sueste Creative",
+    logo: "https://sueste-creative.pt/images/logo-white-hor.webp",
+  },
+  datePublished: post.data.pubDate.toISOString(),
+  dateModified: (post.data.updatedDate || post.data.pubDate).toISOString(),
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": `https://sueste-creative.pt/blog/${post.slug}`,
+  },
+};
+---
+
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description}
+  ogImage={post.data.image}
+  hreflangPt={`https://sueste-creative.pt/blog/${post.slug}`}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} slot="head" />
+  <Navbar />
+  <main class="blog-post-page">
+    <!-- Hero -->
+    <div class="post-hero">
+      <div class="post-hero-image">
+        <img src={post.data.image} alt={post.data.imageAlt} fetchpriority="high" />
+        <div class="post-hero-overlay"></div>
+      </div>
+      <div class="container post-hero-content">
+        <div class="post-tags">
+          {post.data.tags.slice(0, 3).map(tag => (
+            <span class="post-tag">{tag}</span>
+          ))}
+        </div>
+        <h1>{post.data.title}</h1>
+        <div class="post-meta">
+          <span class="post-author">Por {post.data.author}</span>
+          <span class="post-separator">·</span>
+          <time datetime={post.data.pubDate.toISOString()}>
+            {formatDate(post.data.pubDate)}
+          </time>
+          <span class="post-separator">·</span>
+          <span>{post.data.readingTime} min leitura</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="container post-layout">
+      <article class="post-content glass">
+        <Content />
+      </article>
+
+      <!-- Sidebar CTA -->
+      <aside class="post-sidebar">
+        <div class="sidebar-cta glass">
+          <p class="sidebar-cta-label">Pronto para crescer?</p>
+          <h3>Fale com a nossa equipa</h3>
+          <p>Consulta inicial gratuita e sem compromisso para o seu projeto.</p>
+          <a href="/contacto" class="btn-cta">Falar connosco</a>
+          <a href="/orcamento" class="btn-cta-secondary">Calcular orcamento</a>
+        </div>
+        <div class="sidebar-social glass">
+          <p class="sidebar-cta-label">Siga-nos</p>
+          <div class="social-links">
+            <a href="https://www.instagram.com/sueste.agency/" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href="https://linkedin.com/company/sueste-creative" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="https://www.facebook.com/sueste.agency" target="_blank" rel="noopener noreferrer">Facebook</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Related Posts -->
+    {related.length > 0 && (
+      <section class="related-posts">
+        <div class="container">
+          <h2 class="related-title">Artigos Relacionados</h2>
+          <div class="related-grid">
+            {related.map(p => (
+              <a href={`/blog/${p.slug}`} class="related-card glass">
+                <div class="related-card-image">
+                  <img src={p.data.image} alt={p.data.imageAlt} loading="lazy" />
+                </div>
+                <div class="related-card-body">
+                  <span class="related-reading-time">{p.data.readingTime} min</span>
+                  <h3>{p.data.title}</h3>
+                  <span class="blog-read-more">Ler &rarr;</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .blog-post-page {
+    padding-top: 80px;
+  }
+
+  /* Hero */
+  .post-hero {
+    position: relative;
+    height: min(60vh, 520px);
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .post-hero-image {
+    position: absolute;
+    inset: 0;
+  }
+
+  .post-hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .post-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(5,5,5,0.95) 0%, rgba(5,5,5,0.4) 60%, rgba(5,5,5,0.2) 100%);
+  }
+
+  .post-hero-content {
+    position: relative;
+    z-index: 1;
+    padding-bottom: 3rem;
+    max-width: 860px;
+  }
+
+  .post-tags {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .post-tag {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0.3rem 0.8rem;
+    border-radius: 50px;
+    background: rgba(56, 189, 248, 0.15);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    color: var(--color-accent);
+  }
+
+  .post-hero-content h1 {
+    font-size: clamp(1.75rem, 4vw, 3rem);
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.5);
+    flex-wrap: wrap;
+  }
+
+  .post-author {
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 600;
+  }
+
+  .post-separator {
+    opacity: 0.3;
+  }
+
+  /* Layout */
+  .post-layout {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 3rem;
+    padding-top: 3rem;
+    padding-bottom: 6rem;
+    align-items: start;
+  }
+
+  @media (max-width: 1024px) {
+    .post-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .post-sidebar {
+      display: none;
+    }
+  }
+
+  /* Article content */
+  .post-content {
+    border-radius: 20px;
+    padding: 3rem;
+    line-height: 1.85;
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.82);
+  }
+
+  @media (max-width: 640px) {
+    .post-content {
+      padding: 1.75rem;
+      font-size: 1rem;
+    }
+  }
+
+  .post-content :global(h2) {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #fff;
+    margin: 2.5rem 0 1rem;
+    line-height: 1.2;
+  }
+
+  .post-content :global(h3) {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    margin: 2rem 0 0.75rem;
+  }
+
+  .post-content :global(p) {
+    margin-bottom: 1.25rem;
+  }
+
+  .post-content :global(ul),
+  .post-content :global(ol) {
+    margin: 1rem 0 1.5rem 1.5rem;
+  }
+
+  .post-content :global(li) {
+    margin-bottom: 0.5rem;
+  }
+
+  .post-content :global(strong) {
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 700;
+  }
+
+  .post-content :global(a) {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: opacity 0.2s;
+  }
+
+  .post-content :global(a:hover) {
+    opacity: 0.8;
+  }
+
+  .post-content :global(hr) {
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    margin: 2.5rem 0;
+  }
+
+  .post-content :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.9rem;
+  }
+
+  .post-content :global(th) {
+    text-align: left;
+    padding: 0.75rem 1rem;
+    background: rgba(56, 189, 248, 0.08);
+    color: var(--color-accent);
+    font-weight: 700;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .post-content :global(td) {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  .post-content :global(blockquote) {
+    border-left: 3px solid var(--color-accent);
+    padding: 0.5rem 0 0.5rem 1.25rem;
+    margin: 1.5rem 0;
+    color: rgba(255, 255, 255, 0.6);
+    font-style: italic;
+  }
+
+  /* Sidebar */
+  .post-sidebar {
+    position: sticky;
+    top: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .sidebar-cta {
+    border-radius: 16px;
+    padding: 1.75rem;
+  }
+
+  .sidebar-cta-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--color-accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .sidebar-cta h3 {
+    font-size: 1.15rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+  }
+
+  .sidebar-cta p {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.55);
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+  }
+
+  .btn-cta {
+    display: block;
+    text-align: center;
+    background: linear-gradient(135deg, var(--color-accent), var(--color-accent-dark));
+    color: white;
+    font-weight: 700;
+    font-size: 0.875rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: 50px;
+    text-decoration: none;
+    margin-bottom: 0.6rem;
+    transition: opacity 0.2s;
+  }
+
+  .btn-cta:hover { opacity: 0.85; }
+
+  .btn-cta-secondary {
+    display: block;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 600;
+    font-size: 0.875rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .btn-cta-secondary:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+    color: #fff;
+  }
+
+  .sidebar-social {
+    border-radius: 16px;
+    padding: 1.5rem 1.75rem;
+  }
+
+  .social-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+  }
+
+  .social-links a {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .social-links a:hover { color: var(--color-accent); }
+
+  /* Related posts */
+  .related-posts {
+    padding: 0 0 8rem;
+  }
+
+  .related-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 2rem;
+  }
+
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 640px) {
+    .related-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .related-card {
+    border-radius: 16px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease;
+  }
+
+  .related-card:hover {
+    transform: translateY(-3px);
+  }
+
+  .related-card-image {
+    aspect-ratio: 16/9;
+    overflow: hidden;
+  }
+
+  .related-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .related-card:hover .related-card-image img {
+    transform: scale(1.04);
+  }
+
+  .related-card-body {
+    padding: 1.25rem 1.5rem;
+  }
+
+  .related-reading-time {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+
+  .related-card-body h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.35;
+    margin-bottom: 0.75rem;
+  }
+
+  .blog-read-more {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--color-accent);
+  }
+</style>
