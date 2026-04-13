@@ -12,6 +12,8 @@ const blog = defineCollection({
     imageAlt: z.string(),
     tags: z.array(z.string()),
     readingTime: z.number(), // minutes
+    lang: z.enum(["pt", "en"]).default("pt"),
+    translationSlug: z.string().optional(), // slug of the same post in the other language
   }),
 });
 

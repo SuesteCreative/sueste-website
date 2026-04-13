@@ -7,6 +7,8 @@ image: "https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=
 imageAlt: "Vista aérea do Algarve com mar e praia ao fundo"
 tags: ["web design", "algarve", "empresas locais", "digital"]
 readingTime: 8
+lang: "pt"
+translationSlug: "web-design-algarve-guide-for-local-businesses"
 ---
 
 O Algarve é uma das regiões com maior crescimento económico de Portugal — turismo, gastronomia, desportos náuticos, imobiliário, saúde e bem-estar. Mas muitas empresas locais ainda não aproveitam o potencial digital que têm à disposição.

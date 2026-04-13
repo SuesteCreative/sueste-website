@@ -21,7 +21,7 @@ const navItems = [
     href: lang === "pt" ? "/contacto" : "/en/contact",
     label: t("nav.contact"),
   },
-  { href: "/blog", label: t("nav.blog") },
+  { href: lang === "pt" ? "/blog" : "/en/blog", label: t("nav.blog") },
 ];
 
 const quoteHref = lang === "pt" ? "/orcamento" : "/en/quote";

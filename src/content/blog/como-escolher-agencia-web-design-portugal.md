@@ -7,6 +7,8 @@ image: "https://images.pexels.com/photos/3182812/pexels-photo-3182812.jpeg?auto=
 imageAlt: "Reunião de equipa a analisar propostas de design em computador portátil"
 tags: ["web design", "agência", "portugal", "dicas"]
 readingTime: 7
+lang: "pt"
+translationSlug: "how-to-choose-a-web-design-agency-in-portugal"
 ---
 
 Escolher uma agência de web design é uma decisão importante. O website da sua empresa vai representá-la 24 horas por dia, 7 dias por semana — e uma má escolha pode custar tempo, dinheiro e oportunidades de negócio.

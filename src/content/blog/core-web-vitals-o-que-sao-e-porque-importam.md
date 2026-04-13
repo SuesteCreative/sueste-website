@@ -7,6 +7,8 @@ image: "https://images.pexels.com/photos/147413/twitter-facebook-together-exchan
 imageAlt: "Dashboard de analytics com métricas de performance num ecrã"
 tags: ["seo", "performance", "core web vitals", "google"]
 readingTime: 6
+lang: "pt"
+translationSlug: "core-web-vitals-what-they-are-and-why-they-matter"
 ---
 
 Em 2021, o Google introduziu os **Core Web Vitals** como fator de ranking oficial. Desde então, a velocidade e a experiência de utilização de um site influenciam diretamente onde aparece nos resultados de pesquisa.

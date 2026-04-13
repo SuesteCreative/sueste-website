@@ -7,6 +7,8 @@ image: "https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=
 imageAlt: "Equipa a trabalhar num projeto de web design com computadores e esboços"
 tags: ["web design", "preços", "portugal", "websites"]
 readingTime: 7
+lang: "pt"
+translationSlug: "how-much-does-a-website-cost-in-portugal-2026"
 ---
 
 Uma das perguntas que mais recebemos é: **"Quanto custa um site?"** A resposta honesta é: depende. Mas neste artigo vamos dar-lhe números reais, explicar o que influencia o preço e ajudá-lo a perceber o que deve esperar quando contrata uma agência em Portugal.

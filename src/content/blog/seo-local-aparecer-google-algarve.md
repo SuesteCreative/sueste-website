@@ -7,6 +7,8 @@ image: "https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=co
 imageAlt: "Gráficos de analytics e crescimento num ecrã de computador"
 tags: ["seo", "seo local", "google", "algarve", "marketing digital"]
 readingTime: 9
+lang: "pt"
+translationSlug: "local-seo-appear-on-google-algarve"
 ---
 
 Aparecer na primeira página do Google para pesquisas como "restaurante Lagos", "surf school Algarve" ou "web design Portimão" pode transformar completamente um negócio. O SEO local é uma das estratégias com maior retorno para empresas com presença física ou que servem uma região específica.
