@@ -113,7 +113,7 @@
     display: none;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     .hero-scroll-container {
       height: 100vh;
     }
@@ -139,7 +139,7 @@
 
   gsap.registerPlugin(ScrollTrigger);
 
-  const isDesktop = window.matchMedia("(min-width: 769px)").matches;
+  const isDesktop = window.matchMedia("(min-width: 1025px)").matches;
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   if (!isDesktop || reducedMotion) {
