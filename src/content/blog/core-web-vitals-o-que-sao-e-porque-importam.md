@@ -112,7 +112,7 @@ Os fatores mais comuns que prejudicam a pontuação:
 
 ## Como a Tecnologia Afeta Estes Números
 
-A escolha da tecnologia tem impacto direto nos Core Web Vitals. É por isso que na [Sueste Creative](/sobre) construímos com **Astro 5** — um framework moderno que gera HTML estático por defeito, com JavaScript mínimo e carregamento ultrarrápido.
+A escolha da tecnologia tem impacto direto nos Core Web Vitals. Na [Sueste Creative](/sobre) escolhemos a tecnologia certa para cada projeto — frameworks modernos como **Astro** e **Next.js**, com deploy em Vercel, Cloudflare e outras plataformas de alto desempenho, garantindo JavaScript mínimo e carregamento ultrarrápido.
 
 Os nossos sites consistentemente atingem pontuações acima de **95/100** no Google Lighthouse em todos os critérios. Não por acidente — é uma decisão arquitetural desde o início do projeto.
 

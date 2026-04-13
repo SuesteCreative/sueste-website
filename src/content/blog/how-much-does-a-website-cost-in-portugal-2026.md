@@ -54,7 +54,7 @@ There are three main paths:
 
 ### 2. Technology Used
 
-A WordPress site has different costs from a site built in Astro or Next.js. At [Sueste Creative](/en/services), we build with cutting-edge technology — Astro 5 and Cloudflare Edge — which guarantees superior speed, lower maintenance costs and better technical SEO from day one.
+A WordPress site has different costs from a site built in Astro, Next.js or Nuxt. At [Sueste Creative](/en/services), we choose the right technology for each project — Astro, Next.js, Vercel, Cloudflare and other modern platforms — which guarantees superior speed, lower maintenance costs and better technical SEO from day one.
 
 ### 3. SEO Included or Not
 

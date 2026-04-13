@@ -112,7 +112,7 @@ The most common factors that hurt scores:
 
 ## How Technology Affects These Numbers
 
-The choice of technology has a direct impact on Core Web Vitals. That's why at [Sueste Creative](/en/about) we build with **Astro 5** — a modern framework that generates static HTML by default, with minimal JavaScript and ultra-fast loading.
+The choice of technology has a direct impact on Core Web Vitals. At [Sueste Creative](/en/about) we choose the right technology for each project — modern frameworks like **Astro** and **Next.js**, deployed on Vercel, Cloudflare and other high-performance platforms, ensuring minimal JavaScript and ultra-fast loading.
 
 Our sites consistently achieve scores above **95/100** on Google Lighthouse across all criteria. Not by accident — it's an architectural decision from the start of the project.
 

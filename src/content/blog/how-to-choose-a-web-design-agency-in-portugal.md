@@ -121,7 +121,7 @@ In our [terms](/en/terms), all intellectual property transfers to the client aft
 
 ## About Sueste Creative
 
-We are an agency based in the Algarve with projects across Portugal and internationally. We build with Astro 5 and Cloudflare Edge — cutting-edge technology that guarantees superior speed and better SEO from day one.
+We are an agency based in the Algarve with projects across Portugal and internationally. We work with the best modern technologies — Astro, Next.js, Vercel, Cloudflare and others — always choosing the right solution for each project.
 
 [See our work](/en/work), [meet our team](/en/about) or [request a free quote](/en/quote). You can also follow our daily work on [Instagram](https://www.instagram.com/sueste.agency/).
 
