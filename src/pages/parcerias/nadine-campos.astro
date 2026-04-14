@@ -79,7 +79,7 @@ const partner = {
             </div>
         </header>
 
-        <Section id="bio" title="Sobre a Artista">
+        <Section id="bio" title="Sobre a Artista" className="bio-section">
             <div class="bio-container grid">
                 <div class="bio-text" data-reveal>
                     <p>{partner.bio}</p>
@@ -96,7 +96,7 @@ const partner = {
             </div>
         </Section>
 
-        <Section id="pricing" title="Serviços & Packs" dark>
+        <Section id="pricing" title="Serviços & Packs" dark centered>
             <div class="pricing-tabs">
                 <div class="pricing-category">
                     <h3>{partner.pricing.photo.title}</h3>
@@ -160,7 +160,7 @@ const partner = {
             </div>
         </Section>
 
-        <Section id="terms" title="Termos & Condições" dark>
+        <Section id="terms" title="Termos & Condições" dark centered>
             <div class="terms-grid">
                 <div class="term-card" data-reveal>
                     <h4>Deslocação</h4>
@@ -193,7 +193,7 @@ const partner = {
             </div>
         </Section>
 
-        <Section id="collaboration" title="Como Trabalhamos">
+        <Section id="collaboration" title="Como Trabalhamos" centered>
             <div class="collab-container">
                 <div class="collab-content" data-reveal>
                     <div class="collab-card glass">
@@ -262,6 +262,16 @@ const partner = {
         height: 4px;
         background: #38bdf8;
         margin: 2rem auto 0;
+    }
+
+    .bio-section :global(.section-header) {
+        margin-bottom: 2rem;
+    }
+
+    .cta-inner {
+        text-align: center;
+        max-width: 700px;
+        margin: 0 auto;
     }
 
     .bio-container {
