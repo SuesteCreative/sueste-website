@@ -84,8 +84,14 @@ const partner = {
                 <div class="bio-text" data-reveal>
                     <p>{partner.bio}</p>
                 </div>
-                <div class="bio-image" data-reveal>
-                    <img src={partner.images[0]} alt="Nádine Campos em ação" />
+                <div class="bio-image">
+                    <div class="nadine-portrait-wrap">
+                        <img
+                            src="/images/partners/nadine-portrait.webp"
+                            alt="Nádine Campos"
+                            class="nadine-portrait"
+                        />
+                    </div>
                 </div>
             </div>
         </Section>
@@ -260,8 +266,8 @@ const partner = {
 
     .bio-container {
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 4rem;
+        grid-template-columns: 3fr 2fr;
+        gap: 5rem;
         align-items: center;
     }
 
@@ -271,10 +277,38 @@ const partner = {
         color: #a1a1aa;
     }
 
-    .bio-image img {
-        border-radius: 24px;
+    .bio-image {
+        display: flex;
+        justify-content: center;
+    }
+
+    .nadine-portrait-wrap {
         width: 100%;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        max-width: 360px;
+        border-radius: 24px;
+        overflow: hidden;
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+        perspective: 700px;
+        transform-style: preserve-3d;
+        clip-path: inset(100% 0% 0% 0% round 24px);
+        opacity: 0;
+        cursor: default;
+    }
+
+    .nadine-portrait {
+        display: block;
+        width: 100%;
+        aspect-ratio: 4 / 5;
+        object-fit: cover;
+        object-position: center top;
+        will-change: transform;
+        transform-origin: center center;
+    }
+
+    @media (max-width: 991px) {
+        .nadine-portrait-wrap {
+            max-width: 280px;
+        }
     }
 
     .pricing-tabs {
@@ -417,3 +451,53 @@ const partner = {
         }
     }
 </style>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+    gsap.registerPlugin(ScrollTrigger);
+
+    const wrap = document.querySelector<HTMLElement>(".nadine-portrait-wrap");
+    if (wrap) {
+        // Clip-path wipe reveal on scroll
+        gsap.to(wrap, {
+            clipPath: "inset(0% 0% 0% 0% round 24px)",
+            opacity: 1,
+            duration: 1.1,
+            ease: "expo.out",
+            scrollTrigger: {
+                trigger: wrap,
+                start: "top 82%",
+                toggleActions: "play none none none",
+            },
+        });
+
+        // 3D tilt on hover
+        const img = wrap.querySelector<HTMLElement>(".nadine-portrait");
+        if (img) {
+            wrap.addEventListener("mousemove", (e: MouseEvent) => {
+                const r = wrap.getBoundingClientRect();
+                const x = (e.clientX - r.left) / r.width - 0.5;
+                const y = (e.clientY - r.top) / r.height - 0.5;
+                gsap.to(img, {
+                    rotationY: x * 14,
+                    rotationX: -y * 14,
+                    scale: 1.04,
+                    duration: 0.35,
+                    ease: "power2.out",
+                    transformPerspective: 700,
+                });
+            });
+
+            wrap.addEventListener("mouseleave", () => {
+                gsap.to(img, {
+                    rotationY: 0,
+                    rotationX: 0,
+                    scale: 1,
+                    duration: 0.75,
+                    ease: "elastic.out(1, 0.6)",
+                });
+            });
+        }
+    }
+</script>
