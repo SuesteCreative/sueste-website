@@ -21,8 +21,8 @@ Local SEO is the set of techniques that help your business appear in search resu
 
 There are two types of local results on Google:
 
-1. **Google Maps / Local Pack** — the block of 3 results with a map that appears at the top when you search "café Lagos" or "dentist Portimão"
-2. **Organic results** — the regular links below the map, ordered by relevance and authority
+1. **Google Maps / Local Pack:** the block of 3 results with a map that appears at the top when you search "café Lagos" or "dentist Portimão"
+2. **Organic results:** the regular links below the map, ordered by relevance and authority
 
 The ideal is to appear in both. Here's how.
 
@@ -36,11 +36,11 @@ Google Business Profile (GBP) is your company's free profile on Google. It's wha
 
 To optimise your profile:
 
-- **Complete all fields** — name, category, address, hours, phone, website, description
-- **Choose the correct category** — it's the most important factor for local searches
-- **Add quality photos** — businesses with photos receive 42% more direction requests
-- **Respond to all reviews** — positive and negative. It shows the business is active
-- **Post updates regularly** — news, promotions, events
+- **Complete all fields:** name, category, address, hours, phone, website, description
+- **Choose the correct category:** it's the most important factor for local searches
+- **Add quality photos:** businesses with photos receive 42% more direction requests
+- **Respond to all reviews:** positive and negative. It shows the business is active
+- **Post updates regularly:** news, promotions, events
 
 **Google reviews** are the number 1 factor for local ranking. Each genuine review is worth more than any SEO technique.
 
@@ -50,9 +50,9 @@ Your website must confirm to Google that you exist in a specific location. This 
 
 **Structured Data (Schema Markup):** JSON-LD code in the site header that tells Google: "this business is called X, is located at Y, has phone number Z and serves area W." It's invisible to visitors but fundamental for search engines.
 
-**Content with local keywords:** It's not enough to have "web design" in the text — you need "web design Algarve", "creative agency Portimão", "web development Portugal". Naturally integrated, not forced.
+**Content with local keywords:** It's not enough to have "web design" in the text. You need "web design Algarve", "creative agency Portimão", "web development Portugal". Naturally integrated, not forced.
 
-**Speed and mobile:** Google uses mobile-first indexing — it evaluates the mobile version of your site first. A slow or poorly adapted mobile site loses rankings.
+**Speed and mobile:** Google uses mobile-first indexing. It evaluates the mobile version of your site first. A slow or poorly adapted mobile site loses rankings.
 
 At [Sueste Creative](/en/about), all sites we develop include LocalBusiness schema markup from day one, with Lighthouse scores above 95.
 
@@ -60,7 +60,7 @@ At [Sueste Creative](/en/about), all sites we develop include LocalBusiness sche
 
 NAP means Name, Address, Phone. They must be **exactly the same** everywhere your business appears online: website, Google Business Profile, Facebook, LinkedIn, directories, articles.
 
-A simple difference — "Flowers Street 12" vs "12 Flowers St" — can confuse Google and hurt ranking. It seems like a detail, but the algorithm takes it seriously.
+A simple difference between "Flowers Street 12" and "12 Flowers St" can confuse Google and hurt ranking. It seems like a detail, but the algorithm takes it seriously.
 
 ### 4. Local Backlinks
 
@@ -80,11 +80,11 @@ Each link from a relevant regional site is worth more than hundreds of links fro
 
 Actions that cost nothing and have immediate impact:
 
-1. **Create or complete your Google Business Profile** — free, takes 20 minutes
-2. **Ask satisfied clients for reviews** — send the direct link to your Google listing
-3. **Check your NAP consistency** — search your business name on Google and see what appears
-4. **Post a new photo on GBP** — one per week already helps the algorithm see the business is active
-5. **Respond to all reviews** — even if just saying "thank you"
+1. **Create or complete your Google Business Profile:** free, takes 20 minutes
+2. **Ask satisfied clients for reviews:** send the direct link to your Google listing
+3. **Check your NAP consistency:** search your business name on Google and see what appears
+4. **Post a new photo on GBP:** one per week already helps the algorithm see the business is active
+5. **Respond to all reviews:** even if just saying "thank you"
 
 ---
 
@@ -92,11 +92,11 @@ Actions that cost nothing and have immediate impact:
 
 Some things are more technical and worth the investment:
 
-- **Schema markup** — requires code on the website
-- **Backlink audit** — identifying opportunities and toxic links
-- **Speed optimisation** — Core Web Vitals, image compression, lazy loading
-- **Content strategy** — blog articles optimised for local keywords (like this one)
-- **Local link building** — contacting regional media and associations
+- **Schema markup:** requires code on the website
+- **Backlink audit:** identifying opportunities and toxic links
+- **Speed optimisation:** Core Web Vitals, image compression, lazy loading
+- **Content strategy:** blog articles optimised for local keywords (like this one)
+- **Local link building:** contacting regional media and associations
 
 Our [SEO and digital marketing services](/en/services) include all of this, with monthly progress reports.
 
@@ -106,17 +106,17 @@ Our [SEO and digital marketing services](/en/services) include all of this, with
 
 SEO is a medium-to-long-term investment. Realistic expectations are:
 
-- **1–3 months** — improved positions for lower competition keywords
-- **3–6 months** — consistent appearance on first pages for main terms
-- **6–12 months** — established authority, stable and growing organic traffic
+- **1–3 months:** improved positions for lower competition keywords
+- **3–6 months:** consistent appearance on first pages for main terms
+- **6–12 months:** established authority, stable and growing organic traffic
 
-Unlike paid advertising (Google Ads, Meta Ads) that stops when the budget runs out, SEO is a cumulative asset — the work done today continues to generate results for years.
+Unlike paid advertising (Google Ads, Meta Ads) that stops when the budget runs out, SEO is a cumulative asset. The work done today continues to generate results for years.
 
 ---
 
 ## Local SEO vs. Google Ads: What to Choose?
 
-They're not mutually exclusive — they're complementary:
+They're not mutually exclusive. They're complementary:
 
 | | Local SEO | Google Ads |
 |---|---|---|
@@ -138,4 +138,4 @@ Follow us on [Instagram](https://www.instagram.com/sueste.agency/) and [LinkedIn
 
 ---
 
-*Want to appear at the top of Google for your business searches in the Algarve? [Request a free analysis](/en/contact) — no commitment.*
+*Want to appear at the top of Google for your business searches in the Algarve? [Request a free analysis](/en/contact). No commitment.*

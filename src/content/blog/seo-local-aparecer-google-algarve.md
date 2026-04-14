@@ -21,8 +21,8 @@ SEO local é o conjunto de técnicas que ajudam a sua empresa a aparecer nos res
 
 Existem dois tipos de resultados locais no Google:
 
-1. **Google Maps / Local Pack** — o bloco de 3 resultados com mapa que aparece no topo quando pesquisa "café Lagos" ou "dentista Portimão"
-2. **Resultados orgânicos** — os links normais abaixo do mapa, ordenados por relevância e autoridade
+1. **Google Maps / Local Pack:** o bloco de 3 resultados com mapa que aparece no topo quando pesquisa "café Lagos" ou "dentista Portimão"
+2. **Resultados orgânicos:** os links normais abaixo do mapa, ordenados por relevância e autoridade
 
 O ideal é aparecer em ambos. Vamos explicar como.
 
@@ -36,11 +36,11 @@ O Google Business Profile (GBP) é o perfil gratuito da sua empresa no Google. �
 
 Para otimizar o seu perfil:
 
-- **Complete todos os campos** — nome, categoria, morada, horário, telefone, website, descrição
-- **Escolha a categoria correta** — é o fator mais importante para as pesquisas locais
-- **Adicione fotos de qualidade** — empresas com fotos recebem 42% mais pedidos de direções
-- **Responda a todas as avaliações** — positivas e negativas. Mostra que o negócio está ativo
-- **Publique atualizações regularmente** — novidades, promoções, eventos
+- **Complete todos os campos:** nome, categoria, morada, horário, telefone, website, descrição
+- **Escolha a categoria correta:** é o fator mais importante para as pesquisas locais
+- **Adicione fotos de qualidade:** empresas com fotos recebem 42% mais pedidos de direções
+- **Responda a todas as avaliações:** positivas e negativas. Mostra que o negócio está ativo
+- **Publique atualizações regularmente:** novidades, promoções, eventos
 
 As **avaliações no Google** são o fator número 1 para o ranking local. Cada avaliação genuína vale mais do que qualquer técnica de SEO.
 
@@ -50,17 +50,17 @@ O seu website deve confirmar ao Google que existe numa localização específica
 
 **Dados estruturados (Schema Markup):** Código JSON-LD no cabeçalho do site que diz ao Google: "este negócio chama-se X, fica em Y, tem o telefone Z e serve a área W." É invisível para os visitantes mas fundamental para os motores de busca.
 
-**Conteúdo com palavras-chave locais:** Não basta ter "web design" no texto — precisa de "web design Algarve", "agência criativa Portimão", "desenvolvimento web Portugal". Naturalmente integrados, não forçados.
+**Conteúdo com palavras-chave locais:** Não basta ter "web design" no texto. Precisa de "web design Algarve", "agência criativa Portimão", "desenvolvimento web Portugal". Naturalmente integrados, não forçados.
 
-**Velocidade e mobile:** O Google usa o mobile-first indexing — avalia a versão móvel do site primeiro. Um site lento ou mal adaptado a telemóvel perde posições.
+**Velocidade e mobile:** O Google usa o mobile-first indexing. Avalia a versão móvel do site primeiro. Um site lento ou mal adaptado a telemóvel perde posições.
 
 Na [Sueste Creative](/sobre), todos os sites que desenvolvemos incluem schema markup LocalBusiness desde o primeiro dia, com pontuações acima de 95 no Google Lighthouse.
 
 ### 3. Consistência de NAP
 
-NAP significa Name, Address, Phone — o nome, morada e telefone da sua empresa. Devem ser **exactamente iguais** em todos os lugares onde aparecem online: website, Google Business Profile, Facebook, LinkedIn, diretórios, artigos.
+NAP significa Name, Address, Phone: o nome, morada e telefone da sua empresa. Devem ser **exactamente iguais** em todos os lugares onde aparecem online: website, Google Business Profile, Facebook, LinkedIn, diretórios, artigos.
 
-Uma simples diferença — "Rua das Flores 12" vs "R. das Flores, 12" — pode confundir o Google e prejudicar o ranking. Parece um detalhe, mas o algoritmo leva isto a sério.
+Uma simples diferença entre "Rua das Flores 12" e "R. das Flores, 12" pode confundir o Google e prejudicar o ranking. Parece um detalhe, mas o algoritmo leva isto a sério.
 
 ### 4. Backlinks Locais
 
@@ -80,11 +80,11 @@ Cada link de um site relevante na região vale mais do que centenas de links de 
 
 Ações que não custam nada e têm impacto imediato:
 
-1. **Crie ou complete o Google Business Profile** — gratuito, leva 20 minutos
-2. **Peça avaliações a clientes satisfeitos** — envie o link direto para a sua ficha do Google
-3. **Verifique se o NAP é consistente** — pesquise o nome da empresa no Google e veja o que aparece
-4. **Publique uma foto nova no GBP** — uma por semana já ajuda o algoritmo a perceber que o negócio está ativo
-5. **Responda a todas as avaliações** — mesmo que só diga "obrigado"
+1. **Crie ou complete o Google Business Profile:** gratuito, leva 20 minutos
+2. **Peça avaliações a clientes satisfeitos:** envie o link direto para a sua ficha do Google
+3. **Verifique se o NAP é consistente:** pesquise o nome da empresa no Google e veja o que aparece
+4. **Publique uma foto nova no GBP:** uma por semana já ajuda o algoritmo a perceber que o negócio está ativo
+5. **Responda a todas as avaliações:** mesmo que só diga "obrigado"
 
 ---
 
@@ -92,11 +92,11 @@ Ações que não custam nada e têm impacto imediato:
 
 Algumas coisas são mais técnicas e valem o investimento:
 
-- **Schema markup** — requer código no website
-- **Auditoria de backlinks** — identificar oportunidades e links tóxicos
-- **Otimização de velocidade** — Core Web Vitals, compressão de imagens, lazy loading
-- **Estratégia de conteúdo** — artigos de blog otimizados para palavras-chave locais (como este)
-- **Link building local** — contactar meios e associações regionais
+- **Schema markup:** requer código no website
+- **Auditoria de backlinks:** identificar oportunidades e links tóxicos
+- **Otimização de velocidade:** Core Web Vitals, compressão de imagens, lazy loading
+- **Estratégia de conteúdo:** artigos de blog otimizados para palavras-chave locais (como este)
+- **Link building local:** contactar meios e associações regionais
 
 Os nossos [serviços de SEO e marketing digital](/servicos) incluem tudo isto, com relatórios mensais de evolução.
 
@@ -106,17 +106,17 @@ Os nossos [serviços de SEO e marketing digital](/servicos) incluem tudo isto, c
 
 SEO é um investimento de médio-longo prazo. As expectativas realistas são:
 
-- **1–3 meses** — melhoria de posições para palavras-chave de menor competição
-- **3–6 meses** — aparecimento consistente nas primeiras páginas para termos principais
-- **6–12 meses** — autoridade estabelecida, tráfego orgânico estável e crescente
+- **1–3 meses:** melhoria de posições para palavras-chave de menor competição
+- **3–6 meses:** aparecimento consistente nas primeiras páginas para termos principais
+- **6–12 meses:** autoridade estabelecida, tráfego orgânico estável e crescente
 
-Ao contrário da publicidade paga (Google Ads, Meta Ads) que para quando o orçamento acaba, o SEO é um ativo acumulativo — o trabalho feito hoje continua a gerar resultados daqui a anos.
+Ao contrário da publicidade paga (Google Ads, Meta Ads) que para quando o orçamento acaba, o SEO é um ativo acumulativo. O trabalho feito hoje continua a gerar resultados daqui a anos.
 
 ---
 
 ## SEO Local vs. Google Ads: O que Escolher?
 
-Não são mutuamente exclusivos — são complementares:
+Não são mutuamente exclusivos. São complementares:
 
 | | SEO Local | Google Ads |
 |---|---|---|
@@ -138,4 +138,4 @@ Siga-nos no [Instagram](https://www.instagram.com/sueste.agency/) e no [LinkedIn
 
 ---
 
-*Quer aparecer no topo do Google para pesquisas do seu negócio no Algarve? [Peça uma análise gratuita](/contacto) — sem compromisso.*
+*Quer aparecer no topo do Google para pesquisas do seu negócio no Algarve? [Peça uma análise gratuita](/contacto). Sem compromisso.*

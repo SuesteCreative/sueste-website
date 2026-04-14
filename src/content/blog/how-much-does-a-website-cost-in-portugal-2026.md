@@ -17,12 +17,12 @@ One of the most common questions we receive is: **"How much does a website cost?
 
 The price of a website is not arbitrary. It depends on several factors:
 
-- **Complexity and number of pages** — a 5-page site costs much less than a platform with 50 pages, client area and custom back-office
-- **Features** — simple forms, online store, booking system, CRM integration
-- **Design** — adapted template vs. 100% custom design from scratch
-- **Content** — copywriting, photography, video
-- **Technical SEO** — speed optimisation, URL structure, structured data
-- **Maintenance** — ongoing support after launch
+- **Complexity and number of pages:** a 5-page site costs much less than a platform with 50 pages, client area and custom back-office
+- **Features:** simple forms, online store, booking system, CRM integration
+- **Design:** adapted template vs. 100% custom design from scratch
+- **Content:** copywriting, photography, video
+- **Technical SEO:** speed optimisation, URL structure, structured data
+- **Maintenance:** ongoing support after launch
 
 ---
 
@@ -30,10 +30,10 @@ The price of a website is not arbitrary. It depends on several factors:
 
 | Type of Website | Estimated Price |
 |---|---|
-| Landing page (1 page) | €500 — €1,500 |
-| Institutional site (5–10 pages) | €1,500 — €4,000 |
-| Site with blog and SEO | €2,500 — €6,000 |
-| Online store (e-commerce) | €3,000 — €10,000 |
+| Landing page (1 page) | €500 to €1,500 |
+| Institutional site (5–10 pages) | €1,500 to €4,000 |
+| Site with blog and SEO | €2,500 to €6,000 |
+| Online store (e-commerce) | €3,000 to €10,000 |
 | Custom platform | €8,000+ |
 
 These values refer to work done by professional agencies in Portugal. Freelancers may charge less but also offer fewer guarantees of quality and continuity.
@@ -54,11 +54,11 @@ There are three main paths:
 
 ### 2. Technology Used
 
-A WordPress site has different costs from a site built in Astro, Next.js or Nuxt. At [Sueste Creative](/en/services), we choose the right technology for each project — Astro, Next.js, Vercel, Cloudflare and other modern platforms — which guarantees superior speed, lower maintenance costs and better technical SEO from day one.
+A WordPress site has different costs from a site built in Astro, Next.js or Nuxt. At [Sueste Creative](/en/services), we choose the right technology for each project: Astro, Next.js, Vercel, Cloudflare and other modern platforms, which guarantees superior speed, lower maintenance costs and better technical SEO from day one.
 
 ### 3. SEO Included or Not
 
-A beautiful site without SEO is like having a shop in a dead-end alley. Technical SEO — speed, data structure, meta tags, sitemap — must be included from development. Always ask your provider for a Google Lighthouse score above 90.
+A beautiful site without SEO is like having a shop in a dead-end alley. Technical SEO (speed, data structure, meta tags, sitemap) must be included from development. Always ask your provider for a Google Lighthouse score above 90.
 
 ---
 
@@ -79,7 +79,7 @@ For projects in the Algarve or Lisbon, we offer in-person meetings to align stra
 
 ## Is It Worth Investing?
 
-A professional website is your business's most important digital asset. Unlike social media, it's 100% yours — it doesn't depend on algorithms, it won't disappear if a platform changes its rules.
+A professional website is your business's most important digital asset. Unlike social media, it's 100% yours. It doesn't depend on algorithms, it won't disappear if a platform changes its rules.
 
 A well-built site can:
 
@@ -102,4 +102,4 @@ You can also follow us on [Instagram](https://www.instagram.com/sueste.agency/) 
 
 ---
 
-*Need help defining the right budget for your project? [Talk to us](/en/contact) — the initial consultation is free.*
+*Need help defining the right budget for your project? [Talk to us](/en/contact). The initial consultation is free.*
