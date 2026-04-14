@@ -1,0 +1,300 @@
+---
+import ProjectLayout from "../../../layouts/ProjectLayout.astro";
+---
+
+<ProjectLayout
+    title="Desportos Náuticos de Alvor — Website & Uniforms"
+    category="E-Commerce & Merch"
+    client="Desportos Náuticos de Alvor"
+    year="2024"
+    description="Online booking portal with automated billing and an exclusive merchandise line for the largest nautical sports school in the Algarve."
+    heroImage="/images/portfolio/desportos-mockup.png"
+    lang="en"
+    metrics={[
+        { label: "Online Bookings", value: "+300%" },
+        { label: "Mobile Conversion", value: "+85%" },
+        { label: "Auto Billing", value: "100%" },
+    ]}
+>
+    <div class="container project-content-grid">
+        <div class="project-text-block" data-reveal>
+            <h2>The Challenge</h2>
+            <p>
+                Desportos Náuticos de Alvor, the leader in nautical experiences
+                in the Algarve, faced the challenge of managing hundreds of
+                manual bookings daily. The lack of a centralised system resulted
+                in scheduling errors, lost direct sales and time-consuming
+                manual invoicing.
+            </p>
+            <p>
+                The goal was to build a robust platform where customers could
+                book in seconds — with secure payment, instant confirmation and
+                an invoice issued automatically.
+            </p>
+        </div>
+
+        <div class="project-media project-media-right reveal-delay-1" data-reveal>
+            <img
+                src="/images/portfolio/desportos-mockup.png"
+                alt="Desportos Náuticos de Alvor — Booking Portal"
+                class="rounded-xl w-full"
+            />
+        </div>
+
+        <div class="solution-section" data-reveal>
+            <div class="project-text-block solution-content">
+                <h2>The Solution</h2>
+                <p>
+                    We developed a <strong>Service E-commerce</strong> built for
+                    conversion. The portal integrates a dynamic availability calendar,
+                    payment gateways (Stripe/Multibanco) and a complete control panel
+                    for the team.
+                </p>
+                <ul>
+                    <li>3-step booking with dynamic time selection.</li>
+                    <li>Mobile-first layout for on-the-go bookings at the beach.</li>
+                    <li>Automated confirmation emails and SMS reminders.</li>
+                    <li>
+                        <strong>Automatic billing</strong> for all reservations and
+                        merchandise sales — every transaction generates a Moloni invoice
+                        with zero manual intervention.
+                    </li>
+                    <li>Integrated merch store with inventory and shipping.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="project-full-media mt-24" data-reveal>
+            <video
+                autoplay
+                loop
+                muted
+                playsinline
+                class="rounded-2xl glass-panel w-full"
+                style="padding: 0.5rem;"
+            >
+                <source
+                    src="/media/dna-website-presentation.webm"
+                    type="video/webm"
+                />
+                <source
+                    src="/media/dna-website-presentation.mp4"
+                    type="video/mp4"
+                />
+                Your browser does not support this video.
+            </video>
+        </div>
+    </div>
+
+    <!-- Merch Section -->
+    <div class="merch-section">
+        <div class="container">
+            <div class="merch-header" data-reveal>
+                <span class="merch-label">Merchandise & Uniforms</span>
+                <h2>Identity on the Beach</h2>
+                <p class="merch-intro">
+                    Alongside the website, we developed the Desportos Náuticos de Alvor
+                    merchandise and uniform line — pieces that communicate professionalism
+                    and reinforce brand identity in every customer interaction. Every merch
+                    sale is automatically invoiced through the Moloni integration.
+                </p>
+            </div>
+
+            <div class="merch-grid" data-reveal>
+                <div class="merch-item merch-main">
+                    <img
+                        src="/images/portfolio/dna/merch-3.webp"
+                        alt="Desportos Náuticos de Alvor uniform"
+                    />
+                </div>
+                <div class="merch-item">
+                    <img
+                        src="/images/portfolio/dna/merch-2.webp"
+                        alt="DNA Merchandise — T-shirt"
+                    />
+                </div>
+                <div class="merch-item">
+                    <img
+                        src="/images/portfolio/dna/buckethat-alvor.webp"
+                        alt="Desportos Náuticos de Alvor Bucket Hat"
+                    />
+                </div>
+            </div>
+        </div>
+    </div>
+</ProjectLayout>
+
+<style>
+    .project-content-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+        margin-top: 4rem;
+    }
+
+    .project-text-block {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .solution-section {
+        grid-column: 1 / -1;
+        width: 100%;
+        margin-top: 4rem;
+    }
+
+    .solution-content {
+        max-width: 100%;
+    }
+
+    .project-text-block h2 {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: #fff;
+        margin-bottom: 1rem;
+        position: relative;
+        display: inline-block;
+    }
+
+    .project-text-block h2::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 60px;
+        height: 4px;
+        background: #38bdf8;
+        border-radius: 2px;
+    }
+
+    .project-text-block p {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    .project-text-block ul {
+        list-style-type: none;
+        padding: 0;
+        margin-top: 1rem;
+    }
+
+    .project-text-block li {
+        font-size: 1.1rem;
+        color: rgba(255, 255, 255, 0.8);
+        position: relative;
+        padding-left: 1.5rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .project-text-block li::before {
+        content: "→";
+        position: absolute;
+        left: 0;
+        color: #38bdf8;
+        font-weight: bold;
+    }
+
+    .project-media img,
+    .project-full-media video {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        border-radius: 24px;
+        transition: transform 0.8s ease;
+    }
+
+    .project-media:hover img {
+        transform: scale(1.02);
+    }
+
+    .project-full-media {
+        grid-column: 1 / -1;
+    }
+
+    @media (max-width: 900px) {
+        .project-content-grid {
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+    }
+
+    /* ── MERCH SECTION ──────────────────────────────────────────────── */
+    .merch-section {
+        padding: 6rem 0;
+        background: linear-gradient(180deg, transparent 0%, rgba(56, 189, 248, 0.03) 50%, transparent 100%);
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .merch-header {
+        max-width: 720px;
+        margin-bottom: 4rem;
+    }
+
+    .merch-label {
+        display: inline-block;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        color: #38bdf8;
+        background: rgba(56, 189, 248, 0.08);
+        border: 1px solid rgba(56, 189, 248, 0.2);
+        padding: 0.35rem 0.9rem;
+        border-radius: 50px;
+        margin-bottom: 1.5rem;
+    }
+
+    .merch-header h2 {
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 800;
+        color: #fff;
+        margin-bottom: 1.25rem;
+        letter-spacing: -0.02em;
+    }
+
+    .merch-intro {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: rgba(255, 255, 255, 0.65);
+    }
+
+    .merch-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: 1.5rem;
+        align-items: start;
+    }
+
+    .merch-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 20px;
+        display: block;
+        transition: transform 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+    }
+
+    .merch-item:hover img {
+        transform: scale(1.03);
+    }
+
+    .merch-main img {
+        aspect-ratio: 1;
+    }
+
+    .merch-item:not(.merch-main) img {
+        aspect-ratio: 1;
+    }
+
+    @media (max-width: 768px) {
+        .merch-grid {
+            grid-template-columns: 1fr 1fr;
+        }
+        .merch-main {
+            grid-column: 1 / -1;
+        }
+    }
+</style>

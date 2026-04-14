@@ -1,0 +1,477 @@
+---
+import ProjectLayout from "../../../layouts/ProjectLayout.astro";
+---
+
+<ProjectLayout
+    title="DNA · CRM & Backoffice"
+    category="CRM & Backoffice"
+    client="Desportos Náuticos de Alvor"
+    year="2024–2026"
+    description="Custom internal management system built from scratch: personalised CRM, Stripe QR codes for instant payment and automated billing integrated with Moloni."
+    heroImage="/images/crm-macbook.png"
+    lang="en"
+    metrics={[
+        { label: "Customer Retention", value: "+45%" },
+        { label: "Operational Efficiency", value: "+80%" },
+        { label: "Point-of-Sale Conversion", value: "+60%" },
+    ]}
+>
+    <!-- CRM Section -->
+    <div class="crm-section crm-section-top">
+        <div class="container">
+            <div class="crm-header" data-reveal>
+                <span class="crm-label">Internal Management System</span>
+                <h2>A CRM built for the beach</h2>
+                <p class="crm-intro">
+                    We built a complete backoffice from scratch — a custom CRM that
+                    centralises all of Desportos Náuticos de Alvor's operations in a
+                    single platform: activities, beach concessions, team, customers and
+                    billing, all synchronised in real time and accessible from any device.
+                </p>
+            </div>
+
+            <div class="crm-features" data-reveal>
+                <div class="crm-feature">
+                    <div class="crm-feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+                    </div>
+                    <div>
+                        <h4>Activity Control</h4>
+                        <p>Real-time visual timeline for all company assets: jet-skis, wave runners, kayaks and towables. Session logging with payment tracking, partner attribution and offline sync queue.</p>
+                    </div>
+                </div>
+                <div class="crm-feature">
+                    <div class="crm-feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    </div>
+                    <div>
+                        <h4>Customer CRM</h4>
+                        <p>Unified profiles cross-referencing bookings, concession visits and spend history by phone number. Automatic returning customer detection with name suggestion and visit count.</p>
+                    </div>
+                </div>
+                <div class="crm-feature">
+                    <div class="crm-feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    </div>
+                    <div>
+                        <h4>Beach Concession Management</h4>
+                        <p>Daily sunbed and umbrella control with a 14-day occupancy grid. Automatic Excel and PDF report exports with revenue breakdown by occupancy type.</p>
+                    </div>
+                </div>
+                <div class="crm-feature">
+                    <div class="crm-feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                    </div>
+                    <div>
+                        <h4>Dashboards & Statistics</h4>
+                        <p>Total and projected revenue, cancellation rate, activities by hour, new vs returning customers and payment method breakdown — all in real time with auto-polling every 30 seconds.</p>
+                    </div>
+                </div>
+                <div class="crm-feature">
+                    <div class="crm-feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    </div>
+                    <div>
+                        <h4>Team Management</h4>
+                        <p>Time-bank with GPS clock-in/out, per-staff schedules, shift swap system with notifications, and a sticky shift bar for quick clock-in/out from any page.</p>
+                    </div>
+                </div>
+                <div class="crm-feature">
+                    <div class="crm-feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2-2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    </div>
+                    <div>
+                        <h4>Email Automation</h4>
+                        <p>5 configurable templates: booking confirmation with QR code, concession reservation, review follow-up, shift swap and daily report. Preview, send history and per-type toggle.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="crm-mockups" data-reveal>
+                <div class="crm-mockup-main">
+                    <img src="/images/crm-macbook.png" alt="DNA CRM Dashboard — Admin panel" />
+                </div>
+                <div class="crm-mockup-side">
+                    <img src="/images/crm-ipad.png" alt="DNA CRM — Activity Control on tablet" />
+                    <img src="/images/crm-iphone.png" alt="DNA — Mobile availability portal" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stripe QR Section -->
+    <div class="qr-section">
+        <div class="container">
+            <div class="qr-inner">
+                <div class="qr-text" data-reveal>
+                    <span class="qr-label">Instant Payment</span>
+                    <h2>Stripe QR code at your fingertips</h2>
+                    <p>
+                        We integrated Stripe QR payment codes directly into the CRM's
+                        operational flow. Staff generate a QR in seconds — the customer
+                        scans with their phone, pays online and the entry is created
+                        automatically in the system.
+                    </p>
+                    <p>
+                        No friction, no queues, no lost sales. The result is a
+                        <strong>direct increase in point-of-sale conversion</strong>
+                        and a payment experience customers remember — driving
+                        <strong>retention and lifetime value</strong> for every visitor.
+                    </p>
+                    <ul class="qr-highlights">
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            30-min countdown QR with auto-confirmation
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            24h payment links for admin use
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            Duplicate protection with idempotency keys
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            Moloni invoice included in confirmation email
+                        </li>
+                    </ul>
+                </div>
+                <div class="qr-image" data-reveal>
+                    <img
+                        src="/images/portfolio/dna/qr-code-chapeu.webp"
+                        alt="Stripe QR code on Desportos Náuticos de Alvor hat"
+                    />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Billing Integration Section -->
+    <div class="billing-section">
+        <div class="container">
+            <div class="billing-inner" data-reveal>
+                <span class="billing-label">Automated Billing</span>
+                <h2>Zero manual intervention</h2>
+                <p>
+                    Every transaction processed — whether an online booking, a QR
+                    code activity payment or a merchandise sale — automatically
+                    triggers invoice generation in Moloni. The PDF link reaches the
+                    customer by email seconds after payment, without the team touching
+                    a single document.
+                </p>
+                <div class="billing-steps">
+                    <div class="b-step">
+                        <div class="b-step-num">01</div>
+                        <h4>Payment confirmed</h4>
+                        <p>Stripe webhook received and validated in real time.</p>
+                    </div>
+                    <div class="b-step-arrow">→</div>
+                    <div class="b-step">
+                        <div class="b-step-num">02</div>
+                        <h4>Invoice created</h4>
+                        <p>Document generated in Moloni with customer and service data.</p>
+                    </div>
+                    <div class="b-step-arrow">→</div>
+                    <div class="b-step">
+                        <div class="b-step-num">03</div>
+                        <h4>Automatic delivery</h4>
+                        <p>PDF sent to customer by email, embedded in the confirmation.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ProjectLayout>
+
+<style>
+    .crm-section-top {
+        padding-top: 4rem;
+    }
+
+    .crm-section {
+        padding: 6rem 0;
+    }
+
+    .crm-header {
+        max-width: 720px;
+        margin-bottom: 4rem;
+    }
+
+    .crm-label {
+        display: inline-block;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        color: #22d3ee;
+        background: rgba(34, 211, 238, 0.08);
+        border: 1px solid rgba(34, 211, 238, 0.2);
+        padding: 0.35rem 0.9rem;
+        border-radius: 50px;
+        margin-bottom: 1.5rem;
+    }
+
+    .crm-header h2 {
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 800;
+        color: #fff;
+        margin-bottom: 1.25rem;
+        letter-spacing: -0.02em;
+    }
+
+    .crm-intro {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: rgba(255, 255, 255, 0.65);
+    }
+
+    .crm-features {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        margin-bottom: 5rem;
+    }
+
+    .crm-feature {
+        display: flex;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+
+    .crm-feature-icon {
+        flex-shrink: 0;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(34, 211, 238, 0.08);
+        border: 1px solid rgba(34, 211, 238, 0.18);
+        border-radius: 10px;
+        color: #22d3ee;
+        margin-top: 2px;
+    }
+
+    .crm-feature h4 {
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 0.4rem;
+    }
+
+    .crm-feature p {
+        font-size: 0.875rem;
+        line-height: 1.65;
+        color: rgba(255, 255, 255, 0.55);
+    }
+
+    .crm-mockups {
+        display: grid;
+        grid-template-columns: 3fr 2fr;
+        gap: 1.5rem;
+        align-items: center;
+    }
+
+    .crm-mockup-main img {
+        width: 100%;
+        height: auto;
+        border-radius: 20px;
+        display: block;
+    }
+
+    .crm-mockup-side {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .crm-mockup-side img {
+        width: 100%;
+        height: auto;
+        border-radius: 20px;
+        display: block;
+    }
+
+    .qr-section {
+        padding: 6rem 0;
+        background: linear-gradient(180deg, transparent 0%, rgba(34, 211, 238, 0.04) 50%, transparent 100%);
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .qr-inner {
+        display: grid;
+        grid-template-columns: 3fr 2fr;
+        gap: 5rem;
+        align-items: center;
+    }
+
+    .qr-label {
+        display: block;
+        width: fit-content;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        color: #22d3ee;
+        background: rgba(34, 211, 238, 0.08);
+        border: 1px solid rgba(34, 211, 238, 0.2);
+        padding: 0.35rem 0.9rem;
+        border-radius: 50px;
+        margin-bottom: 1.5rem;
+    }
+
+    .qr-text h2 {
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 800;
+        color: #fff;
+        margin-bottom: 1.5rem;
+        letter-spacing: -0.02em;
+    }
+
+    .qr-text p {
+        font-size: 1.05rem;
+        line-height: 1.8;
+        color: rgba(255, 255, 255, 0.65);
+        margin-bottom: 1rem;
+    }
+
+    .qr-highlights {
+        list-style: none;
+        padding: 0;
+        margin-top: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .qr-highlights li {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-size: 0.95rem;
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    .qr-highlights li svg {
+        color: #22d3ee;
+        flex-shrink: 0;
+    }
+
+    .qr-image img {
+        width: 100%;
+        max-width: 360px;
+        border-radius: 24px;
+        box-shadow: 0 24px 60px rgba(34, 211, 238, 0.1);
+        display: block;
+        margin: 0 auto;
+    }
+
+    .billing-section {
+        padding: 6rem 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .billing-label {
+        display: inline-block;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        color: #38bdf8;
+        background: rgba(56, 189, 248, 0.08);
+        border: 1px solid rgba(56, 189, 248, 0.2);
+        padding: 0.35rem 0.9rem;
+        border-radius: 50px;
+        margin-bottom: 1.5rem;
+    }
+
+    .billing-inner h2 {
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 800;
+        color: #fff;
+        margin-bottom: 1.25rem;
+        letter-spacing: -0.02em;
+    }
+
+    .billing-inner > p {
+        font-size: 1.05rem;
+        line-height: 1.8;
+        color: rgba(255, 255, 255, 0.65);
+        max-width: 700px;
+        margin-bottom: 3rem;
+    }
+
+    .billing-steps {
+        display: flex;
+        align-items: flex-start;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+    }
+
+    .b-step {
+        flex: 1;
+        min-width: 180px;
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 20px;
+        padding: 2rem;
+    }
+
+    .b-step-num {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: rgba(56, 189, 248, 0.25);
+        line-height: 1;
+        margin-bottom: 1rem;
+    }
+
+    .b-step h4 {
+        font-size: 1rem;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 0.5rem;
+    }
+
+    .b-step p {
+        font-size: 0.875rem;
+        line-height: 1.6;
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    .b-step-arrow {
+        font-size: 1.5rem;
+        color: rgba(56, 189, 248, 0.4);
+        align-self: center;
+        flex-shrink: 0;
+    }
+
+    @media (max-width: 1024px) {
+        .crm-features {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .crm-features {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        .crm-mockups {
+            grid-template-columns: 1fr;
+        }
+        .crm-mockup-side {
+            flex-direction: row;
+        }
+        .qr-inner {
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+        .b-step-arrow {
+            display: none;
+        }
+        .billing-steps {
+            flex-direction: column;
+        }
+    }
+</style>
