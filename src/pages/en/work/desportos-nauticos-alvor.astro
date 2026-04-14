@@ -33,44 +33,33 @@ import ProjectLayout from "../../../layouts/ProjectLayout.astro";
         </div>
 
         <div
-            class="project-media project-media-right"
+            class="project-media project-media-right reveal-delay-1"
             data-reveal
-            class="reveal-delay-1"
         >
             <img
-                src="https://images.pexels.com/photos/625418/pexels-photo-625418.jpeg?auto=compress&cs=tinysrgb&w=1000"
-                alt="Luxury boat in Alvor"
-                class="rounded-xl glass-panel p-2"
+                src="/images/portfolio/desportos-mockup.png"
+                alt="Desportos Náuticos de Alvor Mockup"
+                class="rounded-xl w-full"
             />
         </div>
 
-        <div class="project-media project-media-left mt-16" data-reveal>
-            <img
-                src="https://images.pexels.com/photos/34193707/pexels-photo-34193707.jpeg?auto=compress&cs=tinysrgb&w=1000"
-                alt="Watersports equipment"
-                class="rounded-xl glass-panel p-2"
-            />
-        </div>
-
-        <div
-            class="project-text-block mt-16"
-            data-reveal
-            class="reveal-delay-1"
-        >
-            <h2>The Solution</h2>
-            <p>
-                We developed a <strong>Service E-commerce</strong> focused on conversion.
-                The new portal integrates a dynamic availability calendar, payment
-                gateways (Stripe/Multibanco), and a complete control panel for the
-                Desportos Náuticos team.
-            </p>
-            <ul>
-                <li>3-step booking with dynamic time selection.</li>
-                <li>
-                    Mobile-first layout for "on-the-go" bookings at the beach.
-                </li>
-                <li>Automated confirmation emails and SMS reminders.</li>
-            </ul>
+        <div class="solution-section" data-reveal>
+            <div class="project-text-block solution-content">
+                <h2>The Solution</h2>
+                <p>
+                    We developed a <strong>Service E-commerce</strong> focused on conversion.
+                    The new portal integrates a dynamic availability calendar, payment
+                    gateways (Stripe/Multibanco), and a complete control panel for the
+                    Desportos Náuticos team.
+                </p>
+                <ul>
+                    <li>3-step booking with dynamic time selection.</li>
+                    <li>
+                        Mobile-first layout for "on-the-go" bookings at the beach.
+                    </li>
+                    <li>Automated confirmation emails and SMS reminders.</li>
+                </ul>
+            </div>
         </div>
 
         <div class="project-full-media mt-24" data-reveal>
@@ -83,7 +72,11 @@ import ProjectLayout from "../../../layouts/ProjectLayout.astro";
                 style="padding: 0.5rem;"
             >
                 <source
-                    src="https://player.vimeo.com/external/498216173.sd.mp4?s=d0fb5b6e22f87a3cb1d4fbeb7f12ac26ddafb5fb&profile_id=165&oauth2_token_id=57447761"
+                    src="/media/dna-website-presentation.webm"
+                    type="video/webm"
+                />
+                <source
+                    src="/media/dna-website-presentation.mp4"
                     type="video/mp4"
                 />
                 Your browser does not support the video tag.
@@ -188,6 +181,17 @@ import ProjectLayout from "../../../layouts/ProjectLayout.astro";
         gap: 1.5rem;
     }
 
+    /* Wrap Solution text to match video width */
+    .solution-section {
+        grid-column: 1 / -1;
+        width: 100%;
+        margin-top: 4rem;
+    }
+
+    .solution-content {
+        max-width: 100%; /* Matches the video since they are both grid-column 1 / -1 */
+    }
+
     .project-text-block h2 {
         font-size: 2.5rem;
         font-weight: 800;
@@ -236,10 +240,12 @@ import ProjectLayout from "../../../layouts/ProjectLayout.astro";
         font-weight: bold;
     }
 
-    .project-media img {
+    .project-media img,
+    .project-full-media video {
         width: 100%;
         height: auto;
         object-fit: cover;
+        border-radius: 24px; /* Matches bento card corner radius */
         transition: transform 0.8s ease;
     }
 

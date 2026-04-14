@@ -18,19 +18,12 @@ import Footer from '../../components/Footer.astro';
     <!-- ── HERO ──────────────────────────────────────────────────── -->
     <section class="s-hero">
       <div class="container">
-        <div class="hero-pill" data-reveal>
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-          Algarve, Portugal
-        </div>
         <h1 class="hero-title" data-reveal>
-          We build digital<br />
-          <span class="grad">that grows</span><br />
-          your business.
+          We give <span class="grad">wind to the ideas</span> that grow your business.
         </h1>
         <p class="hero-sub" data-reveal>
-          We are a creative agency based in the Algarve. We unite design,
-          technology, and strategy to build digital presences that convert
-          visitors into clients.
+          We are a creative agency between Lisbon and the Algarve. We align
+          design, technology and strategy to set your business in motion.
         </p>
         <div class="hero-actions" data-reveal>
           <a href="/en/work" class="btn-primary">See Our Work</a>
@@ -62,29 +55,28 @@ import Footer from '../../components/Footer.astro';
         <div class="stats-grid">
           <div class="stat-card" data-reveal>
             <div class="stat-top">
-              <span class="stat-num" data-count="50">50</span>
-              <span class="stat-suffix">+</span>
+              <span class="stat-num" id="stat-projects">35</span>
             </div>
             <span class="stat-label">Projects delivered</span>
           </div>
           <div class="stat-card" data-reveal>
             <div class="stat-top">
-              <span class="stat-num" data-count="4">4</span>
+              <span class="stat-num" id="stat-years">7</span>
             </div>
             <span class="stat-label">Years of experience</span>
           </div>
           <div class="stat-card" data-reveal>
             <div class="stat-top">
-              <span class="stat-num" data-count="100">100</span>
-              <span class="stat-suffix">%</span>
+              <span class="stat-num">90</span>
+              <span class="stat-suffix">+</span>
             </div>
-            <span class="stat-label">Satisfaction rate</span>
+            <span class="stat-label">In performance and technical SEO</span>
           </div>
           <div class="stat-card stat-card--accent" data-reveal>
             <div class="stat-top">
-              <span class="stat-num">∞</span>
+              <span class="stat-num" id="stat-coffees">324</span>
             </div>
-            <span class="stat-label">Commitment</span>
+            <span class="stat-label">Coffees between projects</span>
           </div>
         </div>
       </div>
@@ -94,8 +86,7 @@ import Footer from '../../components/Footer.astro';
     <section class="s-founder">
       <div class="container founder-grid">
         <div class="founder-image-wrapper" data-reveal>
-          <img src="/professional_setup.png" alt="Pedro - Sueste Creative Founder" class="founder-img" loading="lazy" />
-          <div class="founder-badge">Founder & Lead Dev</div>
+          <img src="/images/professional_setup.png" alt="Pedro - Sueste Creative Founder" class="founder-img" loading="lazy" />
         </div>
         <div class="founder-text">
           <span class="eyebrow" data-reveal>The Face of Sueste</span>
@@ -263,7 +254,7 @@ import Footer from '../../components/Footer.astro';
     align-items: center;
     gap: 0.5rem;
     padding: 0.85rem 2rem;
-    background: var(--color-accent-dark);
+    background: var(--color-accent);
     color: #fff;
     border-radius: 50px;
     font-weight: 700;
@@ -303,21 +294,6 @@ import Footer from '../../components/Footer.astro';
     padding: 7rem 0 6rem;
   }
 
-  .hero-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.4rem 1rem;
-    border-radius: 50px;
-    background: rgba(0, 112, 243, 0.12);
-    border: 1px solid rgba(0, 112, 243, 0.25);
-    color: var(--color-accent);
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    margin-bottom: 2.5rem;
-  }
-
   .hero-title {
     font-size: clamp(3rem, 7vw, 5.5rem);
     font-weight: 900;
@@ -352,7 +328,6 @@ import Footer from '../../components/Footer.astro';
   /* ── STORY ─────────────────────────────────────────────────────── */
   .s-story {
     padding: 8rem 0;
-    border-top: 1px solid rgba(255,255,255,0.05);
   }
 
   .story-grid {
@@ -439,8 +414,6 @@ import Footer from '../../components/Footer.astro';
   /* ── FOUNDER ─────────────────────────────────────────────────── */
   .s-founder {
     padding: 8rem 0;
-    border-top: 1px solid rgba(255,255,255,0.05);
-    background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, transparent 100%);
   }
 
   .founder-grid {
@@ -468,21 +441,6 @@ import Footer from '../../components/Footer.astro';
     transform: scale(1.02);
   }
 
-  .founder-badge {
-    position: absolute;
-    bottom: 2rem;
-    right: 2rem;
-    background: rgba(0, 112, 243, 0.9);
-    backdrop-filter: blur(10px);
-    color: #fff;
-    padding: 0.6rem 1.2rem;
-    border-radius: 50px;
-    font-size: 0.85rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-  }
-
   .founder-text h2 {
     font-size: clamp(2rem, 3.5vw, 2.8rem);
     font-weight: 800;
@@ -502,7 +460,6 @@ import Footer from '../../components/Footer.astro';
   /* ── VALUES ─────────────────────────────────────────────────────── */
   .s-values {
     padding: 8rem 0;
-    border-top: 1px solid rgba(255,255,255,0.05);
   }
 
   .values-grid {
@@ -578,7 +535,6 @@ import Footer from '../../components/Footer.astro';
   /* ── WHY US ─────────────────────────────────────────────────────── */
   .s-why {
     padding: 8rem 0;
-    border-top: 1px solid rgba(255,255,255,0.05);
   }
 
   .why-list {
@@ -642,7 +598,6 @@ import Footer from '../../components/Footer.astro';
   /* ── CTA ────────────────────────────────────────────────────────── */
   .s-cta {
     padding: 8rem 0 10rem;
-    border-top: 1px solid rgba(255,255,255,0.05);
   }
 
   .cta-box {
@@ -736,7 +691,45 @@ import Footer from '../../components/Footer.astro';
 
   gsap.registerPlugin(ScrollTrigger);
 
+  // ── Dynamic stat calculations ──────────────────────────────
+  function getProjectCount(): number {
+    // Base: 35 projects as of April 2, 2026. +1 on the 2nd of each month.
+    const now = new Date();
+    const baseYear = 2026, baseMonth = 3; // April = month index 3
+    const base = 35;
+    const nowMonth = now.getFullYear() * 12 + now.getMonth() + (now.getDate() >= 2 ? 1 : 0);
+    const baseMonthNum = baseYear * 12 + baseMonth + 1; // April after the 2nd
+    return base + Math.max(0, nowMonth - baseMonthNum);
+  }
+
+  function getYearsExperience(): number {
+    // Base: 7 years in 2026 (before Sept 15). +1 every Sept 15.
+    const now = new Date();
+    const pastSept15 = now.getMonth() > 8 || (now.getMonth() === 8 && now.getDate() >= 15);
+    return pastSept15 ? now.getFullYear() - 2018 : now.getFullYear() - 2019;
+  }
+
+  function getCoffeeCount(): number {
+    // Base: 324 coffees on April 12, 2026. +21 every week.
+    const base = 324;
+    const baseDate = new Date(2026, 3, 12);
+    const now = new Date();
+    const weeks = Math.floor((now.getTime() - baseDate.getTime()) / (7 * 24 * 60 * 60 * 1000));
+    return base + Math.max(0, weeks * 21);
+  }
+
+  function setDynamicStats() {
+    const projects = document.getElementById("stat-projects");
+    const years    = document.getElementById("stat-years");
+    const coffees  = document.getElementById("stat-coffees");
+    if (projects) projects.dataset.count = String(getProjectCount());
+    if (years)    years.dataset.count    = String(getYearsExperience());
+    if (coffees)  coffees.dataset.count  = String(getCoffeeCount());
+  }
+
   function init() {
+    setDynamicStats();
+
     // Staggered hero entrance
     const heroEls = document.querySelectorAll(".s-hero [data-reveal]");
     heroEls.forEach((el, i) => {
@@ -762,7 +755,7 @@ import Footer from '../../components/Footer.astro';
       );
     });
 
-    // Count-up for stats
+    // Count-up for stats (reads data-count set above)
     document.querySelectorAll(".stat-num[data-count]").forEach((el) => {
       const htmlEl = el as HTMLElement;
       const target = parseInt(htmlEl.dataset.count || "0");

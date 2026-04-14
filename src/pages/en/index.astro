@@ -9,6 +9,7 @@ import PortfolioLanding from "../../components/PortfolioLanding.astro";
 import BentoServices from "../../components/BentoServices.astro";
 import ProcessHorizontalScroll from "../../components/ProcessHorizontalScroll.astro";
 import Testimonials from "../../components/Testimonials.astro";
+import ServiceBundle from "../../components/ServiceBundle.astro";
 import HeroPills from "../../components/HeroPills.astro";
 import { useTranslations } from "../../utils/i18n";
 
@@ -55,8 +56,6 @@ const t = useTranslations(lang);
       </div>
     </HeroScrollSequence>
 
-    <WhoWeAre lang="en" />
-
     <Section
       id="services"
       title="Services"
@@ -65,6 +64,10 @@ const t = useTranslations(lang);
     >
       <BentoServices lang="en" />
     </Section>
+
+    <ServiceBundle lang="en" />
+
+    <WhoWeAre lang="en" />
 
     <Section
       id="portfolio"

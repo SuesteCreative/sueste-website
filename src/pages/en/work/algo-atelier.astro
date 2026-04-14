@@ -20,9 +20,9 @@ import Section from "../../../components/Section.astro";
     <div class="container project-content-grid">
         <div class="project-media project-media-left" data-reveal>
             <img
-                src="https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1000"
-                alt="Minimalist architectural project"
-                class="rounded-xl glass-panel p-2"
+                src="/images/portfolio/algoatelier-mockup.png"
+                alt="Algo Atelier Mockup"
+                class="rounded-xl w-full"
             />
         </div>
 
@@ -41,26 +41,43 @@ import Section from "../../../components/Section.astro";
             </p>
         </div>
 
-        <div class="project-full-media mt-24 project-text-block" data-reveal>
-            <h2>SEO as a Lever</h2>
-            <p>
-                More than a visual portfolio, we designed the content structure
-                to dominate local and international searches for luxury
-                architecture. Semantic optimization and response speed allowed
-                us to achieve a 98% SEO score.
-            </p>
+        <div class="solution-section" data-reveal>
+            <div class="project-text-block solution-content">
+                <h2>SEO as a Lever</h2>
+                <p>
+                    More than a visual portfolio, we designed the content
+                    structure to dominate local and international searches for
+                    luxury architecture. Semantic optimisation and response speed
+                    allowed us to achieve a 98% SEO score.
+                </p>
+            </div>
         </div>
 
         <div
-            class="project-media project-media-right"
-            style="grid-column: 1 / -1; margin-top: 2rem;"
+            class="project-full-media mt-24"
             data-reveal
+            style="display: flex; justify-content: center;"
         >
-            <img
-                src="https://images.pexels.com/photos/1774931/pexels-photo-1774931.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                alt="Architectural structure detail"
-                class="rounded-2xl glass-panel p-2 w-full"
-            />
+            <div style="max-width: 1000px; width: 100%;">
+                <video
+                    autoplay
+                    loop
+                    muted
+                    playsinline
+                    class="rounded-2xl glass-panel w-full"
+                    style="padding: 0.5rem;"
+                >
+                    <source
+                        src="/media/AlgoAtelier-Final.webm"
+                        type="video/webm"
+                    />
+                    <source
+                        src="/media/AlgoAtelier-Final.mp4"
+                        type="video/mp4"
+                    />
+                    Your browser does not support this video.
+                </video>
+            </div>
         </div>
     </div>
 </ProjectLayout>
@@ -78,6 +95,17 @@ import Section from "../../../components/Section.astro";
         display: flex;
         flex-direction: column;
         gap: 1.5rem;
+    }
+
+    /* Wrap text to match video width */
+    .solution-section {
+        grid-column: 1 / -1;
+        width: 100%;
+        margin-top: 4rem;
+    }
+
+    .solution-content {
+        max-width: 100%;
     }
 
     .project-text-block h2 {
@@ -106,10 +134,13 @@ import Section from "../../../components/Section.astro";
         color: rgba(255, 255, 255, 0.7);
     }
 
-    .project-media img {
+    .project-media img,
+    .project-full-media video,
+    .project-full-media img {
         width: 100%;
         height: auto;
         object-fit: cover;
+        border-radius: 24px;
         transition: transform 0.8s ease;
     }
 
@@ -128,7 +159,7 @@ import Section from "../../../components/Section.astro";
         }
 
         .project-media-left {
-            order: 1;
+            order: -1;
         }
     }
 </style>

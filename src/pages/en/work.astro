@@ -18,97 +18,89 @@ import Section from "../../components/Section.astro";
       title="Our Work"
       subtitle="A selection of projects where creativity meets strategy."
     >
-      <div class="portfolio-grid">
-        <a
-          href="/en/work/dna-site-fardas"
-          class="portfolio-card glass"
-          data-reveal
-        >
-          <div
-            class="card-image"
-            style="background-image: url('/images/portfolio/desportos-mockup.png'); background-size: cover; background-position: center top;"
-          >
-            <div class="card-overlay"></div>
+      <div class="p-grid">
+
+        <a href="/en/work/dna-site-fardas" class="pcard pc-1" style="--accent:#38bdf8">
+          <img class="pcard-bg" src="/images/portfolio/desportos-mockup.png" alt="Desportos Náuticos de Alvor website mockup" loading="lazy" />
+          <div class="pcard-gradient"></div>
+          <div class="pcard-content">
+            <span class="pcard-cat">E-Commerce & Merch</span>
+            <h3 class="pcard-title">Desportos Náuticos de Alvor</h3>
+            <p class="pcard-desc">Booking portal with automatic billing and exclusive merchandise line for the largest nautical sports school in the Algarve.</p>
+            <span class="pcard-cta">View Project <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
           </div>
-          <div class="card-info">
-            <span>E-Commerce & Merch</span>
-            <h3>Desportos Náuticos de Alvor</h3>
-            <p>
-              Booking portal with automatic billing and exclusive merchandise
-              line for the largest nautical sports school in the Algarve.
-            </p>
-          </div>
+          <span class="pcard-tag">Website & Merch</span>
         </a>
 
-        <a
-          href="/en/work/dna-crm-backoffice"
-          class="portfolio-card glass reveal-delay-1"
-          data-reveal
-        >
-          <div
-            class="card-image"
-            style="background-image: url('/images/crm-macbook.png'); background-size: cover; background-position: center top;"
-          >
-            <div class="card-overlay"></div>
+        <a href="/en/work/mental8works" class="pcard pc-2" style="--accent:#a78bfa">
+          <img class="pcard-bg" src="/images/portfolio/mental8works-mockup.png" alt="Mental8Works platform mockup" loading="lazy" />
+          <div class="pcard-gradient"></div>
+          <div class="pcard-content">
+            <span class="pcard-cat">Sys & Backoffice</span>
+            <h3 class="pcard-title">Mental8Works</h3>
+            <p class="pcard-desc">Corporate mental health management platform with custom backoffice and real-time data analysis.</p>
+            <span class="pcard-cta">View Project <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
           </div>
-          <div class="card-info">
-            <span>CRM & Backoffice</span>
-            <h3>DNA · CRM & Backoffice</h3>
-            <p>
-              Custom CRM with Stripe QR payments, automatic billing integration
-              and real-time performance dashboards.
-            </p>
-          </div>
+          <span class="pcard-tag">Platform</span>
         </a>
 
-        <a
-          href="/en/work/mental8works"
-          class="portfolio-card glass reveal-delay-2"
-          data-reveal
-        >
-          <div
-            class="card-image"
-            style="background-image: url('/images/portfolio/mental8works-mockup.png'); background-size: cover; background-position: center top;"
-          >
-            <div class="card-overlay"></div>
+        <a href="/en/work/algo-atelier" class="pcard pc-3" style="--accent:#fbbf24">
+          <img class="pcard-bg" src="/images/portfolio/algoatelier-mockup.png" alt="Algo Atelier portfolio mockup" loading="lazy" />
+          <div class="pcard-gradient"></div>
+          <div class="pcard-content">
+            <span class="pcard-cat">Architecture & SEO</span>
+            <h3 class="pcard-title">Algo Atelier</h3>
+            <p class="pcard-desc">High-performance digital presence for an architecture studio, focused on minimalist aesthetics and technical SEO.</p>
+            <span class="pcard-cta">View Project <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
           </div>
-          <div class="card-info">
-            <span>Sys & Backoffice</span>
-            <h3>Mental8Works</h3>
-            <p>
-              Corporate mental health management platform with custom backoffice
-              and real-time data analysis.
-            </p>
-          </div>
+          <span class="pcard-tag">98% SEO</span>
         </a>
 
-        <a
-          href="/en/work/algo-atelier"
-          class="portfolio-card glass reveal-delay-3"
-          data-reveal
-          style="grid-column: 1 / -1;"
-        >
-          <div
-            class="card-image"
-            style="background-image: url('/images/portfolio/algoatelier-mockup.png'); background-size: cover; background-position: center top; height: 400px;"
-          >
-            <div class="card-overlay"></div>
+        <a href="/en/work/dna-crm-backoffice" class="pcard pc-4" style="--accent:#22d3ee">
+          <img class="pcard-bg" src="/images/crm-macbook.png" alt="Desportos Náuticos de Alvor CRM system" loading="lazy" />
+          <div class="pcard-gradient"></div>
+          <div class="pcard-content">
+            <span class="pcard-cat">CRM & Backoffice</span>
+            <h3 class="pcard-title">DNA · CRM & Backoffice</h3>
+            <p class="pcard-desc">Custom CRM with Stripe QR payments, automatic billing integration and real-time performance dashboards.</p>
+            <span class="pcard-cta">View Project <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
           </div>
-          <div
-            class="card-info"
-            style="display: flex; flex-direction: column; justify-content: flex-end; position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%);"
-          >
-            <span>Architecture & SEO</span>
-            <h3>Algo Atelier</h3>
-            <p>
-              High-performance digital presence for an architecture studio,
-              focused on minimalist aesthetics and technical SEO.
-            </p>
-          </div>
+          <span class="pcard-tag">Custom CRM</span>
         </a>
+
+      </div>
+    </Section>
+
+    <Section
+      title="Our Method"
+      subtitle="How we turn ideas into products of excellence."
+      dark
+    >
+      <div class="process-steps">
+        <div class="step" data-reveal>
+          <div class="step-number">01</div>
+          <h3>Discovery</h3>
+          <p>Deep immersion into your business to understand objectives, audience and real challenges.</p>
+        </div>
+        <div class="step reveal-delay-1" data-reveal>
+          <div class="step-number">02</div>
+          <h3>Strategy & Design</h3>
+          <p>Strategic planning and design focused on an intuitive user experience.</p>
+        </div>
+        <div class="step reveal-delay-2" data-reveal>
+          <div class="step-number">03</div>
+          <h3>Development</h3>
+          <p>High-performance code development using the latest technologies.</p>
+        </div>
+        <div class="step reveal-delay-3" data-reveal>
+          <div class="step-number">04</div>
+          <h3>Launch & Support</h3>
+          <p>Optimised delivery with ongoing support focused on your project's growth.</p>
+        </div>
       </div>
     </Section>
   </main>
+
   <Footer />
 </BaseLayout>
 
@@ -117,55 +109,216 @@ import Section from "../../components/Section.astro";
     padding-top: 80px;
   }
 
-  .portfolio-grid {
+  /* ── BENTO GRID ─────────────────────────────────────────────────── */
+  .p-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 3rem;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 500px 500px;
+    gap: 1.25rem;
+    margin-top: 3rem;
   }
 
-  .portfolio-card {
-    border-radius: 30px;
-    overflow: hidden;
-    transition: transform 0.5s cubic-bezier(0.2, 1, 0.3, 1);
-  }
+  .pc-1 { grid-column: 1 / 4; }
+  .pc-2 { grid-column: 4 / 6; }
+  .pc-3 { grid-column: 1 / 3; }
+  .pc-4 { grid-column: 3 / 6; }
 
-  .portfolio-card:hover {
-    transform: translateY(-15px) scale(1.02);
-  }
-
-  .card-image {
-    height: 300px;
-    background: linear-gradient(45deg, #111, #222);
+  /* ── CARD ───────────────────────────────────────────────────────── */
+  .pcard {
     position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    display: block;
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    transition: border-color 0.4s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .card-info {
-    padding: 2.5rem;
+  .pcard:hover {
+    border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px -15px color-mix(in srgb, var(--accent) 30%, transparent);
   }
 
-  .card-info span {
-    font-size: 0.75rem;
+  .pcard-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .pcard:hover .pcard-bg {
+    transform: scale(1.05);
+  }
+
+  .pcard-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(5, 5, 12, 0.96) 0%,
+      rgba(5, 5, 12, 0.55) 40%,
+      rgba(5, 5, 12, 0.1) 70%,
+      transparent 100%
+    );
+  }
+
+  .pcard-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 2rem 2rem 2.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .pcard-cat {
+    font-size: 0.65rem;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 2px;
-    color: var(--color-accent);
-    margin-bottom: 0.5rem;
+    letter-spacing: 0.14em;
+    color: var(--accent);
     display: block;
   }
 
-  .card-info h3 {
-    font-size: 1.75rem;
-    margin-bottom: 1rem;
+  .pcard-title {
+    font-size: clamp(1.25rem, 2.5vw, 1.85rem);
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.15;
+    margin: 0;
+    letter-spacing: -0.02em;
   }
 
-  .card-info p {
-    opacity: 0.6;
+  .pcard-desc {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.55;
+    margin: 0.2rem 0 0;
+  }
+
+  .pcard-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 0.6rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--accent);
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .pcard:hover .pcard-cta {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .pcard-tag {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: 50px;
+    background: color-mix(in srgb, var(--accent) 12%, rgba(0, 0, 0, 0.5));
+    border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+    color: var(--accent);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    backdrop-filter: blur(10px);
+    z-index: 2;
+  }
+
+  /* ── PROCESS ────────────────────────────────────────────────────── */
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 3rem;
+    margin-top: 3rem;
+  }
+
+  .step {
+    position: relative;
+    padding-top: 2rem;
+  }
+
+  .step-number {
+    font-size: 3.5rem;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 1.5rem;
+    opacity: 0.15;
+    background: linear-gradient(135deg, white 0%, var(--color-accent) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .step h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: white;
+  }
+
+  .step p {
     font-size: 1rem;
+    opacity: 0.6;
     line-height: 1.6;
   }
 
-  @media (max-width: 768px) {
-    .portfolio-grid {
-      grid-template-columns: 1fr;
+  /* ── RESPONSIVE ─────────────────────────────────────────────────── */
+  @media (max-width: 1024px) {
+    .p-grid {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: repeat(2, 420px);
     }
+    .pc-1 { grid-column: 1 / 2; }
+    .pc-2 { grid-column: 2 / 3; }
+    .pc-3 { grid-column: 1 / 2; }
+    .pc-4 { grid-column: 2 / 3; }
+  }
+
+  @media (max-width: 640px) {
+    .p-grid {
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(4, 360px);
+      gap: 1rem;
+    }
+    .pc-1, .pc-2, .pc-3, .pc-4 { grid-column: 1 / 2; }
+    .pcard-cta { opacity: 1; transform: none; }
+    .process-steps { grid-template-columns: 1fr; gap: 4rem; }
   }
 </style>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  function init() {
+    document.querySelectorAll(".pcard").forEach((card, i) => {
+      gsap.fromTo(
+        card,
+        { opacity: 0, y: 40, scale: 0.97 },
+        {
+          opacity: 1, y: 0, scale: 1,
+          duration: 0.9,
+          ease: "power3.out",
+          delay: (i % 2) * 0.1,
+          scrollTrigger: { trigger: card, start: "top 88%" },
+        }
+      );
+    });
+  }
+
+  init();
+  document.addEventListener("astro:after-swap", init);
+</script>

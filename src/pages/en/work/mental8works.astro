@@ -32,45 +32,50 @@ import Section from "../../../components/Section.astro";
         </div>
 
         <div
-            class="project-media project-media-right"
+            class="project-media project-media-right reveal-delay-1"
             data-reveal
-            class="reveal-delay-1"
         >
             <img
-                src="https://images.pexels.com/photos/34976564/pexels-photo-34976564.jpeg?auto=compress&cs=tinysrgb&w=1000"
-                alt="Dashboard interface"
-                class="rounded-xl glass-panel p-2"
+                src="/images/portfolio/mental8works-mockup.png"
+                alt="Mental8Works Mockup"
+                class="rounded-xl w-full"
             />
         </div>
 
-        <div class="project-media project-media-left mt-16" data-reveal>
-            <img
-                src="https://images.pexels.com/photos/3888151/pexels-photo-3888151.jpeg?auto=compress&cs=tinysrgb&w=1000"
-                alt="Data analytics view"
-                class="rounded-xl glass-panel p-2"
-            />
+        <div class="solution-section" data-reveal>
+            <div class="project-text-block solution-content">
+                <h2>The Solution</h2>
+                <p>
+                    We designed a <strong>Custom Backoffice</strong> that serves
+                    as the nerve centre of the operation. We focused on scalable
+                    data architecture and an intuitive dashboard design that
+                    prioritises the reading of wellbeing indicators.
+                </p>
+                <ul>
+                    <li>Automated session and payment management.</li>
+                    <li>
+                        Business Intelligence module for real-time reporting.
+                    </li>
+                    <li>
+                        Redundant infrastructure with a focus on data security
+                        (GDPR).
+                    </li>
+                </ul>
+            </div>
         </div>
 
         <div
-            class="project-text-block mt-16"
+            class="project-full-media mt-24"
             data-reveal
-            class="reveal-delay-1"
+            style="display: flex; justify-content: center;"
         >
-            <h2>The Solution</h2>
-            <p>
-                We engineered a <strong>Custom Backoffice</strong> that serves as
-                the mission control for the operation. We focused on scalable data
-                architecture and an intuitive dashboard design that prioritizes wellbeing
-                indicator readability.
-            </p>
-            <ul>
-                <li>Automated session and payment management.</li>
-                <li>Business Intelligence module for real-time reporting.</li>
-                <li>
-                    Redundant infrastructure with a focus on data security
-                    (GDPR).
-                </li>
-            </ul>
+            <div style="max-width: 1000px; width: 100%;">
+                <img
+                    src="/images/portfolio/mental8works-iphone-mockup.png"
+                    alt="Mental8Works Appointments iPhone Mockup"
+                    class="w-full"
+                />
+            </div>
         </div>
     </div>
 </ProjectLayout>
@@ -88,6 +93,17 @@ import Section from "../../../components/Section.astro";
         display: flex;
         flex-direction: column;
         gap: 1.5rem;
+    }
+
+    /* Wrap text to match media width */
+    .solution-section {
+        grid-column: 1 / -1;
+        width: 100%;
+        margin-top: 4rem;
+    }
+
+    .solution-content {
+        max-width: 100%;
     }
 
     .project-text-block h2 {
@@ -138,10 +154,12 @@ import Section from "../../../components/Section.astro";
         font-weight: bold;
     }
 
-    .project-media img {
+    .project-media img,
+    .project-full-media img {
         width: 100%;
         height: auto;
         object-fit: cover;
+        border-radius: 24px;
         transition: transform 0.8s ease;
     }
 
@@ -149,10 +167,18 @@ import Section from "../../../components/Section.astro";
         transform: scale(1.02);
     }
 
+    .project-full-media {
+        grid-column: 1 / -1;
+    }
+
     @media (max-width: 900px) {
         .project-content-grid {
             grid-template-columns: 1fr;
             gap: 3rem;
+        }
+
+        .project-media-left {
+            order: -1;
         }
     }
 </style>
