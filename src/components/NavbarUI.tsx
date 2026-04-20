@@ -27,32 +27,61 @@ const LangSwitcher: React.FC<{ lang: 'pt' | 'en', mobile?: boolean }> = ({ lang,
     useEffect(() => {
         const getSwitchLanguageUrl = (pathname: string, currentLang: 'pt' | 'en') => {
             const isPT = currentLang === 'pt';
-            const ptToEnMap: Record<string, string> = {
-                '/servicos': '/en/services', '/portfolio': '/en/work', '/sobre': '/en/about',
-                '/contacto': '/en/contact', '/orcamento': '/en/quote', '/parcerias': '/en/partners',
-                '/servicos/': '/en/services/', '/portfolio/': '/en/work/', '/sobre/': '/en/about/',
-                '/contacto/': '/en/contact/', '/orcamento/': '/en/quote/', '/parcerias/': '/en/partners/',
-            };
-            const enToPtMap: Record<string, string> = {
-                '/en/services': '/servicos', '/en/work': '/portfolio', '/en/about': '/sobre',
-                '/en/contact': '/contacto', '/en/quote': '/orcamento', '/en/partners': '/parcerias',
-                '/en/services/': '/servicos/', '/en/work/': '/portfolio/', '/en/about/': '/sobre/',
-                '/en/contact/': '/contacto/', '/en/quote/': '/orcamento/', '/en/partners/': '/parcerias/',
-            };
+
+            // PT path -> EN path. Reverse map derived automatically.
+            const routePairs: Array<[string, string]> = [
+                ['/servicos', '/en/services'],
+                ['/portfolio', '/en/work'],
+                ['/sobre', '/en/about'],
+                ['/contacto', '/en/contact'],
+                ['/orcamento', '/en/quote'],
+                ['/parcerias', '/en/partners'],
+                ['/blog', '/en/blog'],
+                ['/privacidade', '/en/privacy'],
+                ['/termos', '/en/terms'],
+                ['/cookies', '/en/cookies'],
+                ['/sucesso/agendamento', '/en/success/booking'],
+                ['/sucesso/contacto', '/en/success/contact'],
+                ['/sucesso/inscricao', '/en/success/subscription'],
+            ];
+
+            // PT prefix -> EN prefix (both end with '/'). Covers dynamic slugs.
+            const prefixPairs: Array<[string, string]> = [
+                ['/portfolio/', '/en/work/'],
+                ['/parcerias/', '/en/partners/'],
+                ['/blog/', '/en/blog/'],
+                ['/sucesso/', '/en/success/'],
+            ];
+
+            const ptToEnMap: Record<string, string> = {};
+            const enToPtMap: Record<string, string> = {};
+            routePairs.forEach(([pt, en]) => {
+                ptToEnMap[pt] = en;
+                ptToEnMap[pt + '/'] = en + '/';
+                enToPtMap[en] = pt;
+                enToPtMap[en + '/'] = pt + '/';
+            });
+
             const normalizedPath = pathname.endsWith('/') && pathname !== '/' && pathname !== '/en/'
                 ? pathname.slice(0, -1) : pathname;
 
             if (isPT) {
                 if (normalizedPath === '/') return '/en/';
                 if (ptToEnMap[normalizedPath]) return ptToEnMap[normalizedPath];
-                if (normalizedPath.startsWith('/portfolio/')) return normalizedPath.replace('/portfolio/', '/en/work/');
-                if (normalizedPath.startsWith('/parcerias/')) return normalizedPath.replace('/parcerias/', '/en/partners/');
+                for (const [ptPrefix, enPrefix] of prefixPairs) {
+                    if (normalizedPath.startsWith(ptPrefix)) {
+                        return normalizedPath.replace(ptPrefix, enPrefix);
+                    }
+                }
                 return '/en/';
             } else {
                 if (normalizedPath === '/en' || normalizedPath === '/en/') return '/';
                 if (enToPtMap[normalizedPath]) return enToPtMap[normalizedPath];
-                if (normalizedPath.startsWith('/en/work/')) return normalizedPath.replace('/en/work/', '/portfolio/');
-                if (normalizedPath.startsWith('/en/partners/')) return normalizedPath.replace('/en/partners/', '/parcerias/');
+                for (const [ptPrefix, enPrefix] of prefixPairs) {
+                    if (normalizedPath.startsWith(enPrefix)) {
+                        return normalizedPath.replace(enPrefix, ptPrefix);
+                    }
+                }
                 return '/';
             }
         };
