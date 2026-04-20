@@ -116,6 +116,14 @@ const canonicalURL = new URL(Astro.url.pathname, "https://sueste-creative.pt");
       <div class="bg-blob-2"></div>
     </div>
     <slot />
+
+    <div id="wave-curtain" aria-hidden="true">
+      <svg viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path class="wave-fill" d="M0,0 L100,0 L100,100 L0,100 Z" />
+        <path class="wave-edge" d="" fill="none" stroke="currentColor" />
+      </svg>
+    </div>
+
     <CookieBanner lang={lang} />
 
     <script>
@@ -149,6 +157,134 @@ const canonicalURL = new URL(Astro.url.pathname, "https://sueste-creative.pt");
       document.addEventListener("astro:after-swap", () => {
         // You could re-init Lenis here if the DOM swaps heavily
       });
+
+      // ---- Ocean-wave curtain page transition ----
+      const curtain = document.getElementById("wave-curtain");
+      const waveEdgePath = curtain?.querySelector<SVGPathElement>(".wave-edge");
+      const waveFillPath = curtain?.querySelector<SVGPathElement>(".wave-fill");
+      const prefersReduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      // Build a wavy diagonal edge across a 100x100 viewBox.
+      // The edge runs TL-ish to BR-ish with a sine-scalloped offset,
+      // fill covers the BR side of the edge.
+      function buildWavePaths(phase = 0) {
+        if (!waveEdgePath || !waveFillPath) return;
+        const segments = 28;
+        const amplitude = 6;   // viewBox units
+        const frequency = 2.4; // full sine cycles across the edge
+
+        type Pt = { x: number; y: number };
+        const pts: Pt[] = [];
+        for (let i = 0; i <= segments; i++) {
+          const t = i / segments;
+          // Diagonal baseline from (-5, -5) to (105, 105) so ends extend off-canvas.
+          const bx = -5 + t * 110;
+          const by = -5 + t * 110;
+          // Perpendicular to the diagonal (unit vector 1/sqrt2 each axis).
+          const off = Math.sin(t * Math.PI * 2 * frequency + phase) * amplitude;
+          pts.push({ x: bx + off * 0.7071, y: by - off * 0.7071 });
+        }
+
+        const edgeD =
+          "M " + pts.map((p) => `${p.x.toFixed(2)},${p.y.toFixed(2)}`).join(" L ");
+        // Fill polygon: the wavy edge plus the BR corner so everything below/right is painted.
+        const fillD =
+          edgeD + ` L 110,-5 L 110,110 L -5,110 Z`;
+
+        waveEdgePath.setAttribute("d", edgeD);
+        waveFillPath.setAttribute("d", fillD);
+      }
+      buildWavePaths();
+      window.addEventListener("resize", () => buildWavePaths(), { passive: true });
+
+      function playExit() {
+        if (!curtain) return;
+        gsap.set(curtain, { xPercent: 0, yPercent: 0 });
+        gsap.to(curtain, {
+          xPercent: 110,
+          yPercent: 110,
+          duration: 0.75,
+          ease: "power2.inOut",
+          onComplete: () => {
+            curtain.classList.remove("is-active");
+            gsap.set(curtain, { xPercent: -110, yPercent: -110 });
+            lenis.start();
+          },
+        });
+      }
+
+      function playEntry(onDone: () => void) {
+        if (!curtain) { onDone(); return; }
+        curtain.classList.add("is-active");
+        lenis.stop();
+        gsap.set(curtain, { xPercent: -110, yPercent: -110 });
+        gsap.to(curtain, {
+          xPercent: 0,
+          yPercent: 0,
+          duration: 0.7,
+          ease: "power2.inOut",
+          onComplete: onDone,
+        });
+      }
+
+      if (!prefersReduced && curtain) {
+        // Exit leg — continuation of a transition started on the previous page.
+        if (sessionStorage.getItem("wave:exit") === "1") {
+          sessionStorage.removeItem("wave:exit");
+          playExit();
+        } else {
+          gsap.set(curtain, { xPercent: -110, yPercent: -110 });
+        }
+
+        // Entry leg — intercept internal link clicks.
+        document.addEventListener(
+          "click",
+          (e) => {
+            const mouseEvt = e as MouseEvent;
+            if (
+              mouseEvt.button !== 0 ||
+              mouseEvt.metaKey ||
+              mouseEvt.ctrlKey ||
+              mouseEvt.shiftKey ||
+              mouseEvt.altKey
+            )
+              return;
+
+            const target = e.target as HTMLElement | null;
+            if (!target) return;
+            const a = target.closest("a");
+            if (!a) return;
+
+            const href = a.getAttribute("href");
+            if (!href) return;
+            if (a.target === "_blank") return;
+            if (a.hasAttribute("download")) return;
+            if (!href.startsWith("/")) return; // external, mailto:, tel:, hash
+            if (href.startsWith("//")) return; // protocol-relative external
+
+            // Same-URL navigation — let the browser handle (likely scroll/no-op).
+            if (a.href === window.location.href) return;
+
+            e.preventDefault();
+            playEntry(() => {
+              sessionStorage.setItem("wave:exit", "1");
+              window.location.href = href;
+            });
+          },
+          { capture: true }
+        );
+
+        // bfcache restore — wipe any stale curtain state.
+        window.addEventListener("pageshow", (e) => {
+          if ((e as PageTransitionEvent).persisted) {
+            gsap.set(curtain, { xPercent: -110, yPercent: -110 });
+            curtain.classList.remove("is-active");
+            sessionStorage.removeItem("wave:exit");
+            lenis.start();
+          }
+        });
+      }
+      // ---- end curtain ----
 
       // Masterful Reveal System that we left working
       const revealCallback = (entries: IntersectionObserverEntry[]) => {
