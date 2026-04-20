@@ -29,15 +29,15 @@ const LangSwitcher: React.FC<{ lang: 'pt' | 'en', mobile?: boolean }> = ({ lang,
             const isPT = currentLang === 'pt';
             const ptToEnMap: Record<string, string> = {
                 '/servicos': '/en/services', '/portfolio': '/en/work', '/sobre': '/en/about',
-                '/contacto': '/en/contact', '/orcamento': '/en/quote', '/servicos/': '/en/services/',
-                '/portfolio/': '/en/work/', '/sobre/': '/en/about/', '/contacto/': '/en/contact/',
-                '/orcamento/': '/en/quote/',
+                '/contacto': '/en/contact', '/orcamento': '/en/quote', '/parcerias': '/en/partners',
+                '/servicos/': '/en/services/', '/portfolio/': '/en/work/', '/sobre/': '/en/about/',
+                '/contacto/': '/en/contact/', '/orcamento/': '/en/quote/', '/parcerias/': '/en/partners/',
             };
             const enToPtMap: Record<string, string> = {
                 '/en/services': '/servicos', '/en/work': '/portfolio', '/en/about': '/sobre',
-                '/en/contact': '/contacto', '/en/quote': '/orcamento', '/en/services/': '/servicos/',
-                '/en/work/': '/portfolio/', '/en/about/': '/sobre/', '/en/contact/': '/contacto/',
-                '/en/quote/': '/orcamento/',
+                '/en/contact': '/contacto', '/en/quote': '/orcamento', '/en/partners': '/parcerias',
+                '/en/services/': '/servicos/', '/en/work/': '/portfolio/', '/en/about/': '/sobre/',
+                '/en/contact/': '/contacto/', '/en/quote/': '/orcamento/', '/en/partners/': '/parcerias/',
             };
             const normalizedPath = pathname.endsWith('/') && pathname !== '/' && pathname !== '/en/'
                 ? pathname.slice(0, -1) : pathname;
@@ -46,11 +46,13 @@ const LangSwitcher: React.FC<{ lang: 'pt' | 'en', mobile?: boolean }> = ({ lang,
                 if (normalizedPath === '/') return '/en/';
                 if (ptToEnMap[normalizedPath]) return ptToEnMap[normalizedPath];
                 if (normalizedPath.startsWith('/portfolio/')) return normalizedPath.replace('/portfolio/', '/en/work/');
+                if (normalizedPath.startsWith('/parcerias/')) return normalizedPath.replace('/parcerias/', '/en/partners/');
                 return '/en/';
             } else {
                 if (normalizedPath === '/en' || normalizedPath === '/en/') return '/';
                 if (enToPtMap[normalizedPath]) return enToPtMap[normalizedPath];
                 if (normalizedPath.startsWith('/en/work/')) return normalizedPath.replace('/en/work/', '/portfolio/');
+                if (normalizedPath.startsWith('/en/partners/')) return normalizedPath.replace('/en/partners/', '/parcerias/');
                 return '/';
             }
         };
