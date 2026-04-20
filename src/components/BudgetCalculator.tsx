@@ -199,21 +199,24 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
 
     const calculateEstimation = () => {
         let baseSum = 0;
+        let audiovisualSubtotal = 0;
         let hasStartingAt = false;
 
         pricingData.services.forEach((service: any) => {
             if (service.is_group && service.sub_services) {
-                service.sub_services.forEach((sub: any) => checkItem(sub));
+                const isAudiovisual = service.id === 'audiovisual';
+                service.sub_services.forEach((sub: any) => checkItem(sub, isAudiovisual));
             } else {
-                checkItem(service);
+                checkItem(service, false);
             }
         });
 
-        function checkItem(service: any) {
+        function checkItem(service: any, isAudiovisual: boolean) {
             if (selections[service.id]) {
                 const opt = service.options.find((o: any) => o.id === selections[service.id].option);
                 if (opt) {
                     baseSum += opt.price;
+                    if (isAudiovisual) audiovisualSubtotal += opt.price;
                     if (opt.type === 'starting_at') hasStartingAt = true;
                 }
             }
@@ -221,6 +224,7 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
 
         if (hasReelsExtra) {
             baseSum += 50;
+            audiovisualSubtotal += 50;
         }
 
         // Global Addons
@@ -231,11 +235,12 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
             }
         });
 
-        const marginBase = Math.round(baseSum);
-        return { baseSum, marginBase, hasStartingAt };
+        const postProdFee = Math.round(audiovisualSubtotal * 0.15);
+        const marginBase = Math.round(baseSum + postProdFee);
+        return { baseSum, postProdFee, audiovisualSubtotal, marginBase, hasStartingAt };
     };
 
-    const { baseSum, marginBase, hasStartingAt } = calculateEstimation();
+    const { baseSum, postProdFee, marginBase, hasStartingAt } = calculateEstimation();
     const animatedTotal = useCountUp(marginBase, 1200);
 
     const toggleGroup = (groupId: string) => {
@@ -364,7 +369,9 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
         included: lang === 'pt' ? 'Incluído' : 'Included',
         onRequest: lang === 'pt' ? 'Sob consulta' : 'On request',
         addonsTitle: lang === 'pt' ? 'Serviços Adicionais' : 'Additional Services',
-        base: lang === 'pt' ? 'Preço base' : 'Base price'
+        base: lang === 'pt' ? 'Preço base' : 'Base price',
+        postProd: lang === 'pt' ? 'Edição & pós-produção (15%)' : 'Editing & post-production (15%)',
+        postProdNote: lang === 'pt' ? 'Aplica-se 15% sobre o valor audiovisual para edição & pós-produção.' : 'A 15% fee applies on the audiovisual amount for editing & post-production.'
     };
 
     const renderServiceCard = (service: any, idx: number, isSub = false) => {
@@ -427,7 +434,7 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                                     {service.is_partner && (
                                         <div className="partner-card-disclaimer">
                                             <p>
-                                                {lang === 'pt' ? '*Taxas extra podem-se aplicar. ' : '*Extra taxes may apply. '}
+                                                {lang === 'pt' ? '*Acresce 15% para edição & pós-produção. Taxas extra podem aplicar-se. ' : '*Additional 15% for editing & post-production. Extra taxes may apply. '}
                                                 <a href={lang === 'pt' ? `/parcerias/${service.partner_slug}` : `/en/partners/${service.partner_slug}`}>
                                                     {lang === 'pt' ? 'Ver condições' : 'View terms'}
                                                 </a>
@@ -598,6 +605,13 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                                 </div>
                             </div>
 
+                            {!shouldCollapse && postProdFee > 0 && (
+                                <div className="estimate-breakdown">
+                                    <span className="breakdown-label">{t.postProd}</span>
+                                    <span className="breakdown-value">+{postProdFee}€</span>
+                                </div>
+                            )}
+
                             <button
                                 type="button"
                                 className="btn-clear"
@@ -700,6 +714,12 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                                                     )}
                                                 </AnimatePresence>
                                             </div>
+                                            {postProdFee > 0 && (
+                                                <div className="estimate-breakdown merged">
+                                                    <span className="breakdown-label">{t.postProd}</span>
+                                                    <span className="breakdown-value">+{postProdFee}€</span>
+                                                </div>
+                                            )}
                                         </div>
                                         <button
                                             type="button"
