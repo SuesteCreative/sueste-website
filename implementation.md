@@ -81,7 +81,7 @@ Priority order based on SEO, trust, and conversion impact.
 - [x] Missing `.mp4` video asset — 4 portfolio pages reference mp4 that only exists as webm: portfolio/desportos-nauticos-alvor.astro:84, portfolio/dna-site-fardas.astro:82, en/work/desportos-nauticos-alvor.astro:79, en/work/dna-site-fardas.astro:81
 - [x] Favicon 404 — BaseLayout.astro:52 refs favicon.svg but only favicon.png exists
 - [x] Broken image — web-design-hoteis-algarve.astro:196 refs /images/portfolio/desportos-nauticos.webp (not found)
-- [ ] Page web-design-hoteis-algarve.astro orphaned from i18n — no EN counterpart, no hreflangEn
+- [x] Page web-design-hoteis-algarve.astro orphaned from i18n — no EN counterpart, no hreflangEn (resolved: PT-only landing is correct; hreflangPt already doubles as x-default via BaseLayout, no EN version needed for a PT-targeted "Algarve hotéis" keyword page)
 - [ ] Unoptimized images >1MB — crm-iphone.png (1.74MB), crm-macbook.png (1.49MB), crm-ipad.png (1.46MB), sueste-logo-creation.png (1.37MB)
 
 ### Medium
