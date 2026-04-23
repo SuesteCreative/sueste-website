@@ -4,7 +4,9 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased] - 2026-04-23
 ### Added
-- **Serviços — Partner & Google Ads Cards**: Expanded BentoServices from 4 to 6 cards in a clean 3×2 grid. New "Fotografia Profissional" card showcases the Nadine Campos partnership (logo badge, kicker pill, link to `/parcerias/nadine-campos`); new "Google Ads" card covers performance-marketing services.
+- **Serviços — Partner & Google Ads Cards**: Expanded BentoServices from 4 to 6 cards in a clean 3×2 grid. New "Fotografia Profissional" card showcases the Nadine Campos partnership (logo badge, link to `/parcerias/nadine-campos`); new "Google Ads" card covers performance-marketing services.
+- **Serviços page — Google Ads section**: New detailed section (`#ads`) on `/servicos` and `/en/services` with features (Search & PMax, Conversion Tracking, ROAS Optimization, Reporting).
+- **Card CTAs + Deep Links**: Every bento card is now a clickable link with a matching "Ver serviço" / "View service" CTA ("Ver parceria" for the partner card). Hash-anchored hrefs auto-scroll to the relevant section on the Serviços page (`/servicos#web`, `#design`, `#social`, `#video`, `#ads`).
 - **Entry Animations**: Ecossistema Digital stage (desktop + mobile lists) now fades/slides in via `data-reveal` when scrolled into view. Section headers rendered through `Section.astro` now animate on scroll (data-reveal applied to `.section-header`).
 
 ### Fixed
