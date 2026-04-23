@@ -52,7 +52,7 @@ const cssLefts = xs.map(x => `${(x / 1100 * 100).toFixed(2)}%`);
     </div>
 
     <!-- Desktop visualization -->
-    <div class="bundle-stage" id="bundle-stage">
+    <div class="bundle-stage" id="bundle-stage" data-reveal>
 
       <svg class="bundle-svg" viewBox="0 0 1100 380" preserveAspectRatio="xMidYMid meet" aria-hidden="true" style="overflow:visible">
         <defs>
@@ -156,7 +156,7 @@ const cssLefts = xs.map(x => `${(x / 1100 * 100).toFixed(2)}%`);
     </div>
 
     <!-- Mobile: vertical toggle list -->
-    <div class="bundle-mobile">
+    <div class="bundle-mobile" data-reveal>
       <div class="mobile-list">
         {services.map(s => (
           <button class="msvc-row active" data-svc={s.svc} style={`--c:${s.accent}`}>

@@ -3,7 +3,12 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased] - 2026-04-23
+### Added
+- **Serviços — Partner & Google Ads Cards**: Expanded BentoServices from 4 to 6 cards in a clean 3×2 grid. New "Fotografia Profissional" card showcases the Nadine Campos partnership (logo badge, kicker pill, link to `/parcerias/nadine-campos`); new "Google Ads" card covers performance-marketing services.
+- **Entry Animations**: Ecossistema Digital stage (desktop + mobile lists) now fades/slides in via `data-reveal` when scrolled into view. Section headers rendered through `Section.astro` now animate on scroll (data-reveal applied to `.section-header`).
+
 ### Fixed
+- **Serviços PT Titles**: Card titles now translate correctly on the Portuguese landing ("Desenvolvimento Web", "Fotografia Drone", "Design Gráfico"); previously hardcoded in English only.
 - **Ecossistema Digital Spacing**: Tightened vertical rhythm on landing — reduced header margin (4rem → 2rem), stage height (420px → 300px), and stage margin (3rem → 2rem) so subtitle-to-cards and cards-to-footer gaps match.
 
 ## [v2.1] - 2026-02-27

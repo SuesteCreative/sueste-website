@@ -1,46 +1,73 @@
 ---
 const { lang = "pt" } = Astro.props;
+const pt = lang === "pt";
+
+const nadineHref = pt ? "/parcerias/nadine-campos" : "/en/partners/nadine-campos";
 
 const services = [
     {
         id: "web",
-        title: "Web Development",
+        titlePt: "Desenvolvimento Web",
+        titleEn: "Web Development",
         descPt: "Ecossistemas digitais de alta performance, otimizados para converter visitantes em clientes fiéis.",
         descEn: "High-performance digital ecosystems, optimized to convert visitors into loyal customers.",
-        size: "large",
         accent: "#38bdf8",
         icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`,
         iconBig: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><polyline points="8 21 12 17 16 21"/><line x1="12" y1="17" x2="12" y2="21"/><polyline points="9 10 12 7 15 10"/><line x1="12" y1="7" x2="12" y2="13"/></svg>`,
     },
     {
         id: "drone",
-        title: "Drone Footage",
+        titlePt: "Fotografia Drone",
+        titleEn: "Drone Footage",
         descPt: "Perspetivas cinematográficas em 4K que elevam o prestígio visual do seu projeto.",
         descEn: "Cinematic 4K perspectives that elevate the visual prestige of your project.",
-        size: "small",
         accent: "#22d3ee",
         icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"/><path d="M7 4l-3 3"/><path d="M17 4l3 3"/><path d="M7 20l-3 -3"/><path d="M17 20l3 -3"/><path d="M4 7m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"/><path d="M20 7m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"/><path d="M4 17m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"/><path d="M20 17m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"/></svg>`,
         iconBig: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"/><path d="M7 4l-3 3"/><path d="M17 4l3 3"/><path d="M7 20l-3 -3"/><path d="M17 20l3 -3"/><path d="M4 7m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"/><path d="M20 7m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"/><path d="M4 17m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"/><path d="M20 17m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"/></svg>`,
     },
     {
         id: "social",
-        title: "Social Media",
+        titlePt: "Social Media",
+        titleEn: "Social Media",
         descPt: "Gestão de autoridade e conteúdo estratégico que constrói comunidades em torno da sua marca.",
         descEn: "Authority management and strategic content that builds communities around your brand.",
-        size: "small",
         accent: "#a78bfa",
         icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/><path d="M6 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/><path d="M18 22a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/><line x1="15.18" y1="5.73" x2="8.82" y2="9.27"/><line x1="8.82" y1="14.73" x2="15.18" y2="18.27"/></svg>`,
         iconBig: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/><path d="M6 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/><path d="M18 22a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/><line x1="15.18" y1="5.73" x2="8.82" y2="9.27"/><line x1="8.82" y1="14.73" x2="15.18" y2="18.27"/></svg>`,
     },
     {
         id: "graphic",
-        title: "Graphic Design",
+        titlePt: "Design Gráfico",
+        titleEn: "Graphic Design",
         descPt: "Identidade visual premium que comunica sofisticação e liderança no seu setor.",
         descEn: "Premium visual identity that communicates sophistication and leadership in your sector.",
-        size: "medium",
         accent: "#fbbf24",
         icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>`,
         iconBig: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>`,
+    },
+    {
+        id: "photo",
+        titlePt: "Fotografia Profissional",
+        titleEn: "Professional Photography",
+        descPt: "Retratos editoriais, corporate, eventos e produto em parceria com Nadine Campos — estética cuidada e direção criativa premium.",
+        descEn: "Editorial portraits, corporate, events, and product photography in partnership with Nadine Campos — refined aesthetics and premium creative direction.",
+        accent: "#ec4899",
+        partner: true,
+        partnerName: "Nadine Campos",
+        partnerLogo: "/images/partners/SVG/logo-nadine-white.svg",
+        href: nadineHref,
+        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>`,
+        iconBig: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>`,
+    },
+    {
+        id: "ads",
+        titlePt: "Google Ads",
+        titleEn: "Google Ads",
+        descPt: "Campanhas de performance focadas em conversão, ROAS e crescimento sustentável do pipeline comercial.",
+        descEn: "Performance campaigns focused on conversion, ROAS, and sustainable pipeline growth.",
+        accent: "#34d399",
+        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>`,
+        iconBig: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>`,
     },
 ];
 ---
@@ -48,24 +75,51 @@ const services = [
 <div class="bento-container" id="bento-services">
     <div class="bento-grid">
         {
-            services.map((service, index) => (
-                <div
-                    class={`bento-card bento-${service.size} magnetic-card reveal-delay-${(index % 3) + 1}`}
-                    data-reveal
-                    data-accent={service.accent}
-                    style={`--accent: ${service.accent};`}
-                >
-                    <div class="bento-glow" />
-                    <div class="bento-icon-bg" set:html={service.iconBig} />
-                    <div class="bento-content">
-                        <div class="bento-label">
-                            <span class="bento-icon-small" set:html={service.icon} />
+            services.map((service, index) => {
+                const Tag = service.partner ? "a" : "div";
+                const extraProps = service.partner ? { href: service.href } : {};
+                return (
+                    <Tag
+                        class={`bento-card magnetic-card reveal-delay-${(index % 3) + 1}${service.partner ? " bento-partner" : ""}`}
+                        data-reveal
+                        data-accent={service.accent}
+                        style={`--accent: ${service.accent};`}
+                        {...extraProps}
+                    >
+                        <div class="bento-glow" />
+                        <div class="bento-icon-bg" set:html={service.iconBig} />
+                        {service.partner && service.partnerLogo && (
+                            <img
+                                class="bento-partner-logo"
+                                src={service.partnerLogo}
+                                alt={service.partnerName}
+                                loading="lazy"
+                            />
+                        )}
+                        <div class="bento-content">
+                            <div class="bento-label">
+                                <span class="bento-icon-small" set:html={service.icon} />
+                            </div>
+                            {service.partner && (
+                                <span class="bento-partner-kicker">
+                                    {pt ? "Parceria" : "Partnership"} · {service.partnerName}
+                                </span>
+                            )}
+                            <h3>{pt ? service.titlePt : service.titleEn}</h3>
+                            <p>{pt ? service.descPt : service.descEn}</p>
+                            {service.partner && (
+                                <span class="bento-partner-cta">
+                                    {pt ? "Ver parceria" : "View partnership"}
+                                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <line x1="7" y1="17" x2="17" y2="7" />
+                                        <polyline points="7 7 17 7 17 17" />
+                                    </svg>
+                                </span>
+                            )}
                         </div>
-                        <h3>{service.title}</h3>
-                        <p>{lang === "pt" ? service.descPt : service.descEn}</p>
-                    </div>
-                </div>
-            ))
+                    </Tag>
+                );
+            })
         }
     </div>
 </div>
@@ -79,14 +133,14 @@ const services = [
     .bento-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        grid-template-rows: repeat(2, minmax(280px, auto));
+        grid-auto-rows: minmax(280px, auto);
         gap: 1.5rem;
     }
 
     .bento-card {
         position: relative;
         border-radius: 24px;
-        padding: 3rem;
+        padding: 2.5rem;
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
@@ -99,9 +153,11 @@ const services = [
             box-shadow 0.4s ease;
         will-change: transform;
         cursor: pointer;
+        text-decoration: none;
+        color: inherit;
     }
 
-    /* Accent border glow on hover — was broken before (all stops were alpha 0) */
+    /* Accent border glow on hover */
     .bento-card::before {
         content: "";
         position: absolute;
@@ -134,25 +190,13 @@ const services = [
         border-color: rgba(255, 255, 255, 0.12);
     }
 
-    /* Grid Area Assignments */
-    .bento-large {
-        grid-column: span 2;
-        grid-row: span 1;
+    /* Partner card — subtle accent tint */
+    .bento-partner {
         background: linear-gradient(
             135deg,
-            rgba(255, 255, 255, 0.05) 0%,
-            rgba(255, 255, 255, 0.01) 100%
+            color-mix(in srgb, var(--accent, #ec4899) 6%, rgba(255, 255, 255, 0.03)) 0%,
+            rgba(255, 255, 255, 0.02) 100%
         );
-    }
-
-    .bento-small {
-        grid-column: span 1;
-        grid-row: span 1;
-    }
-
-    .bento-medium {
-        grid-column: span 2;
-        grid-row: span 1;
     }
 
     /* Large decorative icon in background */
@@ -172,6 +216,25 @@ const services = [
     .bento-card:hover .bento-icon-bg {
         opacity: 0.1;
         transform: scale(1.08) rotate(-5deg);
+    }
+
+    /* Partner logo badge, top-right */
+    .bento-partner-logo {
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        width: 90px;
+        height: auto;
+        max-height: 42px;
+        object-fit: contain;
+        opacity: 0.75;
+        z-index: 2;
+        pointer-events: none;
+        transition: opacity 0.35s ease;
+    }
+
+    .bento-partner:hover .bento-partner-logo {
+        opacity: 1;
     }
 
     /* Small icon label */
@@ -228,8 +291,22 @@ const services = [
         pointer-events: none;
     }
 
+    .bento-partner-kicker {
+        display: inline-block;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--accent, #ec4899);
+        margin-bottom: 0.6rem;
+        padding: 0.3rem 0.7rem;
+        border-radius: 50px;
+        background: color-mix(in srgb, var(--accent, #ec4899) 10%, transparent);
+        border: 1px solid color-mix(in srgb, var(--accent, #ec4899) 30%, transparent);
+    }
+
     .bento-card h3 {
-        font-size: clamp(1.5rem, 4vw, 2rem);
+        font-size: clamp(1.4rem, 2.4vw, 1.75rem);
         font-weight: 700;
         margin-bottom: 0.75rem;
         color: #fff;
@@ -237,28 +314,40 @@ const services = [
     }
 
     .bento-card p {
-        font-size: 1.05rem;
+        font-size: 1rem;
         color: #a1a1aa;
         line-height: 1.6;
-        max-width: 90%;
     }
 
-    .bento-large h3 {
-        font-size: clamp(1.8rem, 5vw, 2.5rem);
+    .bento-partner-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        margin-top: 1rem;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--accent, #ec4899);
+        letter-spacing: 0.02em;
     }
 
-    @media (max-width: 900px) {
+    @media (max-width: 1024px) {
+        .bento-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 700px) {
         .bento-grid {
             grid-template-columns: 1fr;
-            grid-template-rows: auto;
-        }
-        .bento-large,
-        .bento-small,
-        .bento-medium {
-            grid-column: span 1;
         }
         .bento-card {
             padding: 2rem;
+        }
+        .bento-partner-logo {
+            width: 70px;
+            max-height: 34px;
+            top: 1.2rem;
+            right: 1.2rem;
         }
     }
 </style>
@@ -274,11 +363,9 @@ const services = [
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
 
-            // Update glow position
             el.style.setProperty("--mouse-x", `${x - 175}px`);
             el.style.setProperty("--mouse-y", `${y - 175}px`);
 
-            // Magnetic 3D tilt
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
 
