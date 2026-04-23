@@ -1,0 +1,118 @@
+---
+interface Props {
+  lang?: string;
+}
+
+const { lang = "pt" } = Astro.props;
+
+const phone = "351965494727";
+const message =
+  lang === "en"
+    ? "Hi Pedro, I saw the Sueste Creative website and would like to..."
+    : "Olá Pedro, vi o site da Sueste Creative e gostaria de...";
+const ariaLabel =
+  lang === "en" ? "Chat on WhatsApp" : "Falar no WhatsApp";
+
+const href = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+---
+
+<a
+  class="wa-float"
+  href={href}
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label={ariaLabel}
+  data-wa-float
+>
+  <svg
+    viewBox="0 0 32 32"
+    width="30"
+    height="30"
+    aria-hidden="true"
+    fill="currentColor"
+  >
+    <path d="M19.11 17.205c-.372 0-1.088 1.39-1.518 1.39a.63.63 0 0 1-.315-.1c-.802-.402-1.504-.817-2.163-1.447-.545-.516-1.146-1.29-1.46-1.963a.426.426 0 0 1-.073-.215c0-.33.99-.945.99-1.49 0-.143-.73-2.09-.832-2.335-.143-.372-.214-.487-.6-.487-.187 0-.36-.043-.53-.043-.302 0-.53.115-.746.315-.688.645-1.04 1.397-1.04 2.335 0 .856.458 1.735 1.017 2.556C12.98 17.47 15.04 19.23 17.64 20c.915.272 1.562.314 2.2.314.89 0 1.937-.458 2.26-1.185.1-.23.1-.43.1-.645 0-.143-.043-.286-.07-.43-.086-.415-1.53-1.13-1.898-1.29-.33-.145-.715-.56-1.122-.56zm-2.95 7.44c-1.572 0-3.114-.43-4.454-1.237l-3.114.817.83-3.029a8.67 8.67 0 0 1-1.353-4.64c0-4.786 3.91-8.684 8.697-8.684 2.32 0 4.49.898 6.13 2.54a8.633 8.633 0 0 1 2.54 6.145c0 4.786-3.91 8.69-8.696 8.69h-.57zm7.4-16.07A10.385 10.385 0 0 0 16.148 5.5c-5.76 0-10.447 4.688-10.447 10.448 0 1.84.487 3.638 1.405 5.222L5.5 26.5l5.46-1.432a10.425 10.425 0 0 0 4.988 1.27h.007c5.76 0 10.447-4.687 10.447-10.447a10.386 10.386 0 0 0-3.05-7.415z"></path>
+  </svg>
+</a>
+
+<style>
+  .wa-float {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 9998;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #25d366;
+    color: #fff;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18),
+      0 0 0 0 rgba(37, 211, 102, 0.5);
+    transition:
+      transform 0.18s ease,
+      box-shadow 0.25s ease;
+    animation: wa-pulse 2.4s ease-out infinite;
+  }
+
+  .wa-float:hover,
+  .wa-float:focus-visible {
+    transform: scale(1.08);
+    outline: none;
+  }
+
+  .wa-float:focus-visible {
+    box-shadow:
+      0 6px 20px rgba(0, 0, 0, 0.18),
+      0 0 0 4px rgba(37, 211, 102, 0.35);
+  }
+
+  @keyframes wa-pulse {
+    0% {
+      box-shadow:
+        0 6px 20px rgba(0, 0, 0, 0.18),
+        0 0 0 0 rgba(37, 211, 102, 0.5);
+    }
+    70% {
+      box-shadow:
+        0 6px 20px rgba(0, 0, 0, 0.18),
+        0 0 0 14px rgba(37, 211, 102, 0);
+    }
+    100% {
+      box-shadow:
+        0 6px 20px rgba(0, 0, 0, 0.18),
+        0 0 0 0 rgba(37, 211, 102, 0);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .wa-float {
+      bottom: 1rem;
+      right: 1rem;
+      width: 52px;
+      height: 52px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .wa-float {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLAnchorElement>("[data-wa-float]").forEach((el) => {
+    el.addEventListener("click", () => {
+      const w = window as unknown as { gtag?: (...args: unknown[]) => void };
+      if (typeof w.gtag === "function") {
+        w.gtag("event", "whatsapp_click", {
+          event_category: "engagement",
+          event_label: "floating_button",
+        });
+      }
+    });
+  });
+</script>

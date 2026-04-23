@@ -2,6 +2,17 @@
 import "../styles/global.css";
 import { getLangFromUrl } from "../utils/i18n";
 import CookieBanner from "../components/CookieBanner.astro";
+import WhatsAppFloat from "../components/WhatsAppFloat.astro";
+
+interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+interface BreadcrumbItem {
+  name: string;
+  url: string;
+}
 
 interface Props {
   title: string;
@@ -12,6 +23,8 @@ interface Props {
   preloadImage?: string;
   ogImage?: string;
   noindex?: boolean;
+  faqs?: FaqItem[];
+  breadcrumbs?: BreadcrumbItem[];
 }
 
 const {
@@ -23,6 +36,8 @@ const {
   preloadImage,
   ogImage = "https://sueste-creative.pt/images/og-preview.jpg",
   noindex = false,
+  faqs,
+  breadcrumbs,
 } = Astro.props;
 const lang = propLang || getLangFromUrl(Astro.url);
 const canonicalURL = new URL(Astro.url.pathname, "https://sueste-creative.pt");
@@ -109,6 +124,46 @@ const canonicalURL = new URL(Astro.url.pathname, "https://sueste-creative.pt");
         ],
       })}
     ></script>
+
+    {
+      breadcrumbs && breadcrumbs.length > 0 && (
+        <script
+          type="application/ld+json"
+          is:inline
+          set:html={JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: breadcrumbs.map((b, i) => ({
+              "@type": "ListItem",
+              position: i + 1,
+              name: b.name,
+              item: b.url,
+            })),
+          })}
+        />
+      )
+    }
+
+    {
+      faqs && faqs.length > 0 && (
+        <script
+          type="application/ld+json"
+          is:inline
+          set:html={JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: faqs.map((f) => ({
+              "@type": "Question",
+              name: f.question,
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: f.answer,
+              },
+            })),
+          })}
+        />
+      )
+    }
   </head>
   <body>
     <div class="bg-blob-container">
@@ -116,6 +171,7 @@ const canonicalURL = new URL(Astro.url.pathname, "https://sueste-creative.pt");
       <div class="bg-blob-2"></div>
     </div>
     <slot />
+    <WhatsAppFloat lang={lang} />
     <CookieBanner lang={lang} />
 
     <script>

@@ -72,3 +72,28 @@ Priority order based on SEO, trust, and conversion impact.
 - [x] EN cookies page has geral@sueste-creative.pt — fix to info@
 - [x] JSON-LD schema in BaseLayout has geral@ email — fix to info@
 - [ ] Marketing emails will have no unsubscribe mechanism — note: requires email marketing tool (Resend Broadcasts / Mailchimp)
+
+---
+
+## Audit — 2026-04-23
+
+### Critical
+- [x] Missing `.mp4` video asset — 4 portfolio pages reference mp4 that only exists as webm: portfolio/desportos-nauticos-alvor.astro:84, portfolio/dna-site-fardas.astro:82, en/work/desportos-nauticos-alvor.astro:79, en/work/dna-site-fardas.astro:81
+- [ ] Favicon 404 — BaseLayout.astro:52 refs favicon.svg but only favicon.png exists
+- [ ] Broken image — web-design-hoteis-algarve.astro:196 refs /images/portfolio/desportos-nauticos.webp (not found)
+- [ ] Page web-design-hoteis-algarve.astro orphaned from i18n — no EN counterpart, no hreflangEn
+- [ ] Unoptimized images >1MB — crm-iphone.png (1.74MB), crm-macbook.png (1.49MB), crm-ipad.png (1.46MB), sueste-logo-creation.png (1.37MB)
+
+### Medium
+- [ ] Meta descriptions >160 chars — en/blog/index, en/about, en/work/dna-crm-backoffice, en/services, blog/index, en/quote, orcamento
+- [ ] Dead code — delete src/components/QuoteBuilder.jsx (322 lines, orphan) and src/layouts/Layout.astro (replaced by BaseLayout)
+- [ ] OSRM reliability risk — BudgetCalculator.tsx:264 uses public demo router.project-osrm.org (documented, acceptable for now)
+- [ ] handleSubmit missing AbortController timeout — BudgetCalculator.tsx:544 fetch has no timeout; add 30s
+- [ ] hreflang broken reciprocal pair — en/blog/index.astro:21 missing hreflangEn; blog/index has inverse omission
+- [ ] Generic alt "Partner Logo" — BudgetCalculator.tsx:624 and :786, interpolate partner name
+
+### Low
+- [ ] Page titles >60 chars with brand suffix — shorten longest offenders
+- [ ] og:image fixed across all pages — blog posts + case studies lack per-page OG
+- [ ] framer-motion client:load on orcamento/quote (~120KB) — switch to client:visible
+- [ ] BudgetCalculator useEffect order fragile — localStorage vs URL bundle param race

@@ -1,0 +1,710 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+
+const faqs = [
+  {
+    question: "Quanto custa um website para um hotel no Algarve?",
+    answer:
+      "O investimento varia conforme a dimensão do hotel e as funcionalidades necessárias. Sites institucionais simples arrancam em 2.500€, enquanto soluções completas com motor de reservas próprio, multi-idioma e integração com Booking/Expedia situam-se entre 6.000€ e 15.000€. Use a nossa calculadora em /orcamento para uma estimativa imediata.",
+  },
+  {
+    question: "Quanto tempo demora a lançar o site de um hotel?",
+    answer:
+      "Um site institucional otimizado fica pronto em 4 a 6 semanas. Projetos com motor de reservas próprio, área reservada a clientes ou integrações com PMS (property management systems) demoram 8 a 12 semanas. Trabalhamos em sprints quinzenais com entregas visíveis em cada etapa.",
+  },
+  {
+    question: "Fazem o site em português e inglês?",
+    answer:
+      "Sim. Todos os nossos sites para hotelaria são construídos com suporte nativo a múltiplos idiomas (PT, EN, ES, FR, DE) usando hreflang correto para SEO internacional. Os hóspedes de Reino Unido, Irlanda, Alemanha e França encontram-no no Google do seu país.",
+  },
+  {
+    question: "Integram com Booking.com, Expedia ou sistemas de reservas existentes?",
+    answer:
+      "Sim. Fazemos integração com channel managers como SiteMinder, Cloudbeds, Little Hotelier e motores de reservas como Mews, Opera e Protel. Se já usa um sistema PMS, mantemos essa infraestrutura e ligamos o site a ela sem fricção.",
+  },
+  {
+    question: "Garantem bons resultados de SEO para termos locais como 'hotel Portimão' ou 'guesthouse Lagos'?",
+    answer:
+      "Aplicamos SEO local desde o primeiro dia: schema LocalBusiness e Hotel, otimização do perfil Google Business, conteúdo focado em intenção de pesquisa local, velocidade 95+ no Lighthouse e estrutura semântica. Não prometemos primeiro lugar garantido — isso é contra as orientações do Google — mas entregamos a fundação técnica que permite rankings sustentáveis.",
+  },
+];
+
+const breadcrumbs = [
+  { name: "Início", url: "https://sueste-creative.pt/" },
+  { name: "Serviços", url: "https://sueste-creative.pt/servicos" },
+  {
+    name: "Web Design para Hotéis no Algarve",
+    url: "https://sueste-creative.pt/web-design-hoteis-algarve",
+  },
+];
+---
+
+<BaseLayout
+  title="Web Design para Hotéis no Algarve"
+  description="Websites de alto desempenho para hotéis, guesthouses e alojamento local no Algarve. Reservas directas, multilíngue, SEO local e Lighthouse 95+. Orçamento em 24h."
+  hreflangPt="https://sueste-creative.pt/web-design-hoteis-algarve"
+  faqs={faqs}
+  breadcrumbs={breadcrumbs}
+>
+  <Navbar />
+  <main class="niche-page">
+    <header class="niche-hero">
+      <div class="container hero-inner">
+        <span class="eyebrow">Especialistas em hotelaria · Algarve</span>
+        <h1 class="reveal-text">
+          Web Design para Hotéis
+          <span class="highlight">no Algarve</span>
+        </h1>
+        <p class="reveal-subtitle">
+          Sites rápidos, multilíngue e com motor de reservas próprio. Menos
+          comissões para Booking. Mais hóspedes directos. Lighthouse 95+ e SEO
+          local afinado para quem procura "hotel Portimão", "guesthouse Lagos" ou
+          "resort Albufeira".
+        </p>
+        <div class="cta-row">
+          <a href="/orcamento" class="btn-primary">Pedir Orçamento</a>
+          <a href="#como-trabalhamos" class="btn-secondary">Como Trabalhamos</a>
+        </div>
+      </div>
+      <div class="hero-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+      </div>
+    </header>
+
+    <section class="pain-section">
+      <div class="container">
+        <h2>Os 4 erros que estão a custar-lhe reservas</h2>
+        <div class="pain-grid">
+          <div class="pain-card">
+            <div class="pain-number">01</div>
+            <h3>Site lento em telemóvel</h3>
+            <p>
+              Mais de 70% dos hóspedes pesquisam no telemóvel. Se o seu site
+              demora mais de 3 segundos, metade abandona antes de ver o primeiro
+              quarto.
+            </p>
+          </div>
+          <div class="pain-card">
+            <div class="pain-number">02</div>
+            <h3>Dependência de 20%+ de comissões</h3>
+            <p>
+              Booking.com e Expedia cobram entre 15% e 25% por reserva. Um
+              motor próprio paga-se em poucos meses e devolve-lhe a relação
+              directa com o hóspede.
+            </p>
+          </div>
+          <div class="pain-card">
+            <div class="pain-number">03</div>
+            <h3>Invisível em inglês, alemão e francês</h3>
+            <p>
+              Sem hreflang e sem conteúdo traduzido de forma nativa, os hóspedes
+              internacionais nunca o encontram no Google do país deles — vão
+              direto para a OTA.
+            </p>
+          </div>
+          <div class="pain-card">
+            <div class="pain-number">04</div>
+            <h3>Galerias pesadas sem storytelling</h3>
+            <p>
+              Fotografias lindas mal comprimidas destroem a velocidade e não
+              contam a experiência. Um hotel vende emoção, não imagens a 4MB.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="solution-section" id="como-trabalhamos">
+      <div class="container">
+        <h2>O que entregamos a hotéis no Algarve</h2>
+        <p class="section-lead">
+          Um sistema completo, não um site. Construído para converter pesquisas
+          em reservas directas.
+        </p>
+
+        <div class="bento-grid">
+          <article class="bento-item bento-large">
+            <h3>Motor de reservas próprio</h3>
+            <p>
+              Integração com o seu PMS (Mews, Opera, Cloudbeds, Protel) ou
+              channel managers (SiteMinder, Little Hotelier). Reserva em 3
+              passos, pagamento Stripe/Multibanco/MB WAY. Zero comissões a
+              terceiros.
+            </p>
+          </article>
+          <article class="bento-item">
+            <h3>Multi-idioma nativo</h3>
+            <p>PT, EN, ES, FR, DE com hreflang correto e URL por idioma.</p>
+          </article>
+          <article class="bento-item">
+            <h3>Lighthouse 95+</h3>
+            <p>
+              Astro + Cloudflare edge. Site carrega em menos de 1.5s em 4G no
+              Algarve.
+            </p>
+          </article>
+          <article class="bento-item">
+            <h3>SEO local afinado</h3>
+            <p>
+              Schema Hotel + LocalBusiness, Google Business Profile,
+              otimização para "hotel + cidade".
+            </p>
+          </article>
+          <article class="bento-item">
+            <h3>Galerias cinematográficas</h3>
+            <p>
+              Fotografia e vídeo drone profissional opcional. WebP progressivo.
+              Carregamento instantâneo mesmo com 200+ fotos.
+            </p>
+          </article>
+          <article class="bento-item bento-wide">
+            <h3>Analytics + relatórios mensais</h3>
+            <p>
+              GA4, mapas de calor, relatório mensal com reservas, origem de
+              tráfego e recomendações. Saiba exatamente de onde vêm os seus
+              hóspedes.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="proof-section">
+      <div class="container proof-inner">
+        <div class="proof-text">
+          <span class="eyebrow">Caso de estudo</span>
+          <h2>Desportos Náuticos de Alvor</h2>
+          <p>
+            Um negócio de hospitalidade adjacente com o mesmo desafio: demasiada
+            dependência de plataformas terceiras. Construímos site + motor de
+            reservas + loja de merchandise e o resultado fala por si.
+          </p>
+          <ul class="proof-list">
+            <li><strong>+40%</strong> reservas diretas em 6 meses</li>
+            <li><strong>98</strong> score Lighthouse mobile</li>
+            <li><strong>5 idiomas</strong> activos com SEO internacional</li>
+          </ul>
+          <a href="/portfolio/desportos-nauticos-alvor" class="link-underline">
+            Ver caso completo →
+          </a>
+        </div>
+        <div class="proof-visual">
+          <img
+            src="/images/portfolio/desportos-nauticos.webp"
+            alt="Desportos Náuticos de Alvor — caso de estudo Sueste Creative"
+            loading="lazy"
+            onerror="this.style.display='none'"
+          />
+        </div>
+      </div>
+    </section>
+
+    <section class="pricing-teaser">
+      <div class="container">
+        <h2>Investimento</h2>
+        <div class="pricing-grid">
+          <div class="pricing-card">
+            <span class="tier">Essencial</span>
+            <span class="price">desde 2.500€</span>
+            <p>
+              Site institucional + 3 idiomas + SEO base. Ideal para guesthouses
+              e alojamento local.
+            </p>
+          </div>
+          <div class="pricing-card featured">
+            <span class="tier">Completo</span>
+            <span class="price">desde 6.000€</span>
+            <p>
+              Site + motor de reservas + 5 idiomas + integrações PMS +
+              analytics. Ideal para hotéis boutique.
+            </p>
+          </div>
+          <div class="pricing-card">
+            <span class="tier">Premium</span>
+            <span class="price">sob consulta</span>
+            <p>
+              Resort / grupo hoteleiro com várias unidades, área reservada,
+              programa de fidelização, produção de vídeo drone.
+            </p>
+          </div>
+        </div>
+        <div class="pricing-cta">
+          <a href="/orcamento" class="btn-primary">Calcular Orçamento</a>
+          <span class="divider">ou</span>
+          <a
+            href="https://wa.me/351965494727?text=Ol%C3%A1%20Pedro%2C%20gostaria%20de%20falar%20sobre%20o%20site%20do%20meu%20hotel"
+            class="btn-secondary"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Falar no WhatsApp
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq-section">
+      <div class="container">
+        <h2>Perguntas frequentes</h2>
+        <div class="faq-list">
+          {
+            faqs.map((f) => (
+              <details class="faq-item">
+                <summary>{f.question}</summary>
+                <p>{f.answer}</p>
+              </details>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta">
+      <div class="container text-center">
+        <h2>Pronto para receber hóspedes directos?</h2>
+        <p>Orçamento em 24h. Sem compromisso.</p>
+        <a href="/orcamento" class="btn-primary">Começar Agora</a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .niche-page {
+    background: #050505;
+    color: #fff;
+    overflow-x: hidden;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .eyebrow {
+    display: inline-block;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #38bdf8;
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+  }
+
+  .niche-hero {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    padding-top: 140px;
+    padding-bottom: 4rem;
+    position: relative;
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 10;
+  }
+
+  .niche-hero h1 {
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    max-width: 900px;
+    margin: 0;
+  }
+
+  .highlight {
+    background: linear-gradient(135deg, #38bdf8 0%, #2563eb 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  .reveal-subtitle {
+    font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+    color: #a1a1aa;
+    max-width: 680px;
+    margin: 2rem 0 2.5rem;
+    line-height: 1.65;
+    font-weight: 300;
+  }
+
+  .cta-row {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    padding: 1rem 2rem;
+    border-radius: 100px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    font-size: 1rem;
+  }
+
+  .btn-primary {
+    background: #fff;
+    color: #000;
+  }
+
+  .btn-primary:hover {
+    transform: scale(1.04);
+    box-shadow: 0 10px 30px rgba(56, 189, 248, 0.4);
+  }
+
+  .btn-secondary {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+  }
+
+  .btn-secondary:hover {
+    border-color: #38bdf8;
+    background: rgba(56, 189, 248, 0.08);
+  }
+
+  .hero-blobs .blob {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    filter: blur(90px);
+    border-radius: 50%;
+    opacity: 0.28;
+    z-index: -1;
+  }
+
+  .blob-1 {
+    background: #38bdf8;
+    top: 10%;
+    right: -5%;
+  }
+
+  .blob-2 {
+    background: #2563eb;
+    bottom: -10%;
+    left: -5%;
+  }
+
+  section {
+    padding: 6rem 0;
+  }
+
+  section h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    margin: 0 0 3rem;
+    max-width: 800px;
+    line-height: 1.15;
+  }
+
+  .section-lead {
+    font-size: 1.15rem;
+    color: #a1a1aa;
+    max-width: 640px;
+    margin: -2rem 0 3.5rem;
+    line-height: 1.6;
+  }
+
+  .pain-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .pain-card {
+    padding: 2.5rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(15, 15, 15, 0.6);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+  }
+
+  .pain-card:hover {
+    border-color: rgba(56, 189, 248, 0.4);
+    transform: translateY(-4px);
+  }
+
+  .pain-number {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #38bdf8;
+    letter-spacing: 0.2em;
+    margin-bottom: 1rem;
+  }
+
+  .pain-card h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 0 0 1rem;
+    letter-spacing: -0.01em;
+  }
+
+  .pain-card p {
+    color: #a1a1aa;
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  .bento-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .bento-item {
+    padding: 2rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(15, 15, 15, 0.6);
+    backdrop-filter: blur(10px);
+  }
+
+  .bento-item h3 {
+    font-size: 1.2rem;
+    margin: 0 0 0.75rem;
+    font-weight: 700;
+  }
+
+  .bento-item p {
+    color: #a1a1aa;
+    line-height: 1.6;
+    margin: 0;
+    font-size: 0.95rem;
+  }
+
+  .bento-large {
+    grid-column: span 2;
+  }
+
+  .bento-wide {
+    grid-column: span 2;
+  }
+
+  .proof-section {
+    background: linear-gradient(
+      180deg,
+      rgba(56, 189, 248, 0.03),
+      transparent
+    );
+  }
+
+  .proof-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .proof-text h2 {
+    margin-bottom: 1.5rem;
+  }
+
+  .proof-text p {
+    color: #a1a1aa;
+    line-height: 1.7;
+    font-size: 1.1rem;
+  }
+
+  .proof-list {
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0;
+  }
+
+  .proof-list li {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    color: #d4d4d8;
+  }
+
+  .proof-list strong {
+    color: #38bdf8;
+    font-size: 1.4rem;
+    margin-right: 0.75rem;
+  }
+
+  .link-underline {
+    color: #38bdf8;
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 1px solid rgba(56, 189, 248, 0.4);
+    padding-bottom: 2px;
+  }
+
+  .link-underline:hover {
+    border-bottom-color: #38bdf8;
+  }
+
+  .proof-visual img {
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+  }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .pricing-card {
+    padding: 2.5rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(15, 15, 15, 0.6);
+  }
+
+  .pricing-card.featured {
+    border-color: #38bdf8;
+    background: rgba(56, 189, 248, 0.05);
+    position: relative;
+  }
+
+  .pricing-card .tier {
+    display: block;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #71717a;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .pricing-card .price {
+    display: block;
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+  }
+
+  .pricing-card p {
+    color: #a1a1aa;
+    line-height: 1.6;
+    margin: 0;
+    font-size: 0.95rem;
+  }
+
+  .pricing-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+  }
+
+  .pricing-cta .divider {
+    color: #71717a;
+    font-size: 0.9rem;
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    max-width: 860px;
+  }
+
+  .faq-item {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(15, 15, 15, 0.6);
+    border-radius: 14px;
+    padding: 1.5rem 1.75rem;
+    transition: border-color 0.2s ease;
+  }
+
+  .faq-item[open] {
+    border-color: rgba(56, 189, 248, 0.35);
+  }
+
+  .faq-item summary {
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.05rem;
+    list-style: none;
+    position: relative;
+    padding-right: 2rem;
+  }
+
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-item summary::after {
+    content: "+";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #38bdf8;
+    font-size: 1.5rem;
+    font-weight: 300;
+    transition: transform 0.2s ease;
+  }
+
+  .faq-item[open] summary::after {
+    transform: translateY(-50%) rotate(45deg);
+  }
+
+  .faq-item p {
+    color: #a1a1aa;
+    line-height: 1.7;
+    margin: 1rem 0 0;
+  }
+
+  .final-cta {
+    padding: 8rem 0;
+    text-align: center;
+  }
+
+  .final-cta h2 {
+    margin: 0 auto 1rem;
+    max-width: none;
+  }
+
+  .final-cta p {
+    color: #a1a1aa;
+    font-size: 1.15rem;
+    margin: 0 0 2.5rem;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  @media (max-width: 900px) {
+    .pain-grid,
+    .bento-grid,
+    .pricing-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .bento-large,
+    .bento-wide {
+      grid-column: span 1;
+    }
+
+    .proof-inner {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    section {
+      padding: 4rem 0;
+    }
+  }
+</style>
