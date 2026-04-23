@@ -122,6 +122,35 @@
             ]
         },
         {
+            "id": "google_ads",
+            "name_pt": "Google Ads",
+            "name_en": "Google Ads",
+            "note_pt": "Valores mensais de gestão. Investimento publicitário não incluído.",
+            "note_en": "Monthly management fee. Ad spend not included.",
+            "is_monthly": true,
+            "options": [
+                {
+                    "id": "ads_starter",
+                    "name_pt": "Starter (Search, 1 campanha)",
+                    "name_en": "Starter (Search, 1 campaign)",
+                    "price": 250
+                },
+                {
+                    "id": "ads_growth",
+                    "name_pt": "Growth (Search + PMax, conversões)",
+                    "name_en": "Growth (Search + PMax, conversions)",
+                    "price": 450
+                },
+                {
+                    "id": "ads_scale",
+                    "name_pt": "Scale (full-funnel + YouTube + relatórios)",
+                    "name_en": "Scale (full-funnel + YouTube + reports)",
+                    "price": 750,
+                    "type": "starting_at"
+                }
+            ]
+        },
+        {
             "id": "audiovisual",
             "name_pt": "Produção Audiovisual",
             "name_en": "Audiovisual Production",

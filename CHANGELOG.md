@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased] - 2026-04-23
 ### Added
+- **Orçamento — Google Ads Card**: New monthly-management service in the quote calculator with 3 tiers (Starter 250€, Growth 450€, Scale 750€+). Note clarifies ad spend is not included. BUNDLE_MAP updated so `?bundle=...ads...` from the Ecossistema Digital CTA preselects the Growth tier. Docking behaviour untouched.
+
 - **Blog — Queue Rescue**: 4 new PT+EN post pairs drafted and scheduled every ~7 days through 2026-05-29 (technical SEO checklist, Google Business Profile guide, website vs landing page, Core Web Vitals in practice). Existing future posts pulled earlier (2026-04-27 + 2026-05-01) to fill the April–May gap. Every post follows the full SEO checklist (keyword-focused title, meta description 140-160 chars, H2/H3 hierarchy, descriptive alt text, ≥3 internal links, ≥1 authoritative outbound reference, hreflang pair).
 - **Blog queue guardrail**: `scripts/check-blog-queue.mjs` (run via `npm run blog:queue`) reports live vs scheduled posts per language and exits non-zero if any language falls below 3 future-dated posts. Prevents silent queue starvation.
 - **Blog README**: `src/content/blog/README.md` documents how the scheduled-publish workflow works, the frontmatter schema, per-post SEO checklist, and cadence target. Prevents future "I thought it was automatic" confusion.

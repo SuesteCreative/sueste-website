@@ -168,6 +168,7 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
             graphic: { serviceId: 'branding',     optionId: 'brand_book'                              },
             drone:   { serviceId: 'photo_pack',   optionId: 'photo_15',      group: 'audiovisual'     },
             social:  { serviceId: 'social_media', optionId: 'social_medium'                           },
+            ads:     { serviceId: 'google_ads',   optionId: 'ads_growth'                              },
         };
 
         const keys = bundle.split(',').map(k => k.trim()).filter(k => BUNDLE_MAP[k]);
