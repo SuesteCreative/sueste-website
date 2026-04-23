@@ -90,11 +90,46 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
     const [travelKm, setTravelKm] = useState<number | null>(null);
     const [travelLoading, setTravelLoading] = useState(false);
     const [travelError, setTravelError] = useState<string | null>(null);
-    const [travelSuggestions, setTravelSuggestions] = useState<Array<{ display_name: string; lat: string; lon: string }>>([]);
+    const [travelSuggestions, setTravelSuggestions] = useState<Array<{ display_name: string; placeId: string; lat?: string; lon?: string }>>([]);
     const [showSuggestions, setShowSuggestions] = useState(false);
     const [suggestLoading, setSuggestLoading] = useState(false);
     const [activeSuggestion, setActiveSuggestion] = useState(-1);
     const suggestAbortRef = React.useRef<AbortController | null>(null);
+    const sessionTokenRef = React.useRef<string | null>(null);
+    const GMAPS_KEY = (import.meta as any).env?.PUBLIC_GOOGLE_MAPS_KEY as string | undefined;
+
+    function getSessionToken() {
+        if (!sessionTokenRef.current) {
+            sessionTokenRef.current = (typeof crypto !== 'undefined' && crypto.randomUUID)
+                ? crypto.randomUUID()
+                : Math.random().toString(36).slice(2) + Date.now().toString(36);
+        }
+        return sessionTokenRef.current;
+    }
+
+    function resetSessionToken() {
+        sessionTokenRef.current = null;
+    }
+
+    async function fetchPlaceLocation(placeId: string): Promise<{ lat: number; lng: number; address: string } | null> {
+        if (!GMAPS_KEY) return null;
+        const url = `https://places.googleapis.com/v1/places/${encodeURIComponent(placeId)}?sessionToken=${encodeURIComponent(getSessionToken())}`;
+        const res = await fetch(url, {
+            headers: {
+                'X-Goog-Api-Key': GMAPS_KEY,
+                'X-Goog-FieldMask': 'location,formattedAddress',
+            },
+        });
+        if (!res.ok) return null;
+        const data = await res.json();
+        resetSessionToken();
+        if (!data?.location) return null;
+        return {
+            lat: data.location.latitude,
+            lng: data.location.longitude,
+            address: data.formattedAddress || '',
+        };
+    }
 
     // Scroll detection and height measurement
     useEffect(() => {
@@ -238,14 +273,6 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
         trackEvent('travel_calculated', 'BudgetCalculator', label, Math.round(km));
     }
 
-    async function geocodeOnce(q: string): Promise<{ lat: string; lon: string; display_name: string } | null> {
-        const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(q)}&format=json&limit=1&countrycodes=pt`;
-        const res = await fetch(url, { headers: { 'Accept-Language': lang === 'pt' ? 'pt' : 'en' } });
-        const data = await res.json();
-        if (Array.isArray(data) && data[0]) return data[0];
-        return null;
-    }
-
     async function calculateTravel() {
         const q = travelAddress.trim();
         if (!q) return;
@@ -254,35 +281,16 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
         setTravelError(null);
         setTravelMatchedAddress(null);
         try {
-            // 1. Prefer the currently-loaded autocomplete suggestions (reuse cached coords)
-            if (travelSuggestions.length > 0) {
-                const top = travelSuggestions[0];
-                setTravelMatchedAddress(top.display_name);
-                await routeFromCoords(parseFloat(top.lat), parseFloat(top.lon), top.display_name);
-                return;
+            if (travelSuggestions.length === 0) {
+                throw new Error(lang === 'pt' ? 'Escolhe uma morada da lista de sugestões.' : 'Please pick an address from the suggestions list.');
             }
-
-            // 2. Try the full query verbatim
-            let match = await geocodeOnce(q);
-
-            // 3. If no match, progressively strip trailing segments (apartment/block details)
-            //    Detailed queries like "Rua X, Bloco D2, 6G, Faro" fail if Bloco/andar not indexed.
-            if (!match) {
-                const parts = q.split(',').map(p => p.trim()).filter(Boolean);
-                for (let n = parts.length - 1; n >= 1 && !match; n--) {
-                    const shorter = parts.slice(0, n).join(', ');
-                    // Nominatim policy: keep requests spaced — small delay between retries
-                    await new Promise(r => setTimeout(r, 1100));
-                    match = await geocodeOnce(shorter);
-                }
+            const top = travelSuggestions[0];
+            const loc = await fetchPlaceLocation(top.placeId);
+            if (!loc) {
+                throw new Error(lang === 'pt' ? 'Não foi possível obter coordenadas.' : 'Could not retrieve coordinates.');
             }
-
-            if (!match) {
-                throw new Error(lang === 'pt' ? 'Morada não encontrada. Tenta ser mais específico ou escolhe uma sugestão da lista.' : 'Address not found. Try being more specific or pick a suggestion from the list.');
-            }
-
-            setTravelMatchedAddress(match.display_name);
-            await routeFromCoords(parseFloat(match.lat), parseFloat(match.lon), match.display_name);
+            setTravelMatchedAddress(loc.address || top.display_name);
+            await routeFromCoords(loc.lat, loc.lng, loc.address || top.display_name);
         } catch (e: any) {
             setTravelError(e?.message || (lang === 'pt' ? 'Erro ao calcular.' : 'Error calculating.'));
             setTravelKm(null);
@@ -291,7 +299,7 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
         }
     }
 
-    async function pickSuggestion(s: { display_name: string; lat: string; lon: string }) {
+    async function pickSuggestion(s: { display_name: string; placeId: string; lat?: string; lon?: string }) {
         setTravelAddress(s.display_name);
         setTravelMatchedAddress(s.display_name);
         setShowSuggestions(false);
@@ -300,7 +308,12 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
         setTravelLoading(true);
         setTravelError(null);
         try {
-            await routeFromCoords(parseFloat(s.lat), parseFloat(s.lon), s.display_name);
+            const loc = await fetchPlaceLocation(s.placeId);
+            if (!loc) {
+                throw new Error(lang === 'pt' ? 'Não foi possível obter coordenadas.' : 'Could not retrieve coordinates.');
+            }
+            setTravelMatchedAddress(loc.address || s.display_name);
+            await routeFromCoords(loc.lat, loc.lng, loc.address || s.display_name);
         } catch (e: any) {
             setTravelError(e?.message || (lang === 'pt' ? 'Erro ao calcular.' : 'Error calculating.'));
             setTravelKm(null);
@@ -309,10 +322,15 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
         }
     }
 
-    // Debounced address suggestions (Nominatim)
+    // Debounced address suggestions (Google Places Autocomplete — New)
     useEffect(() => {
         const q = travelAddress.trim();
         if (q.length < 3) {
+            setTravelSuggestions([]);
+            setSuggestLoading(false);
+            return;
+        }
+        if (!GMAPS_KEY) {
             setTravelSuggestions([]);
             setSuggestLoading(false);
             return;
@@ -323,21 +341,43 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
             suggestAbortRef.current = controller;
             setSuggestLoading(true);
             try {
-                const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(q)}&format=json&limit=5&countrycodes=pt&addressdetails=0`;
-                const res = await fetch(url, {
+                const res = await fetch('https://places.googleapis.com/v1/places:autocomplete', {
+                    method: 'POST',
                     signal: controller.signal,
-                    headers: { 'Accept-Language': lang === 'pt' ? 'pt' : 'en' }
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Goog-Api-Key': GMAPS_KEY,
+                    },
+                    body: JSON.stringify({
+                        input: q,
+                        sessionToken: getSessionToken(),
+                        includedRegionCodes: ['pt'],
+                        languageCode: lang === 'pt' ? 'pt-PT' : 'en',
+                    }),
                 });
+                if (!res.ok) {
+                    setTravelSuggestions([]);
+                    return;
+                }
                 const data = await res.json();
-                if (Array.isArray(data)) setTravelSuggestions(data);
+                const suggestions = Array.isArray(data?.suggestions) ? data.suggestions : [];
+                const mapped = suggestions
+                    .map((s: any) => s?.placePrediction)
+                    .filter(Boolean)
+                    .map((p: any) => ({
+                        display_name: p?.text?.text || p?.structuredFormat?.mainText?.text || '',
+                        placeId: p?.placeId || '',
+                    }))
+                    .filter((s: any) => s.placeId && s.display_name);
+                setTravelSuggestions(mapped);
             } catch (e: any) {
                 if (e?.name !== 'AbortError') setTravelSuggestions([]);
             } finally {
                 setSuggestLoading(false);
             }
-        }, 350);
+        }, 300);
         return () => clearTimeout(handle);
-    }, [travelAddress, lang]);
+    }, [travelAddress, lang, GMAPS_KEY]);
 
     const calculateEstimation = () => {
         let baseSum = 0;
@@ -653,7 +693,7 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                                                             )}
                                                             {travelSuggestions.map((s, i) => (
                                                                 <li
-                                                                    key={`${s.lat},${s.lon},${i}`}
+                                                                    key={`${s.placeId},${i}`}
                                                                     className={`travel-suggestion ${i === activeSuggestion ? 'active' : ''}`}
                                                                     role="option"
                                                                     aria-selected={i === activeSuggestion}
