@@ -4,12 +4,16 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased] - 2026-04-23
 ### Added
+- **Ecossistema Digital — Google Ads Node**: Sixth node added to the ServiceBundle pipeline (green accent, bullseye icon). Connections, footer pills, and mobile list auto-include it. Path topY routing extended for the longer 5-skip reach.
+
 - **Serviços — Partner & Google Ads Cards**: Expanded BentoServices from 4 to 6 cards in a clean 3×2 grid. New "Fotografia Profissional" card showcases the Nadine Campos partnership (logo badge, link to `/parcerias/nadine-campos`); new "Google Ads" card covers performance-marketing services.
 - **Serviços page — Google Ads section**: New detailed section (`#ads`) on `/servicos` and `/en/services` with features (Search & PMax, Conversion Tracking, ROAS Optimization, Reporting).
 - **Card CTAs + Deep Links**: Every bento card is now a clickable link with a matching "Ver serviço" / "View service" CTA ("Ver parceria" for the partner card). Hash-anchored hrefs auto-scroll to the relevant section on the Serviços page (`/servicos#web`, `#design`, `#social`, `#video`, `#ads`).
 - **Entry Animations**: Ecossistema Digital stage (desktop + mobile lists) now fades/slides in via `data-reveal` when scrolled into view. Section headers rendered through `Section.astro` now animate on scroll (data-reveal applied to `.section-header`).
 
 ### Changed
+- **Ecossistema Digital — Line/Card Alignment**: Switched SVG `preserveAspectRatio` from `xMidYMid meet` to `none` so connection lines stretch to exactly match HTML card positions. Previously the SVG scaled to fit by height and ended up narrower than the card row, making connections appear to terminate mid-air instead of at card edges. Card width trimmed 148px → 132px so 6 nodes fit at the 1024px desktop breakpoint.
+
 - **Serviços Page Rhythm**: Each service section now fits the desktop viewport — reduced `.service-section` padding (12rem → 6rem). Section icons now match the landing bento icons 1:1 and inherit a per-section accent color (blue / amber / purple / cyan / green) threaded via `--accent` CSS var — hover glow, bento-item highlights, and border gradients all follow the same accent.
 
 ### Fixed

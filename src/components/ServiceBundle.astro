@@ -9,21 +9,22 @@ const services = [
   { svc: "graphic", name: "Graphic Design",   accent: "#60a5fa", icon: `<path d="m12 19 7-7 3 3-7 7-3-3z"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="m2 2 5 5"/><circle cx="11" cy="11" r="2"/>` },
   { svc: "drone",   name: "Foto & Drone",     accent: "#7dd3fc", icon: `<path d="M12 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"/><path d="M7 4l-3 3"/><path d="M17 4l3 3"/><path d="M7 20l-3 -3"/><path d="M17 20l3 -3"/><path d="M4 7m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"/><path d="M20 7m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"/><path d="M4 17m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"/><path d="M20 17m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"/>` },
   { svc: "social",  name: "Social Media",     accent: "#bae6fd", icon: `<path d="M18 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/><path d="M6 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/><path d="M18 22a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/><line x1="15.18" y1="5.73" x2="8.82" y2="9.27"/><line x1="8.82" y1="14.73" x2="15.18" y2="18.27"/>` },
+  { svc: "ads",     name: "Google Ads",       accent: "#34d399", icon: `<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>` },
 ];
 
 // Node x positions in the SVG viewBox (0 0 1100 380)
-// Centered at y = 190
-const xs = [110, 310, 550, 790, 990];
+// Centered at y = 190. 6 nodes evenly spaced between x=110 and x=990.
+const xs = [110, 286, 462, 638, 814, 990];
 const Y  = 190;
 
 // How far above node-center each skip level routes (clears card tops at ~Y-65)
 // skip 1 = bridge over 1 node, skip 2 = bridge over 2, etc.
-const topYs = [100, 60, 22, -10]; // indexed by (j - i - 1), i.e. skip count
+const topYs = [100, 60, 22, -10, -42]; // indexed by (j - i - 1), i.e. skip count
 
-// Pre-compute all 10 (i,j) path data — orthogonal routing for skips
+// Pre-compute all (i,j) path data — orthogonal routing for skips
 const pairs: Array<{ key: string; d: string; color: string }> = [];
-for (let i = 0; i < 5; i++) {
-  for (let j = i + 1; j < 5; j++) {
+for (let i = 0; i < xs.length; i++) {
+  for (let j = i + 1; j < xs.length; j++) {
     const skip = j - i - 1; // 0 = adjacent nodes
     const d = skip === 0
       // Adjacent: straight horizontal line
@@ -54,7 +55,7 @@ const cssLefts = xs.map(x => `${(x / 1100 * 100).toFixed(2)}%`);
     <!-- Desktop visualization -->
     <div class="bundle-stage" id="bundle-stage" data-reveal>
 
-      <svg class="bundle-svg" viewBox="0 0 1100 380" preserveAspectRatio="xMidYMid meet" aria-hidden="true" style="overflow:visible">
+      <svg class="bundle-svg" viewBox="0 0 1100 380" preserveAspectRatio="none" aria-hidden="true" style="overflow:visible">
         <defs>
           <filter id="pglow" x="-60%" y="-60%" width="220%" height="220%">
             <feGaussianBlur stdDeviation="3" result="b"/>
@@ -242,7 +243,7 @@ const cssLefts = xs.map(x => `${(x / 1100 * 100).toFixed(2)}%`);
   .svc-node {
     position: absolute;
     transform: translate(-50%, -50%);
-    width: 148px;
+    width: 132px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -501,9 +502,9 @@ const cssLefts = xs.map(x => `${(x / 1100 * 100).toFixed(2)}%`);
 </style>
 
 <script>
-  const SVC_INIT = ['web', 'crm', 'graphic', 'drone', 'social'];
-  // CSS left% for each slot — mirrors xs=[110,310,550,790,990] / 1100 * 100
-  const SLOT_PCT = [10, 28.18, 50, 71.82, 90];
+  const SVC_INIT = ['web', 'crm', 'graphic', 'drone', 'social', 'ads'];
+  // CSS left% for each slot — mirrors xs=[110,286,462,638,814,990] / 1100 * 100
+  const SLOT_PCT = [10, 26, 42, 58, 74, 90];
 
   let svcOrder = [...SVC_INIT];
   let activeMap: Record<string, boolean> = Object.fromEntries(SVC_INIT.map(s => [s, true]));
