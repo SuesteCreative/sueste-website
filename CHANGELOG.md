@@ -9,8 +9,11 @@ All notable changes to this project will be documented in this file.
 - **Card CTAs + Deep Links**: Every bento card is now a clickable link with a matching "Ver serviço" / "View service" CTA ("Ver parceria" for the partner card). Hash-anchored hrefs auto-scroll to the relevant section on the Serviços page (`/servicos#web`, `#design`, `#social`, `#video`, `#ads`).
 - **Entry Animations**: Ecossistema Digital stage (desktop + mobile lists) now fades/slides in via `data-reveal` when scrolled into view. Section headers rendered through `Section.astro` now animate on scroll (data-reveal applied to `.section-header`).
 
+### Changed
+- **Serviços Page Rhythm**: Each service section now fits the desktop viewport — reduced `.service-section` padding (12rem → 6rem). Section icons now match the landing bento icons 1:1 and inherit a per-section accent color (blue / amber / purple / cyan / green) threaded via `--accent` CSS var — hover glow, bento-item highlights, and border gradients all follow the same accent.
+
 ### Fixed
-- **Serviços PT Titles**: Card titles now translate correctly on the Portuguese landing ("Desenvolvimento Web", "Fotografia Drone", "Design Gráfico"); previously hardcoded in English only.
+- **Serviços PT Titles**: Card titles now translate correctly on the Portuguese landing ("Desenvolvimento Web", "Fotografia Drone", "Redes Sociais", "Design Gráfico"); previously hardcoded in English only.
 - **Ecossistema Digital Spacing**: Tightened vertical rhythm on landing — reduced header margin (4rem → 2rem), stage height (420px → 300px), and stage margin (3rem → 2rem) so subtitle-to-cards and cards-to-footer gaps match.
 
 ## [v2.1] - 2026-02-27
