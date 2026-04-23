@@ -1,7 +1,7 @@
 ---
 title: "Como Escolher uma Agência de Web Design em Portugal: Guia Prático"
 description: "O que avaliar antes de contratar uma agência de web design em Portugal. Portfólio, tecnologia, preço, suporte: tudo o que precisa de saber para tomar a decisão certa."
-pubDate: 2026-04-27
+pubDate: 2026-04-23
 author: "Sueste Creative"
 image: "https://images.pexels.com/photos/3182812/pexels-photo-3182812.jpeg?auto=compress&cs=tinysrgb&w=1600"
 imageAlt: "Reunião de equipa a analisar propostas de design em computador portátil"
