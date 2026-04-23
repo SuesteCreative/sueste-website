@@ -511,10 +511,13 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
             return;
         }
 
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 30000);
         try {
             const response = await fetch('/api/quote', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
+                signal: controller.signal,
                 body: JSON.stringify({
                     ...formState,
                     selections,
@@ -541,9 +544,16 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                 trackEvent('quote_submit_failure', 'BudgetCalculator', result.error || 'unknown');
                 setStatus({ type: 'error', msg: result.error || (lang === 'pt' ? 'Erro ao enviar. Tente novamente.' : 'Error sending. Try again.') });
             }
-        } catch (error) {
-            setStatus({ type: 'error', msg: lang === 'pt' ? 'Erro de comunicação. Tente novamente.' : 'Communication error. Try again.' });
+        } catch (error: any) {
+            const timedOut = error?.name === 'AbortError';
+            setStatus({
+                type: 'error',
+                msg: timedOut
+                    ? (lang === 'pt' ? 'Pedido demorou demasiado. Verifica a tua ligação e tenta novamente.' : 'Request took too long. Check your connection and try again.')
+                    : (lang === 'pt' ? 'Erro de comunicação. Tente novamente.' : 'Communication error. Try again.'),
+            });
         } finally {
+            clearTimeout(timeoutId);
             setIsSubmitting(false);
         }
     };
@@ -621,7 +631,7 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                                     onClick={(e) => e.stopPropagation()}
                                     title={lang === 'pt' ? 'Ver condições do parceiro' : 'View partner terms'}
                                 >
-                                    <img src={service.partner_logo} alt="Partner Logo" className="partner-logo-calc" />
+                                    <img src={service.partner_logo} alt={`${lang === 'pt' ? 'Logo do parceiro' : 'Partner logo'}: ${service.name_pt || service.name_en || ''}`} className="partner-logo-calc" />
                                 </a>
                             </div>
                         )}
@@ -783,7 +793,7 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                             onClick={(e) => e.stopPropagation()}
                             title={lang === 'pt' ? 'Ver parceiro' : 'View partner'}
                         >
-                            <img src={service.partner_logo} alt="Partner Logo" className="partner-logo-calc" />
+                            <img src={service.partner_logo} alt={`${lang === 'pt' ? 'Logo do parceiro' : 'Partner logo'}: ${service.name_pt || service.name_en || ''}`} className="partner-logo-calc" />
                         </a>
                     )}
                     {service.is_monthly && <span className="service-badge">{t.monthlyNote}</span>}

@@ -85,12 +85,12 @@ Priority order based on SEO, trust, and conversion impact.
 - [x] Unoptimized images >1MB — converted crm-iphone/macbook/ipad PNG → WebP (91-94% smaller), removed orphan sueste-logo-creation.png (webp already used)
 
 ### Medium
-- [ ] Meta descriptions >160 chars — en/blog/index, en/about, en/work/dna-crm-backoffice, en/services, blog/index, en/quote, orcamento
-- [ ] Dead code — delete src/components/QuoteBuilder.jsx (322 lines, orphan) and src/layouts/Layout.astro (replaced by BaseLayout)
-- [ ] OSRM reliability risk — BudgetCalculator.tsx:264 uses public demo router.project-osrm.org (documented, acceptable for now)
-- [ ] handleSubmit missing AbortController timeout — BudgetCalculator.tsx:544 fetch has no timeout; add 30s
-- [ ] hreflang broken reciprocal pair — en/blog/index.astro:21 missing hreflangEn; blog/index has inverse omission
-- [ ] Generic alt "Partner Logo" — BudgetCalculator.tsx:624 and :786, interpolate partner name
+- [x] Meta descriptions >160 chars — en/blog/index, en/about, en/work/dna-crm-backoffice, en/services, blog/index, en/quote, orcamento
+- [x] Dead code — delete src/components/QuoteBuilder.jsx (322 lines, orphan) and src/layouts/Layout.astro (replaced by BaseLayout)
+- [x] OSRM reliability risk — BudgetCalculator.tsx:264 uses public demo router.project-osrm.org (known risk; acceptable — low traffic, no SLA needed; revisit if 429/5xx observed, candidate replacement: Google Routes API or self-host OSRM)
+- [x] handleSubmit missing AbortController timeout — BudgetCalculator.tsx:544 fetch has no timeout; add 30s
+- [x] hreflang broken reciprocal pair — en/blog/index.astro already had hreflangEn; PT blog/index was missing — now added
+- [x] Generic alt "Partner Logo" — BudgetCalculator.tsx:624 and :786, interpolate partner name
 
 ### Low
 - [ ] Page titles >60 chars with brand suffix — shorten longest offenders
