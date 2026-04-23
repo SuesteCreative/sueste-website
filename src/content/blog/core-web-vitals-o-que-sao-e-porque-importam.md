@@ -1,7 +1,7 @@
 ---
 title: "Core Web Vitals: O que São e Porque Importam para o Seu Negócio"
 description: "Guia simples sobre Core Web Vitals: as métricas de velocidade e experiência do Google que afetam diretamente o ranking do seu site nos resultados de pesquisa."
-pubDate: 2026-05-15
+pubDate: 2026-05-01
 author: "Sueste Creative"
 image: "https://images.pexels.com/photos/147413/twitter-facebook-together-exchange-of-information-147413.jpeg?auto=compress&cs=tinysrgb&w=1600"
 imageAlt: "Dashboard de analytics com métricas de performance num ecrã"
