@@ -93,7 +93,7 @@ Priority order based on SEO, trust, and conversion impact.
 - [x] Generic alt "Partner Logo" — BudgetCalculator.tsx:624 and :786, interpolate partner name
 
 ### Low
-- [ ] Page titles >60 chars with brand suffix — shorten longest offenders
-- [ ] og:image fixed across all pages — blog posts + case studies lack per-page OG
-- [ ] framer-motion client:load on orcamento/quote (~120KB) — switch to client:visible
-- [ ] BudgetCalculator useEffect order fragile — localStorage vs URL bundle param race
+- [x] Page titles >60 chars with brand suffix — shortened worst offenders (index PT/EN, orcamento, quote, services EN, partners EN)
+- [x] og:image fixed across all pages — ProjectLayout now auto-passes heroImage as og:image for all 10 portfolio case studies (blog posts still need per-post frontmatter, not addressed here)
+- [x] framer-motion client:load on orcamento/quote (~120KB) — switched to client:visible
+- [x] BudgetCalculator useEffect order fragile — consolidated hydration into single effect; URL bundle param wins, else localStorage

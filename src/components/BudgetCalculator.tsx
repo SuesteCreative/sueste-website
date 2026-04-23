@@ -195,29 +195,10 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
 
     const shouldCollapse = isStickyMobile;
 
-    // Load from local storage
-    useEffect(() => {
-        const savedSelections = localStorage.getItem('budgetSelections');
-        const savedAddons = localStorage.getItem('budgetAddons');
-        const savedHours = localStorage.getItem('budgetAudiovisualHours');
-        const savedGroups = localStorage.getItem('budgetExpandedGroups');
-
-        if (savedSelections) setSelections(JSON.parse(savedSelections));
-        if (savedAddons) setAddons(JSON.parse(savedAddons));
-        if (savedHours) setAudiovisualHours(parseInt(savedHours, 10));
-        if (savedGroups) setExpandedGroups(JSON.parse(savedGroups));
-
-        const savedAddr = localStorage.getItem('budgetTravelAddress');
-        const savedKm = localStorage.getItem('budgetTravelKm');
-        if (savedAddr) setTravelAddress(savedAddr);
-        if (savedKm) setTravelKm(parseFloat(savedKm));
-    }, []);
-
-    // Load from URL ?bundle= param — takes priority over localStorage
+    // Initial state hydration: URL ?bundle= param wins over localStorage.
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
         const bundle = params.get('bundle');
-        if (!bundle) return;
 
         const BUNDLE_MAP: Record<string, { serviceId: string; optionId: string; group?: string }> = {
             web:     { serviceId: 'website',      optionId: 'web_medium',    group: 'web_development' },
@@ -228,23 +209,37 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
             ads:     { serviceId: 'google_ads',   optionId: 'ads_growth'                              },
         };
 
-        const keys = bundle.split(',').map(k => k.trim()).filter(k => BUNDLE_MAP[k]);
-        if (keys.length === 0) return;
+        const bundleKeys = bundle ? bundle.split(',').map(k => k.trim()).filter(k => BUNDLE_MAP[k]) : [];
 
-        const newSelections: SelectionsState = {};
-        const newGroups: { [key: string]: boolean } = {};
-        keys.forEach(key => {
-            const m = BUNDLE_MAP[key];
-            newSelections[m.serviceId] = { option: m.optionId };
-            if (m.group) newGroups[m.group] = true;
-        });
+        if (bundleKeys.length > 0) {
+            const newSelections: SelectionsState = {};
+            const newGroups: { [key: string]: boolean } = {};
+            bundleKeys.forEach(key => {
+                const m = BUNDLE_MAP[key];
+                newSelections[m.serviceId] = { option: m.optionId };
+                if (m.group) newGroups[m.group] = true;
+            });
+            setSelections(newSelections);
+            setExpandedGroups(newGroups);
 
-        setSelections(newSelections);
-        setExpandedGroups(newGroups);
+            const url = new URL(window.location.href);
+            url.searchParams.delete('bundle');
+            history.replaceState(null, '', url.toString());
+        } else {
+            const savedSelections = localStorage.getItem('budgetSelections');
+            const savedAddons = localStorage.getItem('budgetAddons');
+            const savedHours = localStorage.getItem('budgetAudiovisualHours');
+            const savedGroups = localStorage.getItem('budgetExpandedGroups');
+            if (savedSelections) setSelections(JSON.parse(savedSelections));
+            if (savedAddons) setAddons(JSON.parse(savedAddons));
+            if (savedHours) setAudiovisualHours(parseInt(savedHours, 10));
+            if (savedGroups) setExpandedGroups(JSON.parse(savedGroups));
+        }
 
-        const url = new URL(window.location.href);
-        url.searchParams.delete('bundle');
-        history.replaceState(null, '', url.toString());
+        const savedAddr = localStorage.getItem('budgetTravelAddress');
+        const savedKm = localStorage.getItem('budgetTravelKm');
+        if (savedAddr) setTravelAddress(savedAddr);
+        if (savedKm) setTravelKm(parseFloat(savedKm));
     }, []);
 
     // Save to local storage
