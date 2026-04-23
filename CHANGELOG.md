@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased] - 2026-04-23
+### Fixed
+- **Ecossistema Digital Spacing**: Tightened vertical rhythm on landing — reduced header margin (4rem → 2rem), stage height (420px → 300px), and stage margin (3rem → 2rem) so subtitle-to-cards and cards-to-footer gaps match.
+
 ## [v2.1] - 2026-02-27
 ### Fixed
 - **Mobile Background Cohesion**: Made body background transparent to reveal global animated blobs across all sections, eliminating abrupt black cuts on the landing page.
