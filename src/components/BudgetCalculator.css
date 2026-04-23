@@ -1318,3 +1318,53 @@
     color: #ec4899;
     font-weight: 700;
 }
+
+.travel-input-wrap {
+    flex: 1;
+    min-width: 220px;
+    position: relative;
+}
+
+.travel-input-wrap .travel-input {
+    width: 100%;
+}
+
+.travel-suggestions {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    z-index: 20;
+    list-style: none;
+    margin: 0;
+    padding: 4px;
+    max-height: 260px;
+    overflow-y: auto;
+    background: #0f172a;
+    border: 1px solid rgba(236, 72, 153, 0.3);
+    border-radius: 10px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+}
+
+.travel-suggestion {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.85);
+    cursor: pointer;
+    border-radius: 6px;
+    line-height: 1.4;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.travel-suggestion:hover,
+.travel-suggestion.active {
+    background: rgba(236, 72, 153, 0.15);
+    color: #fff;
+}
+
+.travel-suggestion-empty {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.82rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-style: italic;
+}

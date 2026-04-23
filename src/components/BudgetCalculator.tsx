@@ -89,6 +89,11 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
     const [travelKm, setTravelKm] = useState<number | null>(null);
     const [travelLoading, setTravelLoading] = useState(false);
     const [travelError, setTravelError] = useState<string | null>(null);
+    const [travelSuggestions, setTravelSuggestions] = useState<Array<{ display_name: string; lat: string; lon: string }>>([]);
+    const [showSuggestions, setShowSuggestions] = useState(false);
+    const [suggestLoading, setSuggestLoading] = useState(false);
+    const [activeSuggestion, setActiveSuggestion] = useState(-1);
+    const suggestAbortRef = React.useRef<AbortController | null>(null);
 
     // Scroll detection and height measurement
     useEffect(() => {
@@ -220,9 +225,22 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
         else localStorage.removeItem('budgetTravelKm');
     }, [travelAddress, travelKm]);
 
+    async function routeFromCoords(destLat: number, destLng: number, label: string) {
+        const rUrl = `https://router.project-osrm.org/route/v1/driving/${NADINE_ORIGIN.lng},${NADINE_ORIGIN.lat};${destLng},${destLat}?overview=false`;
+        const rRes = await fetch(rUrl);
+        const rData = await rRes.json();
+        if (!rData.routes?.[0]) {
+            throw new Error(lang === 'pt' ? 'Não foi possível calcular a rota.' : 'Could not calculate the route.');
+        }
+        const km = rData.routes[0].distance / 1000;
+        setTravelKm(km);
+        trackEvent('travel_calculated', 'BudgetCalculator', label, Math.round(km));
+    }
+
     async function calculateTravel() {
         const q = travelAddress.trim();
         if (!q) return;
+        setShowSuggestions(false);
         setTravelLoading(true);
         setTravelError(null);
         try {
@@ -232,18 +250,7 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
             if (!Array.isArray(geoData) || geoData.length === 0) {
                 throw new Error(lang === 'pt' ? 'Morada não encontrada. Tenta ser mais específico.' : 'Address not found. Try being more specific.');
             }
-            const destLat = parseFloat(geoData[0].lat);
-            const destLng = parseFloat(geoData[0].lon);
-
-            const rUrl = `https://router.project-osrm.org/route/v1/driving/${NADINE_ORIGIN.lng},${NADINE_ORIGIN.lat};${destLng},${destLat}?overview=false`;
-            const rRes = await fetch(rUrl);
-            const rData = await rRes.json();
-            if (!rData.routes?.[0]) {
-                throw new Error(lang === 'pt' ? 'Não foi possível calcular a rota.' : 'Could not calculate the route.');
-            }
-            const km = rData.routes[0].distance / 1000;
-            setTravelKm(km);
-            trackEvent('travel_calculated', 'BudgetCalculator', q, Math.round(km));
+            await routeFromCoords(parseFloat(geoData[0].lat), parseFloat(geoData[0].lon), q);
         } catch (e: any) {
             setTravelError(e?.message || (lang === 'pt' ? 'Erro ao calcular.' : 'Error calculating.'));
             setTravelKm(null);
@@ -251,6 +258,53 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
             setTravelLoading(false);
         }
     }
+
+    async function pickSuggestion(s: { display_name: string; lat: string; lon: string }) {
+        setTravelAddress(s.display_name);
+        setShowSuggestions(false);
+        setTravelSuggestions([]);
+        setActiveSuggestion(-1);
+        setTravelLoading(true);
+        setTravelError(null);
+        try {
+            await routeFromCoords(parseFloat(s.lat), parseFloat(s.lon), s.display_name);
+        } catch (e: any) {
+            setTravelError(e?.message || (lang === 'pt' ? 'Erro ao calcular.' : 'Error calculating.'));
+            setTravelKm(null);
+        } finally {
+            setTravelLoading(false);
+        }
+    }
+
+    // Debounced address suggestions (Nominatim)
+    useEffect(() => {
+        const q = travelAddress.trim();
+        if (q.length < 3) {
+            setTravelSuggestions([]);
+            setSuggestLoading(false);
+            return;
+        }
+        const handle = setTimeout(async () => {
+            if (suggestAbortRef.current) suggestAbortRef.current.abort();
+            const controller = new AbortController();
+            suggestAbortRef.current = controller;
+            setSuggestLoading(true);
+            try {
+                const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(q)}&format=json&limit=5&countrycodes=pt&addressdetails=0`;
+                const res = await fetch(url, {
+                    signal: controller.signal,
+                    headers: { 'Accept-Language': lang === 'pt' ? 'pt' : 'en' }
+                });
+                const data = await res.json();
+                if (Array.isArray(data)) setTravelSuggestions(data);
+            } catch (e: any) {
+                if (e?.name !== 'AbortError') setTravelSuggestions([]);
+            } finally {
+                setSuggestLoading(false);
+            }
+        }, 350);
+        return () => clearTimeout(handle);
+    }, [travelAddress, lang]);
 
     const calculateEstimation = () => {
         let baseSum = 0;
@@ -520,15 +574,63 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                                                 <p className="travel-help">{t.travelHelp}</p>
                                             </div>
                                             <div className="travel-row">
-                                                <input
-                                                    type="text"
-                                                    className="travel-input"
-                                                    placeholder={t.travelPlaceholder}
-                                                    value={travelAddress}
-                                                    onChange={(e) => { setTravelAddress(e.target.value); setTravelError(null); }}
-                                                    onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); calculateTravel(); } }}
-                                                    disabled={travelLoading}
-                                                />
+                                                <div className="travel-input-wrap">
+                                                    <input
+                                                        type="text"
+                                                        className="travel-input"
+                                                        placeholder={t.travelPlaceholder}
+                                                        value={travelAddress}
+                                                        autoComplete="off"
+                                                        onChange={(e) => {
+                                                            setTravelAddress(e.target.value);
+                                                            setTravelError(null);
+                                                            setShowSuggestions(true);
+                                                            setActiveSuggestion(-1);
+                                                        }}
+                                                        onFocus={() => { if (travelSuggestions.length > 0) setShowSuggestions(true); }}
+                                                        onBlur={() => { setTimeout(() => setShowSuggestions(false), 180); }}
+                                                        onKeyDown={(e) => {
+                                                            if (e.key === 'ArrowDown' && travelSuggestions.length > 0) {
+                                                                e.preventDefault();
+                                                                setActiveSuggestion(i => Math.min(i + 1, travelSuggestions.length - 1));
+                                                            } else if (e.key === 'ArrowUp') {
+                                                                e.preventDefault();
+                                                                setActiveSuggestion(i => Math.max(i - 1, -1));
+                                                            } else if (e.key === 'Enter') {
+                                                                e.preventDefault();
+                                                                if (activeSuggestion >= 0 && travelSuggestions[activeSuggestion]) {
+                                                                    pickSuggestion(travelSuggestions[activeSuggestion]);
+                                                                } else {
+                                                                    calculateTravel();
+                                                                }
+                                                            } else if (e.key === 'Escape') {
+                                                                setShowSuggestions(false);
+                                                                setActiveSuggestion(-1);
+                                                            }
+                                                        }}
+                                                        disabled={travelLoading}
+                                                    />
+                                                    {showSuggestions && (travelSuggestions.length > 0 || suggestLoading) && (
+                                                        <ul className="travel-suggestions" role="listbox">
+                                                            {suggestLoading && travelSuggestions.length === 0 && (
+                                                                <li className="travel-suggestion-empty">{t.travelCalculating}</li>
+                                                            )}
+                                                            {travelSuggestions.map((s, i) => (
+                                                                <li
+                                                                    key={`${s.lat},${s.lon},${i}`}
+                                                                    className={`travel-suggestion ${i === activeSuggestion ? 'active' : ''}`}
+                                                                    role="option"
+                                                                    aria-selected={i === activeSuggestion}
+                                                                    onMouseDown={(e) => e.preventDefault()}
+                                                                    onClick={() => pickSuggestion(s)}
+                                                                    onMouseEnter={() => setActiveSuggestion(i)}
+                                                                >
+                                                                    {s.display_name}
+                                                                </li>
+                                                            ))}
+                                                        </ul>
+                                                    )}
+                                                </div>
                                                 <button
                                                     type="button"
                                                     className="travel-btn"
