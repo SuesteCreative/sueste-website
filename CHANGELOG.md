@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased] - 2026-04-23
 ### Added
+- **Blog — Queue Rescue**: 4 new PT+EN post pairs drafted and scheduled every ~7 days through 2026-05-29 (technical SEO checklist, Google Business Profile guide, website vs landing page, Core Web Vitals in practice). Existing future posts pulled earlier (2026-04-27 + 2026-05-01) to fill the April–May gap. Every post follows the full SEO checklist (keyword-focused title, meta description 140-160 chars, H2/H3 hierarchy, descriptive alt text, ≥3 internal links, ≥1 authoritative outbound reference, hreflang pair).
+- **Blog queue guardrail**: `scripts/check-blog-queue.mjs` (run via `npm run blog:queue`) reports live vs scheduled posts per language and exits non-zero if any language falls below 3 future-dated posts. Prevents silent queue starvation.
+- **Blog README**: `src/content/blog/README.md` documents how the scheduled-publish workflow works, the frontmatter schema, per-post SEO checklist, and cadence target. Prevents future "I thought it was automatic" confusion.
+
 - **Ecossistema Digital — Google Ads Node**: Sixth node added to the ServiceBundle pipeline (green accent, bullseye icon). Connections, footer pills, and mobile list auto-include it. Path topY routing extended for the longer 5-skip reach.
 
 - **Serviços — Partner & Google Ads Cards**: Expanded BentoServices from 4 to 6 cards in a clean 3×2 grid. New "Fotografia Profissional" card showcases the Nadine Campos partnership (logo badge, link to `/parcerias/nadine-campos`); new "Google Ads" card covers performance-marketing services.

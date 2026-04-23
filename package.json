@@ -7,7 +7,10 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "build:social": "node social-media/automation.js"
+    "build:social": "node social-media/automation.js",
+    "prospects": "node scripts/find-prospects.mjs",
+    "lighthouse": "node scripts/check-lighthouse.mjs",
+    "blog:queue": "node scripts/check-blog-queue.mjs"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.6.12",
