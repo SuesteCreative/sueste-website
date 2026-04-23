@@ -21,21 +21,40 @@ const year = new Date().getFullYear();
         <div class="footer-contact-info">
           <p>Algarve, Portugal</p>
           <a href="tel:+351965494727" class="phone-link">+351 965 494 727</a>
-          <a href="mailto:geral@sueste-creative.pt" class="email-link"
-            >geral@sueste-creative.pt</a
+          <a href="mailto:info@sueste-creative.pt" class="email-link"
+            >info@sueste-creative.pt</a
           >
         </div>
       </div>
 
       <div class="footer-nav-columns">
         <div class="link-group">
-          <h4>Sueste</h4>
+          <h4>{lang === "pt" ? "Empresa" : "Company"}</h4>
           <ul class="footer-list">
             <li>
               <a href={lang === "pt" ? "/sobre" : "/en/about"}
                 >{t("nav.about")}</a
               >
             </li>
+            <li>
+              <a href={lang === "pt" ? "/parcerias" : "/en/partners"}
+                >{t("nav.parcerias")}</a
+              >
+            </li>
+            <li>
+              <a href={lang === "pt" ? "/blog" : "/en/blog"}>{t("nav.blog")}</a>
+            </li>
+            <li>
+              <a href={lang === "pt" ? "/contacto" : "/en/contact"}
+                >{t("nav.contact")}</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <div class="link-group">
+          <h4>{lang === "pt" ? "Ofertas" : "Offerings"}</h4>
+          <ul class="footer-list">
             <li>
               <a href={lang === "pt" ? "/servicos" : "/en/services"}
                 >{t("nav.services")}</a
@@ -47,22 +66,9 @@ const year = new Date().getFullYear();
               >
             </li>
             <li>
-              <a href={lang === "pt" ? "/contacto" : "/en/contact"}
-                >{t("nav.contact")}</a
-              >
-            </li>
-            <li>
-              <a href={lang === "pt" ? "/parcerias" : "/en/partners"}
-                >{t("nav.parcerias")}</a
-              >
-            </li>
-            <li>
               <a href={lang === "pt" ? "/orcamento" : "/en/quote"}
                 >{t("nav.quote")}</a
               >
-            </li>
-            <li>
-              <a href={lang === "pt" ? "/blog" : "/en/blog"}>{t("nav.blog")}</a>
             </li>
           </ul>
         </div>
@@ -227,7 +233,7 @@ const year = new Date().getFullYear();
 
   .footer-nav-columns {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
   }
 
