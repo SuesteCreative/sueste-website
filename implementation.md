@@ -82,7 +82,7 @@ Priority order based on SEO, trust, and conversion impact.
 - [x] Favicon 404 — BaseLayout.astro:52 refs favicon.svg but only favicon.png exists
 - [x] Broken image — web-design-hoteis-algarve.astro:196 refs /images/portfolio/desportos-nauticos.webp (not found)
 - [x] Page web-design-hoteis-algarve.astro orphaned from i18n — no EN counterpart, no hreflangEn (resolved: PT-only landing is correct; hreflangPt already doubles as x-default via BaseLayout, no EN version needed for a PT-targeted "Algarve hotéis" keyword page)
-- [ ] Unoptimized images >1MB — crm-iphone.png (1.74MB), crm-macbook.png (1.49MB), crm-ipad.png (1.46MB), sueste-logo-creation.png (1.37MB)
+- [x] Unoptimized images >1MB — converted crm-iphone/macbook/ipad PNG → WebP (91-94% smaller), removed orphan sueste-logo-creation.png (webp already used)
 
 ### Medium
 - [ ] Meta descriptions >160 chars — en/blog/index, en/about, en/work/dna-crm-backoffice, en/services, blog/index, en/quote, orcamento
