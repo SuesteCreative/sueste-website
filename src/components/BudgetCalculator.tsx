@@ -4,6 +4,11 @@ import { Check, Info, Trash2, Send, Square, CheckSquare, ChevronDown } from 'luc
 import pricingData from '../data/pricing.json';
 import './BudgetCalculator.css';
 
+// Nadine's travel origin: Escolinha D'ADR, Urbanização Fazenda Grande, Estômbar
+const NADINE_ORIGIN = { lat: 37.1447549, lng: -8.5088603 };
+const NADINE_TRAVEL_RATE = 0.30; // €/km
+const NADINE_FREE_RADIUS_KM = 15; // one-way; round-trip free distance = 30km
+
 // GA4 helper
 const trackEvent = (action: string, category: string, label: string, value?: number) => {
     if (typeof window !== 'undefined' && (window as any).gtag) {
@@ -78,6 +83,12 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
     const [isStickyMobile, setIsStickyMobile] = useState(false);
     const [isMergedWithForm, setIsMergedWithForm] = useState(false);
     const [formHeight, setFormHeight] = useState(0);
+
+    // Nadine travel calculation (Escolinha D'ADR, Estômbar)
+    const [travelAddress, setTravelAddress] = useState('');
+    const [travelKm, setTravelKm] = useState<number | null>(null);
+    const [travelLoading, setTravelLoading] = useState(false);
+    const [travelError, setTravelError] = useState<string | null>(null);
 
     // Scroll detection and height measurement
     useEffect(() => {
@@ -154,6 +165,11 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
         if (savedAddons) setAddons(JSON.parse(savedAddons));
         if (savedHours) setAudiovisualHours(parseInt(savedHours, 10));
         if (savedGroups) setExpandedGroups(JSON.parse(savedGroups));
+
+        const savedAddr = localStorage.getItem('budgetTravelAddress');
+        const savedKm = localStorage.getItem('budgetTravelKm');
+        if (savedAddr) setTravelAddress(savedAddr);
+        if (savedKm) setTravelKm(parseFloat(savedKm));
     }, []);
 
     // Load from URL ?bundle= param — takes priority over localStorage
@@ -198,6 +214,44 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
         localStorage.setItem('budgetExpandedGroups', JSON.stringify(expandedGroups));
     }, [selections, addons, audiovisualHours, expandedGroups]);
 
+    useEffect(() => {
+        localStorage.setItem('budgetTravelAddress', travelAddress);
+        if (travelKm != null) localStorage.setItem('budgetTravelKm', travelKm.toString());
+        else localStorage.removeItem('budgetTravelKm');
+    }, [travelAddress, travelKm]);
+
+    async function calculateTravel() {
+        const q = travelAddress.trim();
+        if (!q) return;
+        setTravelLoading(true);
+        setTravelError(null);
+        try {
+            const geoUrl = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(q)}&format=json&limit=1&countrycodes=pt`;
+            const geoRes = await fetch(geoUrl, { headers: { 'Accept-Language': lang === 'pt' ? 'pt' : 'en' } });
+            const geoData = await geoRes.json();
+            if (!Array.isArray(geoData) || geoData.length === 0) {
+                throw new Error(lang === 'pt' ? 'Morada não encontrada. Tenta ser mais específico.' : 'Address not found. Try being more specific.');
+            }
+            const destLat = parseFloat(geoData[0].lat);
+            const destLng = parseFloat(geoData[0].lon);
+
+            const rUrl = `https://router.project-osrm.org/route/v1/driving/${NADINE_ORIGIN.lng},${NADINE_ORIGIN.lat};${destLng},${destLat}?overview=false`;
+            const rRes = await fetch(rUrl);
+            const rData = await rRes.json();
+            if (!rData.routes?.[0]) {
+                throw new Error(lang === 'pt' ? 'Não foi possível calcular a rota.' : 'Could not calculate the route.');
+            }
+            const km = rData.routes[0].distance / 1000;
+            setTravelKm(km);
+            trackEvent('travel_calculated', 'BudgetCalculator', q, Math.round(km));
+        } catch (e: any) {
+            setTravelError(e?.message || (lang === 'pt' ? 'Erro ao calcular.' : 'Error calculating.'));
+            setTravelKm(null);
+        } finally {
+            setTravelLoading(false);
+        }
+    }
+
     const calculateEstimation = () => {
         let baseSum = 0;
         let audiovisualSubtotal = 0;
@@ -241,7 +295,18 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
         return { baseSum, postProdFee, audiovisualSubtotal, marginBase, hasStartingAt };
     };
 
-    const { baseSum, postProdFee, marginBase, hasStartingAt } = calculateEstimation();
+    const estimation = calculateEstimation();
+    const { baseSum, postProdFee, hasStartingAt } = estimation;
+
+    // Travel fee only applies when at least one audiovisual item is selected
+    const hasAudiovisualSelected = pricingData.services.some((s: any) =>
+        s.id === 'audiovisual' && s.sub_services?.some((sub: any) => !!selections[sub.id])
+    );
+    const travelFee = (travelKm != null && hasAudiovisualSelected)
+        ? Math.round(Math.max(0, travelKm * 2 - NADINE_FREE_RADIUS_KM * 2) * NADINE_TRAVEL_RATE * 100) / 100
+        : 0;
+
+    const marginBase = estimation.marginBase + travelFee;
     const animatedTotal = useCountUp(marginBase, 1200);
 
     const toggleGroup = (groupId: string) => {
@@ -297,6 +362,9 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
         setAddons({});
         setAudiovisualHours(1);
         setHasReelsExtra(false);
+        setTravelAddress('');
+        setTravelKm(null);
+        setTravelError(null);
         setStatus({ type: '', msg: '' });
     };
 
@@ -324,6 +392,9 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                     selections,
                     addons,
                     audiovisualHours,
+                    travelAddress,
+                    travelKm,
+                    travelFee,
                     totalEstimated: marginBase,
                     hasStartingAt,
                     lang
@@ -372,7 +443,16 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
         addonsTitle: lang === 'pt' ? 'Serviços Adicionais' : 'Additional Services',
         base: lang === 'pt' ? 'Preço base' : 'Base price',
         postProd: lang === 'pt' ? 'Edição & pós-produção (15%)' : 'Editing & post-production (15%)',
-        postProdNote: lang === 'pt' ? 'Aplica-se 15% sobre o valor audiovisual para edição & pós-produção.' : 'A 15% fee applies on the audiovisual amount for editing & post-production.'
+        postProdNote: lang === 'pt' ? 'Aplica-se 15% sobre o valor audiovisual para edição & pós-produção.' : 'A 15% fee applies on the audiovisual amount for editing & post-production.',
+        travelTitle: lang === 'pt' ? 'Deslocação ao local' : 'Travel to location',
+        travelHelp: lang === 'pt' ? "A partir de Estômbar (Escolinha D'ADR). Primeiros 15km de raio são gratuitos; 0,30€/km aplica-se à distância total (ida + volta) menos os 30km oferecidos." : "From Estômbar (Escolinha D'ADR). First 15km radius free; 0.30€/km applies to total round-trip distance minus the 30km offered.",
+        travelPlaceholder: lang === 'pt' ? 'Ex.: Rua de Santa Catarina 14, Faro' : 'E.g., Rua de Santa Catarina 14, Faro',
+        travelCalc: lang === 'pt' ? 'Calcular' : 'Calculate',
+        travelCalculating: lang === 'pt' ? 'A calcular…' : 'Calculating…',
+        travelFree: lang === 'pt' ? 'Dentro do raio gratuito — sem taxa.' : 'Within free radius — no fee.',
+        travelLine: lang === 'pt' ? 'Deslocação' : 'Travel',
+        travelOneWay: lang === 'pt' ? 'ida' : 'one-way',
+        travelFreeLabel: lang === 'pt' ? '30km oferecidos' : '30km free'
     };
 
     const renderServiceCard = (service: any, idx: number, isSub = false) => {
@@ -432,6 +512,45 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                             >
                                 <div className="sub-services-wrapper">
                                     {service.sub_services.map((sub: any, subIdx: number) => renderServiceCard(sub, subIdx, true))}
+
+                                    {service.id === 'audiovisual' && (
+                                        <div className="travel-block">
+                                            <div className="travel-header">
+                                                <h4 className="travel-title">{t.travelTitle}</h4>
+                                                <p className="travel-help">{t.travelHelp}</p>
+                                            </div>
+                                            <div className="travel-row">
+                                                <input
+                                                    type="text"
+                                                    className="travel-input"
+                                                    placeholder={t.travelPlaceholder}
+                                                    value={travelAddress}
+                                                    onChange={(e) => { setTravelAddress(e.target.value); setTravelError(null); }}
+                                                    onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); calculateTravel(); } }}
+                                                    disabled={travelLoading}
+                                                />
+                                                <button
+                                                    type="button"
+                                                    className="travel-btn"
+                                                    onClick={calculateTravel}
+                                                    disabled={travelLoading || !travelAddress.trim()}
+                                                >
+                                                    {travelLoading ? t.travelCalculating : t.travelCalc}
+                                                </button>
+                                            </div>
+                                            {travelError && <p className="travel-error">{travelError}</p>}
+                                            {travelKm != null && !travelError && (
+                                                travelFee > 0 ? (
+                                                    <p className="travel-result">
+                                                        {travelKm.toFixed(1)}km ({t.travelOneWay}) × 2 − {t.travelFreeLabel} = <strong>{travelFee.toFixed(2).replace('.', ',')}€</strong>
+                                                    </p>
+                                                ) : (
+                                                    <p className="travel-result">{t.travelFree} ({travelKm.toFixed(1)}km)</p>
+                                                )
+                                            )}
+                                        </div>
+                                    )}
+
                                     {service.is_partner && (
                                         <div className="partner-card-disclaimer">
                                             <p>
@@ -610,6 +729,13 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                                 <div className="estimate-breakdown">
                                     <span className="breakdown-label">{t.postProd}</span>
                                     <span className="breakdown-value">+{postProdFee}€</span>
+                                </div>
+                            )}
+
+                            {!shouldCollapse && travelFee > 0 && (
+                                <div className="estimate-breakdown">
+                                    <span className="breakdown-label">{t.travelLine}</span>
+                                    <span className="breakdown-value">+{travelFee.toFixed(2).replace('.', ',')}€</span>
                                 </div>
                             )}
 

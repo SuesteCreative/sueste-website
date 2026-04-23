@@ -116,6 +116,9 @@ export async function sendQuoteNotification(data: {
     addons?: unknown;
     totalEstimated?: number;
     hasStartingAt?: boolean;
+    travelAddress?: string;
+    travelKm?: number | null;
+    travelFee?: number;
 }): Promise<{ ok: boolean; error?: string }> {
     const resend = getResend();
     const target = getTargetEmail();
@@ -152,6 +155,12 @@ export async function sendQuoteNotification(data: {
       ${selectionsText ? section('Serviços Selecionados', `<pre style="margin:0;font-size:12px;color:#334155;white-space:pre-wrap;overflow-x:auto;">${selectionsText}</pre>`) : ''}
 
       ${addonsText ? section('Add-ons', `<pre style="margin:0;font-size:12px;color:#334155;white-space:pre-wrap;overflow-x:auto;">${addonsText}</pre>`) : ''}
+
+      ${data.travelAddress ? section('Deslocação (Nadine)', `
+        ${row('Morada', data.travelAddress)}
+        ${data.travelKm != null ? row('Distância (ida)', `${data.travelKm.toFixed(1)} km`) : ''}
+        ${typeof data.travelFee === 'number' ? row('Taxa de deslocação', `${data.travelFee.toFixed(2).replace('.', ',')} €`) : ''}
+      `) : ''}
 
       ${data.message ? section('Mensagem / Notas', `<p style="margin:0;font-size:15px;color:#334155;line-height:1.7;white-space:pre-wrap;">${data.message}</p>`) : ''}
 

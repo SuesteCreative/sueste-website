@@ -1215,3 +1215,106 @@
         scroll-behavior: auto !important;
     }
 }
+/* Nadine travel block */
+.travel-block {
+    margin-top: 1.25rem;
+    padding: 1.25rem;
+    background: rgba(236, 72, 153, 0.04);
+    border: 1px solid rgba(236, 72, 153, 0.2);
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.travel-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.travel-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+}
+
+.travel-help {
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.55);
+    line-height: 1.5;
+    margin: 0;
+}
+
+.travel-row {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+}
+
+.travel-input {
+    flex: 1;
+    min-width: 220px;
+    padding: 0.7rem 0.9rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    color: #fff;
+    font-size: 0.9rem;
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.travel-input:focus {
+    outline: none;
+    border-color: rgba(236, 72, 153, 0.5);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.travel-input:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.travel-btn {
+    padding: 0.7rem 1.3rem;
+    background: rgba(236, 72, 153, 0.18);
+    border: 1px solid rgba(236, 72, 153, 0.4);
+    border-radius: 10px;
+    color: #fff;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.travel-btn:hover:not(:disabled) {
+    background: rgba(236, 72, 153, 0.3);
+    border-color: #ec4899;
+}
+
+.travel-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.travel-error {
+    font-size: 0.82rem;
+    color: #f87171;
+    margin: 0;
+}
+
+.travel-result {
+    font-size: 0.88rem;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+    padding: 0.6rem 0.8rem;
+    background: rgba(236, 72, 153, 0.08);
+    border-radius: 8px;
+}
+
+.travel-result strong {
+    color: #ec4899;
+    font-weight: 700;
+}

@@ -30,6 +30,9 @@ export async function POST({ request }: { request: Request }) {
             addons: data.addons,
             totalEstimated: data.totalEstimated,
             hasStartingAt: data.hasStartingAt,
+            travelAddress: data.travelAddress,
+            travelKm: data.travelKm,
+            travelFee: data.travelFee,
         });
 
         if (!ok) {
