@@ -86,6 +86,7 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
 
     // Nadine travel calculation (Escolinha D'ADR, Estômbar)
     const [travelAddress, setTravelAddress] = useState('');
+    const [travelMatchedAddress, setTravelMatchedAddress] = useState<string | null>(null);
     const [travelKm, setTravelKm] = useState<number | null>(null);
     const [travelLoading, setTravelLoading] = useState(false);
     const [travelError, setTravelError] = useState<string | null>(null);
@@ -237,20 +238,51 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
         trackEvent('travel_calculated', 'BudgetCalculator', label, Math.round(km));
     }
 
+    async function geocodeOnce(q: string): Promise<{ lat: string; lon: string; display_name: string } | null> {
+        const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(q)}&format=json&limit=1&countrycodes=pt`;
+        const res = await fetch(url, { headers: { 'Accept-Language': lang === 'pt' ? 'pt' : 'en' } });
+        const data = await res.json();
+        if (Array.isArray(data) && data[0]) return data[0];
+        return null;
+    }
+
     async function calculateTravel() {
         const q = travelAddress.trim();
         if (!q) return;
         setShowSuggestions(false);
         setTravelLoading(true);
         setTravelError(null);
+        setTravelMatchedAddress(null);
         try {
-            const geoUrl = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(q)}&format=json&limit=1&countrycodes=pt`;
-            const geoRes = await fetch(geoUrl, { headers: { 'Accept-Language': lang === 'pt' ? 'pt' : 'en' } });
-            const geoData = await geoRes.json();
-            if (!Array.isArray(geoData) || geoData.length === 0) {
-                throw new Error(lang === 'pt' ? 'Morada não encontrada. Tenta ser mais específico.' : 'Address not found. Try being more specific.');
+            // 1. Prefer the currently-loaded autocomplete suggestions (reuse cached coords)
+            if (travelSuggestions.length > 0) {
+                const top = travelSuggestions[0];
+                setTravelMatchedAddress(top.display_name);
+                await routeFromCoords(parseFloat(top.lat), parseFloat(top.lon), top.display_name);
+                return;
             }
-            await routeFromCoords(parseFloat(geoData[0].lat), parseFloat(geoData[0].lon), q);
+
+            // 2. Try the full query verbatim
+            let match = await geocodeOnce(q);
+
+            // 3. If no match, progressively strip trailing segments (apartment/block details)
+            //    Detailed queries like "Rua X, Bloco D2, 6G, Faro" fail if Bloco/andar not indexed.
+            if (!match) {
+                const parts = q.split(',').map(p => p.trim()).filter(Boolean);
+                for (let n = parts.length - 1; n >= 1 && !match; n--) {
+                    const shorter = parts.slice(0, n).join(', ');
+                    // Nominatim policy: keep requests spaced — small delay between retries
+                    await new Promise(r => setTimeout(r, 1100));
+                    match = await geocodeOnce(shorter);
+                }
+            }
+
+            if (!match) {
+                throw new Error(lang === 'pt' ? 'Morada não encontrada. Tenta ser mais específico ou escolhe uma sugestão da lista.' : 'Address not found. Try being more specific or pick a suggestion from the list.');
+            }
+
+            setTravelMatchedAddress(match.display_name);
+            await routeFromCoords(parseFloat(match.lat), parseFloat(match.lon), match.display_name);
         } catch (e: any) {
             setTravelError(e?.message || (lang === 'pt' ? 'Erro ao calcular.' : 'Error calculating.'));
             setTravelKm(null);
@@ -261,6 +293,7 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
 
     async function pickSuggestion(s: { display_name: string; lat: string; lon: string }) {
         setTravelAddress(s.display_name);
+        setTravelMatchedAddress(s.display_name);
         setShowSuggestions(false);
         setTravelSuggestions([]);
         setActiveSuggestion(-1);
@@ -419,6 +452,7 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
         setTravelAddress('');
         setTravelKm(null);
         setTravelError(null);
+        setTravelMatchedAddress(null);
         setStatus({ type: '', msg: '' });
     };
 
@@ -506,7 +540,8 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
         travelFree: lang === 'pt' ? 'Dentro do raio gratuito — sem taxa.' : 'Within free radius — no fee.',
         travelLine: lang === 'pt' ? 'Deslocação' : 'Travel',
         travelOneWay: lang === 'pt' ? 'ida' : 'one-way',
-        travelFreeLabel: lang === 'pt' ? '30km oferecidos' : '30km free'
+        travelFreeLabel: lang === 'pt' ? '30km oferecidos' : '30km free',
+        travelMatched: lang === 'pt' ? 'Morada localizada' : 'Matched address'
     };
 
     const renderServiceCard = (service: any, idx: number, isSub = false) => {
@@ -584,6 +619,7 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                                                         onChange={(e) => {
                                                             setTravelAddress(e.target.value);
                                                             setTravelError(null);
+                                                            setTravelMatchedAddress(null);
                                                             setShowSuggestions(true);
                                                             setActiveSuggestion(-1);
                                                         }}
@@ -642,13 +678,18 @@ const BudgetCalculator = ({ lang = 'pt' }: { lang?: string }) => {
                                             </div>
                                             {travelError && <p className="travel-error">{travelError}</p>}
                                             {travelKm != null && !travelError && (
-                                                travelFee > 0 ? (
-                                                    <p className="travel-result">
-                                                        {travelKm.toFixed(1)}km ({t.travelOneWay}) × 2 − {t.travelFreeLabel} = <strong>{travelFee.toFixed(2).replace('.', ',')}€</strong>
-                                                    </p>
-                                                ) : (
-                                                    <p className="travel-result">{t.travelFree} ({travelKm.toFixed(1)}km)</p>
-                                                )
+                                                <>
+                                                    {travelFee > 0 ? (
+                                                        <p className="travel-result">
+                                                            {travelKm.toFixed(1)}km ({t.travelOneWay}) × 2 − {t.travelFreeLabel} = <strong>{travelFee.toFixed(2).replace('.', ',')}€</strong>
+                                                        </p>
+                                                    ) : (
+                                                        <p className="travel-result">{t.travelFree} ({travelKm.toFixed(1)}km)</p>
+                                                    )}
+                                                    {travelMatchedAddress && travelMatchedAddress !== travelAddress && (
+                                                        <p className="travel-matched">{t.travelMatched}: {travelMatchedAddress}</p>
+                                                    )}
+                                                </>
                                             )}
                                         </div>
                                     )}

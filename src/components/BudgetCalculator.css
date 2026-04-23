@@ -1368,3 +1368,11 @@
     color: rgba(255, 255, 255, 0.5);
     font-style: italic;
 }
+
+.travel-matched {
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0.3rem 0 0;
+    line-height: 1.4;
+    font-style: italic;
+}
