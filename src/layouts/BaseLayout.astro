@@ -106,6 +106,18 @@ const canonicalURL = new URL(Astro.url.pathname, "https://sueste-creative.pt");
         description: description,
         telephone: "+351935473141",
         email: "info@sueste-creative.pt",
+        contactPoint: [
+          {
+            "@type": "ContactPoint",
+            contactType: "customer service",
+            telephone: "+351935473141",
+            email: "info@sueste-creative.pt",
+            availableLanguage: ["Portuguese", "English"],
+            areaServed: "PT",
+            contactOption: "WhatsApp",
+            url: "https://wa.me/351935473141",
+          },
+        ],
         address: {
           "@type": "PostalAddress",
           addressLocality: "Portimão",

@@ -4,6 +4,7 @@ import Navbar from "../../components/Navbar.astro";
 import Footer from "../../components/Footer.astro";
 import Section from "../../components/Section.astro";
 import BudgetCalculator from "../../components/BudgetCalculator.tsx";
+import WhatsAppButton from "../../components/WhatsAppButton.astro";
 ---
 
 <BaseLayout
@@ -20,6 +21,15 @@ import BudgetCalculator from "../../components/BudgetCalculator.tsx";
       subtitle="Customize the services you need and get a clear, real-time estimate. No strings attached."
     >
       <BudgetCalculator client:visible lang="en" />
+      <div class="quote-wa">
+        <p>Prefer to chat directly?</p>
+        <WhatsAppButton
+          lang="en"
+          source="quote_page_en"
+          variant="cta"
+          message="Hi Pedro, I'd like to talk about a quote."
+        />
+      </div>
     </Section>
   </main>
 
@@ -31,6 +41,22 @@ import BudgetCalculator from "../../components/BudgetCalculator.tsx";
     padding-top: 120px;
     background: #09090b;
     min-height: 100vh;
+  }
+
+  .quote-wa {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .quote-wa p {
+    margin: 0;
+    opacity: 0.6;
+    font-size: 0.95rem;
   }
 
   @media (max-width: 768px) {
