@@ -30,7 +30,7 @@ Se não fizer — ignore sem problema, continuo nas férias.
 Abraço,
 Pedro Porto
 Sueste Creative · Portimão
-sueste-creative.pt | +351 965 494 727
+sueste-creative.pt | +351 935 473 141
 ```
 
 ### Loom script (60–120s)
@@ -81,7 +81,7 @@ Olá {NOME},
 caso não seja prioridade — sem drama.
 
 Se em algum momento o site do {HOTEL_NAME} passar para a lista de tarefas,
-fica o contacto: pedro@sueste-creative.pt ou +351 965 494 727.
+fica o contacto: pedro@sueste-creative.pt ou +351 935 473 141.
 
 Abraço,
 Pedro

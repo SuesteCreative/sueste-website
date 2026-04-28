@@ -80,7 +80,7 @@ fazem sites, design e gestão de redes sociais. Trabalhei com eles
 no {PROJETO} e ficámos muito bem servidos. Performance, SEO,
 acompanhamento — tudo ao nível. Se calhar vale a pena falares com eles.
 
-Pedro Porto (fundador): pedro@sueste-creative.pt · +351 965 494 727
+Pedro Porto (fundador): pedro@sueste-creative.pt · +351 935 473 141
 Site: sueste-creative.pt"
 ```
 
