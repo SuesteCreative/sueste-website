@@ -111,7 +111,12 @@ const pricingRows = [
 ];
 
 const addonRows = [
-  { label: "Advanced CRM (premium features)", price: "€500 – €1,000", note: "depending on complexity" },
+  {
+    label: "Advanced CRM (premium features)",
+    price: "€500 – €1,000",
+    note: "depending on complexity",
+    desc: "Automated follow-up email sequences, lead scoring & tagging, deal value tracking, team accounts for additional agents, and custom reporting dashboards.",
+  },
   { label: "Blog writing, 1 post/week", price: "€150", note: "/month" },
   { label: "Blog writing, 2–3 posts/week", price: "€300", note: "/month" },
   { label: "Blog writing, 3+ posts/week", price: "€500", note: "/month" },
@@ -152,6 +157,7 @@ const timeline = [
   noindex={true}
 >
   <main class="proposal-page">
+    <div class="bg-blob" aria-hidden="true"></div>
     <header class="proposal-header">
       <div class="container header-inner">
         <img src="/images/logo-white-hor.webp" alt="Sueste Creative" class="logo" />
@@ -293,7 +299,10 @@ const timeline = [
           <div class="pricing-table addon-table">
             {addonRows.map((row) => (
               <div class="pricing-row">
-                <span class="pricing-label">{row.label}</span>
+                <div class="pricing-label-group">
+                  <span class="pricing-label">{row.label}</span>
+                  {row.desc && <span class="pricing-desc">{row.desc}</span>}
+                </div>
                 <span class="pricing-price">
                   {row.price}
                   {row.note && <span class="pricing-note"> {row.note}</span>}
@@ -515,6 +524,34 @@ const timeline = [
   .proposal-page {
     background-color: #050505;
     min-height: 100vh;
+  }
+
+  .bg-blob {
+    position: fixed;
+    top: -10%;
+    left: -15%;
+    width: 60vw;
+    height: 60vw;
+    max-width: 700px;
+    max-height: 700px;
+    background: radial-gradient(circle at 30% 30%, rgba(56, 189, 248, 0.35), transparent 70%);
+    filter: blur(80px);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+    animation: blob-drift 22s ease-in-out infinite alternate;
+  }
+
+  @keyframes blob-drift {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(35vw, 25vh) scale(1.15); }
+    100% { transform: translate(12vw, 45vh) scale(0.95); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bg-blob {
+      animation: none;
+    }
   }
 
   .proposal-header {
@@ -902,6 +939,23 @@ const timeline = [
 
   .addon-table .pricing-label {
     font-size: 0.92rem;
+  }
+
+  .addon-table .pricing-row {
+    align-items: flex-start;
+  }
+
+  .pricing-label-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding-right: 1.5rem;
+  }
+
+  .pricing-desc {
+    font-size: 0.82rem;
+    color: #71717a;
+    line-height: 1.5;
   }
 
   /* NOT INCLUDED */
