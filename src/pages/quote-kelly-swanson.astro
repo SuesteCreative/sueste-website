@@ -4,23 +4,37 @@ import WhatsAppButton from "../components/WhatsAppButton.astro";
 
 const preparedDate = "June 23, 2026";
 const validUntil = "July 23, 2026";
+const earlyBirdDeadline = "July 1, 2026";
+const earlyBirdPrice = "€3,325";
 
 const features = [
   {
     accent: "#38bdf8",
-    name: "Real Estate Website + Full CMS",
+    name: "Real Estate Website",
     price: "€2,500",
     priceNote: "one-time",
     icon: `<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 21V9h6v12"/><path d="M3 9h18"/>`,
     items: [
       "Custom-designed site built for international buyers",
-      "Unlimited property listings, add, edit, remove yourself, no coding",
       "Property pages: photo gallery, map, price, features, status (For Sale / Sold / Reserved)",
       "Search & filter by location, price, bedrooms, type",
       "Mobile-first, fast-loading, SEO-structured",
       "Up to 5 rounds of design revisions included",
       "Always open to new ideas and feedback along the way, regardless of revision count",
       "English-language site at launch, additional languages available as an add-on",
+    ],
+  },
+  {
+    accent: "#22d3ee",
+    name: "Content Management System (CMS)",
+    price: "€1,000",
+    priceNote: "one-time",
+    icon: `<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/>`,
+    items: [
+      "The admin panel behind the site, where you manage everything yourself",
+      "Add, edit, or remove listings any time, no developer, no code",
+      "Unlimited property listings",
+      "Same panel doubles as your blog editor and CRM dashboard, see below",
     ],
   },
   {
@@ -102,7 +116,8 @@ const features = [
 ];
 
 const pricingRows = [
-  { label: "Real Estate Website + Full CMS", price: "€2,500", note: "one-time" },
+  { label: "Real Estate Website", price: "€2,500", note: "one-time" },
+  { label: "Content Management System (CMS)", price: "€1,000", note: "one-time" },
   { label: "Built-in CRM (contact list, pipeline, email sender)", price: "Included", note: "" },
   { label: "Calendly + Stripe Consulting Bookings", price: "Included", note: "" },
   { label: "SEO + GEO", price: "Included", note: "" },
@@ -148,6 +163,33 @@ const timeline = [
   },
   { phase: "Final week", title: "Content, QA & Launch", desc: "Listings and blog content loaded, final testing, go live." },
 ];
+
+const faqs = [
+  {
+    q: "What if I want more than 5 rounds of revisions?",
+    a: "Just ask. Additional rounds beyond the 5 included are billed hourly, most projects never need it.",
+  },
+  {
+    q: "Can I cancel partway through the project?",
+    a: "Yes. The deposit is non-refundable once work begins, but whatever's been completed up to that point is delivered to you as-is.",
+  },
+  {
+    q: "What happens to my current website and listings?",
+    a: "We migrate your existing listings and content into the new CMS as part of the build. Large catalogs are quoted separately.",
+  },
+  {
+    q: "Do you offer support after the first 12 months?",
+    a: "Yes, it's just quoted per request instead of bundled. Small fixes within reason stay free, same as during the first year.",
+  },
+  {
+    q: "Is my buyers' data handled securely?",
+    a: "Yes. The CRM runs on EU-based database infrastructure (Neon/Supabase), and we build with GDPR principles in mind, since you're collecting personal data from buyers across many countries.",
+  },
+  {
+    q: "Can I add another language later, even after launch?",
+    a: "Anytime. It's a flat €400 one-time add-on per additional language, no need to decide now.",
+  },
+];
 ---
 
 <BaseLayout
@@ -163,6 +205,7 @@ const timeline = [
         <img src="/images/logo-white-hor.webp" alt="Sueste Creative" class="logo" />
         <div class="header-right">
           <span class="header-tag">Business Proposal</span>
+          <a href="https://sueste-creative.pt/portfolio" target="_blank" rel="noopener" class="header-pill">See Our Work</a>
           <a href="https://sueste-creative.pt" target="_blank" rel="noopener" class="header-pill">Visit Website</a>
         </div>
       </div>
@@ -277,6 +320,10 @@ const timeline = [
           <h2>Investment</h2>
           <p>One flat price for the full platform. No hidden line items.</p>
         </div>
+        <div class="discount-banner" data-reveal>
+          <strong>Accept by {earlyBirdDeadline} and save 5%</strong>
+          <span>€3,500 → {earlyBirdPrice} on the base platform. Standard pricing applies after that date.</span>
+        </div>
         <div class="pricing-table" data-reveal>
           {pricingRows.map((row) => (
             <div class="pricing-row">
@@ -289,13 +336,13 @@ const timeline = [
           ))}
           <div class="pricing-row pricing-total">
             <span class="pricing-label">Total one-time investment</span>
-            <span class="pricing-price">€2,500</span>
+            <span class="pricing-price">€3,500</span>
           </div>
         </div>
 
         <div class="addon-block" data-reveal>
           <h4>Optional add-ons</h4>
-          <p class="addon-intro">Only pay for these if you want them, not part of the €2,500 base price.</p>
+          <p class="addon-intro">Only pay for these if you want them, not part of the €3,500 base price.</p>
           <div class="pricing-table addon-table">
             {addonRows.map((row) => (
               <div class="pricing-row">
@@ -314,17 +361,17 @@ const timeline = [
 
         <div class="payment-terms" data-reveal>
           <h4>Payment terms</h4>
-          <p>50% to begin the project, 50% on final delivery, Sueste Creative's standard terms. Prices shown exclude applicable VAT (IVA). The deposit is non-refundable once work begins, if you cancel mid-project, completed work is delivered as-is.</p>
+          <p>50% to begin the project, 50% on final delivery, Sueste Creative's standard terms. Prices shown exclude applicable VAT (IVA). The deposit is non-refundable once work begins, if you cancel mid-project, completed work is delivered as-is. Accept by {earlyBirdDeadline} and the base platform price drops 5% to {earlyBirdPrice}.</p>
         </div>
 
         <div class="payment-terms" data-reveal>
           <h4>Revisions</h4>
-          <p>2 rounds of design feedback are included in the base price. Additional rounds are billed hourly.</p>
+          <p>Up to 5 rounds of design feedback are included in the base price, and we're always open to new ideas along the way regardless of revision count. Additional rounds beyond that are billed hourly.</p>
         </div>
 
         <div class="payment-terms" data-reveal>
           <h4>Post-launch support</h4>
-          <p>30 days of free bug-fix support after launch. New features or changes after that are quoted separately.</p>
+          <p>1 major update every 3 months for the first 12 months, at no extra cost. Small bug fixes and adjustments aren't charged, as long as it's within reason. After 12 months, further major updates are quoted individually.</p>
         </div>
 
         <div class="payment-terms" data-reveal>
@@ -347,6 +394,23 @@ const timeline = [
               <span class="ni-label">{row.label}</span>
               <span class="ni-note">{row.note}</span>
             </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header" data-reveal>
+          <h2>Frequently asked questions</h2>
+        </div>
+        <div class="faq-list" data-reveal>
+          {faqs.map((f) => (
+            <details class="faq-item">
+              <summary>{f.q}</summary>
+              <p>{f.a}</p>
+            </details>
           ))}
         </div>
       </div>
@@ -401,7 +465,7 @@ const timeline = [
       <div class="container">
         <div class="section-header" data-reveal>
           <h2>Build your package</h2>
-          <p>Pick the optional add-ons you want, the €2,500 base is always included. Then send it to Pedro.</p>
+          <p>Pick the optional add-ons you want, the €3,500 base is always included. Then send it to Pedro.</p>
         </div>
 
         <form id="kelly-form" class="kelly-form" data-reveal>
@@ -496,7 +560,10 @@ const timeline = [
         <h2>Ready to move forward?</h2>
         <p>
           Reply on WhatsApp to confirm, ask questions, or request changes to scope,
-          this proposal is valid until {validUntil}.
+          this proposal is valid until {validUntil}. Accept by {earlyBirdDeadline} and save 5% ({earlyBirdPrice} instead of €3,500).
+        </p>
+        <p class="cta-portfolio">
+          Want to see more of our work first? <a href="https://sueste-creative.pt/portfolio" target="_blank" rel="noopener">Browse our portfolio</a>.
         </p>
         <div class="cta-actions">
           <WhatsAppButton
@@ -1422,7 +1489,7 @@ const timeline = [
     return [
       `Name: ${sel.name}`,
       `Email: ${sel.email}`,
-      `Base platform: €2,500 (website + CMS + CRM + Calendly/Stripe + SEO/GEO + blog), always included`,
+      `Base platform: €3,500 (website + CMS + CRM + Calendly/Stripe + SEO/GEO + blog), always included`,
       `Advanced CRM add-on: ${sel.advancedCrm ? "Yes, quote €500–€1,000 depending on complexity" : "No"}`,
       `Blog writing plan: ${BLOG_LABELS[sel.blogTier] || "Not specified"}`,
       `Brandbook: ${sel.brandbook ? "Yes, quoted separately" : "No"}`,
