@@ -187,3 +187,65 @@ export async function sendQuoteNotification(data: {
     }
     return { ok: true };
 }
+
+// ── Kelly Swanson proposal selection ──────────────────────────────────────────
+
+export async function sendKellySelectionNotification(data: {
+    name: string;
+    email: string;
+    advancedCrm: boolean;
+    blogTier: string;
+    brandbook: boolean;
+    notes?: string;
+}): Promise<{ ok: boolean; error?: string }> {
+    const resend = getResend();
+    const target = getTargetEmail();
+
+    const blogLabels: Record<string, string> = {
+        none: 'No — she’ll write her own posts',
+        '1': '1 post/week — €150/month',
+        '2-3': '2–3 posts/week — €300/month',
+        '3+': '3+ posts/week — €500/month',
+    };
+
+    const html = emailShell(`
+      <h2 style="margin:0 0 4px;font-size:22px;color:#1e293b;">Kelly Swanson — Proposal Selection</h2>
+      <p style="margin:0 0 24px;font-size:14px;color:#64748b;">Submitted from the proposal at sueste-creative.pt/quote-kelly-swanson</p>
+
+      ${section('Contact', `
+        ${row('Name', data.name)}
+        ${row('Email', `<a href="mailto:${data.email}" style="color:${BRAND_COLOR};">${data.email}</a>`)}
+      `)}
+
+      ${section('Selections', `
+        ${row('Base platform', '€2,500 (website + CMS + CRM + Calendly/Stripe + SEO/GEO + blog) — always included')}
+        ${row('Advanced CRM add-on', data.advancedCrm ? 'Yes — quote €500–€1,000 depending on complexity' : 'No')}
+        ${row('Blog writing plan', blogLabels[data.blogTier] || 'Not specified')}
+        ${row('Brandbook', data.brandbook ? 'Yes — quote separately' : 'No')}
+      `)}
+
+      ${data.notes ? section('Notes', `<p style="margin:0;font-size:15px;color:#334155;line-height:1.7;white-space:pre-wrap;">${data.notes}</p>`) : ''}
+
+      <div style="text-align:center;margin-top:28px;">
+        <a href="mailto:${data.email}?subject=Re: Your Sueste Creative proposal" style="display:inline-block;background:${BRAND_COLOR};color:#0f172a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:8px;font-size:14px;">
+          Reply to ${data.name.split(' ')[0]}
+        </a>
+      </div>
+    `);
+
+    if (!resend) return { ok: true }; // dev mode — no-op
+
+    const { error } = await resend.emails.send({
+        from: 'Sueste Website <website@sueste-creative.pt>',
+        to: [target],
+        replyTo: data.email,
+        subject: `Kelly Swanson proposal selection from ${data.name}`,
+        html,
+    });
+
+    if (error) {
+        console.error('[email] sendKellySelectionNotification error:', error);
+        return { ok: false, error: JSON.stringify(error) };
+    }
+    return { ok: true };
+}

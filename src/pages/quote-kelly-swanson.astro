@@ -70,6 +70,18 @@ const features = [
       "GEO (Generative Engine Optimization) — structured so AI search/answer engines surface your listings",
     ],
   },
+  {
+    accent: "#f472b6",
+    name: "Brandbook",
+    price: "Optional",
+    priceNote: "quoted later",
+    icon: `<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><circle cx="11.5" cy="9" r="2"/>`,
+    items: [
+      "Logo refinement, color palette, typography, brand guidelines",
+      "Only if you feel you need one — not required to launch",
+      "We'll scope and quote this separately once you decide",
+    ],
+  },
 ];
 
 const pricingRows = [
@@ -89,20 +101,31 @@ const addonRows = [
 
 const notIncludedRows = [
   { label: "Domain registration & renewal", note: "~€12–20/year, billed by registrar" },
-  { label: "Hosting", note: "Quoted separately based on traffic needs" },
-  { label: "Calendly & Stripe service fees", note: "Billed directly by Calendly/Stripe, not by Sueste" },
-  { label: "Business email setup", note: "e.g. Google Workspace — available as an add-on" },
-  { label: "Professional photography", note: "Available via our partner Nadine Campos, on request" },
+  { label: "Hosting", note: "Serverless on Vercel — no extra charge to you" },
+  { label: "Calendly & Stripe", note: "Calendly's free tier works fine. If you choose to upgrade, that's billed directly to you by Calendly. Stripe's processing fees also apply per transaction." },
+  { label: "Company email", note: "Not included" },
   { label: "Paid ad spend", note: "Google Ads / social ads budget, management quoted separately" },
   { label: "Property listing data entry", note: "You (or your team) add listings via the CMS" },
   { label: "Ongoing blog writing", note: "Unless one of the monthly plans above is selected" },
+];
+
+const concepts = [
+  { num: "01", name: "Coastal Minimal", desc: "Light, airy, sand & deep-green palette — classic upscale Algarve real estate.", src: "/quote-kelly/concept-1.html" },
+  { num: "02", name: "Bold Modern", desc: "Dark, confident, blue gradient accents — matches this proposal's own style.", src: "/quote-kelly/concept-2.html" },
+  { num: "03", name: "Editorial Luxury", desc: "Black & gold, magazine-style — for a more discreet, high-end feel.", src: "/quote-kelly/concept-3.html" },
 ];
 
 const timeline = [
   { phase: "Week 1", title: "Discovery & Design", desc: "Brand direction, sitemap, wireframes for listings and consulting pages." },
   { phase: "Weeks 1–2", title: "Website + Full CMS + CRM Build", desc: "Full build of the site, the property management system, and the contact pipeline." },
   { phase: "Week 3", title: "Calendly + Stripe, SEO + GEO", desc: "Consulting bookings go live with payment; SEO/GEO foundations applied." },
-  { phase: "Weeks 3–4", title: "Content, QA & Launch", desc: "Listings and blog content loaded, final testing, go live." },
+  {
+    blackout: true,
+    phase: "July 18 – August 2",
+    title: "Pedro unavailable — wedding & honeymoon",
+    desc: "No development work during this window. If the project is in progress when this date arrives, it simply pauses and picks back up right after — nothing is lost.",
+  },
+  { phase: "Final week", title: "Content, QA & Launch", desc: "Listings and blog content loaded, final testing, go live." },
 ];
 ---
 
@@ -198,6 +221,32 @@ const timeline = [
       </div>
     </section>
 
+    <!-- LANDING PAGE CONCEPTS -->
+    <section class="section section-dark">
+      <div class="container">
+        <div class="section-header" data-reveal>
+          <h2>Three directions to choose from</h2>
+          <p>Scroll sideways to compare. Scroll inside each preview to see the full page.</p>
+        </div>
+      </div>
+      <div class="concepts-scroller" data-reveal>
+        {concepts.map((c) => (
+          <div class="concept-card">
+            <div class="concept-label">
+              <span class="concept-num">{c.num}</span>
+              <div>
+                <h4>{c.name}</h4>
+                <p>{c.desc}</p>
+              </div>
+            </div>
+            <div class="concept-frame-wrap">
+              <iframe src={c.src} title={`Landing page concept: ${c.name}`} loading="lazy"></iframe>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
     <!-- INVESTMENT -->
     <section class="section">
       <div class="container">
@@ -267,22 +316,138 @@ const timeline = [
       <div class="container">
         <div class="section-header" data-reveal>
           <h2>Timeline</h2>
-          <p>From kickoff to launch in roughly 4 weeks.</p>
+          <p>~4 weeks of active work. Calendar time may extend if the project overlaps Pedro's wedding window below.</p>
         </div>
         <div class="timeline" data-reveal>
-          {timeline.map((t, i) => (
-            <div class="timeline-step">
-              <div class="timeline-num">{i + 1}</div>
-              <div class="timeline-body">
-                <span class="timeline-phase">{t.phase}</span>
-                <h4>{t.title}</h4>
-                <p>{t.desc}</p>
-              </div>
-            </div>
-          ))}
+          {(() => {
+            let step = 0;
+            return timeline.map((t) => {
+              if (t.blackout) {
+                return (
+                  <div class="timeline-step timeline-blackout">
+                    <div class="timeline-num timeline-num-blackout" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                      </svg>
+                    </div>
+                    <div class="timeline-body">
+                      <span class="timeline-phase timeline-phase-blackout">{t.phase}</span>
+                      <h4>{t.title}</h4>
+                      <p>{t.desc}</p>
+                    </div>
+                  </div>
+                );
+              }
+              step += 1;
+              return (
+                <div class="timeline-step">
+                  <div class="timeline-num">{step}</div>
+                  <div class="timeline-body">
+                    <span class="timeline-phase">{t.phase}</span>
+                    <h4>{t.title}</h4>
+                    <p>{t.desc}</p>
+                  </div>
+                </div>
+              );
+            });
+          })()}
         </div>
       </div>
     </section>
+
+    <!-- SELECTION FORM -->
+    <section class="section section-dark">
+      <div class="container">
+        <div class="section-header" data-reveal>
+          <h2>Build your package</h2>
+          <p>Pick the optional add-ons you want — the €2,500 base is always included. Then send it to Pedro.</p>
+        </div>
+
+        <form id="kelly-form" class="kelly-form" data-reveal>
+          <div class="kf-row pair">
+            <div class="kf-field">
+              <label for="kf-name">Your name</label>
+              <input id="kf-name" name="name" type="text" required value="Kelly Swanson" />
+            </div>
+            <div class="kf-field">
+              <label for="kf-email">Your email</label>
+              <input id="kf-email" name="email" type="email" required value="portugalpropertyspecialist@gmail.com" />
+            </div>
+          </div>
+
+          <div class="kf-option">
+            <label class="kf-checkbox">
+              <input type="checkbox" id="kf-advanced-crm" name="advancedCrm" />
+              <span class="kf-checkbox-box"></span>
+              <span class="kf-option-text">
+                <strong>Advanced CRM</strong> — premium features beyond the basic pipeline
+                <span class="kf-option-price">€500 – €1,000, depending on complexity</span>
+              </span>
+            </label>
+          </div>
+
+          <div class="kf-option kf-option-group">
+            <span class="kf-group-label">Blog writing — do you want Sueste to write the posts?</span>
+            <label class="kf-radio">
+              <input type="radio" name="blogTier" value="none" checked />
+              <span class="kf-radio-dot"></span>
+              <span class="kf-option-text">No — I'll write my own posts</span>
+            </label>
+            <label class="kf-radio">
+              <input type="radio" name="blogTier" value="1" />
+              <span class="kf-radio-dot"></span>
+              <span class="kf-option-text">1 post/week <span class="kf-option-price">€150/month</span></span>
+            </label>
+            <label class="kf-radio">
+              <input type="radio" name="blogTier" value="2-3" />
+              <span class="kf-radio-dot"></span>
+              <span class="kf-option-text">2–3 posts/week <span class="kf-option-price">€300/month</span></span>
+            </label>
+            <label class="kf-radio">
+              <input type="radio" name="blogTier" value="3+" />
+              <span class="kf-radio-dot"></span>
+              <span class="kf-option-text">3+ posts/week <span class="kf-option-price">€500/month</span></span>
+            </label>
+          </div>
+
+          <div class="kf-option">
+            <label class="kf-checkbox">
+              <input type="checkbox" id="kf-brandbook" name="brandbook" />
+              <span class="kf-checkbox-box"></span>
+              <span class="kf-option-text">
+                <strong>Brandbook</strong> — logo refinement, colors, typography, guidelines
+                <span class="kf-option-price">Quoted separately</span>
+              </span>
+            </label>
+          </div>
+
+          <div class="kf-field">
+            <label for="kf-notes">Anything else? (optional)</label>
+            <textarea id="kf-notes" name="notes" rows="3"></textarea>
+          </div>
+
+          <input type="text" name="honey" class="kf-honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+          <div id="kf-status" class="kf-status" role="status"></div>
+
+          <button type="submit" id="kf-submit" class="kf-submit-btn">Send to Pedro by Email</button>
+
+          <div class="kf-alt">
+            <p>Prefer WhatsApp? Download a PDF summary, then attach it in the chat — wa.me links can't attach files automatically.</p>
+            <div class="kf-alt-actions">
+              <button type="button" id="kf-pdf-btn" class="kf-alt-btn">Download PDF summary</button>
+              <button type="button" id="kf-wa-btn" class="kf-alt-btn kf-alt-btn-wa">Open WhatsApp</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <div id="kelly-print-summary">
+      <h2>Sueste Creative — Proposal Selection</h2>
+      <p class="kps-meta"></p>
+      <div class="kps-body"></div>
+    </div>
 
     <!-- NEXT STEPS -->
     <section class="section cta-section">
@@ -571,6 +736,77 @@ const timeline = [
     color: #52525b;
   }
 
+  /* CONCEPTS SCROLLER */
+  .concepts-scroller {
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 0 2rem 1rem;
+    scrollbar-width: thin;
+  }
+
+  .concepts-scroller::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .concept-card {
+    flex: 0 0 auto;
+    width: min(420px, 86vw);
+    scroll-snap-align: center;
+    background: rgba(8, 10, 20, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .concept-label {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    padding: 1.25rem 1.4rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  }
+
+  .concept-num {
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: #38bdf8;
+    flex-shrink: 0;
+    padding-top: 0.15rem;
+  }
+
+  .concept-label h4 {
+    font-size: 1.05rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .concept-label p {
+    font-size: 0.85rem;
+    color: #71717a;
+    line-height: 1.5;
+  }
+
+  .concept-frame-wrap {
+    height: 560px;
+    background: #fff;
+  }
+
+  .concept-frame-wrap iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+  }
+
+  @media (max-width: 768px) {
+    .concept-frame-wrap {
+      height: 460px;
+    }
+  }
+
   /* PRICING TABLE */
   .pricing-table {
     max-width: 720px;
@@ -761,6 +997,256 @@ const timeline = [
     line-height: 1.55;
   }
 
+  .timeline-blackout {
+    padding: 0.75rem;
+    margin: -0.75rem;
+    border-radius: 14px;
+    background: rgba(244, 114, 182, 0.06);
+    border: 1px dashed rgba(244, 114, 182, 0.3);
+  }
+
+  .timeline-num-blackout {
+    background: rgba(244, 114, 182, 0.12);
+    border-color: rgba(244, 114, 182, 0.4);
+    color: #f472b6;
+  }
+
+  .timeline-phase-blackout {
+    color: #f472b6;
+  }
+
+  /* SELECTION FORM */
+  .kelly-form {
+    max-width: 640px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .kf-row.pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+
+  .kf-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .kf-field label {
+    font-size: 0.82rem;
+    color: #a1a1aa;
+  }
+
+  .kf-field input,
+  .kf-field textarea {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    color: #fff;
+    font-family: inherit;
+    font-size: 0.95rem;
+    resize: vertical;
+  }
+
+  .kf-field input:focus,
+  .kf-field textarea:focus {
+    outline: none;
+    border-color: #38bdf8;
+  }
+
+  .kf-honey {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .kf-option {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 14px;
+    padding: 1.1rem 1.3rem;
+  }
+
+  .kf-group-label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.9rem;
+  }
+
+  .kf-checkbox,
+  .kf-radio {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+    cursor: pointer;
+  }
+
+  .kf-option-group .kf-radio {
+    padding: 0.5rem 0;
+  }
+
+  .kf-checkbox input,
+  .kf-radio input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+  }
+
+  .kf-checkbox-box {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    border: 1.5px solid rgba(255, 255, 255, 0.25);
+    margin-top: 0.1rem;
+    transition: all 0.2s ease;
+  }
+
+  .kf-checkbox input:checked + .kf-checkbox-box {
+    background: #38bdf8;
+    border-color: #38bdf8;
+    box-shadow: inset 0 0 0 3px rgba(8, 10, 20, 0.6);
+  }
+
+  .kf-radio-dot {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255, 255, 255, 0.25);
+    margin-top: 0.1rem;
+    transition: all 0.2s ease;
+  }
+
+  .kf-radio input:checked + .kf-radio-dot {
+    border-color: #38bdf8;
+    box-shadow: inset 0 0 0 4px #38bdf8;
+  }
+
+  .kf-option-text {
+    font-size: 0.92rem;
+    color: #d4d4d8;
+    line-height: 1.5;
+  }
+
+  .kf-option-text strong {
+    color: #fff;
+    display: block;
+    margin-bottom: 0.2rem;
+  }
+
+  .kf-option-price {
+    display: block;
+    font-size: 0.8rem;
+    color: #52525b;
+    margin-top: 0.2rem;
+  }
+
+  .kf-status {
+    font-size: 0.9rem;
+    min-height: 1.2em;
+  }
+
+  .kf-status.success { color: #34d399; }
+  .kf-status.error { color: #f87171; }
+
+  .kf-submit-btn {
+    background: linear-gradient(135deg, #38bdf8 0%, #2563eb 100%);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 0.9rem 1.5rem;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.3s, transform 0.3s;
+  }
+
+  .kf-submit-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+  .kf-submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .kf-alt {
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+  }
+
+  .kf-alt p {
+    font-size: 0.85rem;
+    color: #71717a;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+  }
+
+  .kf-alt-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .kf-alt-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #d4d4d8;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.65rem 1.2rem;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  .kf-alt-btn:hover {
+    border-color: #38bdf8;
+    color: #38bdf8;
+  }
+
+  .kf-alt-btn-wa:hover {
+    border-color: #25d366;
+    color: #25d366;
+  }
+
+  #kelly-print-summary {
+    display: none;
+  }
+
+  @media print {
+    body * {
+      visibility: hidden;
+    }
+    #kelly-print-summary,
+    #kelly-print-summary * {
+      visibility: visible;
+    }
+    #kelly-print-summary {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 2rem;
+      color: #000;
+      background: #fff;
+      font-family: Arial, sans-serif;
+    }
+    #kelly-print-summary h2 { margin-bottom: 0.5rem; }
+    #kelly-print-summary .kps-meta { color: #555; font-size: 0.85rem; margin-bottom: 1.5rem; }
+    #kelly-print-summary .kps-body p { margin-bottom: 0.6rem; font-size: 0.95rem; }
+  }
+
+  @media (max-width: 600px) {
+    .kf-row.pair {
+      grid-template-columns: 1fr;
+    }
+  }
+
   /* CTA */
   .cta-section {
     text-align: center;
@@ -843,3 +1329,102 @@ const timeline = [
     }
   }
 </style>
+
+<script>
+  const BLOG_LABELS: Record<string, string> = {
+    none: "No — I'll write my own posts",
+    "1": "1 post/week — €150/month",
+    "2-3": "2–3 posts/week — €300/month",
+    "3+": "3+ posts/week — €500/month",
+  };
+
+  function getSelections() {
+    const form = document.getElementById("kelly-form") as HTMLFormElement;
+    const name = (form.querySelector('[name="name"]') as HTMLInputElement)?.value || "";
+    const email = (form.querySelector('[name="email"]') as HTMLInputElement)?.value || "";
+    const advancedCrm = (form.querySelector('[name="advancedCrm"]') as HTMLInputElement)?.checked || false;
+    const blogTier = (form.querySelector('[name="blogTier"]:checked') as HTMLInputElement)?.value || "none";
+    const brandbook = (form.querySelector('[name="brandbook"]') as HTMLInputElement)?.checked || false;
+    const notes = (form.querySelector('[name="notes"]') as HTMLTextAreaElement)?.value || "";
+    const honey = (form.querySelector('[name="honey"]') as HTMLInputElement)?.value || "";
+    return { name, email, advancedCrm, blogTier, brandbook, notes, honey };
+  }
+
+  function buildSummaryLines(sel: ReturnType<typeof getSelections>): string[] {
+    return [
+      `Name: ${sel.name}`,
+      `Email: ${sel.email}`,
+      `Base platform: €2,500 (website + CMS + CRM + Calendly/Stripe + SEO/GEO + blog) — always included`,
+      `Advanced CRM add-on: ${sel.advancedCrm ? "Yes — quote €500–€1,000 depending on complexity" : "No"}`,
+      `Blog writing plan: ${BLOG_LABELS[sel.blogTier] || "Not specified"}`,
+      `Brandbook: ${sel.brandbook ? "Yes — quoted separately" : "No"}`,
+      ...(sel.notes ? [`Notes: ${sel.notes}`] : []),
+    ];
+  }
+
+  function initKellyForm() {
+    const form = document.getElementById("kelly-form") as HTMLFormElement | null;
+    if (!form) return;
+
+    const statusEl = document.getElementById("kf-status") as HTMLElement;
+    const submitBtn = document.getElementById("kf-submit") as HTMLButtonElement;
+    const pdfBtn = document.getElementById("kf-pdf-btn") as HTMLButtonElement;
+    const waBtn = document.getElementById("kf-wa-btn") as HTMLButtonElement;
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const sel = getSelections();
+      if (sel.honey) return;
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Sending...";
+      statusEl.textContent = "";
+      statusEl.className = "kf-status";
+
+      try {
+        const res = await fetch("/api/kelly-selection", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(sel),
+        });
+        const result = await res.json();
+        if (result.success) {
+          statusEl.textContent = "Sent! Pedro will get back to you shortly.";
+          statusEl.className = "kf-status success";
+        } else {
+          statusEl.textContent = result.error || "Something went wrong. Try WhatsApp instead.";
+          statusEl.className = "kf-status error";
+        }
+      } catch {
+        statusEl.textContent = "Connection error. Try WhatsApp instead.";
+        statusEl.className = "kf-status error";
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Send to Pedro by Email";
+      }
+    });
+
+    pdfBtn?.addEventListener("click", () => {
+      const sel = getSelections();
+      const lines = buildSummaryLines(sel);
+      const summaryEl = document.getElementById("kelly-print-summary");
+      if (!summaryEl) return;
+      const meta = summaryEl.querySelector(".kps-meta") as HTMLElement;
+      const body = summaryEl.querySelector(".kps-body") as HTMLElement;
+      meta.textContent = `Prepared for ${sel.name || "Kelly Swanson"} · ${new Date().toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}`;
+      body.innerHTML = lines.map((l) => `<p>${l}</p>`).join("");
+      window.print();
+    });
+
+    waBtn?.addEventListener("click", () => {
+      const sel = getSelections();
+      const lines = buildSummaryLines(sel);
+      const text = `Hi Pedro, here's my project selection for the Sueste Creative proposal:\n\n${lines.join("\n")}\n\n(PDF summary attached)`;
+      const url = `https://wa.me/351935473141?text=${encodeURIComponent(text)}`;
+      window.open(url, "_blank", "noopener,noreferrer");
+    });
+  }
+
+  initKellyForm();
+  document.addEventListener("astro:after-swap", initKellyForm);
+</script>
