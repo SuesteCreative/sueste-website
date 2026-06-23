@@ -2,6 +2,8 @@ export const prerender = false;
 
 import { sendKellySelectionNotification } from '../../lib/email';
 
+const EARLY_BIRD_DEADLINE = new Date('2026-07-01T23:59:59+01:00').getTime();
+
 export async function POST({ request }: { request: Request }) {
     try {
         const data = await request.json();
@@ -20,6 +22,8 @@ export async function POST({ request }: { request: Request }) {
             });
         }
 
+        const isEarlyBird = Date.now() <= EARLY_BIRD_DEADLINE;
+
         const { ok } = await sendKellySelectionNotification({
             name: data.name,
             email: data.email,
@@ -30,6 +34,7 @@ export async function POST({ request }: { request: Request }) {
             refSite1: data.refSite1,
             refSite2: data.refSite2,
             refSite3: data.refSite3,
+            isEarlyBird,
         });
 
         if (!ok) {

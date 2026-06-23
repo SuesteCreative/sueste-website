@@ -200,11 +200,16 @@ export async function sendKellySelectionNotification(data: {
     refSite1?: string;
     refSite2?: string;
     refSite3?: string;
+    isEarlyBird: boolean;
 }): Promise<{ ok: boolean; error?: string }> {
     const resend = getResend();
     const target = getTargetEmail();
 
     const refSites = [data.refSite1, data.refSite2, data.refSite3].filter(Boolean) as string[];
+
+    const basePlatformLabel = data.isEarlyBird
+        ? '€3,325 (5% early-bird discount applied — accepted before July 1, 2026) — website + CMS + CRM + Calendly/Stripe + SEO/GEO + blog'
+        : '€3,500 (website + CMS + CRM + Calendly/Stripe + SEO/GEO + blog) — always included';
 
     const blogLabels: Record<string, string> = {
         none: 'No — she’ll write her own posts',
@@ -223,7 +228,7 @@ export async function sendKellySelectionNotification(data: {
       `)}
 
       ${section('Selections', `
-        ${row('Base platform', '€2,500 (website + CMS + CRM + Calendly/Stripe + SEO/GEO + blog) — always included')}
+        ${row('Base platform', basePlatformLabel)}
         ${row('Advanced CRM add-on', data.advancedCrm ? 'Yes — quote €500–€1,000 depending on complexity' : 'No')}
         ${row('Blog writing plan', blogLabels[data.blogTier] || 'Not specified')}
         ${row('Brandbook', data.brandbook ? 'Yes — quote separately' : 'No')}
