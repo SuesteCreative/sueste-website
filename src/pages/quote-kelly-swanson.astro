@@ -123,6 +123,12 @@ const pricingRows = [
   { label: "SEO + GEO", price: "Included", note: "" },
   { label: "Blog Section", price: "Included", note: "" },
   { label: "Post-Launch Support (1 major update / 3 months)", price: "Included", note: "first 12 months" },
+  {
+    label: "Translations (EN, PT, FR)",
+    price: "Included",
+    note: "",
+    desc: "Other languages may be added later as a paid add-on, reviewing the translated content is the client's responsibility.",
+  },
 ];
 
 const addonRows = [
@@ -135,7 +141,6 @@ const addonRows = [
   { label: "Blog writing, 1 post/week", price: "€150", note: "/month" },
   { label: "Blog writing, 2–3 posts/week", price: "€300", note: "/month" },
   { label: "Blog writing, 3+ posts/week", price: "€500", note: "/month" },
-  { label: "Language beyond English, Portuguese & French", price: "€400", note: "one-time, client reviews translated content" },
 ];
 
 const notIncludedRows = [
@@ -327,7 +332,10 @@ const faqs = [
         <div class="pricing-table" data-reveal>
           {pricingRows.map((row) => (
             <div class="pricing-row">
-              <span class="pricing-label">{row.label}</span>
+              <div class="pricing-label-group">
+                <span class="pricing-label">{row.label}</span>
+                {row.desc && <span class="pricing-desc">{row.desc}</span>}
+              </div>
               <span class="pricing-price">
                 {row.price}
                 {row.note && <span class="pricing-note">, {row.note}</span>}
@@ -361,8 +369,13 @@ const faqs = [
 
         <div class="payment-terms" data-reveal>
           <h4>Payment terms</h4>
-          <p>50% to begin the project, 50% on final delivery, Sueste Creative's standard terms. Prices shown have no VAT added, Sueste Creative is under the Portuguese VAT exemption regime (Artigo 53.º do CIVA). The deposit is non-refundable once work begins, if you cancel mid-project, completed work is delivered as-is. Accept by {earlyBirdDeadline} and the base platform price drops 5% to {earlyBirdPrice}.</p>
-          <p>Once you approve the proposal, we'll need your billing details (name/company, address, and NIF/tax number) to issue the invoice.</p>
+          <ul>
+            <li>50% to begin the project, 50% on final delivery, Sueste Creative's standard terms.</li>
+            <li>Prices shown have no VAT added, Sueste Creative is under the Portuguese VAT exemption regime (Artigo 53.º do CIVA).</li>
+            <li>The deposit is non-refundable once work begins, if you cancel mid-project, completed work is delivered as-is.</li>
+            <li>Accept by {earlyBirdDeadline} and the base platform price drops 5% to {earlyBirdPrice}.</li>
+            <li>Once you approve the proposal, we'll need your billing details (name/company, address, and NIF/tax number) to issue the invoice.</li>
+          </ul>
         </div>
 
         <div class="payment-terms" data-reveal>
