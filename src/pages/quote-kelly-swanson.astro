@@ -204,6 +204,26 @@ const faqs = [
   noindex={true}
 >
   <main class="proposal-page">
+    <div id="kelly-gate" class="kelly-gate">
+      <div class="kelly-gate-blob" aria-hidden="true"></div>
+      <div class="kelly-gate-card">
+        <img src="/images/logo-white-hor.webp" alt="Sueste Creative" class="kelly-gate-logo" />
+        <p class="kelly-gate-tagline">This proposal is private. Enter your access details to continue.</p>
+        <form id="kelly-gate-form" class="kelly-gate-form" autocomplete="off">
+          <div class="kf-field">
+            <label for="kg-user">Project ID</label>
+            <input id="kg-user" name="user" type="text" autocomplete="username" required />
+          </div>
+          <div class="kf-field">
+            <label for="kg-pass">Password</label>
+            <input id="kg-pass" name="pass" type="password" autocomplete="current-password" required />
+          </div>
+          <button type="submit" class="kelly-gate-submit">Unlock proposal</button>
+        </form>
+      </div>
+    </div>
+    <div id="kelly-toast-container" class="kelly-toast-container" aria-live="polite"></div>
+
     <div class="bg-blob" aria-hidden="true"></div>
     <header class="proposal-header">
       <div class="container header-inner">
@@ -230,7 +250,7 @@ const faqs = [
           <span class="eyebrow">Project SW26-14</span>
         </div>
         <h1 class="hero-title" data-reveal>
-          A real estate platform built around <span class="highlight"><span class="gradient">your personal touch</span> with buyers from around the world</span>
+          A real estate platform built around your <span class="gradient">personal touch</span> with buyers from around the world
         </h1>
         <p class="hero-subtitle" data-reveal>
           A self-managed website with unlimited listings, a built-in CRM for every lead,
@@ -325,7 +345,7 @@ const faqs = [
           <h2>Investment</h2>
           <p>One flat price for the full platform. No hidden line items.</p>
         </div>
-        <div class="discount-banner" data-reveal>
+        <div id="discount-banner" class="discount-banner" data-reveal>
           <strong>Accept by {earlyBirdDeadline} and save 5%</strong>
           <span>€3,500 → {earlyBirdPrice} on the base platform. Standard pricing applies after that date.</span>
         </div>
@@ -373,7 +393,7 @@ const faqs = [
             <li>50% to begin the project, 50% on final delivery, Sueste Creative's standard terms.</li>
             <li>Prices shown have no VAT added, Sueste Creative is under the Portuguese VAT exemption regime (Artigo 53.º do CIVA).</li>
             <li>The deposit is non-refundable once work begins, if you cancel mid-project, completed work is delivered as-is.</li>
-            <li>Accept by {earlyBirdDeadline} and the base platform price drops 5% to {earlyBirdPrice}.</li>
+            <li id="discount-terms-line">Accept by {earlyBirdDeadline} and the base platform price drops 5% to {earlyBirdPrice}.</li>
             <li>Once you approve the proposal, we'll need your billing details (name/company, address, and NIF/tax number) to issue the invoice.</li>
           </ul>
         </div>
@@ -574,7 +594,7 @@ const faqs = [
         <h2>Ready to move forward?</h2>
         <p>
           Reply on WhatsApp to confirm, ask questions, or request changes to scope,
-          this proposal is valid until {validUntil}. Accept by {earlyBirdDeadline} and save 5% ({earlyBirdPrice} instead of €3,500).
+          this proposal is valid until {validUntil}. <span id="discount-cta-line">Accept by {earlyBirdDeadline} and save 5% ({earlyBirdPrice} instead of €3,500).</span>
         </p>
         <p class="cta-portfolio">
           Want to see more of our work first? <a href="https://sueste-creative.pt/en/work" target="_blank" rel="noopener">Browse our portfolio</a>.
@@ -607,6 +627,10 @@ const faqs = [
     min-height: 100vh;
   }
 
+  :global(body.kelly-gate-open) {
+    overflow: hidden;
+  }
+
   .bg-blob {
     position: fixed;
     top: -10%;
@@ -632,6 +656,161 @@ const faqs = [
   @media (prefers-reduced-motion: reduce) {
     .bg-blob {
       animation: none;
+    }
+  }
+
+  /* GATE */
+  .kelly-gate {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 2rem;
+    background-color: #050505;
+    overflow: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+  }
+
+  .kelly-gate.kelly-gate-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .kelly-gate-blob {
+    position: absolute;
+    top: -10%;
+    left: -15%;
+    width: 60vw;
+    height: 60vw;
+    max-width: 700px;
+    max-height: 700px;
+    background: radial-gradient(circle at 30% 30%, rgba(56, 189, 248, 0.35), transparent 70%);
+    filter: blur(80px);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: blob-drift 22s ease-in-out infinite alternate;
+  }
+
+  .kelly-gate-card {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 380px;
+    background: rgba(8, 10, 20, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    padding: 2.25rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.25rem;
+    backdrop-filter: blur(10px);
+  }
+
+  .kelly-gate-card.kelly-gate-shake {
+    animation: kelly-gate-shake 0.4s ease;
+  }
+
+  @keyframes kelly-gate-shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-8px); }
+    40%, 80% { transform: translateX(8px); }
+  }
+
+  .kelly-gate-logo {
+    height: 36px;
+    width: auto;
+  }
+
+  .kelly-gate-tagline {
+    font-size: 0.85rem;
+    color: #a1a1aa;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .kelly-gate-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .kelly-gate-form .kf-field {
+    text-align: left;
+  }
+
+  .kelly-gate-submit {
+    background: linear-gradient(135deg, #38bdf8 0%, #2563eb 100%);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 0.85rem 1.5rem;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .kelly-gate-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(56, 189, 248, 0.25);
+  }
+
+  /* TOASTS */
+  .kelly-toast-container {
+    position: fixed;
+    top: 1.5rem;
+    right: 1.5rem;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    pointer-events: none;
+  }
+
+  .kelly-toast {
+    background: rgba(15, 17, 26, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-left: 3px solid #71717a;
+    border-radius: 10px;
+    padding: 0.85rem 1.2rem;
+    color: #f4f4f5;
+    font-size: 0.9rem;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    transform: translateX(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .kelly-toast.kelly-toast-visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .kelly-toast.kelly-toast-success {
+    border-left-color: #34d399;
+  }
+
+  .kelly-toast.kelly-toast-error {
+    border-left-color: #f87171;
+  }
+
+  @media (max-width: 640px) {
+    .kelly-toast-container {
+      left: 1rem;
+      right: 1rem;
+      top: 1rem;
+    }
+
+    .kelly-toast {
+      width: 100%;
     }
   }
 
@@ -745,10 +924,6 @@ const faqs = [
     line-height: 1.1;
     max-width: 880px;
     margin-bottom: 1.5rem;
-  }
-
-  .hero-title .highlight {
-    color: #38bdf8;
   }
 
   .hero-title .gradient {
@@ -1610,6 +1785,66 @@ const faqs = [
 </style>
 
 <script>
+  const KELLY_GATE_USER = "SW26-14";
+  const KELLY_GATE_PASS = "kelly123";
+  const KELLY_GATE_STORAGE_KEY = "kellyGateAuthed";
+
+  function showKellyToast(message: string, type: "success" | "error") {
+    const container = document.getElementById("kelly-toast-container");
+    if (!container) return;
+    const toast = document.createElement("div");
+    toast.className = `kelly-toast kelly-toast-${type}`;
+    toast.textContent = message;
+    container.appendChild(toast);
+    requestAnimationFrame(() => toast.classList.add("kelly-toast-visible"));
+    setTimeout(() => {
+      toast.classList.remove("kelly-toast-visible");
+      setTimeout(() => toast.remove(), 300);
+    }, 3500);
+  }
+
+  function initKellyGate() {
+    const gate = document.getElementById("kelly-gate") as HTMLElement | null;
+    const card = gate?.querySelector(".kelly-gate-card") as HTMLElement | null;
+    const form = document.getElementById("kelly-gate-form") as HTMLFormElement | null;
+    if (!gate || !form) return;
+
+    if (localStorage.getItem(KELLY_GATE_STORAGE_KEY) === "1") {
+      gate.classList.add("kelly-gate-hidden");
+      document.body.classList.remove("kelly-gate-open");
+      return;
+    }
+
+    document.body.classList.add("kelly-gate-open");
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const user = (document.getElementById("kg-user") as HTMLInputElement).value.trim();
+      const pass = (document.getElementById("kg-pass") as HTMLInputElement).value.trim();
+
+      if (user === KELLY_GATE_USER && pass === KELLY_GATE_PASS) {
+        localStorage.setItem(KELLY_GATE_STORAGE_KEY, "1");
+        showKellyToast("Welcome, Kelly! Unlocking your proposal...", "success");
+        setTimeout(() => {
+          gate.classList.add("kelly-gate-hidden");
+          document.body.classList.remove("kelly-gate-open");
+        }, 900);
+      } else {
+        showKellyToast("Incorrect project ID or password.", "error");
+        card?.classList.remove("kelly-gate-shake");
+        requestAnimationFrame(() => card?.classList.add("kelly-gate-shake"));
+        (document.getElementById("kg-pass") as HTMLInputElement).value = "";
+        (document.getElementById("kg-pass") as HTMLInputElement).focus();
+      }
+    });
+  }
+
+  initKellyGate();
+  document.addEventListener("astro:after-swap", initKellyGate);
+
+  const EARLY_BIRD_DEADLINE = new Date("2026-07-01T23:59:59+01:00").getTime();
+  const isEarlyBird = () => Date.now() <= EARLY_BIRD_DEADLINE;
+
   const BLOG_LABELS: Record<string, string> = {
     none: "No, I'll write my own posts",
     "1": "1 post/week, €150/month",
@@ -1637,7 +1872,9 @@ const faqs = [
     return [
       `Name: ${sel.name}`,
       `Email: ${sel.email}`,
-      `Base platform: €3,500 (website + CMS + CRM + Calendly/Stripe + SEO/GEO + blog), always included`,
+      isEarlyBird()
+        ? `Base platform: €3,325 (5% early-bird discount applied, accepted before July 1, 2026), website + CMS + CRM + Calendly/Stripe + SEO/GEO + blog`
+        : `Base platform: €3,500 (website + CMS + CRM + Calendly/Stripe + SEO/GEO + blog), always included`,
       `Advanced CRM add-on: ${sel.advancedCrm ? "Yes, quote €500–€1,000 depending on complexity" : "No"}`,
       `Blog writing plan: ${BLOG_LABELS[sel.blogTier] || "Not specified"}`,
       `Brandbook: ${sel.brandbook ? "Yes, quoted separately" : "No"}`,
@@ -1709,6 +1946,17 @@ const faqs = [
     });
   }
 
+  function initDiscountVisibility() {
+    if (isEarlyBird()) return;
+    ["discount-banner", "discount-terms-line", "discount-cta-line"].forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) el.style.display = "none";
+    });
+  }
+
   initKellyForm();
   document.addEventListener("astro:after-swap", initKellyForm);
+
+  initDiscountVisibility();
+  document.addEventListener("astro:after-swap", initDiscountVisibility);
 </script>
