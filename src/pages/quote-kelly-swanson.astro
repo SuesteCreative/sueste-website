@@ -764,7 +764,7 @@ const faqs = [
   }
 
   /* TOASTS */
-  .kelly-toast-container {
+  :global(.kelly-toast-container) {
     position: fixed;
     top: 1.5rem;
     right: 1.5rem;
@@ -775,7 +775,7 @@ const faqs = [
     pointer-events: none;
   }
 
-  .kelly-toast {
+  :global(.kelly-toast) {
     background: rgba(15, 17, 26, 0.95);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-left: 3px solid #71717a;
@@ -789,27 +789,27 @@ const faqs = [
     transition: opacity 0.3s ease, transform 0.3s ease;
   }
 
-  .kelly-toast.kelly-toast-visible {
+  :global(.kelly-toast.kelly-toast-visible) {
     opacity: 1;
     transform: translateX(0);
   }
 
-  .kelly-toast.kelly-toast-success {
+  :global(.kelly-toast.kelly-toast-success) {
     border-left-color: #34d399;
   }
 
-  .kelly-toast.kelly-toast-error {
+  :global(.kelly-toast.kelly-toast-error) {
     border-left-color: #f87171;
   }
 
   @media (max-width: 640px) {
-    .kelly-toast-container {
+    :global(.kelly-toast-container) {
       left: 1rem;
       right: 1rem;
       top: 1rem;
     }
 
-    .kelly-toast {
+    :global(.kelly-toast) {
       width: 100%;
     }
   }
