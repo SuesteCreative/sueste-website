@@ -27,6 +27,9 @@ export async function POST({ request }: { request: Request }) {
             blogTier: data.blogTier || 'none',
             brandbook: !!data.brandbook,
             notes: data.notes,
+            refSite1: data.refSite1,
+            refSite2: data.refSite2,
+            refSite3: data.refSite3,
         });
 
         if (!ok) {

@@ -109,12 +109,6 @@ const notIncludedRows = [
   { label: "Ongoing blog writing", note: "Unless one of the monthly plans above is selected" },
 ];
 
-const concepts = [
-  { num: "01", name: "Coastal Minimal", desc: "Light, airy, sand & deep-green palette, classic upscale Algarve real estate.", src: "/quote-kelly/concept-1.html", accent: "#1f5f4f" },
-  { num: "02", name: "Bold Modern", desc: "Dark, confident, blue gradient accents, matches this proposal's own style.", src: "/quote-kelly/concept-2.html", accent: "#38bdf8" },
-  { num: "03", name: "Editorial Luxury", desc: "Black & gold, magazine-style, for a more discreet, high-end feel.", src: "/quote-kelly/concept-3.html", accent: "#c9a86a" },
-];
-
 const timeline = [
   { phase: "Week 1", title: "Discovery & Design", desc: "Brand direction, sitemap, wireframes for listings and consulting pages." },
   { phase: "Weeks 1–2", title: "Website + Full CMS + CRM Build", desc: "Full build of the site, the property management system, and the contact pipeline." },
@@ -224,45 +218,27 @@ const timeline = [
       </div>
     </section>
 
-    <!-- LANDING PAGE CONCEPTS -->
+    <!-- REFERENCE SITES -->
     <section class="section section-dark">
       <div class="container">
         <div class="section-header" data-reveal>
-          <h2>Three directions to choose from</h2>
-          <p>Scroll sideways to compare. Scroll inside each preview to see the full page.</p>
+          <h2>Show us what you like</h2>
+          <p>Paste links to 3 real estate (or any) websites whose look and feel you like. We'll use them as visual direction for your design.</p>
         </div>
-      </div>
-      <div class="concepts-scroller" data-reveal>
-        {concepts.map((c) => (
-          <div class="concept-card" style={`--accent:${c.accent}`}>
-            <div class="concept-label">
-              <span class="concept-num">{c.num}</span>
-              <div>
-                <h4>{c.name}</h4>
-                <p>{c.desc}</p>
-              </div>
-            </div>
-            <div class="concept-frame-wrap">
-              <div class="device device-desktop">
-                <div class="device-chrome">
-                  <span class="chrome-dot" style="background:#ff5f57"></span>
-                  <span class="chrome-dot" style="background:#febc2e"></span>
-                  <span class="chrome-dot" style="background:#28c840"></span>
-                  <span class="chrome-url">kellyswanson.pt</span>
-                </div>
-                <div class="device-screen">
-                  <iframe class="device-iframe device-iframe-desktop" data-base-width="1440" src={c.src} title={`Landing page concept: ${c.name} (desktop)`} loading="lazy"></iframe>
-                </div>
-              </div>
-              <div class="device device-mobile">
-                <div class="device-notch"></div>
-                <div class="device-screen">
-                  <iframe class="device-iframe device-iframe-mobile" data-base-width="390" src={c.src} title={`Landing page concept: ${c.name} (mobile)`} loading="lazy"></iframe>
-                </div>
-              </div>
-            </div>
+        <div class="ref-sites" data-reveal>
+          <div class="kf-field">
+            <label for="kf-ref-1">Website 1</label>
+            <input id="kf-ref-1" name="refSite1" type="url" placeholder="https://..." />
           </div>
-        ))}
+          <div class="kf-field">
+            <label for="kf-ref-2">Website 2</label>
+            <input id="kf-ref-2" name="refSite2" type="url" placeholder="https://..." />
+          </div>
+          <div class="kf-field">
+            <label for="kf-ref-3">Website 3</label>
+            <input id="kf-ref-3" name="refSite3" type="url" placeholder="https://..." />
+          </div>
+        </div>
       </div>
     </section>
 
@@ -785,177 +761,18 @@ const timeline = [
     color: #52525b;
   }
 
-  /* CONCEPTS SCROLLER */
-  .concepts-scroller {
-    display: flex;
-    gap: 1.5rem;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    padding: 0 2rem 1rem;
-    scrollbar-width: thin;
-  }
-
-  .concepts-scroller::-webkit-scrollbar {
-    height: 8px;
-  }
-
-  .concept-card {
-    flex: 0 0 auto;
-    width: min(440px, 86vw);
-    scroll-snap-align: center;
-    background: rgba(8, 10, 20, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 18px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    transition: border-color 0.3s, transform 0.3s;
-  }
-
-  .concept-card:hover {
-    border-color: color-mix(in srgb, var(--accent) 35%, transparent);
-    transform: translateY(-3px);
-  }
-
-  .concept-label {
-    display: flex;
-    gap: 1rem;
-    align-items: flex-start;
-    padding: 1.25rem 1.4rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-  }
-
-  .concept-num {
-    font-size: 0.8rem;
-    font-weight: 800;
-    color: var(--accent);
-    flex-shrink: 0;
-    padding-top: 0.15rem;
-  }
-
-  .concept-label h4 {
-    font-size: 1.05rem;
-    margin-bottom: 0.3rem;
-  }
-
-  .concept-label p {
-    font-size: 0.85rem;
-    color: #71717a;
-    line-height: 1.5;
-  }
-
-  /* DEVICE MOCKUPS */
-  .concept-frame-wrap {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1.5rem;
-    background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.04), transparent 70%);
-  }
-
-  .device {
-    width: 100%;
-  }
-
-  .device-mobile {
-    display: none;
-  }
-
-  /* Desktop browser mockup, 16:9 */
-  .device-desktop {
-    border-radius: 12px;
-    overflow: hidden;
-    background: #18181b;
-    box-shadow: 0 24px 48px -16px rgba(0, 0, 0, 0.55);
-  }
-
-  .device-chrome {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 0.55rem 0.75rem;
-    background: #232327;
-  }
-
-  .chrome-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-
-  .chrome-url {
-    margin-left: 0.5rem;
-    flex: 1;
-    text-align: center;
-    font-size: 0.68rem;
-    font-family: ui-monospace, monospace;
-    color: #71717a;
-    background: #131316;
-    padding: 0.25rem 0.8rem;
-    border-radius: 5px;
-  }
-
-  .device-desktop .device-screen {
-    aspect-ratio: 16 / 9;
-    overflow: hidden;
-    background: #fff;
-  }
-
-  .device-iframe-desktop {
-    width: 1440px;
-    height: 810px;
-    border: 0;
-    transform-origin: top left;
-  }
-
-  /* Mobile phone mockup */
-  .device-mobile {
-    width: min(220px, 64%);
+  /* REFERENCE SITES */
+  .ref-sites {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    max-width: 880px;
     margin: 0 auto;
-    padding: 26px 9px 9px;
-    border-radius: 30px;
-    background: #111;
-    position: relative;
-    box-shadow: 0 24px 48px -16px rgba(0, 0, 0, 0.55);
-  }
-
-  .device-notch {
-    position: absolute;
-    top: 8px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 64px;
-    height: 14px;
-    background: #000;
-    border-radius: 8px;
-    z-index: 2;
-  }
-
-  .device-mobile .device-screen {
-    aspect-ratio: 390 / 844;
-    overflow: hidden;
-    border-radius: 22px;
-    background: #fff;
-  }
-
-  .device-iframe-mobile {
-    width: 390px;
-    height: 844px;
-    border: 0;
-    transform-origin: top left;
   }
 
   @media (max-width: 768px) {
-    .device-desktop {
-      display: none;
-    }
-    .device-mobile {
-      display: block;
-    }
-    .concept-frame-wrap {
-      padding: 2rem 1.5rem;
+    .ref-sites {
+      grid-template-columns: 1fr;
     }
   }
 
@@ -1503,10 +1320,14 @@ const timeline = [
     const brandbook = (form.querySelector('[name="brandbook"]') as HTMLInputElement)?.checked || false;
     const notes = (form.querySelector('[name="notes"]') as HTMLTextAreaElement)?.value || "";
     const honey = (form.querySelector('[name="honey"]') as HTMLInputElement)?.value || "";
-    return { name, email, advancedCrm, blogTier, brandbook, notes, honey };
+    const refSite1 = (document.getElementById("kf-ref-1") as HTMLInputElement)?.value || "";
+    const refSite2 = (document.getElementById("kf-ref-2") as HTMLInputElement)?.value || "";
+    const refSite3 = (document.getElementById("kf-ref-3") as HTMLInputElement)?.value || "";
+    return { name, email, advancedCrm, blogTier, brandbook, notes, honey, refSite1, refSite2, refSite3 };
   }
 
   function buildSummaryLines(sel: ReturnType<typeof getSelections>): string[] {
+    const refSites = [sel.refSite1, sel.refSite2, sel.refSite3].filter(Boolean);
     return [
       `Name: ${sel.name}`,
       `Email: ${sel.email}`,
@@ -1514,6 +1335,7 @@ const timeline = [
       `Advanced CRM add-on: ${sel.advancedCrm ? "Yes, quote €500–€1,000 depending on complexity" : "No"}`,
       `Blog writing plan: ${BLOG_LABELS[sel.blogTier] || "Not specified"}`,
       `Brandbook: ${sel.brandbook ? "Yes, quoted separately" : "No"}`,
+      ...(refSites.length ? [`Websites she likes: ${refSites.join(", ")}`] : []),
       ...(sel.notes ? [`Notes: ${sel.notes}`] : []),
     ];
   }
@@ -1583,23 +1405,4 @@ const timeline = [
 
   initKellyForm();
   document.addEventListener("astro:after-swap", initKellyForm);
-
-  function initDeviceFrames() {
-    const screens = document.querySelectorAll<HTMLElement>(".device-screen");
-    screens.forEach((screen) => {
-      const iframe = screen.querySelector<HTMLIFrameElement>(".device-iframe");
-      if (!iframe) return;
-      const baseWidth = Number(iframe.dataset.baseWidth);
-      if (!baseWidth) return;
-      const apply = () => {
-        const scale = screen.clientWidth / baseWidth;
-        iframe.style.transform = `scale(${scale})`;
-      };
-      apply();
-      new ResizeObserver(apply).observe(screen);
-    });
-  }
-
-  initDeviceFrames();
-  document.addEventListener("astro:after-swap", initDeviceFrames);
 </script>

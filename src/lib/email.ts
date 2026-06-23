@@ -197,9 +197,14 @@ export async function sendKellySelectionNotification(data: {
     blogTier: string;
     brandbook: boolean;
     notes?: string;
+    refSite1?: string;
+    refSite2?: string;
+    refSite3?: string;
 }): Promise<{ ok: boolean; error?: string }> {
     const resend = getResend();
     const target = getTargetEmail();
+
+    const refSites = [data.refSite1, data.refSite2, data.refSite3].filter(Boolean) as string[];
 
     const blogLabels: Record<string, string> = {
         none: 'No — she’ll write her own posts',
@@ -223,6 +228,8 @@ export async function sendKellySelectionNotification(data: {
         ${row('Blog writing plan', blogLabels[data.blogTier] || 'Not specified')}
         ${row('Brandbook', data.brandbook ? 'Yes — quote separately' : 'No')}
       `)}
+
+      ${refSites.length ? section('Websites she likes', refSites.map((url) => row('Reference', `<a href="${url}" style="color:${BRAND_COLOR};">${url}</a>`)).join('')) : ''}
 
       ${data.notes ? section('Notes', `<p style="margin:0;font-size:15px;color:#334155;line-height:1.7;white-space:pre-wrap;">${data.notes}</p>`) : ''}
 
