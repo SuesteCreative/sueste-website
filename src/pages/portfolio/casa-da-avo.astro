@@ -7,13 +7,13 @@ import ProjectLayout from "../../layouts/ProjectLayout.astro";
     category="Reservas & Pagamentos"
     client="Casa da Avó · Praia da Luz"
     year="2026"
-    description="Website de reservas diretas para uma moradia em Praia da Luz, com pagamento faseado 30/70 via Stripe e um custo de operação de apenas 34€ por ano."
+    description="Website de reservas diretas para uma moradia em Praia da Luz, com pagamento faseado 30/70 via Stripe e um custo de operação de 2,80€ por mês."
     heroImage="/images/portfolio/casa-da-avo/hero.webp"
     lang="pt"
     metrics={[
-        { label: "Custo Anual de Operação", value: "34€" },
-        { label: "Mensalidades de Plataforma", value: "0€" },
+        { label: "Custo Mensal do Site", value: "2,80€" },
         { label: "Comissão de Intermediários", value: "0%" },
+        { label: "Pagamento Automatizado", value: "30/70" },
     ]}
 >
     <div class="container project-content-grid">
@@ -39,11 +39,11 @@ import ProjectLayout from "../../layouts/ProjectLayout.astro";
 
         <div class="project-media project-media-right" data-reveal>
             <img
-                src="/images/portfolio/casa-da-avo/booking-desktop.webp"
-                alt="Secção de reserva direta do website Casa da Avó, com calendário, seletor de hóspedes e pagamento processado por Stripe"
+                src="/images/portfolio/casa-da-avo/booking-flow.webp"
+                alt="Calendário de reservas da Casa da Avó num telemóvel, com reserva instantânea sem intermediários nem taxas de plataforma"
                 class="rounded-xl w-full"
-                width="1500"
-                height="1147"
+                width="1600"
+                height="900"
                 loading="lazy"
             />
         </div>
@@ -63,11 +63,11 @@ import ProjectLayout from "../../layouts/ProjectLayout.astro";
 
         <div class="cost-section" data-reveal>
             <span class="cost-label">O que custa manter o site</span>
-            <span class="cost-figure">34€<small>/ano</small></span>
+            <span class="cost-figure">2,80€<small>/mês</small></span>
             <p class="cost-line">O domínio. Mais nada.</p>
             <p class="cost-sub">
-                Sem alojamento a pagar, sem CMS, sem plugins, sem mensalidades.
-                A Stripe só cobra quando entra uma reserva.
+                Sem alojamento a pagar, sem CMS, sem plugins, sem licenças a
+                renovar. A Stripe só cobra quando entra uma reserva.
             </p>
         </div>
 
