@@ -13,6 +13,8 @@ interface Props {
     heroImage: string;
     lang?: string;
     metrics?: { label: string; value: string }[];
+    hreflangPt?: string;
+    hreflangEn?: string;
 }
 
 const {
@@ -24,13 +26,24 @@ const {
     heroImage,
     lang = "pt",
     metrics,
+    hreflangPt,
+    hreflangEn,
 } = Astro.props;
+
+// PT case studies live at /portfolio/<slug> and EN at /en/work/<slug>, always on
+// the same slug — so the alternate pair is derived here rather than repeated on
+// every page. Pass the props explicitly if a page ever breaks that convention.
+const slug = Astro.url.pathname.replace(/\/+$/, "").split("/").pop();
+const altPt = hreflangPt ?? `https://sueste-creative.pt/portfolio/${slug}`;
+const altEn = hreflangEn ?? `https://sueste-creative.pt/en/work/${slug}`;
 ---
 
 <BaseLayout
     title={`${title} | Portfólio`}
     description={description}
     lang={lang}
+    hreflangPt={altPt}
+    hreflangEn={altEn}
     ogImage={heroImage?.startsWith('http') ? heroImage : `https://sueste-creative.pt${heroImage}`}
 >
     <Navbar />

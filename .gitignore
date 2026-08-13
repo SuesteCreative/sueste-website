@@ -28,3 +28,7 @@ cartao-euro-v1.md
 social-media/outbox/
 ~$*.xlsx
 
+# raw design mockups — source PNGs kept locally (OneDrive-backed), never served
+# or committed. Processed webp derivatives live in public/images/.
+mockups/
+

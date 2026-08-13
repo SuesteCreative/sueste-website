@@ -1,0 +1,296 @@
+---
+import ProjectLayout from "../../layouts/ProjectLayout.astro";
+---
+
+<ProjectLayout
+    title="Casa da Avó"
+    category="Reservas & Pagamentos"
+    client="Casa da Avó · Praia da Luz"
+    year="2026"
+    description="Website de reservas diretas para uma moradia em Praia da Luz, com pagamento faseado 30/70 via Stripe e um custo de operação de apenas 34€ por ano."
+    heroImage="/images/portfolio/casa-da-avo/hero.webp"
+    lang="pt"
+    metrics={[
+        { label: "Custo Anual de Operação", value: "34€" },
+        { label: "Mensalidades de Plataforma", value: "0€" },
+        { label: "Comissão de Intermediários", value: "0%" },
+    ]}
+>
+    <div class="container project-content-grid">
+        <div class="project-text-block" data-reveal>
+            <h2>O Desafio</h2>
+            <p>
+                A Casa da Avó é uma moradia privada em Praia da Luz — três
+                quartos, piscina, vista para o Atlântico e capacidade para seis
+                pessoas. Um único imóvel, gerido por uma família, não por uma
+                cadeia hoteleira.
+            </p>
+            <p>
+                Os portais de reserva cobram comissão sobre cada estadia. E um
+                site em CMS com plugin de reservas troca essa comissão por outra
+                fatura: alojamento, licenças, atualizações e uma mensalidade que
+                corre mesmo nos meses em que a casa está vazia.
+            </p>
+            <p>
+                Para uma casa só, com uma época definida, nenhuma das duas
+                contas fecha bem.
+            </p>
+        </div>
+
+        <div class="project-media project-media-right" data-reveal>
+            <img
+                src="/images/portfolio/casa-da-avo/booking-desktop.webp"
+                alt="Secção de reserva direta do website Casa da Avó, com calendário, seletor de hóspedes e pagamento processado por Stripe"
+                class="rounded-xl w-full"
+                width="1500"
+                height="1147"
+                loading="lazy"
+            />
+        </div>
+
+        <div class="solution-section" data-reveal>
+            <div class="project-text-block solution-content">
+                <h2>A Solução</h2>
+                <p>
+                    Construímos o site sem nada que exija manutenção paga. Sem
+                    CMS, sem base de dados a faturar ao mês, sem plugins para
+                    renovar. A gestão de reservas e os pagamentos vivem dentro
+                    do próprio site, e a Stripe só cobra quando entra uma
+                    reserva.
+                </p>
+            </div>
+        </div>
+
+        <div class="cost-section" data-reveal>
+            <span class="cost-label">O que custa manter o site</span>
+            <span class="cost-figure">34€<small>/ano</small></span>
+            <p class="cost-line">O domínio. Mais nada.</p>
+            <p class="cost-sub">
+                Sem alojamento a pagar, sem CMS, sem plugins, sem mensalidades.
+                A Stripe só cobra quando entra uma reserva.
+            </p>
+        </div>
+
+        <div class="solution-section" data-reveal>
+            <div class="project-text-block solution-content">
+                <h2>Pagamento Faseado 30/70</h2>
+                <p>
+                    Uma estadia de uma semana não se cobra como um par de
+                    sapatos. O hóspede paga <strong>30% no momento da
+                    reserva</strong> para garantir as datas, e os restantes
+                    <strong>70% são cobrados 14 dias antes da chegada</strong>.
+                </p>
+                <p>
+                    O sinal reduz o risco de cancelamento sem pedir ao hóspede
+                    que adiante a estadia inteira meses antes de viajar — e o
+                    saldo entra automaticamente, sem lembretes para enviar nem
+                    transferências para perseguir.
+                </p>
+            </div>
+        </div>
+
+        <div class="solution-section" data-reveal>
+            <div class="project-text-block solution-content">
+                <h2>Reservas Diretas, Relação Direta</h2>
+                <p>
+                    Cada reserva feita no site é uma reserva sem intermediário:
+                    sem comissão, e com os dados do hóspede a pertencerem a quem
+                    é dono da casa. Um site que trabalha na época alta e não
+                    cobra nada na época baixa.
+                </p>
+            </div>
+        </div>
+
+        <div class="project-cta" data-reveal>
+            <a
+                href="https://www.casadaavo.online/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn-live"
+            >
+                Visitar casadaavo.online
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    ><line x1="7" y1="17" x2="17" y2="7"></line><polyline
+                        points="7 7 17 7 17 17"></polyline></svg
+                >
+            </a>
+        </div>
+    </div>
+</ProjectLayout>
+
+<style>
+    .project-content-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+        margin-top: 4rem;
+    }
+
+    .project-text-block {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .solution-section {
+        grid-column: 1 / -1;
+        width: 100%;
+        margin-top: 4rem;
+    }
+
+    .solution-content {
+        max-width: 100%;
+    }
+
+    .project-text-block h2 {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: #fff;
+        margin-bottom: 1rem;
+        position: relative;
+        display: inline-block;
+    }
+
+    .project-text-block h2::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 60px;
+        height: 4px;
+        background: #f97316;
+        border-radius: 2px;
+    }
+
+    .project-text-block p {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    .project-text-block strong {
+        color: #fff;
+        font-weight: 700;
+    }
+
+    .project-media img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        border-radius: 24px;
+        transition: transform 0.8s ease;
+    }
+
+    .project-media:hover img {
+        transform: scale(1.02);
+    }
+
+    /* ── RUNNING COST ───────────────────────────────────────────────── */
+    .cost-section {
+        grid-column: 1 / -1;
+        margin-top: 5rem;
+        padding: 3.5rem 2.5rem;
+        border-radius: 24px;
+        border: 1px solid rgba(249, 115, 22, 0.25);
+        background: rgba(249, 115, 22, 0.05);
+        text-align: center;
+    }
+
+    .cost-label {
+        display: block;
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    .cost-figure {
+        display: block;
+        margin-top: 0.75rem;
+        font-size: clamp(3.5rem, 10vw, 6rem);
+        font-weight: 900;
+        line-height: 1;
+        color: #f97316;
+        letter-spacing: -0.04em;
+    }
+
+    .cost-figure small {
+        font-size: 0.25em;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.45);
+        letter-spacing: 0;
+    }
+
+    .cost-line {
+        margin: 1.25rem 0 0;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #fff;
+    }
+
+    .cost-sub {
+        margin: 1rem auto 0;
+        max-width: 46ch;
+        font-size: 1rem;
+        line-height: 1.7;
+        color: rgba(255, 255, 255, 0.55);
+    }
+
+    /* ── CTA ────────────────────────────────────────────────────────── */
+    .project-cta {
+        grid-column: 1 / -1;
+        display: flex;
+        justify-content: center;
+        margin-top: 5rem;
+    }
+
+    .btn-live {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 1rem 2.25rem;
+        border-radius: 50px;
+        border: 1px solid rgba(249, 115, 22, 0.4);
+        background: rgba(249, 115, 22, 0.08);
+        color: #f97316;
+        font-weight: 700;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .btn-live:hover {
+        background: rgba(249, 115, 22, 0.16);
+        transform: translateY(-2px);
+    }
+
+    @media (max-width: 900px) {
+        .project-content-grid {
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+
+        .project-media-left,
+        .project-media-right {
+            order: 0;
+        }
+
+        .project-text-block h2 {
+            font-size: 2rem;
+        }
+
+        .cost-section {
+            padding: 2.5rem 1.5rem;
+        }
+    }
+</style>

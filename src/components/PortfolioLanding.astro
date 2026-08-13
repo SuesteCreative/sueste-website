@@ -9,8 +9,8 @@ interface Project {
     metricLabelEn: string;
     image: string;
     size: "small" | "large";
-    link: string;
-    internalLink: string;
+    slug: string;
+    liveUrl: string;
     altPt: string;
     altEn: string;
     hoverPt: string;
@@ -19,6 +19,24 @@ interface Project {
 }
 
 const projects: Project[] = [
+    {
+        title: "Casa da Avó",
+        categoryPt: "Reservas & Pagamentos",
+        categoryEn: "Bookings & Payments",
+        metricPt: "€34/ano",
+        metricEn: "€34/yr",
+        metricLabelPt: "Custo total do site para o cliente",
+        metricLabelEn: "Total site running cost for the client",
+        image: "/images/LandingPage/landing-casa-da-avo-mockup.webp",
+        size: "large",
+        slug: "casa-da-avo",
+        liveUrl: "https://www.casadaavo.online/",
+        altPt: "Mockup do website Casa da Avó com portal de reservas e pagamento Stripe",
+        altEn: "Casa da Avó website mockup with booking portal and Stripe payment",
+        hoverPt: "Ver Projeto",
+        hoverEn: "View Project",
+        deviceType: "macbook",
+    },
     {
         title: "Desportos Náuticos de Alvor",
         categoryPt: "Reservas Online & Merch",
@@ -29,8 +47,8 @@ const projects: Project[] = [
         metricLabelEn: "Booking Platform",
         image: "/images/LandingPage/landing-dna-mockup.webp",
         size: "small",
-        link: "https://desportosnauticosalvor.com/",
-        internalLink: "https://desportosnauticosalvor.com/",
+        slug: "dna-site-fardas",
+        liveUrl: "https://desportosnauticosalvor.com/",
         altPt: "Mockup do website Desportos Náuticos de Alvor",
         altEn: "Desportos Náuticos de Alvor website mockup",
         hoverPt: "Explorar Website",
@@ -47,8 +65,8 @@ const projects: Project[] = [
         metricLabelEn: "Custom Backoffice",
         image: "/images/LandingPage/landing-mental8works-mockup.webp",
         size: "small",
-        link: "https://www.mental8works.pt/",
-        internalLink: "https://www.mental8works.pt/",
+        slug: "mental8works",
+        liveUrl: "https://www.mental8works.pt/",
         altPt: "Plataforma Mental8Works mockup",
         altEn: "Mental8Works platform mockup",
         hoverPt: "Ver Plataforma",
@@ -65,8 +83,8 @@ const projects: Project[] = [
         metricLabelEn: "98% SEO Score",
         image: "/images/LandingPage/landing-algo-mockup.webp",
         size: "large",
-        link: "https://algoatelier.pt/",
-        internalLink: "https://algoatelier.pt/",
+        slug: "algo-atelier",
+        liveUrl: "https://algoatelier.pt/",
         altPt: "Portfólio Algo Atelier mockup",
         altEn: "Algo Atelier portfolio mockup",
         hoverPt: "Ver Portfólio",
@@ -79,6 +97,8 @@ const { lang = "pt" } = Astro.props;
 const isPt = lang === "pt";
 const viewAllLabel = isPt ? "Ver Todos os Projetos" : "View All Projects";
 const viewAllHref = isPt ? "/portfolio" : "/en/work";
+const caseHref = (slug: string) =>
+    isPt ? `/portfolio/${slug}` : `/en/work/${slug}`;
 ---
 
 <div class="portfolio-showcase-container">
@@ -127,12 +147,10 @@ const viewAllHref = isPt ? "/portfolio" : "/en/work";
                             </div>
 
                             <a
-                                href={project.internalLink}
+                                href={caseHref(project.slug)}
                                 class="btn-project desktop-only"
-                                target="_blank"
-                                rel="noopener noreferrer"
                             >
-                                {lang === "pt" ? "Ver Projeto" : "View Project"}
+                                {isPt ? "Ver Projeto" : "View Project"}
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     width="16"
@@ -152,10 +170,8 @@ const viewAllHref = isPt ? "/portfolio" : "/en/work";
 
                         <div class="row-mockup-container" data-animate-right>
                             <a
-                                href={project.internalLink}
+                                href={caseHref(project.slug)}
                                 class={`portfolio-image-wrapper wrapper-${project.deviceType}`}
-                                target="_blank"
-                                rel="noopener noreferrer"
                             >
                                 <div class="hover-badge">
                                     {isPt ? project.hoverPt : project.hoverEn}
@@ -165,19 +181,18 @@ const viewAllHref = isPt ? "/portfolio" : "/en/work";
                                     class="portfolio-img"
                                     alt={isPt ? project.altPt : project.altEn}
                                     loading="lazy"
+                                    decoding="async"
                                 />
                             </a>
                         </div>
 
                         <a
-                            href={project.internalLink}
+                            href={caseHref(project.slug)}
                             class="btn-project mobile-only"
                             style="margin-top: 2rem;"
                             data-animate-left
-                            target="_blank"
-                            rel="noopener noreferrer"
                         >
-                            {lang === "pt" ? "Ver Projeto" : "View Project"}
+                            {isPt ? "Ver Projeto" : "View Project"}
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="16"

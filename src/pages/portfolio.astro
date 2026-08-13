@@ -19,6 +19,18 @@ import Section from "../components/Section.astro";
     >
       <div class="p-grid">
 
+        <a href="/portfolio/casa-da-avo" class="pcard pc-5" style="--accent:#f97316">
+          <img class="pcard-bg" src="/images/portfolio/casa-da-avo-mockup.webp" alt="Mockup do website Casa da Avó com portal de reservas e pagamento Stripe" loading="lazy" />
+          <div class="pcard-gradient"></div>
+          <div class="pcard-content">
+            <span class="pcard-cat">Reservas & Pagamentos</span>
+            <h3 class="pcard-title">Casa da Avó</h3>
+            <p class="pcard-desc">Moradia em Praia da Luz com reservas diretas e pagamento 30/70 via Stripe. O proprietário não tem despesas de manutenção: paga o domínio e mais nada.</p>
+            <span class="pcard-cta">Ver Projeto <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+          </div>
+          <span class="pcard-tag">€34/ano</span>
+        </a>
+
         <a href="/portfolio/dna-site-fardas" class="pcard pc-1" style="--accent:#38bdf8">
           <img class="pcard-bg" src="/images/portfolio/desportos-mockup.png" alt="Mockup website Desportos Náuticos de Alvor" loading="lazy" />
           <div class="pcard-gradient"></div>
@@ -112,15 +124,22 @@ import Section from "../components/Section.astro";
   .p-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: 500px 500px;
+    grid-template-rows: 500px 500px 460px;
     gap: 1.25rem;
     margin-top: 3rem;
   }
 
-  .pc-1 { grid-column: 1 / 4; }
-  .pc-2 { grid-column: 4 / 6; }
-  .pc-3 { grid-column: 1 / 3; }
-  .pc-4 { grid-column: 3 / 6; }
+  /* Casa da Avó — tall feature, 3 cols x 2 rows */
+  .pc-5 { grid-column: 1 / 4; grid-row: 1 / 3; }
+  .pc-2 { grid-column: 4 / 6; grid-row: 1 / 2; }
+  .pc-3 { grid-column: 4 / 6; grid-row: 2 / 3; }
+  .pc-1 { grid-column: 1 / 3; grid-row: 3 / 4; }
+  .pc-4 { grid-column: 3 / 6; grid-row: 3 / 4; }
+
+  /* Feature card gets more breathing room for its longer copy */
+  .pc-5 .pcard-content { padding: 2.5rem 2.5rem 2.75rem; }
+  .pc-5 .pcard-title { font-size: clamp(1.75rem, 3.2vw, 2.6rem); }
+  .pc-5 .pcard-desc { font-size: 1rem; max-width: 46ch; }
 
   /* ── CARD ───────────────────────────────────────────────────────── */
   .pcard {
@@ -276,21 +295,27 @@ import Section from "../components/Section.astro";
   @media (max-width: 1024px) {
     .p-grid {
       grid-template-columns: 1fr 1fr;
-      grid-template-rows: repeat(2, 420px);
+      grid-template-rows: 460px repeat(2, 420px);
     }
-    .pc-1 { grid-column: 1 / 2; }
-    .pc-2 { grid-column: 2 / 3; }
-    .pc-3 { grid-column: 1 / 2; }
-    .pc-4 { grid-column: 2 / 3; }
+    /* Feature goes full-width, remaining four pair up */
+    .pc-5 { grid-column: 1 / 3; grid-row: 1 / 2; }
+    .pc-1 { grid-column: 1 / 2; grid-row: 2 / 3; }
+    .pc-2 { grid-column: 2 / 3; grid-row: 2 / 3; }
+    .pc-3 { grid-column: 1 / 2; grid-row: 3 / 4; }
+    .pc-4 { grid-column: 2 / 3; grid-row: 3 / 4; }
   }
 
   @media (max-width: 640px) {
     .p-grid {
       grid-template-columns: 1fr;
-      grid-template-rows: repeat(4, 360px);
+      grid-template-rows: repeat(5, 360px);
       gap: 1rem;
     }
-    .pc-1, .pc-2, .pc-3, .pc-4 { grid-column: 1 / 2; }
+    .pc-5, .pc-1, .pc-2, .pc-3, .pc-4 {
+      grid-column: 1 / 2;
+      grid-row: auto;
+    }
+    .pc-5 .pcard-content { padding: 2rem 2rem 2.25rem; }
     .pcard-cta { opacity: 1; transform: none; }
     .process-steps { grid-template-columns: 1fr; gap: 4rem; }
   }

@@ -8,6 +8,12 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://sueste-creative.pt',
+  // The old combined Desportos Náuticos case study was superseded by the split
+  // site/merch and CRM pages. Keep the old URLs alive rather than 404ing them.
+  redirects: {
+    '/portfolio/desportos-nauticos-alvor': '/portfolio/dna-site-fardas',
+    '/en/work/desportos-nauticos-alvor': '/en/work/dna-site-fardas',
+  },
   integrations: [
     react(),
     sitemap({
